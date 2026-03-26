@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+:root {
+  /* Colors */
+  --color-surface: #faf9f6;
+  --color-surface-bright: #faf9f6;
+  --color-surface-dim: #d9dbd6;
+  
+  --color-surface-container-highest: #e1e3df;
+  --color-surface-container-high: #e8e8e4;
+  --color-surface-container: #eeeeea;
+  --color-surface-container-low: #f4f4f0;
+  --color-surface-container-lowest: #ffffff;
+  
+  --color-on-surface: #303330;
+  --color-on-surface-variant: #5d605c;
+  
+  --color-primary: #944c00;
+  --color-primary-dim: #824200;
+  --color-primary-container: #ffaf72;
+  --color-on-primary: #fff7f4;
+  --color-on-primary-container: #602f00;
+  --color-on-primary-fixed: #421e00;
+  
+  --color-secondary: #006b63;
+  --color-secondary-dim: #005e56;
+  --color-secondary-container: #84f5e8;
+  --color-on-secondary: #e2fff9;
+  --color-on-secondary-container: #005c55;
+  --color-secondary-fixed: #84f5e8;
+  
+  --color-tertiary: #745c00;
+  --color-tertiary-container: #fdd34d;
+  --color-on-tertiary: #fff8ee;
+  
+  --color-error: #aa371c;
+  --color-error-container: #fa7150;
+  --color-on-error: #fff7f6;
+  
+  --color-outline: #797b78;
+  --color-outline-variant: #b1b2af;
+
+  /* Typography */
+  --font-headline: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Be Vietnam Pro', sans-serif;
+  --font-label: 'Plus Jakarta Sans', sans-serif;
+
+  /* Spacing */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+
+  /* Border Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  --radius-full: 9999px;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headline);
+}
+
+/* Utilities */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.bg-mesh {
+  background-color: var(--color-surface);
+  background-image: 
+      radial-gradient(at 0% 0%, rgba(255, 175, 114, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(132, 245, 232, 0.1) 0px, transparent 50%);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+}
+
+.ghost-border {
+  outline: 1.5px solid rgba(177, 178, 175, 0.15);
+}
+
+.signature-glow {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-container) 100%);
+}
+
+/* Layout Utilities derived from Tailwind used in the screens */
+.min-h-screen { min-height: 100vh; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-1 { flex: 1; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: var(--spacing-1); }
+.gap-2 { gap: var(--spacing-2); }
+.gap-3 { gap: var(--spacing-3); }
+.gap-4 { gap: var(--spacing-4); }
+.gap-6 { gap: var(--spacing-6); }
+.p-2 { padding: var(--spacing-2); }
+.p-6 { padding: var(--spacing-6); }
+.py-3 { padding-top: var(--spacing-3); padding-bottom: var(--spacing-3); }
+.px-4 { padding-left: var(--spacing-4); padding-right: var(--spacing-4); }
+
+/* Additional translation for typical components is added as we process HTML. */
