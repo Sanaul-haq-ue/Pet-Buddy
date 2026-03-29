@@ -18,13 +18,21 @@ Route::get('/bookings', [BookingsController::class, 'index'])->name('bookings');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 
 
-Route::middleware(['admin'])->prefix('admin')->group(function()
-{
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('/appointment', [AdminController::class, 'appointment'])->name('appointment');
-    Route::get('/customer', [AdminController::class, 'customer'])->name('customer');
-    Route::get('/inventory', [AdminController::class, 'inventory'])->name('inventory');
+Route::prefix('admin')->group(function () {
+
+    // Guest (admin not logged in)
+    Route::middleware('guest')->group(function () {
+        Route::get('/authentication', [AuthController::class, 'login'])->name('admin.login');
+        Route::post('/authenticatiooon', [AuthController::class, 'loginSubmit'])->name('login.submit');
+    });
+
+    // Admin (logged in)
+    Route::middleware('admin')->group(function () {
+        Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+        Route::get('/appointment', [AdminController::class, 'appointment'])->name('appointment');
+        Route::get('/customer', [AdminController::class, 'customer'])->name('customer');
+        Route::get('/inventory', [AdminController::class, 'inventory'])->name('inventory');
+    });
+
 });
-
-
-Route::get('/authentication', [AuthController::class, 'login'])->name('login');

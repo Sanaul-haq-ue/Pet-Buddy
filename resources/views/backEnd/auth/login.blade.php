@@ -139,8 +139,16 @@
                     <p class="text-on-surface-variant/80 text-sm">Please enter your credentials to access the dashboard.
                     </p>
                 </div>
+
+                @if (session('error'))
+                    <div class="bg-red-100 text-red-700 p-2 rounded mb-4">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <!-- Form -->
-                <form class="space-y-6">
+                <form class="space-y-6" method="POST" action="{{ route('login.submit') }}">
+                    @csrf
                     <div>
                         <label
                             class="block font-label text-[0.7rem] font-bold tracking-widest text-on-surface-variant mb-2"

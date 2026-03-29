@@ -15,10 +15,13 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->role === 'admin') {
-            return $next($request);
+        // Check if 'admin' is in session
+        if (!session()->has('admin')) {
+            // Redirect to admin login if not logged in
+            return redirect()->route('admin.login');
         }
 
-        return redirect('/login'); // or 403
+        // Allow request to proceed if admin is logged in
+        return $next($request);
     }
 }
