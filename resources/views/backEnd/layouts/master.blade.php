@@ -89,6 +89,7 @@
             },
         }
     </script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="{{ asset('backAssets/css/style.css') }}">
 
 </head>

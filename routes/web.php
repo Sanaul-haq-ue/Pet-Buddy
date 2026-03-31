@@ -9,6 +9,7 @@ use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\backEnd\AdminController;
 use App\Http\Controllers\backEnd\AuthController;
+use App\Http\Controllers\backEnd\UserController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -31,8 +32,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/appointment', [AdminController::class, 'appointment'])->name('appointment');
-        Route::get('/customer', [AdminController::class, 'customer'])->name('customer');
         Route::get('/inventory', [AdminController::class, 'inventory'])->name('inventory');
+
+        Route::get('/customer', [UserController::class, 'customer'])->name('customer');
+
+
     });
 
 });

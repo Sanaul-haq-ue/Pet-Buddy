@@ -145,7 +145,6 @@
                         {{ session('error') }}
                     </div>
                 @endif
-
                 <!-- Form -->
                 <form class="space-y-6" method="POST" action="{{ route('login.submit') }}">
                     @csrf
@@ -155,7 +154,11 @@
                             for="email">EMAIL ADDRESS</label>
                         <input
                             class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-3 px-0 focus:ring-0 focus:border-secondary transition-all text-on-surface placeholder:text-outline-variant/60 font-medium"
-                            id="email" name="email" placeholder="admin@radianthabitat.com" type="email" />
+                            id="email" name="email" value="{{ old('email') }}"
+                            placeholder="admin@radianthabitat.com" type="email" />
+                        @error('email')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <div class="flex justify-between items-end mb-2">
@@ -165,9 +168,20 @@
                             <a class="text-[0.7rem] font-semibold text-primary hover:text-primary-dim transition-colors"
                                 href="#">Forgot password?</a>
                         </div>
-                        <input
-                            class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-3 px-0 focus:ring-0 focus:border-secondary transition-all text-on-surface placeholder:text-outline-variant/60 font-medium"
-                            id="password" name="password" placeholder="••••••••" type="password" />
+                        <div class="relative">
+                            <input
+                                class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-3 pr-10 pl-0 focus:ring-0 focus:border-secondary transition-all text-on-surface placeholder:text-outline-variant/60 font-medium"
+                                id="password" name="password" placeholder="••••••••" type="password" />
+                            @error('password')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                            <button
+                                class="absolute right-0 top-1/2 -translate-y-1/2 text-outline-variant hover:text-primary transition-colors focus:outline-none p-1"
+                                id="togglePassword" type="button">
+                                <span class="material-symbols-outlined text-[1.2rem]"
+                                    id="passwordIcon">visibility</span>
+                            </button>
+                        </div>
                     </div>
                     <div class="pt-4 space-y-4">
                         <!-- Primary Action -->
@@ -180,7 +194,7 @@
                         <!-- Secondary Action -->
                         <div class="pt-2 text-center">
                             <a class="inline-flex items-center gap-2 text-sm font-medium text-on-surface-variant hover:text-primary transition-colors py-2 px-4 rounded-full hover:bg-surface-container-low"
-                                href="/">
+                                href="{{route('home')}}">
                                 <span class="material-symbols-outlined text-lg" data-icon="arrow_back">arrow_back</span>
                                 Return to Main Site
                             </a>
@@ -212,6 +226,20 @@
             </div>
         </div>
     </footer>
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+        const passwordIcon = document.querySelector('#passwordIcon');
+
+        togglePassword.addEventListener('click', function(e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            // toggle the icon
+            passwordIcon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+        });
+    </script>
 </body>
 
 </html>

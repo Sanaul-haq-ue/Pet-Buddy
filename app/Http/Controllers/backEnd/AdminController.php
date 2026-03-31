@@ -15,10 +15,6 @@ class AdminController extends Controller
         return view('backEnd.appointment');
     }
 
-    public function customer(){
-        return view('backEnd.customer');
-    }
-
     public function inventory(){
         return view('backEnd.inventory');
     }
