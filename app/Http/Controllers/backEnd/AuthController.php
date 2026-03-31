@@ -21,14 +21,26 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
+        // Step 1: Check email
         $admin = Admin::where('email', $request->email)->first();
 
-        if ($admin && Hash::check($request->password, $admin->password)) {
-            session(['admin' => $admin->id]);
-            return redirect()->route('dashboard');
+        if (!$admin) {
+            return back()->withErrors([
+                'email' => 'Email not found'
+            ])->withInput();
         }
 
-        return back()->with('error', 'Invalid credentials');
+        // Step 2: Check password
+        if (!Hash::check($request->password, $admin->password)) {
+            return back()->withErrors([
+                'password' => 'Incorrect password'
+            ])->withInput();
+        }
+
+        // Step 3: Success
+        session(['admin' => $admin->id]);
+
+        return redirect()->route('dashboard');
     }
 
     public function logout()
