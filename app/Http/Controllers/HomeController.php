@@ -10,4 +10,9 @@ class HomeController extends Controller
     {
         return view('frontEnd.home');
     }
+
+    public function homemobile()
+    {
+        return view('frontEnd.homemobile');
+    }
 }
