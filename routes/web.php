@@ -9,6 +9,7 @@ use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\backEnd\AdminController;
 use App\Http\Controllers\backEnd\AuthController;
+use App\Http\Controllers\backEnd\ConpanyController;
 use App\Http\Controllers\backEnd\UserController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -34,6 +35,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/appointment', [AdminController::class, 'appointment'])->name('appointment');
         Route::get('/inventory', [AdminController::class, 'inventory'])->name('inventory');
         Route::get('/customer', [UserController::class, 'customer'])->name('customer');
+
+        Route::get('/company', [ConpanyController::class, 'company'])->name('company');
+
+
     });
 
 });
+ 
