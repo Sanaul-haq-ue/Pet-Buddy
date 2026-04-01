@@ -14,7 +14,7 @@
 
         <div class="shop-layout">
             <!-- Sidebar Filters -->
-            <aside class="shop-sidebar">
+            <aside class="shop-sidebar" id="shopFilterSidebar">
                 <div class="filter-group">
                     <h3 class="filter-title">PET TYPE</h3>
                     <div class="filter-options">
@@ -48,6 +48,10 @@
                     <p class="promo-text">Join our subscription and save 15% on every auto-ship order.</p>
                 </div>
             </aside>
+
+            <button class="filter-toggle" id="openShopFilter">
+                <span class="material-symbols-outlined">tune</span>
+            </button>
 
             <!-- Product Grid -->
             <div class="product-area">
@@ -188,3 +192,27 @@
         </div>
     </main>
 @endsection
+
+
+@push('scripts')
+    <script>
+    const openShopFilter = document.getElementById('openShopFilter');
+    const shopSidebar = document.getElementById('shopFilterSidebar');
+
+    // Toggle
+    openShopFilter.addEventListener('click', (e) => {
+        e.stopPropagation();
+        shopSidebar.classList.toggle('active');
+    });
+
+    // Prevent inside click
+    shopSidebar.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // Outside click → close
+    document.addEventListener('click', () => {
+        shopSidebar.classList.remove('active');
+    });
+</script>
+@endpush
