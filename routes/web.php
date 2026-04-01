@@ -17,6 +17,7 @@ Route::get('/services', [ServicesController::class, 'index'])->name('services');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/bookings', [BookingsController::class, 'index'])->name('bookings');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/homemobile', [HomeController::class, 'homemobile'])->name('homemobile');
 
 Route::prefix('admin')->group(function () {
 
