@@ -10,6 +10,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\backEnd\AdminController;
 use App\Http\Controllers\backEnd\AuthController;
 use App\Http\Controllers\backEnd\ConpanyController;
+use App\Http\Controllers\backEnd\ServiceManagementController;
 use App\Http\Controllers\backEnd\UserController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -18,7 +19,7 @@ Route::get('/services', [ServicesController::class, 'index'])->name('services');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/bookings', [BookingsController::class, 'index'])->name('bookings');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
-Route::get('/homemobile', [HomeController::class, 'homemobile'])->name('homemobile');
+
 
 Route::prefix('admin')->group(function () {
 
@@ -34,7 +35,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/appointment', [AdminController::class, 'appointment'])->name('appointment');
         Route::get('/inventory', [AdminController::class, 'inventory'])->name('inventory');
+
+        Route::get('/serviceManagement', [ServiceManagementController::class, 'serviceManagement'])->name('serviceManagement');
+
         Route::get('/customer', [UserController::class, 'customer'])->name('customer');
+        Route::post('/saveCustomer', [UserController::class, 'saveCustomer'])->name('customer.store');
+        Route::post('/updateCustomer', [UserController::class, 'updateCustomer'])->name('customer.update');
+
 
         Route::get('/company', [ConpanyController::class, 'company'])->name('company');
 

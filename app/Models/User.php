@@ -18,20 +18,21 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-    'first_name',
-    'last_name',
-    'user_type',
-    'location',
-    'status',
-    'email',
-    'password',
-    'mobile',
-    'last_visit',
-];
+        'first_name',
+        'last_name',
+        'user_type',
+        'location',
+        'status',
+        'email',
+        'password',
+        'mobile',
+        'last_visit',
+        'profile_image'
+    ];
 
-protected $casts = [
-    'last_visit' => 'datetime',
-];
+    protected $casts = [
+        'last_visit' => 'datetime',
+    ];
 
     /**
      * Get the attributes that should be cast.
@@ -44,5 +45,10 @@ protected $casts = [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function pets()
+    {
+        return $this->hasMany(Pet::class);
     }
 }

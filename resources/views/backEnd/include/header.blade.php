@@ -51,6 +51,12 @@
             <span class="material-symbols-outlined">group</span>
             <span>Companies</span>
         </a>
+        <a class="flex items-center gap-3 px-4 py-3 rounded-full font-headline text-sm tracking-tight transition-all duration-300
+            {{ request()->routeIs('serviceManagement') ? $active : $normal }}"
+            href="{{ route('serviceManagement') }}">
+            <span class="material-symbols-outlined">group</span>
+            <span>Service Management</span>
+        </a>
         <a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-all duration-300 rounded-full font-headline text-sm tracking-tight"
             href="#">
             <span class="material-symbols-outlined">settings</span>
