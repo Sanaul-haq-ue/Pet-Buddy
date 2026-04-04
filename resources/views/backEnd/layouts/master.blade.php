@@ -92,6 +92,10 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="{{ asset('backAssets/css/style.css') }}">
 
+    <!-- Add in your layout head -->
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> --}}
+
 </head>
 
 <body class="bg-surface font-body text-on-surface overflow-x-hidden">
