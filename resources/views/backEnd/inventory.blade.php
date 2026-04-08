@@ -40,8 +40,7 @@
                 <p class="text-on-surface-variant font-body max-w-lg">Monitor your stock levels, manage pricing, and
                     ensure your sanctuary is always fully equipped for every pet's needs.</p>
             </div>
-            <button
-                class="bg-primary text-on-primary py-4 px-8 rounded-full font-bold text-sm transition-all duration-300 hover:bg-primary-dim flex items-center justify-center gap-2 shadow-xl shadow-primary/10 hover:scale-[1.02] active:scale-95">
+            <button class="btn-add-new">
                 <span class="material-symbols-outlined" data-icon="add_box">add_box</span>
                 Add New Product
             </button>

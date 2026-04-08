@@ -91,6 +91,8 @@
     </script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="{{ asset('backAssets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('backAssets/css/petManagement.css') }}">
+
 
     <!-- Add in your layout head -->
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -113,6 +115,7 @@
         class="fixed bottom-10 right-10 w-16 h-16 rounded-full signature-glow text-on-primary shadow-2xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-50">
         <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
     </button>
+
 </body>
 
 </html>

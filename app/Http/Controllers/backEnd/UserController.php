@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\backEnd;
 
 use App\Http\Controllers\Controller;
+use App\Models\Breed;
 use App\Models\Pet;
+use App\Models\Species;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,7 @@ class UserController extends Controller
     {
         $users = User::with('pets')->paginate(10);
 
-        return view('backEnd.customer', compact('users'));
+        return view('backEnd.pages.customerPet.customer', compact('users'));
     }
 
     public function updateCustomer(Request $request)
@@ -111,4 +113,11 @@ class UserController extends Controller
             'message' => 'Parent and pets saved successfully'
         ]);
     }
+
+
+
+
+
+
 }
+
