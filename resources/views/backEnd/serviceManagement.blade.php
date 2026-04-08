@@ -1,6 +1,117 @@
 @extends('backEnd.layouts.master')
 
 @section('adminContent')
+    <div class="fixed inset-0 z-50 flex items-center justify-center px-4 py-10 hidden">
+        <div class="absolute inset-0 bg-on-surface/10 backdrop-blur-sm"></div>
+        <div
+            class="glass-panel w-full max-w-2xl rounded-xl shadow-[0_40px_80px_rgba(148,76,0,0.12)] relative flex flex-col overflow-hidden">
+            <!-- Modal Header -->
+            <div class="px-10 pt-10 pb-6 flex justify-between items-start">
+                <div>
+                    <span
+                        class="text-xs font-bold tracking-[0.1em] text-primary uppercase mb-2 block font-headline">ADMINISTRATION</span>
+                    <h2 class="text-3xl font-bold text-on-surface font-headline leading-tight">Configure Service</h2>
+                </div>
+                <button
+                    class="w-12 h-12 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant/40 transition-colors">
+                    <span class="material-symbols-outlined" data-icon="close">close</span>
+                </button>
+            </div>
+            <!-- Modal Body / Form -->
+            <div class="px-10 pb-10 flex flex-col gap-8">
+                <!-- Service Image Mock -->
+                <div class="h-48 rounded-lg overflow-hidden relative group">
+                    <img class="w-full h-full object-cover"
+                        data-alt="serene spa setting with warm wooden textures and soft ambient lighting for a pet grooming service"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2VTDp1yO6SU5-YeYvcEaLQvjIxNoTtNZDr2bZJuTb-XwsYBVQm3b59XEOAVQH6I6gwFdvqitVQkrmSHGoo88kWe1Cbkv_rTOdmnji9BZoPnU_AXs8RiaAtwDXzjYDDsHvbLacAcosahKX9_-BmstEyJvFEYs8xyAsHZ1oKQR18o_GUdt46fZgbUWKr_Uh9P-9wPBavefZi0TlQ0J44SHCTl4-0eF1yHRF0lPiJX3-9hjQ84tqOmQ845KED5Dy7YYmUHr5ZKQKzyzy" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-on-surface/60 to-transparent flex items-end p-6">
+                        <button
+                            class="flex items-center gap-2 text-white bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm font-medium hover:bg-white/30 transition-all">
+                            <span class="material-symbols-outlined text-sm" data-icon="photo_camera">photo_camera</span>
+                            Update Cover Photo
+                        </button>
+                    </div>
+                </div>
+                <!-- Form Fields -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+                    <!-- Service Name -->
+                    <div class="md:col-span-2">
+                        <label
+                            class="block text-sm font-bold text-on-surface-variant mb-2 font-headline uppercase tracking-wider">Service
+                            Name</label>
+                        <input
+                            class="w-full bg-transparent border-b border-outline-variant/30 py-3 text-lg text-on-surface focus:outline-none focus:border-secondary transition-all placeholder:text-outline-variant/50"
+                            placeholder="e.g., Luxury Golden Grooming" type="text" />
+                    </div>
+                    <!-- Status Dropdown (Custom UI style) -->
+                    <div class="relative">
+                        <label
+                            class="block text-sm font-bold text-on-surface-variant mb-2 font-headline uppercase tracking-wider">Status</label>
+                        <div class="relative">
+                            <select
+                                class="appearance-none w-full bg-transparent border-b border-outline-variant/30 py-3 pr-8 text-on-surface focus:outline-none focus:border-secondary transition-all cursor-pointer">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="pending">Maintenance</option>
+                            </select>
+                            <span
+                                class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant"
+                                data-icon="expand_more">expand_more</span>
+                        </div>
+                    </div>
+                    <!-- Category / Species Selection -->
+                    <div class="relative">
+                        <label
+                            class="block text-sm font-bold text-on-surface-variant mb-2 font-headline uppercase tracking-wider">Primary
+                            Species</label>
+                        <div class="relative">
+                            <select
+                                class="appearance-none w-full bg-transparent border-b border-outline-variant/30 py-3 pr-8 text-on-surface focus:outline-none focus:border-secondary transition-all cursor-pointer">
+                                <option value="dogs">Canine (Dogs)</option>
+                                <option value="cats">Feline (Cats)</option>
+                                <option value="birds">Avian (Birds)</option>
+                            </select>
+                            <span
+                                class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant"
+                                data-icon="category">category</span>
+                        </div>
+                    </div>
+                    <!-- Description -->
+                    <div class="md:col-span-2">
+                        <label
+                            class="block text-sm font-bold text-on-surface-variant mb-2 font-headline uppercase tracking-wider">Description</label>
+                        <textarea
+                            class="w-full bg-transparent border-b border-outline-variant/30 py-3 text-on-surface focus:outline-none focus:border-secondary transition-all placeholder:text-outline-variant/50 resize-none"
+                            placeholder="Describe the therapeutic benefits and process..." rows="3"></textarea>
+                    </div>
+                </div>
+                <!-- Modal Footer / Actions -->
+                <div class="flex items-center justify-end gap-6 mt-4 pt-6">
+                    <button
+                        class="px-8 py-3 rounded-full text-on-surface-variant font-bold hover:bg-surface-variant/20 transition-all active:scale-95">
+                        Cancel
+                    </button>
+                    <button
+                        class="bg-gradient-to-r from-primary to-primary-container px-10 py-4 rounded-full text-on-primary font-bold shadow-lg shadow-primary/30 hover:brightness-110 transition-all active:scale-95 flex items-center gap-2">
+                        <span class="material-symbols-outlined" data-icon="save"
+                            style="font-variation-settings: 'FILL' 1;">save</span>
+                        Save Service
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
     <div class="px-12 py-10 space-y-16">
         <!-- Header Section -->
         <section class="max-w-4xl">
@@ -94,192 +205,19 @@
                 </div>
             </div>
         </section>
-        <!-- Species & Breeds Section (Restructured Hierarchy) -->
-        <section class="space-y-8 pb-20">
-            <div class="flex justify-between items-end border-b border-stone-200/50 pb-6">
-                <div>
-                    <h2 class="text-3xl font-extrabold tracking-tight text-on-surface">Species &amp; Breeds</h2>
-                    <p class="text-stone-500 text-sm">Hierarchical management of biological categories.</p>
-                </div>
-                <button
-                    class="bg-primary text-on-primary px-8 py-3 rounded-full font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/10">
-                    <span class="material-symbols-outlined" data-icon="add">add</span>
-                    Add New Species
-                </button>
-            </div>
-            <div class="grid grid-cols-1 gap-12">
-                <!-- Species Block: Canine -->
-                <div class="space-y-6">
-                    <div class="flex items-center justify-between bg-white/40 p-4 rounded-full border border-stone-200/40">
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="w-12 h-12 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center shadow-sm">
-                                <span class="material-symbols-outlined text-2xl" data-icon="pets">pets</span>
-                            </div>
-                            <div>
-                                <h3 class="text-2xl font-extrabold text-on-surface">Canine</h3>
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Mammal • 48
-                                    Varieties</span>
-                            </div>
-                        </div>
-                        <button
-                            class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold text-sm transition-all">
-                            <span class="material-symbols-outlined text-sm" data-icon="add">add</span>
-                            Add New Breed
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
-                        <div
-                            class="glass-card p-5 rounded-lg flex items-center justify-between group hover:border-primary/30 transition-all cursor-default">
-                            <span class="font-bold text-on-surface">Golden Retriever</span>
-                            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="p-1.5 hover:text-primary transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="edit">edit</span></button>
-                                <button class="p-1.5 hover:text-error transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="close">close</span></button>
-                            </div>
-                        </div>
-                        <div
-                            class="glass-card p-5 rounded-lg flex items-center justify-between group hover:border-primary/30 transition-all cursor-default">
-                            <span class="font-bold text-on-surface">German Shepherd</span>
-                            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="p-1.5 hover:text-primary transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="edit">edit</span></button>
-                                <button class="p-1.5 hover:text-error transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="close">close</span></button>
-                            </div>
-                        </div>
-                        <div
-                            class="glass-card p-5 rounded-lg flex items-center justify-between group hover:border-primary/30 transition-all cursor-default">
-                            <span class="font-bold text-on-surface">French Bulldog</span>
-                            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="p-1.5 hover:text-primary transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="edit">edit</span></button>
-                                <button class="p-1.5 hover:text-error transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="close">close</span></button>
-                            </div>
-                        </div>
-                        <button
-                            class="border-2 border-dashed border-stone-200 rounded-lg p-5 text-stone-400 font-bold hover:text-primary hover:border-primary hover:bg-primary/5 transition-all flex items-center justify-center gap-2">
-                            Show +45 more
-                        </button>
-                    </div>
-                </div>
-                <!-- Species Block: Feline -->
-                <div class="space-y-6">
-                    <div class="flex items-center justify-between bg-white/40 p-4 rounded-full border border-stone-200/40">
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center shadow-sm">
-                                <span class="material-symbols-outlined text-2xl" data-icon="cat">pets</span>
-                            </div>
-                            <div>
-                                <h3 class="text-2xl font-extrabold text-on-surface">Feline</h3>
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Mammal •
-                                    32 Varieties</span>
-                            </div>
-                        </div>
-                        <button
-                            class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold text-sm transition-all">
-                            <span class="material-symbols-outlined text-sm" data-icon="add">add</span>
-                            Add New Breed
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
-                        <div
-                            class="glass-card p-5 rounded-lg flex items-center justify-between group hover:border-secondary/30 transition-all cursor-default">
-                            <span class="font-bold text-on-surface">Siamese</span>
-                            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="p-1.5 hover:text-secondary transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="edit">edit</span></button>
-                                <button class="p-1.5 hover:text-error transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="close">close</span></button>
-                            </div>
-                        </div>
-                        <div
-                            class="glass-card p-5 rounded-lg flex items-center justify-between group hover:border-secondary/30 transition-all cursor-default">
-                            <span class="font-bold text-on-surface">Maine Coon</span>
-                            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="p-1.5 hover:text-secondary transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="edit">edit</span></button>
-                                <button class="p-1.5 hover:text-error transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="close">close</span></button>
-                            </div>
-                        </div>
-                        <div
-                            class="glass-card p-5 rounded-lg flex items-center justify-between group hover:border-secondary/30 transition-all cursor-default">
-                            <span class="font-bold text-on-surface">Persian</span>
-                            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="p-1.5 hover:text-secondary transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="edit">edit</span></button>
-                                <button class="p-1.5 hover:text-error transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="close">close</span></button>
-                            </div>
-                        </div>
-                        <button
-                            class="border-2 border-dashed border-stone-200 rounded-lg p-5 text-stone-400 font-bold hover:text-secondary hover:border-secondary hover:bg-secondary/5 transition-all flex items-center justify-center gap-2">
-                            Show +29 more
-                        </button>
-                    </div>
-                </div>
-                <!-- Species Block: Avian -->
-                <div class="space-y-6">
-                    <div class="flex items-center justify-between bg-white/40 p-4 rounded-full border border-stone-200/40">
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="w-12 h-12 bg-tertiary-container text-on-tertiary-container rounded-full flex items-center justify-center shadow-sm">
-                                <span class="material-symbols-outlined text-2xl" data-icon="air">air</span>
-                            </div>
-                            <div>
-                                <h3 class="text-2xl font-extrabold text-on-surface">Avian</h3>
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-stone-500">Bird • 15
-                                    Varieties</span>
-                            </div>
-                        </div>
-                        <button
-                            class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold text-sm transition-all">
-                            <span class="material-symbols-outlined text-sm" data-icon="add">add</span>
-                            Add New Breed
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
-                        <div
-                            class="glass-card p-5 rounded-lg flex items-center justify-between group hover:border-tertiary/30 transition-all cursor-default">
-                            <span class="font-bold text-on-surface">Cockatiel</span>
-                            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="p-1.5 hover:text-tertiary transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="edit">edit</span></button>
-                                <button class="p-1.5 hover:text-error transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="close">close</span></button>
-                            </div>
-                        </div>
-                        <div
-                            class="glass-card p-5 rounded-lg flex items-center justify-between group hover:border-tertiary/30 transition-all cursor-default">
-                            <span class="font-bold text-on-surface">African Grey</span>
-                            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="p-1.5 hover:text-tertiary transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="edit">edit</span></button>
-                                <button class="p-1.5 hover:text-error transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="close">close</span></button>
-                            </div>
-                        </div>
-                        <div
-                            class="glass-card p-5 rounded-lg flex items-center justify-between group hover:border-tertiary/30 transition-all cursor-default">
-                            <span class="font-bold text-on-surface">Budgerigar</span>
-                            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="p-1.5 hover:text-tertiary transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="edit">edit</span></button>
-                                <button class="p-1.5 hover:text-error transition-colors"><span
-                                        class="material-symbols-outlined text-sm" data-icon="close">close</span></button>
-                            </div>
-                        </div>
-                        <button
-                            class="border-2 border-dashed border-stone-200 rounded-lg p-5 text-stone-400 font-bold hover:text-tertiary hover:border-tertiary hover:bg-tertiary/5 transition-all flex items-center justify-center gap-2">
-                            Show +12 more
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
     </div>
+
+
+    <script>
+        $('.saveBtn').click(function() {
+            // Show the modal
+            $('#addNewUserModal').removeClass('hidden');
+        });
+
+        // Close modal
+        $(document).on('click', '#closeAddNewUserModal, #cancelAddNewUserModal', function() {
+            $('#addNewUserModal').addClass('hidden');
+        });
+    </script>
 @endsection

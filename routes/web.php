@@ -10,6 +10,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\backEnd\AdminController;
 use App\Http\Controllers\backEnd\AuthController;
 use App\Http\Controllers\backEnd\ConpanyController;
+use App\Http\Controllers\backEnd\petController;
 use App\Http\Controllers\backEnd\ServiceManagementController;
 use App\Http\Controllers\backEnd\UserController;
 
@@ -32,16 +33,24 @@ Route::prefix('admin')->group(function () {
     // Admin (logged in)
     Route::middleware('admin')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+        
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/appointment', [AdminController::class, 'appointment'])->name('appointment');
         Route::get('/inventory', [AdminController::class, 'inventory'])->name('inventory');
 
-        Route::get('/serviceManagement', [ServiceManagementController::class, 'serviceManagement'])->name('serviceManagement');
 
         Route::get('/customer', [UserController::class, 'customer'])->name('customer');
         Route::post('/saveCustomer', [UserController::class, 'saveCustomer'])->name('customer.store');
         Route::post('/updateCustomer', [UserController::class, 'updateCustomer'])->name('customer.update');
 
+        Route::get('/petManagement', [petController::class, 'petManagement'])->name('petManagement');
+        Route::post('/saveSpecies', [petController::class, 'saveSpecies'])->name('petManagement.saveSpecies');
+        Route::post('/saveBreed', [petController::class, 'saveBreed'])->name('petManagement.saveBreed');
+        Route::patch('/updateBreed/{id}', [petController::class, 'updateBreed'])->name('petManagement.updateBreed');
+        Route::patch('/toggleBreedStatus/{id}', [petController::class, 'toggleBreedStatus'])->name('petManagement.toggleBreedStatus');
+        
+
+        Route::get('/serviceManagement', [ServiceManagementController::class, 'serviceManagement'])->name('serviceManagement');
 
         Route::get('/company', [ConpanyController::class, 'company'])->name('company');
 

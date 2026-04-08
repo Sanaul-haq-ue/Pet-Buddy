@@ -80,6 +80,7 @@
 
 
 
+<!-- Add Customer Modal -->
 
     <div id="addNewUserModal"
         class="fixed inset-0 bg-stone-900/20 backdrop-blur-md z-[100] flex items-center justify-center p-4 hidden">
@@ -300,8 +301,12 @@
                     <span class="material-symbols-outlined text-lg">filter_list</span>
                     Advanced Filters
                 </button>
-                <button
+                {{-- <button
                     class="addBtn px-6 py-2.5 bg-primary text-on-primary rounded-full font-bold text-sm flex items-center gap-2 hover:bg-primary-dim transition-all shadow-md">
+                    <span class="material-symbols-outlined text-lg">person_add</span>
+                    Add New Parent
+                </button> --}}
+                <button class="addBtn btn-add-new">
                     <span class="material-symbols-outlined text-lg">person_add</span>
                     Add New Parent
                 </button>
