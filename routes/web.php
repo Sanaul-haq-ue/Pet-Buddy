@@ -7,11 +7,12 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\ShopController;
-use App\Http\Controllers\backEnd\AdminController;
+
+use App\Http\Controllers\backEnd\DashboardController;
 use App\Http\Controllers\backEnd\AuthController;
 use App\Http\Controllers\backEnd\ConpanyController;
+use App\Http\Controllers\backEnd\ServiceMController;
 use App\Http\Controllers\backEnd\petController;
-use App\Http\Controllers\backEnd\ServiceManagementController;
 use App\Http\Controllers\backEnd\UserController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -33,10 +34,10 @@ Route::prefix('admin')->group(function () {
     // Admin (logged in)
     Route::middleware('admin')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
-        
-        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-        Route::get('/appointment', [AdminController::class, 'appointment'])->name('appointment');
-        Route::get('/inventory', [AdminController::class, 'inventory'])->name('inventory');
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/appointment', [DashboardController::class, 'appointment'])->name('appointment');
+        Route::get('/inventory', [DashboardController::class, 'inventory'])->name('inventory');
 
 
         Route::get('/customer', [UserController::class, 'customer'])->name('customer');
@@ -48,14 +49,11 @@ Route::prefix('admin')->group(function () {
         Route::post('/saveBreed', [petController::class, 'saveBreed'])->name('petManagement.saveBreed');
         Route::patch('/updateBreed/{id}', [petController::class, 'updateBreed'])->name('petManagement.updateBreed');
         Route::patch('/toggleBreedStatus/{id}', [petController::class, 'toggleBreedStatus'])->name('petManagement.toggleBreedStatus');
-        
 
-        Route::get('/serviceManagement', [ServiceManagementController::class, 'serviceManagement'])->name('serviceManagement');
 
         Route::get('/company', [ConpanyController::class, 'company'])->name('company');
 
-
+        Route::get('/serviceManagement', [ServiceMController::class, 'serviceManagement'])->name('serviceManagement');
+        Route::post('/saveCategory', [ServiceMController::class, 'saveCategory'])->name('saveCategory');
     });
-
 });
- 

@@ -60,7 +60,30 @@
             </div>
         </div>
 
-        <a class="flex items-center gap-3 px-4 py-3 rounded-full font-headline text-sm tracking-tight transition-all duration-300
+
+        <div class="relative group">
+            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-full font-headline text-sm tracking-tight transition-all duration-300
+            {{ request()->routeIs('company') || request()->routeIs('serviceManagement') ? $active : $normal }}">
+                <span class="material-symbols-outlined">group</span>
+                <span>Companies/ Services</span>
+                <span class="material-symbols-outlined text-xs ml-auto">expand_more</span>
+            </button>
+            <!-- Dropdown Menu -->
+            <div class="absolute left-4 top-12 w-56 bg-stone-100 dark:bg-stone-800 rounded-lg shadow-lg py-2 z-50 invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 border border-stone-200/20 dark:border-stone-700/20">
+                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-headline text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-colors {{ request()->routeIs('company') ? 'bg-orange-100/50 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 font-bold' : '' }}"
+                    href="{{ route('company') }}">
+                    <span class="material-symbols-outlined text-lg">person</span>
+                    Company Management
+                </a>
+                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-headline text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-colors {{ request()->routeIs('serviceManagement') ? 'bg-orange-100/50 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 font-bold' : '' }}"
+                    href="{{ route('serviceManagement') }}">
+                    <span class="material-symbols-outlined text-lg">pets</span>
+                    Service Management
+                </a>
+            </div>
+        </div>
+
+        {{-- <a class="flex items-center gap-3 px-4 py-3 rounded-full font-headline text-sm tracking-tight transition-all duration-300
             {{ request()->routeIs('company') ? $active : $normal }}"
             href="{{ route('company') }}">
             <span class="material-symbols-outlined">group</span>
@@ -71,7 +94,7 @@
             href="{{ route('serviceManagement') }}">
             <span class="material-symbols-outlined">group</span>
             <span>Service Management</span>
-        </a>
+        </a> --}}
         <a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-all duration-300 rounded-full font-headline text-sm tracking-tight"
             href="#">
             <span class="material-symbols-outlined">settings</span>
