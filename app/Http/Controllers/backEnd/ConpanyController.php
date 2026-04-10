@@ -10,10 +10,9 @@ class ConpanyController extends Controller
 {
     public function company()
     {
-        return view('backEnd.company', [
+        return view('backEnd.pages.companyService.company', [
             'companies' => Company::paginate(7)
         ]);
 
-        // return view('backEnd.company');
     }
 }
