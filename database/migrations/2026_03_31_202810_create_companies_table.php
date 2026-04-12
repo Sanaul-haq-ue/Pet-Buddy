@@ -16,8 +16,8 @@ return new class extends Migration
 
             $table->string('brand_logo')->nullable(); // store image path
             $table->string('company_name');
-            $table->tinyInteger('status')->default(0)
-                ->comment('0 = active, 1 = inactive');
+            $table->tinyInteger('status')->default(1)
+                ->comment('1 = active, 0 = inactive');
             $table->text('address')->nullable();
             $table->string('location')->nullable();
             $table->string('phone1')->nullable();
