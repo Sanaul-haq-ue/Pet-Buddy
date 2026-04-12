@@ -54,6 +54,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/company', [ConpanyController::class, 'company'])->name('company');
 
         Route::get('/serviceManagement', [ServiceMController::class, 'serviceManagement'])->name('serviceManagement');
+        Route::get('/addService', [ServiceMController::class, 'addService'])->name('addService');
+        Route::post('/saveService', [ServiceMController::class, 'saveService'])->name('saveService');
+        Route::get('/upazilas-by-district/{district_id}', [ServiceMController::class, 'upazilasByDistrict'])->name('upazilasByDistrict');
+        Route::get('/unions-by-upazila/{upazila_id}', [ServiceMController::class, 'unionsByUpazila'])->name('unionsByUpazila');
+        
         Route::post('/saveCategory', [ServiceMController::class, 'saveCategory'])->name('saveCategory');
+        Route::post('/updateCategory', [ServiceMController::class, 'updateCategory'])->name('updateCategory');
+        
     });
 });
