@@ -1,7 +1,7 @@
 /* resources/css/bookings.css */
 
 .bookings-main {
-    padding-top: 7rem;
+    padding-top: 0;
     padding-bottom: 5rem;
 }
 
@@ -108,11 +108,6 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
-}
-@media (min-width: 1024px) {
-    .dashboard-grid {
-        grid-template-columns: 7fr 5fr;
-    }
 }
 
 .upcoming-bookings {

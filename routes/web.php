@@ -14,6 +14,8 @@ use App\Http\Controllers\backEnd\ConpanyController;
 use App\Http\Controllers\backEnd\ServiceMController;
 use App\Http\Controllers\backEnd\petController;
 use App\Http\Controllers\backEnd\UserController;
+use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\UserDashbaord;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -21,6 +23,18 @@ Route::get('/services', [ServicesController::class, 'index'])->name('services');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/bookings', [BookingsController::class, 'index'])->name('bookings');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+
+Route::prefix('user')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::post('/login', [UserAuthController::class, 'loginSubmit'])->name('user.login.submit');
+        Route::post('/register', [UserAuthController::class, 'registerSubmit'])->name('user.register.submit');
+    });
+
+    Route::middleware('user')->group(function () {
+        Route::get('/dashboard', [UserDashbaord::class, 'dashboard'])->name('user.dashboard');
+        Route::get('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
+    });
+});
 
 
 Route::prefix('admin')->group(function () {
