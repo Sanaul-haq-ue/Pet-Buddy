@@ -307,3 +307,27 @@
 .btn-load-more:hover {
     background-color: rgba(148, 76, 0, 0.05); /* primary/5 */
 }
+
+
+@media (max-width: 767px) {
+    .services-main {
+      padding-top: 100px;
+      padding-bottom: 5rem;
+  }
+  .services-title{
+    font-size: 30px;
+  }
+  .services-subtitle{
+    font-size: 14px;
+  }
+  .services-header{
+    margin-bottom: 2rem;
+  }
+  .service-card.glass-card{
+    padding: 0px !important;
+    border-radius: 20px !important;
+  }
+  .service-header-row{
+    gap: 10px;
+  }
+}

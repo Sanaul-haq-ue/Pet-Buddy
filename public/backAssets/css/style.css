@@ -1,0 +1,13 @@
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    outline: 1.5px solid rgba(177, 178, 175, 0.15);
+}
+
+.signature-glow {
+    background: linear-gradient(135deg, #944c00 0%, #ffaf72 100%);
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
