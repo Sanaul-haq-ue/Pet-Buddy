@@ -100,9 +100,9 @@
             <span class="nav-menu-text">Dashboard</span>
         </a>
         @else
-        <a class="nav-menu {{ request()->routeIs('profile') ? 'active' : '' }}" href="{{ route('profile') }}">
+        <a class="nav-menu {{ request()->routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">
             <span class="material-symbols-outlined">person</span>
-            <span class="nav-menu-text">Profile</span>
+            <span class="nav-menu-text">Login</span>
         </a>
         @endif
     </nav>
