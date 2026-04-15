@@ -56,9 +56,10 @@
 }
 
 .nav-links a.active {
-  color: var(--color-primary);
-  border-bottom: 2px solid var(--color-primary);
-  padding-bottom: 0.25rem;
+  color: white;
+  padding: 8px 15px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-container) 100%);
+  border-radius: var(--radius-full);
 }
 
 .nav-actions {
@@ -797,13 +798,22 @@
     margin-right: -7px;
     margin-bottom: -5px;
 }
-.mobile-menu-bar , .user-icon{
+.mobile-menu-bar {
   display: none;
 }
 .user-span{
   text-decoration: none; 
-  padding: 0.5rem 1rem; 
   border-radius: 4px;
+}
+.user-menu{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.user-icon{
+  width: 20px;
+  filter: invert(1);
 }
 .service-mb{
   display: none;
@@ -1133,6 +1143,10 @@ a{
     display: block;
     width: 24px;
     cursor: pointer;
+    filter: none;
+  }
+  .user-menu{
+    box-shadow: none !important;
   }
   .hero-container , .container, .nav-container , .hero-content{
     max-width: 100% !important;
@@ -1266,10 +1280,11 @@ a{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 5px 5px 0px;
     z-index: 50;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
+    gap: 15px;
   }
   .nav-menu {
     display: flex;
@@ -1280,11 +1295,19 @@ a{
     padding: 3px;
     text-decoration: none;
     color: #944c00;
+    width: 25%;
+  }
+  .nav-menu.active{
+    color: white;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-container) 100%);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 7px;
   }
   .nav-menu-text{
     font-family: var(--font-headline);
     font-weight: 600;
-    font-size: 0.875rem;
+    font-size: 12px;
   }
    .nav-menu-text:hover {
     color: var(--color-primary);
