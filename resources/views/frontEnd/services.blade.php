@@ -80,7 +80,7 @@
                                 <div class="service-meta">
                                     <span class="material-symbols-outlined">schedule</span> 90-120 mins
                                 </div>
-                                <button class="btn-book signature-glow">Book Now</button>
+                                <button class="btn-book open-booking-modal signature-glow">Book Now</button>
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                                 <div class="service-meta">
                                     <span class="material-symbols-outlined">person</span> Expert Specialist
                                 </div>
-                                <button class="btn-book signature-glow">Book Now</button>
+                                <button class="btn-book open-booking-modal signature-glow">Book Now</button>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                                 <div class="service-meta">
                                     <span class="material-symbols-outlined">location_on</span> In-Park Session
                                 </div>
-                                <button class="btn-book signature-glow">Book Now</button>
+                                <button class="btn-book open-booking-modal signature-glow">Book Now</button>
                             </div>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                                 <div class="service-meta">
                                     <span class="material-symbols-outlined">verified</span> Certified Hygienist
                                 </div>
-                                <button class="btn-book signature-glow">Book Now</button>
+                                <button class="btn-book open-booking-modal signature-glow">Book Now</button>
                             </div>
                         </div>
                     </div>
