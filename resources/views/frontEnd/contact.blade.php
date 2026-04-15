@@ -1,5 +1,14 @@
 @extends('frontEnd.layouts.app')
-
+@push('styles')
+    <style>
+        @media (max-width: 768px) {
+            .cart-icon {
+                bottom: 70px;
+                right: 10px;
+            }
+        }
+    </style>
+@endpush
 @section('content')
 <main class="contact-main container pt-32 pb-20">
         <!-- Hero Section -->

@@ -72,7 +72,7 @@
                         <p class="product-desc flex-grow">A vibrant blend of pasture-raised lamb and ancient grains for optimal energy.</p>
                         <div class="product-footer">
                             <span class="product-price text-primary">$34.99</span>
-                            <button class="btn-add-cart signature-glow">
+                            <button class="btn-add-cart add-to-cart signature-glow">
                                 <span class="material-symbols-outlined">add_shopping_cart</span>
                             </button>
                         </div>
@@ -93,7 +93,7 @@
                         <p class="product-desc flex-grow">Fresh-caught salmon and wild tuna prepared in a savory, hydrating bone broth.</p>
                         <div class="product-footer">
                             <span class="product-price text-primary">$18.50</span>
-                            <button class="btn-add-cart signature-glow">
+                            <button class="btn-add-cart add-to-cart signature-glow">
                                 <span class="material-symbols-outlined">add_shopping_cart</span>
                             </button>
                         </div>
@@ -114,7 +114,7 @@
                         <p class="product-desc flex-grow">Diverse wild seeds and sun-dried berries for radiant feathers and clear songs.</p>
                         <div class="product-footer">
                             <span class="product-price text-primary">$12.99</span>
-                            <button class="btn-add-cart signature-glow">
+                            <button class="btn-add-cart add-to-cart signature-glow">
                                 <span class="material-symbols-outlined">add_shopping_cart</span>
                             </button>
                         </div>
@@ -135,7 +135,7 @@
                         <p class="product-desc flex-grow">Air-dried chicken liver and honey biscuits. Perfect for training and joyful moments.</p>
                         <div class="product-footer">
                             <span class="product-price text-primary">$15.25</span>
-                            <button class="btn-add-cart signature-glow">
+                            <button class="btn-add-cart add-to-cart signature-glow">
                                 <span class="material-symbols-outlined">add_shopping_cart</span>
                             </button>
                         </div>
@@ -157,7 +157,7 @@
                         <p class="product-desc flex-grow">Ultra-soft mouse-like texture designed specifically for the developing palate of kittens.</p>
                         <div class="product-footer">
                             <span class="product-price text-primary">$22.00</span>
-                            <button class="btn-add-cart signature-glow">
+                            <button class="btn-add-cart add-to-cart signature-glow">
                                 <span class="material-symbols-outlined">add_shopping_cart</span>
                             </button>
                         </div>
@@ -178,7 +178,7 @@
                         <p class="product-desc flex-grow">Low-calorie, high-fiber recipe with added glucosamine for the graceful golden years.</p>
                         <div class="product-footer">
                             <span class="product-price text-primary">$42.99</span>
-                            <button class="btn-add-cart signature-glow">
+                            <button class="btn-add-cart add-to-cart signature-glow">
                                 <span class="material-symbols-outlined">add_shopping_cart</span>
                             </button>
                         </div>

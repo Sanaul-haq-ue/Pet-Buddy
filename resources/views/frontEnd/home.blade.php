@@ -1,5 +1,16 @@
 @extends('frontEnd.layouts.app')
 
+@push('styles')
+    <style>
+        @media (max-width: 768px) {
+            .cart-icon {
+                bottom: 70px;
+                right: 10px;
+            }
+        }
+    </style>
+@endpush
+
 @section('content')
     <!-- Hero Section -->
     <section class="home hero-section">
@@ -111,7 +122,7 @@
                             <p class="card-desc">Full-service spa treatments designed for aesthetic excellence.</p>
                             <div class="product-actions">
                                 <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart service primary"><span class="material-symbols-outlined"><i
+                                <button class="add-to-cart service primary open-booking-modal" data-service-name="Artisan Grooming" data-service-price="45.00" data-service-image="https://lh3.googleusercontent.com/aida-public/AB6AXuAn3ZfnJkt-50wYcLntoQYrdWX68D_EbQa0bCMgWbqnnTGHwEz-YOWd6Jnbgg4Vq823BMmRxn5WmjqQdgOCI_xRhPwF8TudN99rKFbSa_bkKcE-ViNHOWhFrviO8pS0op12NBg4o9skDQ5gXJ-Qb5fqLXpMNxTpgSMuQQir6sXpiO4-oQU--cRhN0S2-vabKaCrtoakyBdu5QTBCfypS6Yh9MqM4hwsuMKfbZPJ0jw24ftSTpJpJsC6Cq8WIGa43SlFid7xlREJ4o7T" data-service-desc="Full-service spa treatments designed for aesthetic excellence."><span class="material-symbols-outlined"><i
                                             class="fa-solid fa-plus"></i></span></button>
                             </div>
                         </div>
@@ -127,7 +138,7 @@
                             <p class="card-desc">Full-service spa treatments designed for aesthetic excellence.</p>
                             <div class="product-actions">
                                 <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart service primary"><span class="material-symbols-outlined"><i
+                                <button class="add-to-cart service primary open-booking-modal" data-service-name="Artisan Grooming" data-service-price="45.00" data-service-image="https://lh3.googleusercontent.com/aida-public/AB6AXuDI8VKIF5Dv0mrUTcSY0uGvR78w854ZExEJjdfeH-nHeXwfVV4_74gccUbWFuTwAnatTChMqT9rRoF2LUtByCGyGhdTWSZuZjPwARvWovmo-loPN5sfMRZihhwjXEi6qLEMHcV6oLDhFx4TNJ78HoNeXDExnXC2RfEaR3DoWn8D9I4z8YIqzpV_U-73-HnxJ73SmjRmIXZnGAHxjzwVIWAlY38YdSu8hRUUATo7nSKRBns169e8AXA9N_598SiYRt99Q6Mmuzo6lMgm" data-service-desc="Full-service spa treatments designed for aesthetic excellence."><span class="material-symbols-outlined"><i
                                             class="fa-solid fa-plus"></i></span></button>
                             </div>
                         </div>
@@ -143,7 +154,7 @@
                             <p class="card-desc">Full-service spa treatments designed for aesthetic excellence.</p>
                             <div class="product-actions">
                                 <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart service primary"><span class="material-symbols-outlined"><i
+                                <button class="add-to-cart service primary open-booking-modal" data-service-name="Artisan Grooming" data-service-price="45.00" data-service-image="https://lh3.googleusercontent.com/aida-public/AB6AXuBRHSMqtmp-tkEqR7puXMsj_NFlbFwkdS5-oxTJuT6ul_tJuoXtr8APQdfe-VT8llK478HoGUvwz_DPMZqFJe0psVUW0rq61SIegchF1l9tkAXv0SHK84gB5E7JVS5jKFLgHYys6z8tNE-ykGiWnnaTMNJPe8bp5oSeFlksGUf9cDzC45v9HTqWbLZx0UnQaIKeh8Vm9JzDJu_Mvsst1YZ310VhqPKIuy6tLR1cbX-AA0UP__mUglDYx23L_uxi572-X4qhjChv4w4X" data-service-desc="Full-service spa treatments designed for aesthetic excellence."><span class="material-symbols-outlined"><i
                                             class="fa-solid fa-plus"></i></span></button>
                             </div>
                         </div>
@@ -159,7 +170,7 @@
                             <p class="card-desc">Full-service spa treatments designed for aesthetic excellence.</p>
                             <div class="product-actions">
                                 <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart service primary"><span class="material-symbols-outlined"><i
+                                <button class="add-to-cart service primary open-booking-modal" data-service-name="Artisan Grooming" data-service-price="45.00" data-service-image="https://lh3.googleusercontent.com/aida-public/AB6AXuAn3ZfnJkt-50wYcLntoQYrdWX68D_EbQa0bCMgWbqnnTGHwEz-YOWd6Jnbgg4Vq823BMmRxn5WmjqQdgOCI_xRhPwF8TudN99rKFbSa_bkKcE-ViNHOWhFrviO8pS0op12NBg4o9skDQ5gXJ-Qb5fqLXpMNxTpgSMuQQir6sXpiO4-oQU--cRhN0S2-vabKaCrtoakyBdu5QTBCfypS6Yh9MqM4hwsuMKfbZPJ0jw24ftSTpJpJsC6Cq8WIGa43SlFid7xlREJ4o7T" data-service-desc="Full-service spa treatments designed for aesthetic excellence."><span class="material-symbols-outlined"><i
                                             class="fa-solid fa-plus"></i></span></button>
                             </div>
                         </div>
@@ -519,5 +530,6 @@
                 }
             });
         </script>
+        
     @endpush
 @endsection
