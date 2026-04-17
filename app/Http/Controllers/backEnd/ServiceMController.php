@@ -17,9 +17,16 @@ class ServiceMController extends Controller
 {
     public function serviceManagement()
     {
+
         $categories = Category::paginate(3);
-        return view('backEnd.pages.companyService.serviceManagement', compact('categories'));
+        $services = Service::paginate(10);
+
+        return view(
+            'backEnd.pages.companyService.serviceManagement',
+            compact('categories', 'services')
+        );
     }
+
 
     public function saveCategory(Request $request)
     {

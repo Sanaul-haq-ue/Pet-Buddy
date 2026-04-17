@@ -91,7 +91,10 @@
     </script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="{{ asset('backAssets/css/style.css') }}">
+    
     <link rel="stylesheet" href="{{ asset('backAssets/css/petManagement.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('backAssets/css/company.css') }}">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -99,8 +102,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Add in your layout head -->
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 
@@ -109,22 +112,66 @@
     @include('backEnd/include/header')
 
 
-    <main class="ml-64 p-10 min-h-screen">
+    <main id="mainContent" class="ml-64 pt-20 p-10 min-h-screen transition-all duration-300">
         @yield('adminContent')
     </main>
 
 
     <!-- Floating Action Action Hint (FAB Suppression logic would apply on Detail screens, not Dashboard) -->
-    <button
-        class="fixed bottom-10 right-10 w-16 h-16 rounded-full signature-glow text-on-primary shadow-2xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-50">
-        <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
-    </button>
+    {{-- <button
+            class="fixed bottom-10 right-10 w-16 h-16 rounded-full signature-glow text-on-primary shadow-2xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-50">
+            <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
+        </button> --}}
 
 
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
+
+
+
+    {{-- <script>
+        let isPinned = true;
+
+        const sidebar = document.getElementById('sidebar');
+        const main = document.getElementById('mainContent');
+        const header = document.getElementById('topbar');
+
+        function toggleSidebar() {
+
+            if (isPinned) {
+                // COLLAPSE
+                sidebar.classList.remove('w-64');
+                sidebar.classList.add('w-20');
+
+                main.classList.remove('ml-64');
+                main.classList.add('ml-20');
+
+                header.classList.remove('ml-64');
+                header.classList.add('ml-20');
+
+                header.classList.remove('w-[calc(100%-16rem)]');
+                header.classList.add('w-[calc(100%-5rem)]');
+
+            } else {
+                // EXPAND
+                sidebar.classList.remove('w-20');
+                sidebar.classList.add('w-64');
+
+                main.classList.remove('ml-20');
+                main.classList.add('ml-64');
+
+                header.classList.remove('ml-20');
+                header.classList.add('ml-64');
+
+                header.classList.remove('w-[calc(100%-5rem)]');
+                header.classList.add('w-[calc(100%-16rem)]');
+            }
+
+            isPinned = !isPinned;
+        }
+    </script> --}}
 
 </body>
 

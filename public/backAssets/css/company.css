@@ -1,0 +1,279 @@
+/* Exact Design Mapping for Company Page (Tailwind -> Bootstrap + CSS) */
+.company-canvas {
+    padding-bottom: 8rem;
+}
+
+.tracking-tighter {
+    letter-spacing: -0.05em !important;
+}
+
+.tracking-tight {
+    letter-spacing: -0.025em !important;
+}
+
+.tracking-widest {
+    letter-spacing: 0.1em !important;
+}
+
+.text-10px {
+    font-size: 10px !important;
+}
+
+.text-sm {
+    font-size: 0.875rem !important;
+}
+
+.text-xs {
+    font-size: 0.75rem !important;
+}
+
+/* Color Scheme */
+.text-on-surface {
+    color: #303330 !important;
+}
+
+.text-on-surface-variant {
+    color: #5d605c !important;
+}
+
+.text-primary {
+    color: #944c00 !important;
+}
+
+.text-secondary {
+    color: #006b63 !important;
+}
+
+.text-error {
+    color: #aa371c !important;
+}
+
+.text-zinc-500 {
+    color: #71717a !important;
+}
+
+.text-zinc-600 {
+    color: #52525b !important;
+}
+
+.text-zinc-400 {
+    color: #a1a1aa !important;
+}
+
+.text-zinc-300 {
+    color: #d4d4d8 !important;
+}
+
+.text-stone-400 {
+    color: #a8a29e !important;
+}
+
+.text-on-primary {
+    color: #fff7f4 !important;
+}
+
+.text-on-secondary-container {
+    color: #005c55 !important;
+}
+
+.text-on-tertiary-container {
+    color: #5c4900 !important;
+}
+
+.bg-primary {
+    background-color: #944c00 !important;
+}
+
+.bg-secondary-container {
+    background-color: #84f5e8 !important;
+}
+
+.bg-surface-container-low {
+    background-color: #f4f4f0 !important;
+}
+
+.bg-surface-container {
+    background-color: #eeeeea !important;
+}
+
+.bg-secondary {
+    background-color: #006b63 !important;
+}
+
+.bg-stone-400 {
+    background-color: #a8a29e !important;
+}
+
+.bg-secondary-container-30 {
+    background-color: rgba(132, 245, 232, 0.3) !important;
+}
+
+.bg-tertiary-container-30 {
+    background-color: rgba(253, 211, 77, 0.3) !important;
+}
+
+.bg-primary-10 {
+    background-color: rgba(148, 76, 0, 0.1) !important;
+}
+
+.bg-secondary-10 {
+    background-color: rgba(0, 107, 99, 0.1) !important;
+}
+
+.bg-orange-50-30 {
+    background-color: rgba(255, 247, 237, 0.3) !important;
+}
+
+.bg-surface-lowest-50 {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Typography */
+.font-headline {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.font-body {
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+}
+
+.font-label {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* Border Radius */
+.rounded-full {
+    border-radius: 9999px !important;
+}
+
+.rounded-lg {
+    border-radius: 2rem !important;
+}
+
+/* Configured in system */
+.rounded-xl {
+    border-radius: 3rem !important;
+}
+
+.rounded-2xl {
+    border-radius: 1rem !important;
+}
+
+/* Sizing Constraints */
+.w-10 {
+    width: 2.5rem !important;
+}
+
+.h-10 {
+    height: 2.5rem !important;
+}
+
+.w-2 {
+    width: 0.5rem !important;
+}
+
+.h-2 {
+    height: 0.5rem !important;
+}
+
+.gap-8 {
+    gap: 2rem !important;
+}
+
+/* Visual Effects */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.signature-glow {
+    background: linear-gradient(135deg, #944c00 0%, #ff9b48 100%);
+    box-shadow: 0 10px 25px -5px rgba(148, 76, 0, 0.4);
+}
+
+.table-divider>tbody>tr {
+    border-bottom: 1px solid rgba(177, 178, 175, 0.1);
+}
+
+.table-divider>tbody>tr:last-child {
+    border-bottom: none;
+}
+
+.custom-active-scale:active {
+    transform: scale(0.95);
+}
+
+/* Hover States */
+.hover-bg-surface-lowest:hover {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    transition: all 0.2s;
+}
+
+.hover-text-primary:hover {
+    color: #944c00 !important;
+    transition: all 0.2s;
+}
+
+.hover-text-secondary:hover {
+    color: #006b63 !important;
+    transition: all 0.2s;
+}
+
+.hover-text-error:hover {
+    color: #aa371c !important;
+    transition: all 0.2s;
+}
+
+.hover-bg-primary-dim:hover {
+    background-color: #824200 !important;
+    transition: all 0.2s;
+}
+
+.hover-bg-secondary-fixed:hover {
+    background-color: #75e7da !important;
+    transition: all 0.2s;
+}
+
+.hover-bg-surface-low:hover {
+    background-color: #f4f4f0 !important;
+    transition: all 0.2s;
+}
+
+.group-hover-text-primary {
+    transition: all 0.2s;
+}
+
+.group:hover .group-hover-text-primary {
+    color: #944c00 !important;
+}
+
+/* Animations */
+@keyframes pulse-custom {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}
+
+.animate-pulse {
+    animation: pulse-custom 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Map Input Overrides */
+.custom-focus-ring:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 107, 99, 0.2) !important;
+}
+
+#bottomBar {
+    background-color: rgba(250, 249, 246, 0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(177, 178, 175, 0.1);
+}

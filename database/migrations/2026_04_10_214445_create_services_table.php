@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
 
-            $table->string('service_name');
+            $table->string('name');
             $table->string('slug')->unique();
 
-            $table->text('S_description');
+            $table->text('description');
 
             // JSON for multiple select
             $table->json('category_id');
