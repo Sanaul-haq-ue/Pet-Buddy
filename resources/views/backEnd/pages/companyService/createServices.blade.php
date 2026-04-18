@@ -56,28 +56,9 @@
                                     Service Name<span class="text-red-500">*</span></label>
                                 <input
                                     class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-3 px-0 focus:ring-0 focus:border-secondary transition-all text-lg placeholder:text-outline-variant"
-                                    placeholder="e.g. Premium Sunset Walk" name="service_name" type="text" />
+                                    placeholder="e.g. Premium Sunset Walk" name="name" type="text" />
                             </div>
                             <div class="grid grid-cols-2 gap-8">
-                                {{-- <div class="group">
-                                    <label
-                                        class="block text-xs font-label font-bold text-outline uppercase tracking-widest mb-2 group-focus-within:text-secondary transition-colors">
-                                        Category <span class="text-red-500">*</span>
-                                    </label>
-
-                                    <select name="category_id[]" multiple
-                                        class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-3 px-0 focus:ring-0 focus:border-secondary transition-all text-lg cursor-pointer">
-
-                                        <option disabled>Select Category (hold Ctrl / Cmd to select multiple)</option>
-
-                                        @forelse ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @empty
-                                            <option disabled>No Categories available</option>
-                                        @endforelse
-
-                                    </select>
-                                </div> --}}
 
                                 <div class="group">
                                     <label
@@ -389,7 +370,7 @@
                         <div class="flex-1 group">
                             <textarea
                                 class="w-full h-full bg-transparent border-0 border-b border-outline-variant/30 py-3 px-0 focus:ring-0 focus:border-secondary transition-all text-base resize-none leading-relaxed placeholder:text-outline-variant"
-                                name="S_description" placeholder="Describe the luxury and care of this service..."></textarea>
+                                name="description" placeholder="Describe the luxury and care of this service..."></textarea>
                         </div>
                         <div
                             class="mt-4 flex items-center gap-2 text-xs text-outline font-label uppercase tracking-widest">

@@ -1,147 +1,313 @@
-<aside
-    class="fixed left-0 top-0 h-full flex flex-col p-6 h-screen w-64 border-r border-stone-200/20 dark:border-stone-800/20 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-[0_20px_40px_rgba(148,76,0,0.06)] z-50">
-    <div class="mb-10">
-        <h1 class="text-2xl font-bold text-orange-800 dark:text-orange-300 font-headline tracking-tight">Radiant Admin
-        </h1>
-        <p class="text-[10px] font-label uppercase tracking-widest text-stone-500 mt-1">The Luminous Sanctuary</p>
+<style>
+/* Custom CSS to replace Tailwind specific styles and maintain exact design */
+.sidebar-container {
+    width: 256px;
+    transition: all 0.3s ease;
+    z-index: 50;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.sidebar-container.collapsed {
+    width: 80px;
+}
+
+.sidebar-container.collapsed .sidebar-text {
+    opacity: 0;
+    visibility: hidden;
+    display: none !important;
+}
+
+.sidebar-container.collapsed .nav-link-custom {
+    justify-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.sidebar-container.collapsed .toggle-icon {
+    display: none !important;
+}
+
+.topbar-container {
+    left: 256px;
+    height: 64px;
+    z-index: 40;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+}
+
+.topbar-container.collapsed {
+    left: 80px;
+}
+
+.nav-link-custom {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 9999px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    color: #57534e;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+}
+
+.nav-link-custom:hover {
+    color: #c2410c;
+    background-color: rgba(231, 229, 228, 0.4);
+}
+
+.nav-link-active {
+    background-color: rgba(254, 215, 170, 0.5) !important;
+    color: #9a3412 !important;
+    font-weight: bold !important;
+}
+
+.text-orange-800 { color: #9a3412; }
+.text-stone-500 { color: #78716c; }
+.text-xs { font-size: 0.75rem; }
+.font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+.font-label { font-family: 'Plus Jakarta Sans', sans-serif; }
+.font-body { font-family: 'Be Vietnam Pro', sans-serif; }
+.tracking-tight { letter-spacing: -0.025em; }
+.tracking-widest { letter-spacing: 0.1em; }
+.text-10px { font-size: 10px; }
+
+.search-box {
+    background-color: #f4f4f0;
+    border-radius: 9999px;
+    padding: 0.375rem 1rem;
+    width: 24rem;
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+    font-size: 0.875rem;
+}
+
+.search-input::placeholder {
+    color: #b1b2af;
+}
+
+/* User Dropdown */
+.user-menu-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 0.5rem;
+    width: 12rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.75rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 50;
+    padding: 0.5rem 0;
+}
+
+.user-menu-container:hover .user-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item-custom {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 500;
+    color: #303330;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.dropdown-item-custom:hover {
+    background-color: rgba(148, 76, 0, 0.1);
+}
+
+.dropdown-item-danger {
+    color: #aa371c;
+}
+.dropdown-item-danger:hover {
+    background-color: rgba(170, 55, 28, 0.05);
+}
+
+.menu-btn-custom {
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #303330;
+}
+.menu-btn-custom:hover {
+    background-color: rgba(231, 229, 228, 0.4);
+}
+
+/* Submenu collapse animation without Bootstrap JS dependency */
+.submenu-collapse {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.submenu-collapse.show {
+    max-height: 200px;
+    opacity: 1;
+}
+
+.sidebar-container.collapsed .submenu-collapse {
+    display: none !important;
+}
+</style>
+
+<aside id="sidebar" class="sidebar-container position-fixed top-0 start-0 h-100 d-flex flex-column p-4">
+    <!-- Header -->
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div class="sidebar-text">
+            <h1 class="fs-4 fw-bold text-orange-800 font-headline tracking-tight m-0">
+                Radiant Admin
+            </h1>
+            <p class="text-10px font-label text-uppercase tracking-widest text-stone-500 mt-1 mb-0">
+                The Luminous Sanctuary
+            </p>
+        </div>
+
+        <button onclick="toggleSidebar()" class="menu-btn-custom d-flex align-items-center justify-content-center">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
     </div>
+
     @php
-        $active = 'bg-orange-100/50 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 font-bold';
-        $normal =
-            'text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-stone-200/40 dark:hover:bg-stone-800/40';
+        $activeClass = 'nav-link-active';
     @endphp
-    <nav class="flex-1 space-y-2">
-        {{-- <a class="flex items-center gap-3 px-4 py-3 bg-orange-100/50 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 rounded-full font-bold transition-all duration-300 scale-95 active:scale-90 font-headline text-sm tracking-tight"
-            href="{{ route('dashboard') }}">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span>Dashboard</span>
-        </a> --}}
-        <a class="flex items-center gap-3 px-4 py-3 rounded-full font-headline text-sm tracking-tight transition-all duration-300
-            {{ request()->routeIs('dashboard') ? $active : $normal }}"
-            {{-- // ? 'bg-orange-100/50 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 font-bold'
-                // : 'text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-stone-200/40 dark:hover:bg-stone-800/40' }}" --}} href="{{ route('dashboard') }}">
 
+    <!-- Menu -->
+    <nav class="flex-grow-1 d-flex flex-column gap-2">
+
+        <a href="{{ route('dashboard') ?? '#' }}" 
+           class="nav-link-custom {{ request()->routeIs('dashboard') ? $activeClass : '' }}">
             <span class="material-symbols-outlined">dashboard</span>
-            <span>Dashboard</span>
+            <span class="sidebar-text">Dashboard</span>
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 rounded-full font-headline text-sm tracking-tight transition-all duration-300
-            {{ request()->routeIs('appointment') ? $active : $normal }}"
-            href="{{ route('appointment') }}">
 
+        <a href="{{ route('appointment') }}" 
+           class="nav-link-custom {{ request()->routeIs('appointment') ? $activeClass : '' }}">
             <span class="material-symbols-outlined">calendar_today</span>
-            <span>Appointments</span>
+            <span class="sidebar-text">Appointments</span>
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 rounded-full font-headline text-sm tracking-tight transition-all duration-300
-            {{ request()->routeIs('inventory') ? $active : $normal }}"
-            href="{{ route('inventory') }}">
 
+        <a href="{{ route('inventory') }}" 
+           class="nav-link-custom {{ request()->routeIs('inventory') ? $activeClass : '' }}">
             <span class="material-symbols-outlined">inventory_2</span>
-            <span>Inventory</span>
+            <span class="sidebar-text">Inventory</span>
         </a>
-        <div class="relative group">
-            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-full font-headline text-sm tracking-tight transition-all duration-300
-            {{ request()->routeIs('customer') || request()->routeIs('petManagement') ? $active : $normal }}">
+
+        <!-- Customers -->
+        <div class="d-flex flex-column gap-1">
+            <button onclick="toggleMenu('customerMenu')" class="nav-link-custom w-100 {{ request()->routeIs('customer') || request()->routeIs('petManagement') ? $activeClass : '' }}">
                 <span class="material-symbols-outlined">group</span>
-                <span>Customers/ Pets</span>
-                <span class="material-symbols-outlined text-xs ml-auto">expand_more</span>
+                <span class="sidebar-text">Customers / Pets</span>
+                <span class="material-symbols-outlined ms-auto toggle-icon" style="font-size: 0.75rem;">expand_more</span>
             </button>
-            <!-- Dropdown Menu -->
-            <div class="absolute left-4 top-12 w-56 bg-stone-100 dark:bg-stone-800 rounded-lg shadow-lg py-2 z-50 invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 border border-stone-200/20 dark:border-stone-700/20">
-                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-headline text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-colors {{ request()->routeIs('customer') ? 'bg-orange-100/50 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 font-bold' : '' }}"
-                    href="{{ route('customer') }}">
-                    <span class="material-symbols-outlined text-lg">person</span>
-                    Customer Management
-                </a>
-                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-headline text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-colors {{ request()->routeIs('petManagement') ? 'bg-orange-100/50 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 font-bold' : '' }}"
-                    href="{{ route('petManagement') }}">
-                    <span class="material-symbols-outlined text-lg">pets</span>
-                    Pet Management
-                </a>
+
+            <div id="customerMenu" class="submenu-collapse {{ request()->routeIs('customer') || request()->routeIs('petManagement') ? 'show' : '' }}" style="margin-left: 1.5rem;">
+                <div class="d-flex flex-column gap-1 mt-1">
+                    <a href="{{ route('customer') }}" class="nav-link-custom py-2 {{ request()->routeIs('customer') ? $activeClass : '' }}">
+                        <span class="material-symbols-outlined">person</span>
+                        <span class="sidebar-text">Customer Management</span>
+                    </a>
+                    <a href="{{ route('petManagement') }}" class="nav-link-custom py-2 {{ request()->routeIs('petManagement') ? $activeClass : '' }}">
+                        <span class="material-symbols-outlined">pets</span>
+                        <span class="sidebar-text">Pet Management</span>
+                    </a>
+                </div>
             </div>
         </div>
 
-
-        <div class="relative group">
-            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-full font-headline text-sm tracking-tight transition-all duration-300
-            {{ request()->routeIs('company') || request()->routeIs('serviceManagement') ? $active : $normal }}">
-                <span class="material-symbols-outlined">group</span>
-                <span>Companies/ Services</span>
-                <span class="material-symbols-outlined text-xs ml-auto">expand_more</span>
+        <!-- Operations -->
+        <div class="d-flex flex-column gap-1">
+            <button onclick="toggleMenu('companyMenu')" class="nav-link-custom w-100 {{ request()->routeIs('company') || request()->routeIs('serviceManagement') ? $activeClass : '' }}">
+                <span class="material-symbols-outlined">business</span>
+                <span class="sidebar-text">Operations</span>
+                <span class="material-symbols-outlined ms-auto toggle-icon" style="font-size: 0.75rem;">expand_more</span>
             </button>
-            <!-- Dropdown Menu -->
-            <div class="absolute left-4 top-12 w-56 bg-stone-100 dark:bg-stone-800 rounded-lg shadow-lg py-2 z-50 invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 border border-stone-200/20 dark:border-stone-700/20">
-                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-headline text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-colors {{ request()->routeIs('company') ? 'bg-orange-100/50 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 font-bold' : '' }}"
-                    href="{{ route('company') }}">
-                    <span class="material-symbols-outlined text-lg">person</span>
-                    Company Management
-                </a>
-                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-headline text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-colors {{ request()->routeIs('serviceManagement') ? 'bg-orange-100/50 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 font-bold' : '' }}"
-                    href="{{ route('serviceManagement') }}">
-                    <span class="material-symbols-outlined text-lg">pets</span>
-                    Service Management
-                </a>
+
+            <div id="companyMenu" class="submenu-collapse {{ request()->routeIs('company') || request()->routeIs('serviceManagement') ? 'show' : '' }}" style="margin-left: 1.5rem;">
+                <div class="d-flex flex-column gap-1 mt-1">
+                    <a href="{{ route('company') }}" class="nav-link-custom py-2 {{ request()->routeIs('company') ? $activeClass : '' }}">
+                        <span class="material-symbols-outlined">apartment</span>
+                        <span class="sidebar-text">Company Management</span>
+                    </a>
+                    <a href="{{ route('serviceManagement') }}" class="nav-link-custom py-2 {{ request()->routeIs('serviceManagement') ? $activeClass : '' }}">
+                        <span class="material-symbols-outlined">handyman</span>
+                        <span class="sidebar-text">Service Management</span>
+                    </a>
+                </div>
             </div>
         </div>
 
-        {{-- <a class="flex items-center gap-3 px-4 py-3 rounded-full font-headline text-sm tracking-tight transition-all duration-300
-            {{ request()->routeIs('company') ? $active : $normal }}"
-            href="{{ route('company') }}">
-            <span class="material-symbols-outlined">group</span>
-            <span>Companies</span>
-        </a>
-        <a class="flex items-center gap-3 px-4 py-3 rounded-full font-headline text-sm tracking-tight transition-all duration-300
-            {{ request()->routeIs('serviceManagement') ? $active : $normal }}"
-            href="{{ route('serviceManagement') }}">
-            <span class="material-symbols-outlined">group</span>
-            <span>Service Management</span>
-        </a> --}}
-        <a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-stone-200/40 dark:hover:bg-stone-800/40 transition-all duration-300 rounded-full font-headline text-sm tracking-tight"
-            href="#">
+        <a href="#" class="nav-link-custom">
             <span class="material-symbols-outlined">settings</span>
-            <span>Settings</span>
+            <span class="sidebar-text">Settings</span>
         </a>
+
     </nav>
-    <button
-        class="mt-auto signature-glow text-on-primary py-4 px-6 rounded-full font-headline font-bold text-sm tracking-wide shadow-lg shadow-primary/20 hover:primary-dim transition-all active:scale-95">
-        New Appointment
-    </button>
 </aside>
+
 <!-- TopNavBar -->
-<header
-    class="flex justify-between items-center w-full h-16 px-8 ml-64 max-w-[calc(100%-16rem)] sticky top-0 z-40 bg-white/70 dark:bg-stone-950/70 backdrop-blur-md">
-    <div class="flex items-center bg-surface-container-low rounded-full px-4 py-1.5 w-96">
-        <span class="material-symbols-outlined text-outline text-lg">search</span>
-        <input class="bg-transparent border-none focus:ring-0 text-sm w-full font-body placeholder:text-outline-variant"
-            placeholder="Search appointments, pets, or stock..." type="text" />
+<header id="topbar" class="topbar-container position-fixed top-0 pe-4 pe-md-5 d-flex justify-content-between align-items-center" style="right: 0;">
+    <div class="d-flex align-items-center search-box ms-4">
+        <span class="material-symbols-outlined" style="font-size: 1.125rem; color: #797b78;">search</span>
+        <input class="search-input font-body" placeholder="Search appointments, pets, or stock..." type="text" />
     </div>
-    <div class="flex items-center gap-6">
-        <button class="text-stone-500 hover:text-orange-600 transition-colors">
+    <div class="d-flex align-items-center gap-4">
+        <button class="menu-btn-custom p-0 d-flex text-stone-500">
             <span class="material-symbols-outlined">notifications</span>
         </button>
-        <button class="text-stone-500 hover:text-orange-600 transition-colors">
+        <button class="menu-btn-custom p-0 d-flex text-stone-500">
             <span class="material-symbols-outlined">help_outline</span>
         </button>
-        <div class="relative group">
-            <div class="flex items-center gap-3 pl-4 border-l border-outline-variant/20 cursor-pointer">
-                <div class="text-right">
-                    <p class="text-xs font-headline font-bold text-on-surface">Admin Profile</p>
-                    <p class="text-[10px] text-outline">Super Admin</p>
-                </div>
-                <img alt="Admin User Profile" class="w-10 h-10 rounded-full object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0efH14mVIQ5Ts91_DVq80xvSg5hp-xsQVxi-DeIAn2vmKYfGHciH2v6wFR7Zb28C7s_CJ8nSLbfR31Pci2A4HHwOMydF2xwDrEzGptj4OtregfoxW5Dh3Y0Jk0DfmtdnYpwuoWqD7L36G1M9C4BbStGaFn9GZEOOKuORKrB226KVKTgX1vBC2KkAmwxfzSahc59zR97On8W7_IyxAdF3g3niiEj99KH9NGYOKJZ4XPpUSkvZefuEfHLzMUdHvijC_MCLg2ZxlRcGW" />
+        <div class="user-menu-container d-flex align-items-center gap-3 ps-3 border-start">
+            <div class="text-end">
+                <p class="mb-0 text-xs font-headline fw-bold" style="color: #303330;">Admin Profile</p>
+                <p class="mb-0 text-10px" style="color: #797b78;">Super Admin</p>
             </div>
+            <img alt="Admin User Profile" class="rounded-circle object-fit-cover" style="width: 2.5rem; height: 2.5rem;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0efH14mVIQ5Ts91_DVq80xvSg5hp-xsQVxi-DeIAn2vmKYfGHciH2v6wFR7Zb28C7s_CJ8nSLbfR31Pci2A4HHwOMydF2xwDrEzGptj4OtregfoxW5Dh3Y0Jk0DfmtdnYpwuoWqD7L36G1M9C4BbStGaFn9GZEOOKuORKrB226KVKTgX1vBC2KkAmwxfzSahc59zR97On8W7_IyxAdF3g3niiEj99KH9NGYOKJZ4XPpUSkvZefuEfHLzMUdHvijC_MCLg2ZxlRcGW" />
+            
             <!-- Dropdown Menu -->
-            <div
-                class="absolute right-0 mt-2 w-48 glass-card rounded-xl shadow-2xl py-2 z-50 invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 origin-top-right border border-white/20">
-                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-headline font-medium text-on-surface hover:bg-primary/10 transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined text-lg text-primary">person</span>
+            <div class="user-dropdown">
+                <a class="dropdown-item-custom" href="#">
+                    <span class="material-symbols-outlined text-orange-800" style="font-size: 1.125rem;">person</span>
                     Profile
                 </a>
-                <div class="h-px bg-outline-variant/10 my-1"></div>
-                <a class="flex items-center gap-3 px-4 py-2.5 text-sm font-headline font-medium text-error hover:bg-error/5 transition-colors"
-                    href="{{ route('admin.logout') }}">
-                    <span class="material-symbols-outlined text-lg">logout</span>
+                <hr class="my-1" style="border-color: rgba(177, 178, 175, 0.1);">
+                <a class="dropdown-item-custom dropdown-item-danger" href="{{ route('admin.logout') ?? '#' }}">
+                    <span class="material-symbols-outlined" style="font-size: 1.125rem;">logout</span>
                     Logout
                 </a>
             </div>
@@ -149,3 +315,50 @@
     </div>
 </header>
 
+<script>
+    let isPinned = true;
+
+    function toggleSidebar() {
+        const $sidebar = $('#sidebar');
+        const $main = $('#mainContent');
+        const $header = $('#topbar');
+
+        if (isPinned) {
+            // COLLAPSE
+            $sidebar.addClass('collapsed');
+            $header.addClass('collapsed');
+
+            if ($main.length) {
+                // Remove tailwind ml-64 and explicitly define width and margin
+                $main.removeClass('ml-64').css({
+                    'margin-left': '80px',
+                    'width': 'calc(100% - 80px)'
+                });
+            }
+        } else {
+            // EXPAND
+            $sidebar.removeClass('collapsed');
+            $header.removeClass('collapsed');
+
+            if ($main.length) {
+                // Return to expanded layout proportions
+                $main.css({
+                    'margin-left': '256px', // or just let CSS handle base width
+                    'width': 'calc(100% - 256px)'
+                }).addClass('ml-64');
+            }
+        }
+
+        isPinned = !isPinned;
+    }
+
+    function toggleMenu(id) {
+        // Prevent toggle if sidebar is collapsed
+        if (!isPinned) return;
+        
+        const $menu = $('#' + id);
+        if ($menu.length) {
+            $menu.toggleClass('show');
+        }
+    }
+</script>

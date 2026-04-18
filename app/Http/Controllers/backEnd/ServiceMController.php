@@ -31,6 +31,7 @@ class ServiceMController extends Controller
         return view('backEnd.pages.companyService.serviceManagement', compact('categories', 'services'));
     }
 
+
     public function saveCategory(Request $request)
     {
         $validated = $request->validate([
@@ -87,7 +88,8 @@ class ServiceMController extends Controller
         $sizes = PetSize::all();
         $breeds = Breed::all();
 
-        return view('backEnd.pages.companyService.storeervices',
+        return view(
+            'backEnd.pages.companyService.storeervices',
             compact('categories', 'species', 'companies', 'districts', 'upazilas', 'sizes', 'breeds')
         );
     }
@@ -106,7 +108,8 @@ class ServiceMController extends Controller
         $serviceAvailability = ServiceAvailability::where('service_id', $id)->first();
         $serviceRules = ServicePricingRule::whereIn('service_pricing_id', $servicePricings->pluck('id'))->get();
 
-        return view('backEnd.pages.companyService.editservices',
+        return view(
+            'backEnd.pages.companyService.editservices',
             compact('categories', 'species', 'companies', 'districts', 'upazilas', 'sizes', 'breeds', 'service', 'servicePricings', 'serviceAvailability', 'serviceRules')
         );
     }
@@ -132,7 +135,7 @@ class ServiceMController extends Controller
                 return $pricing;
             })->toArray()
         ]);
-        
+
         /* =========================
         VALIDATION
         ========================= */
@@ -228,13 +231,13 @@ class ServiceMController extends Controller
                 $slug = Str::slug($request->name) . '-' . $i;
             }
 
-            if($request->hasFile('image')) {
+            if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $imageName ='service_' . time() . '_' . $image->getClientOriginalName();
+                $imageName = 'service_' . time() . '_' . $image->getClientOriginalName();
                 $image->move(public_path('backAssets/images/services'), $imageName);
                 $imagePath = 'backAssets/images/services/' . $imageName;
-            } 
-            
+            }
+
 
             $service = Service::create([
                 'name' => $request->name,
@@ -313,7 +316,6 @@ class ServiceMController extends Controller
             return response()->json([
                 'message' => 'Service created successfully!'
             ]);
-
         } catch (\Exception $e) {
 
             DB::rollback();
@@ -325,257 +327,256 @@ class ServiceMController extends Controller
     }
 
     public function updateService(Request $request, $id)
-{
+    {
 
-    $service = Service::findOrFail($id);
+        $service = Service::findOrFail($id);
 
-    /* =========================
+        /* =========================
        NORMALIZE RULE DATA
     ========================= */
-    $request->merge([
-        'pricing_types' => collect($request->pricing_types)->map(function ($pricing) {
+        $request->merge([
+            'pricing_types' => collect($request->pricing_types)->map(function ($pricing) {
 
-            if (!empty($pricing['rules'])) {
+                if (!empty($pricing['rules'])) {
 
-                $pricing['rules'] = collect($pricing['rules'])->map(function ($rule) {
+                    $pricing['rules'] = collect($pricing['rules'])->map(function ($rule) {
 
-                    $rule['species_id'] = $rule['species_id'] ?: null;
-                    $rule['breed_id']   = $rule['breed_id'] ?: null;
-                    $rule['size_id']    = $rule['size_id'] ?: null;
+                        $rule['species_id'] = $rule['species_id'] ?: null;
+                        $rule['breed_id']   = $rule['breed_id'] ?: null;
+                        $rule['size_id']    = $rule['size_id'] ?: null;
 
-                    return $rule;
-                })->toArray();
-            }
+                        return $rule;
+                    })->toArray();
+                }
 
-            return $pricing;
-        })->toArray()
-    ]);
+                return $pricing;
+            })->toArray()
+        ]);
 
-    /* =========================
+        /* =========================
        VALIDATION
     ========================= */
-    $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
 
-        'name' => 'required|string|max:255',
-        'service_type' => 'required|in:Appointments,Duration,Package',
+            'name' => 'required|string|max:255',
+            'service_type' => 'required|in:Appointments,Duration,Package',
 
-        'district_id' => 'required|exists:districts,id',
-        'upazila_id' => 'required|exists:upazilas,id',
-        'union_id' => 'required|exists:unions,id',
+            'district_id' => 'required|exists:districts,id',
+            'upazila_id' => 'required|exists:upazilas,id',
+            'union_id' => 'required|exists:unions,id',
 
-        'category_id' => 'required|exists:categories,id',
-        'company_id' => 'required|exists:companies,id',
+            'category_id' => 'required|exists:categories,id',
+            'company_id' => 'required|exists:companies,id',
 
-        'location' => 'required|string|max:255',
-        'description' => 'nullable|string',
+            'location' => 'required|string|max:255',
+            'description' => 'nullable|string',
 
-        // 🔥 image optional on update
-        'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            // 🔥 image optional on update
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
 
-        'pricing_types' => 'required|array|min:1',
+            'pricing_types' => 'required|array|min:1',
 
-        'pricing_types.*.type' => 'nullable|in:Hourly,Daily,Weekly,Session,Package',
+            'pricing_types.*.type' => 'nullable|in:Hourly,Daily,Weekly,Session,Package',
 
-        'pricing_types.*.price' => [
-            'nullable',
-            'numeric',
-            'required_without:pricing_types.*.rules'
-        ],
+            'pricing_types.*.price' => [
+                'nullable',
+                'numeric',
+                'required_without:pricing_types.*.rules'
+            ],
 
-        'pricing_types.*.sale_price' => 'nullable|numeric|lte:pricing_types.*.price',
+            'pricing_types.*.sale_price' => 'nullable|numeric|lte:pricing_types.*.price',
 
-        'pricing_types.*.qty' => 'nullable|numeric|min:1',
-        'pricing_types.*.time' => 'nullable|string|max:100',
-        'pricing_types.*.label' => 'nullable|string|max:100',
+            'pricing_types.*.qty' => 'nullable|numeric|min:1',
+            'pricing_types.*.time' => 'nullable|string|max:100',
+            'pricing_types.*.label' => 'nullable|string|max:100',
 
-        'pricing_types.*.rules' => 'nullable|array',
+            'pricing_types.*.rules' => 'nullable|array',
 
-        'pricing_types.*.rules.*.species_id' => 'nullable|exists:species,id',
-        'pricing_types.*.rules.*.breed_id' => 'nullable|exists:breeds,id',
-        'pricing_types.*.rules.*.size_id' => 'nullable|exists:pet_sizes,id',
+            'pricing_types.*.rules.*.species_id' => 'nullable|exists:species,id',
+            'pricing_types.*.rules.*.breed_id' => 'nullable|exists:breeds,id',
+            'pricing_types.*.rules.*.size_id' => 'nullable|exists:pet_sizes,id',
 
-        'pricing_types.*.rules.*.price' => 'required|numeric|min:0',
-        'pricing_types.*.rules.*.sale_price' => 'nullable|numeric|lte:pricing_types.*.rules.*.price',
+            'pricing_types.*.rules.*.price' => 'required|numeric|min:0',
+            'pricing_types.*.rules.*.sale_price' => 'nullable|numeric|lte:pricing_types.*.rules.*.price',
 
-        'day_of_week' => 'required|array|min:1',
-        'day_of_week.*' => 'in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
+            'day_of_week' => 'required|array|min:1',
+            'day_of_week.*' => 'in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday',
 
-        'start_time' => 'required',
-        'end_time' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
 
-        'off_dates' => 'nullable|string',
+            'off_dates' => 'nullable|string',
 
-    ]);
+        ]);
 
-    if ($validator->fails()) {
-        return response()->json([
-            'errors' => $validator->errors()
-        ], 422);
-    }
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
-    DB::beginTransaction();
+        DB::beginTransaction();
 
-    try {
+        try {
 
-        /* =========================
+            /* =========================
            TIME FORMAT
         ========================= */
-        $start = date('H:i:s', strtotime($request->start_time));
-        $end   = date('H:i:s', strtotime($request->end_time));
+            $start = date('H:i:s', strtotime($request->start_time));
+            $end   = date('H:i:s', strtotime($request->end_time));
 
-        /* =========================
+            /* =========================
            SLUG (🔥 FIXED)
         ========================= */
-        $slug = Str::slug($request->name);
+            $slug = Str::slug($request->name);
 
-        $originalSlug = $slug;
-        $counter = 1;
+            $originalSlug = $slug;
+            $counter = 1;
 
-        while (
-            Service::where('slug', $slug)
+            while (
+                Service::where('slug', $slug)
                 ->where('id', '!=', $service->id)
                 ->exists()
-        ) {
-            $slug = $originalSlug . '-' . $counter++;
-        }
-
-        /* =========================
-           IMAGE UPDATE
-        ========================= */
-        if ($request->hasFile('image')) {
-
-            // delete old image
-            if ($service->image && file_exists(public_path($service->image))) {
-                unlink(public_path($service->image));
+            ) {
+                $slug = $originalSlug . '-' . $counter++;
             }
 
-            $image = $request->file('image');
-            $imageName = 'service_' . time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('backAssets/images/services'), $imageName);
+            /* =========================
+           IMAGE UPDATE
+        ========================= */
+            if ($request->hasFile('image')) {
 
-            $service->image = 'backAssets/images/services/' . $imageName;
-        }
+                // delete old image
+                if ($service->image && file_exists(public_path($service->image))) {
+                    unlink(public_path($service->image));
+                }
 
-        /* =========================
+                $image = $request->file('image');
+                $imageName = 'service_' . time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('backAssets/images/services'), $imageName);
+
+                $service->image = 'backAssets/images/services/' . $imageName;
+            }
+
+            /* =========================
            UPDATE SERVICE
         ========================= */
-        $service->update([
-            'name' => $request->name,
-            'service_type' => $request->service_type,
-            'slug' => $slug, // 🔥 UPDATED
-            'district_id' => $request->district_id,
-            'upazila_id' => $request->upazila_id,
-            'union_id' => $request->union_id,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'company_id' => $request->company_id,
-            'location' => $request->location,
-            'status' => $request->status,
-        ]);
+            $service->update([
+                'name' => $request->name,
+                'service_type' => $request->service_type,
+                'slug' => $slug, // 🔥 UPDATED
+                'district_id' => $request->district_id,
+                'upazila_id' => $request->upazila_id,
+                'union_id' => $request->union_id,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+                'company_id' => $request->company_id,
+                'location' => $request->location,
+                'status' => $request->status,
+            ]);
 
-        /* =========================
+            /* =========================
            DELETE OLD PRICING
         ========================= */
-        $existingPricingIds = [];
+            $existingPricingIds = [];
 
-foreach ($request->pricing_types as $pricing) {
+            foreach ($request->pricing_types as $pricing) {
 
-    // =========================
-    // UPDATE OR CREATE PRICING
-    // =========================
-    $pricingModel = ServicePricing::updateOrCreate(
-    [
-        'id' => $pricing['id'] ?? null,
-        'service_id' => $service->id
-    ],
-    [
-        'pricing_type' => $pricing['type'] ?? null,
-        'price' => $pricing['price'] ?? null,
-        'sale_price' => $pricing['sale_price'] ?? null,
-        'qty' => $pricing['qty'] ?? null,
-        'time' => $pricing['time'] ?? null,
-        'label' => $pricing['label'] ?? null,
-    ]
-);
+                // =========================
+                // UPDATE OR CREATE PRICING
+                // =========================
+                $pricingModel = ServicePricing::updateOrCreate(
+                    [
+                        'id' => $pricing['id'] ?? null,
+                        'service_id' => $service->id
+                    ],
+                    [
+                        'pricing_type' => $pricing['type'] ?? null,
+                        'price' => $pricing['price'] ?? null,
+                        'sale_price' => $pricing['sale_price'] ?? null,
+                        'qty' => $pricing['qty'] ?? null,
+                        'time' => $pricing['time'] ?? null,
+                        'label' => $pricing['label'] ?? null,
+                    ]
+                );
 
-    $existingPricingIds[] = $pricingModel->id;
+                $existingPricingIds[] = $pricingModel->id;
 
-    // =========================
-    // RULES
-    // =========================
-    $existingRuleIds = [];
+                // =========================
+                // RULES
+                // =========================
+                $existingRuleIds = [];
 
-    if (!empty($pricing['rules'])) {
+                if (!empty($pricing['rules'])) {
 
-        foreach ($pricing['rules'] as $rule) {
+                    foreach ($pricing['rules'] as $rule) {
 
-            $ruleModel = ServicePricingRule::updateOrCreate(
-        [
-            'id' => $rule['id'] ?? null,
-            'service_pricing_id' => $pricingModel->id
-        ],
-        [
-            'species_id' => $rule['species_id'] ?? null,
-            'breed_id' => $rule['breed_id'] ?? null,
-            'size_id' => $rule['size_id'] ?? null,
-            'price' => $rule['price'],
-            'sale_price' => $rule['sale_price'] ?? null,
-        ]
-    );
+                        $ruleModel = ServicePricingRule::updateOrCreate(
+                            [
+                                'id' => $rule['id'] ?? null,
+                                'service_pricing_id' => $pricingModel->id
+                            ],
+                            [
+                                'species_id' => $rule['species_id'] ?? null,
+                                'breed_id' => $rule['breed_id'] ?? null,
+                                'size_id' => $rule['size_id'] ?? null,
+                                'price' => $rule['price'],
+                                'sale_price' => $rule['sale_price'] ?? null,
+                            ]
+                        );
 
-            $existingRuleIds[] = $ruleModel->id;
-        }
-    }
+                        $existingRuleIds[] = $ruleModel->id;
+                    }
+                }
 
-    // =========================
-    // DELETE REMOVED RULES
-    // =========================
-    $pricingModel->rules()
-        ->whereNotIn('id', $existingRuleIds)
-        ->delete();
-}
+                // =========================
+                // DELETE REMOVED RULES
+                // =========================
+                $pricingModel->rules()
+                    ->whereNotIn('id', $existingRuleIds)
+                    ->delete();
+            }
 
-// =========================
-// DELETE REMOVED PRICINGS
-// =========================
-$service->pricings()
-    ->whereNotIn('id', $existingPricingIds)
-    ->delete();
+            // =========================
+            // DELETE REMOVED PRICINGS
+            // =========================
+            $service->pricings()
+                ->whereNotIn('id', $existingPricingIds)
+                ->delete();
 
-        /* =========================
+            /* =========================
            UPDATE SCHEDULE
         ========================= */
-        $days = implode(',', $request->day_of_week);
+            $days = implode(',', $request->day_of_week);
 
-        $offDates = $request->off_dates
-            ? implode(',', array_map('trim', explode(',', $request->off_dates)))
-            : null;
+            $offDates = $request->off_dates
+                ? implode(',', array_map('trim', explode(',', $request->off_dates)))
+                : null;
 
-        ServiceAvailability::updateOrCreate(
-            ['service_id' => $service->id],
-            [
-                'day_of_week' => $days,
-                'start_time' => $start,
-                'end_time' => $end,
-                'off_dates' => $offDates,
-            ]
-        );
+            ServiceAvailability::updateOrCreate(
+                ['service_id' => $service->id],
+                [
+                    'day_of_week' => $days,
+                    'start_time' => $start,
+                    'end_time' => $end,
+                    'off_dates' => $offDates,
+                ]
+            );
 
-        DB::commit();
+            DB::commit();
 
-        return response()->json([
-            'message' => 'Service updated successfully!'
-        ]);
+            return response()->json([
+                'message' => 'Service updated successfully!'
+            ]);
+        } catch (\Exception $e) {
 
-    } catch (\Exception $e) {
+            DB::rollback();
 
-        DB::rollback();
-
-        return response()->json([
-            'message' => $e->getMessage()
-        ], 500);
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
-}
 
     public function getUpazilas($district_id)
     {

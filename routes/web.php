@@ -1,19 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backEnd\AuthController;
+use App\Http\Controllers\backEnd\ConpanyController;
+use App\Http\Controllers\backEnd\DashboardController;
+use App\Http\Controllers\backEnd\petController;
+use App\Http\Controllers\backEnd\ServiceMController;
+use App\Http\Controllers\backEnd\UserController;
+use App\Http\Controllers\BookingsController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServicesController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\ShopController;
-
-use App\Http\Controllers\backEnd\DashboardController;
-use App\Http\Controllers\backEnd\AuthController;
-use App\Http\Controllers\backEnd\ConpanyController;
-use App\Http\Controllers\backEnd\ServiceMController;
-use App\Http\Controllers\backEnd\petController;
-use App\Http\Controllers\backEnd\UserController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAppointmentController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserDashbaord;
@@ -55,7 +54,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/appointment', [DashboardController::class, 'appointment'])->name('appointment');
         Route::get('/inventory', [DashboardController::class, 'inventory'])->name('inventory');
 
-
         Route::get('/customer', [UserController::class, 'customer'])->name('customer');
         Route::post('/saveCustomer', [UserController::class, 'saveCustomer'])->name('customer.store');
         Route::post('/updateCustomer', [UserController::class, 'updateCustomer'])->name('customer.update');
@@ -64,10 +62,12 @@ Route::prefix('admin')->group(function () {
         Route::post('/saveSpecies', [petController::class, 'saveSpecies'])->name('petManagement.saveSpecies');
         Route::post('/saveBreed', [petController::class, 'saveBreed'])->name('petManagement.saveBreed');
         Route::patch('/updateBreed/{id}', [petController::class, 'updateBreed'])->name('petManagement.updateBreed');
-        Route::patch('/toggleBreedStatus/{id}', [petController::class, 'toggleBreedStatus'])->name('petManagement.toggleBreedStatus');
-
-
+        Route::delete('/deleteBreed/{id}', [petController::class, 'deleteBreed'])->name('petManagement.deleteBreed');
+        
         Route::get('/company', [ConpanyController::class, 'company'])->name('company');
+        Route::post('/saveCompany', [ConpanyController::class, 'saveCompany'])->name('saveCompany');
+        Route::post('/updateCompany', [ConpanyController::class, 'updateCompany'])->name('updateCompany');
+        Route::delete('/deleteCompany/{id}', [ConpanyController::class, 'deleteCompany'])->name('deleteCompany');
 
         Route::get('/serviceManagement', [ServiceMController::class, 'serviceManagement'])->name('serviceManagement');
         Route::get('/addService', [ServiceMController::class, 'addService'])->name('addService');

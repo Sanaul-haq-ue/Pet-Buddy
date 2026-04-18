@@ -19,12 +19,7 @@ class petController extends Controller
         return view('backEnd.pages.customerPet.petManagement', compact('species', 'breeds', 'totalSpecies', 'totalBreeds'));
     }
 
-
-
-
-
-
-    ////// Pet Management Species Management Section
+    // //// Pet Management Species Management Section
 
     public function saveSpecies(Request $request)
     {
@@ -43,15 +38,11 @@ class petController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Species saved successfully.'
+            'message' => 'Species saved successfully.',
         ]);
     }
 
-
-
-
-
-    ////// Pet Management Breed Management Section
+    // //// Pet Management Breed Management Section
 
     public function saveBreed(Request $request)
     {
@@ -72,20 +63,20 @@ class petController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = 'breed_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $filename = 'breed_'.uniqid().'.'.$file->getClientOriginalExtension();
             $destinationPath = public_path('backAssets/upload/breedImage');
-            if (!file_exists($destinationPath)) {
+            if (! file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true);
             }
             $file->move($destinationPath, $filename);
-            $breedData['image'] = 'backAssets/upload/breedImage/' . $filename;
+            $breedData['image'] = 'backAssets/upload/breedImage/'.$filename;
         }
 
         Breed::create($breedData);
 
         return response()->json([
             'success' => true,
-            'message' => 'Breed saved successfully.'
+            'message' => 'Breed saved successfully.',
         ]);
     }
 
@@ -107,37 +98,41 @@ class petController extends Controller
         ];
 
         if ($request->hasFile('image')) {
-            // Delete the old image if it exists
             if ($breed->image && file_exists(public_path($breed->image))) {
                 unlink(public_path($breed->image));
             }
 
             $file = $request->file('image');
-            $filename = 'breed_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $filename = 'breed_'.uniqid().'.'.$file->getClientOriginalExtension();
             $destinationPath = public_path('backAssets/upload/breedImage');
-            if (!file_exists($destinationPath)) {
+            if (! file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true);
             }
             $file->move($destinationPath, $filename);
-            $breedData['image'] = 'backAssets/upload/breedImage/' . $filename;
+            $breedData['image'] = 'backAssets/upload/breedImage/'.$filename;
         }
 
         $breed->update($breedData);
 
         return response()->json([
             'success' => true,
-            'message' => 'Breed updated successfully.'
+            'message' => 'Breed updated successfully.',
         ]);
     }
 
-    public function toggleBreedStatus($id)
+    public function deleteBreed($id)
     {
         $breed = Breed::findOrFail($id);
-        $breed->update(['status' => 0]);
+
+        if ($breed->image && file_exists(public_path($breed->image))) {
+            unlink(public_path($breed->image));
+        }
+
+        $breed->delete();
 
         return response()->json([
             'success' => true,
-            'message' => 'Breed deactivated successfully.'
+            'message' => 'Breed deleted successfully.',
         ]);
     }
 }

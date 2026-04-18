@@ -137,6 +137,123 @@
         </div>
     </div>
 
+    {{-- View Pop up Modal --}}
+    <div id="serviceModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+
+        <!-- MODAL BOX -->
+        <div class="w-full max-w-3xl mx-4 bg-surface rounded-2xl shadow-2xl overflow-hidden animate-fadeIn">
+
+            <!-- HEADER -->
+            <div
+                class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-surface-container-low">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </span>
+                    <h2 class="text-lg font-headline font-bold text-on-surface">
+                        Service Details
+                    </h2>
+                </div>
+
+                <button id="closeModal" class="p-2 rounded-full hover:bg-surface-container-lowest transition">
+                    <span class="material-symbols-outlined text-on-surface-variant">close</span>
+                </button>
+            </div>
+
+            <!-- BODY -->
+            <div class="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+
+                <!-- TOP INFO -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-on-surface">Premium Grooming Service</h3>
+                        <p class="text-sm text-on-surface-variant">Luxury care for your pets</p>
+                    </div>
+
+                    <span class="px-3 py-1 text-xs rounded-full bg-secondary/10 text-secondary font-semibold">
+                        Active
+                    </span>
+                </div>
+
+                <!-- 🖼️ IMAGE SECTION (NEW) -->
+                <div
+                    class="w-full h-52 rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant/20">
+                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e" alt="Service Image"
+                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                </div>
+
+                <!-- GRID INFO -->
+                <div class="grid grid-cols-2 gap-4">
+
+                    <div class="p-4 rounded-xl bg-surface-container-low">
+                        <p class="text-xs text-outline">Category</p>
+                        <p class="font-semibold text-on-surface">Grooming, Care</p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-surface-container-low">
+                        <p class="text-xs text-outline">Species</p>
+                        <p class="font-semibold text-on-surface">Dog, Cat</p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-surface-container-low">
+                        <p class="text-xs text-outline">Company</p>
+                        <p class="font-semibold text-on-surface">PetBuddy Ltd</p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-surface-container-low">
+                        <p class="text-xs text-outline">Capacity</p>
+                        <p class="font-semibold text-on-surface">20 / Day</p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-surface-container-low col-span-2">
+                        <p class="text-xs text-outline">Location</p>
+                        <p class="font-semibold text-on-surface">Dhaka, Bangladesh</p>
+                    </div>
+
+                </div>
+
+                <!-- PRICING -->
+                <div class="flex items-center justify-between p-5 rounded-xl bg-primary/5 border border-primary/10">
+
+                    <div>
+                        <p class="text-xs text-outline">Base Price</p>
+                        <p class="text-2xl font-bold text-primary">$300</p>
+                    </div>
+
+                    <div class="text-right">
+                        <p class="text-xs text-outline">Timing</p>
+                        <p class="font-semibold text-on-surface">Hourly</p>
+                    </div>
+
+                    <div class="text-right">
+                        <p class="text-xs text-outline">Offer</p>
+                        <p class="font-semibold text-secondary">$250</p>
+                    </div>
+
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="p-5 rounded-xl bg-surface-container-low">
+                    <p class="text-xs text-outline mb-2">Description</p>
+                    <p class="text-sm text-on-surface leading-relaxed">
+                        This is a premium grooming service designed for full pet care including bathing,
+                        styling, nail trimming, and health checkups in a calm environment.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+            <div class="px-6 py-4 border-t border-outline-variant/20 flex justify-end">
+                <button id="closeModal"
+                    class="px-5 py-2 rounded-full bg-surface-container-low hover:bg-surface-container transition font-semibold text-on-surface">
+                    Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+
 
     <div class="space-y-16">
         <!-- Header Section -->
@@ -250,7 +367,7 @@
                                 </div>
                                 <div>
                                     <h3 class="text-xl font-bold mb-2">{{ $service->name }}</h3>
-                                    <p class="text-sm text-stone-500 line-clamp-2">Category : {{ $service->category->name }}</p>
+                                    <p class="text-sm text-stone-500 line-clamp-2">Category : {{ $service->category?->name }}</p>
                                     <p class="text-sm text-stone-500 line-clamp-2">{{ $service->service_type }}</p>
                                 </div>
                                 <div class="mt-auto flex items-center justify-between border-t border-stone-200/30 pt-6">
@@ -419,4 +536,33 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '.viewServiceBtn', function() {
+
+                let btn = $(this);
+
+                // Fill modal data
+                $('#serviceModal .title').text(btn.data('name'));
+                $('#serviceModal .category').text(btn.data('category'));
+                $('#serviceModal .species').text(btn.data('species'));
+                $('#serviceModal .company').text(btn.data('company'));
+                $('#serviceModal .price').text(btn.data('price'));
+                $('#serviceModal .timing').text(btn.data('timing'));
+                $('#serviceModal .capacity').text(btn.data('capacity'));
+                $('#serviceModal .description').text(btn.data('description'));
+                $('#serviceModal .status').text(btn.data('status'));
+
+                // open modal
+                $('#serviceModal').removeClass('hidden');
+            });
+
+            // close modal
+            $(document).on('click', '#closeModal', function() {
+                $('#serviceModal').addClass('hidden');
+            });
+
+        });
+    </script>
 @endsection
