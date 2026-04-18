@@ -184,4 +184,37 @@ class ConpanyController extends Controller
             'message' => 'Failed to update company.'
         ], 500);
     }
+
+    public function deleteCompany($id)
+    {
+        $company = Company::find($id);
+
+        if (!$company) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Company not found.'
+            ], 404);
+        }
+
+        // Delete images
+        if ($company->brand_logo && file_exists(public_path($company->brand_logo))) {
+            unlink(public_path($company->brand_logo));
+        }
+
+        if ($company->business_card && file_exists(public_path($company->business_card))) {
+            unlink(public_path($company->business_card));
+        }
+
+        if ($company->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Company deleted successfully.'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to delete company.'
+        ], 500);
+    }
 }

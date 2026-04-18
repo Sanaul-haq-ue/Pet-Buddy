@@ -121,7 +121,8 @@
 
                                             <!-- Delete -->
                                             <button
-                                                class="btn btn-link p-1 text-stone-400 hover-text-error text-decoration-none shadow-none">
+                                                class="btn btn-link p-1 text-stone-400 hover-text-error text-decoration-none shadow-none delete-company-btn"
+                                                data-id="{{ $company->id }}">
                                                 <span class="material-symbols-outlined fs-5">delete</span>
                                             </button>
 
@@ -1037,6 +1038,41 @@
                 // Reset to page 1 on filter change
                 url.searchParams.delete('page');
                 window.location.href = url.toString();
+            });
+
+            // Delete Company
+            $('.delete-company-btn').click(function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var deleteUrl = "{{ route('deleteCompany', ':id') }}".replace(':id', id);
+                
+                if (confirm('Are you sure you want to delete this company? This action cannot be undone.')) {
+                    var btn = $(this);
+                    btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+
+                    $.ajax({
+                        url: deleteUrl,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.message);
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 1000);
+                            } else {
+                                toastr.error(response.message);
+                                btn.prop('disabled', false).html('<span class="material-symbols-outlined fs-5">delete</span>');
+                            }
+                        },
+                        error: function(xhr) {
+                            toastr.error('An error occurred while deleting the company.');
+                            btn.prop('disabled', false).html('<span class="material-symbols-outlined fs-5">delete</span>');
+                        }
+                    });
+                }
             });
         });
     </script>

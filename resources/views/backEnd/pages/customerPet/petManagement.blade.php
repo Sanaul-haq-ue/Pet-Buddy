@@ -1,7 +1,6 @@
 @extends('backEnd.layouts.master')
 
 @section('adminContent')
-    <link rel="stylesheet" href="{{ asset('backAssets/css/petManagement.css') }}" />
 
     <!-- Add New Species Modal Overlay -->
     <div id="newSpeciesModal" class="modal-overlay hidden">
@@ -89,40 +88,38 @@
 
 
 
-
     <!-- Add New Breed Modal Overlay -->
-    <div id="addBreedsModal"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/10 backdrop-blur-sm p-4  hidden">
+    <div id="addBreedsModal" class="modal-overlay-custom bg-stone-900-10 backdrop-blur-sm p-3 hidden">
         <!-- Modal Content: Glassmorphic Card (Shaped for Compactness) -->
-        <div
-            class="glass-panel w-full max-w-xl rounded-xl shadow-[0_20px_40px_rgba(148,76,0,0.06)] overflow-hidden bg-white/90">
+        <div class="glass-panel w-90 rounded-xl shadow-custom-1 overflow-hidden bg-white-90">
             <!-- Modal Header -->
-            <div class="px-6 pt-6 pb-4 flex justify-between items-start">
+            <div class="p-4 pb-3 d-flex justify-content-between align-items-start">
                 <div>
-                    <h2 class="text-2xl font-extrabold text-primary tracking-tight font-headline">Add New Breed</h2>
-                    <p class="text-on-surface-variant text-sm font-medium mt-0.5">Define new entry in the habitat library.
+                    <h2 class="fs-4 fw-bolder text-primary tracking-tight font-headline">Add New Breed</h2>
+                    <p class="text-on-surface-variant fs-6 fw-medium mt-1">Define new entry in the habitat library.
                     </p>
                 </div>
-                <button id="closeaddBreeds" class="p-1.5 hover:bg-orange-50 rounded-full transition-colors text-outline">
+                <button id="closeaddBreeds"
+                    class="p-2 rounded-circle hover-bg-orange-50 text-outline border-0 bg-transparent">
                     <span class="material-symbols-outlined text-xl">close</span>
                 </button>
             </div>
             <!-- Modal Form Body -->
-            <form id="breedForm" class="px-6 pb-8 space-y-5" enctype="multipart/form-data">
+            <form id="breedForm" class="p-4 pb-5 d-flex flex-column gap-4" enctype="multipart/form-data">
                 <!-- Top Section: Image & Main Info -->
-                <div class="flex gap-6 items-start">
+                <div class="d-flex gap-4 align-items-start">
                     <!-- Image Upload -->
-                    <div class="w-32">
+                    <div class="w-25">
                         <label
                             class="text-[0.6rem] font-bold font-headline text-on-surface-variant uppercase tracking-[0.1em] mb-2 block">
                             Breed Image
                         </label>
 
-                        <div class="imageUploadBox relative group aspect-square rounded-lg overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center cursor-pointer hover:border-primary/40 transition-all"
+                        <div class="imageUploadBox position-relative group aspect-square rounded-lg overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center cursor-pointer hover:border-primary/40 transition-all"
                             id="imageUploadBox">
 
                             <!-- Preview Image -->
-                            <img class="imagePreview absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity pointer-events-none"
+                            <img class="imagePreview absolute inset-0 w-100 h-100 object-fit-cover opacity-20 group-hover:opacity-30 transition-opacity pointer-events-none"
                                 id="imagePreview"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuATGdqly1vergDzNk6U9EtpyoBtJNP_lndE4Z_v4ddX4lhNrneSBQbWbsyz_No7-JCKl5shIiW5jrpnjVFPW7BmhLG7_vZ1zevpNWagwf4P1B8Z7YQZN7LRGhLkLNcEv7Fd4SqNZBIvGX7E_iVAI5auxRrCY8gVgGH8RaUlH32Phs6sUVNlFn6zGgekktrzUh38NICBuIsqfc8dRZMGymkiGyxMkqrmPwnFQriSa1E5fxZVZuc6e7V_6-0bgJ_Eq8mJYjeLsyAcNEUI" />
 
@@ -132,22 +129,22 @@
                             <input type="file" class="imageInput hidden" accept="image/*" id="imageInput" name="image">
                         </div>
                     </div>
-                    <div class="flex-1 space-y-4">
+                    <div class="flex-grow-1 d-flex flex-column gap-3">
                         <!-- Breed Name & Species Row -->
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="relative group">
+                        <div class="row g-3">
+                            <div class="position-relative group">
                                 <label
                                     class="text-[0.6rem] font-bold font-headline text-on-surface-variant uppercase tracking-[0.1em] mb-0.5 block">Breed
                                     Name</label>
                                 <input name="breed_name"
-                                    class="w-full bg-transparent border-0 border-b border-outline-variant/30 focus:border-secondary focus:ring-0 px-0 py-1.5 text-base font-headline font-semibold text-on-surface placeholder:text-outline-variant/50 transition-all"
+                                    class="form-control border-0 border-bottom border-outline-variant-30 rounded-0 bg-transparent shadow-none px-0 py-2 fs-6 font-headline fw-semibold text-on-surface"
                                     placeholder="e.g. Beagle" type="text" />
                             </div>
-                            <div class="relative group">
+                            <div class="position-relative group">
                                 <label
                                     class="text-[0.6rem] font-bold font-headline text-on-surface-variant uppercase tracking-[0.1em] mb-0.5 block">Species</label>
                                 <select id="addBreedSpeciesSelect" name="species_id"
-                                    class="w-full bg-transparent border-0 border-b border-outline-variant/30 focus:border-secondary focus:ring-0 px-0 py-1.5 text-base font-headline font-semibold text-on-surface appearance-none transition-all">
+                                    class="form-select border-0 border-bottom border-outline-variant-30 rounded-0 bg-transparent shadow-none px-0 py-2 fs-6 font-headline fw-semibold text-on-surface">
                                     @if ($species)
                                         @foreach ($species as $specie)
                                             <option value="{{ $specie->id }}">{{ $specie->species_name }}</option>
@@ -162,14 +159,14 @@
                         <div>
                             <label
                                 class="block text-xs font-headline font-bold text-primary tracking-widest uppercase mb-1 ml-1">Status</label>
-                            <div class="flex gap-4 mt-2">
-                                <label class="flex items-center gap-2 cursor-pointer">
+                            <div class="d-flex gap-3 mt-2">
+                                <label class="d-flex align-items-center gap-2 cursor-pointer">
                                     <input checked=""
                                         class="text-secondary focus:ring-secondary border-outline-variant pet_status"
                                         name="status" value="1" type="radio" />
                                     <span class="text-sm font-medium">Active</span>
                                 </label>
-                                <label class="flex items-center gap-2 cursor-pointer">
+                                <label class="d-flex align-items-center gap-2 cursor-pointer">
                                     <input class="text-secondary focus:ring-secondary border-outline-variant pet_status"
                                         name="status" value="0" type="radio" />
                                     <span class="text-sm font-medium">InActive</span>
@@ -184,58 +181,56 @@
                     <label
                         class="text-[0.6rem] font-bold font-headline text-on-surface-variant uppercase tracking-[0.1em] mb-2 block">Description
                         &amp; Care Notes</label>
-                    <textarea
-                        class="w-full glass-panel rounded-lg border-outline-variant/10 focus:border-secondary/40 focus:ring-0 p-4 text-on-surface text-sm leading-snug placeholder:text-outline-variant/50"
+                    <textarea class="form-control glass-panel rounded-3 border-outline-variant-10 shadow-none p-3 text-on-surface fs-6"
                         name="description" placeholder="Temperament, physical traits, care needs..." rows="3"></textarea>
                 </div>
                 <!-- Modal Footer Actions -->
-                <div class="flex items-center justify-end gap-3 pt-2">
+                <div class="d-flex align-items-center justify-content-end gap-3 pt-2">
                     <button type="button"
-                        class="px-6 py-2 rounded-full text-on-surface-variant font-headline font-bold text-xs hover:bg-stone-100 transition-all"
+                        class="btn rounded-pill text-on-surface-variant font-headline fw-bold hover-bg-stone-100"
                         id="cancelAddBreedBtn">
                         Cancel
                     </button>
                     <button type="submit"
-                        class="px-8 py-2.5 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-extrabold text-xs shadow-md shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                        class="btn btn-primary rounded-pill bg-primary text-white font-headline fw-bolder shadow hover-scale-102 active-scale-95">
                         Save Breed
                     </button>
                 </div>
             </form>
         </div>
         <!-- Decorative Floating Accent (The "Glow") -->
-        <div class="fixed top-1/4 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[100px] -z-10"></div>
-        <div class="fixed bottom-1/4 left-1/4 w-80 h-80 bg-secondary/10 rounded-full blur-[120px] -z-10"></div>
+        <div class="position-fixed top-0 end-0 bg-primary-10 rounded-circle w-50 h-50 z-n1"></div>
+        <div class="position-fixed bottom-0 start-0 bg-secondary-10 rounded-circle w-50 h-50 z-n1"></div>
     </div>
 
 
-<!-- Add Edit Breed Modal Overlay -->
-    <div id="editBreedsModal" class="fixed inset-0 z-[60] bg-on-background/20 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <!-- Add Edit Breed Modal Overlay -->
+    <div id="editBreedsModal" class="modal-overlay-custom z-60 bg-on-background-20 backdrop-blur-sm p-3 hidden">
         <!-- Modal Container -->
-        <div
-            class="glass-panel w-full max-w-4xl max-h-[921px] rounded-xl overflow-hidden flex flex-col shadow-[0_20px_40px_rgba(148,76,0,0.12)] bg-white/90">
+        <div class="glass-panel w-50 rounded-xl overflow-hidden d-flex flex-column shadow-custom-2 bg-white-90">
             <!-- Header -->
-            <div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/10">
-                <h2 class="text-3xl font-headline font-bold tracking-tight text-on-surface">Edit Breed</h2>
-                <button id="closeEditBreedM"
-                    class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">
+            <div class="d-flex align-items-center justify-content-between p-4 border-bottom border-outline-variant-10">
+                <h2 class="fs-3 font-headline fw-bold tracking-tight text-on-surface">Edit Breed</h2>
+                <button id="closeEditBreedM" class="btn p-2 rounded-circle bg-surface-container-high border-0">
                     <span class="material-symbols-outlined text-outline">close</span>
                 </button>
             </div>
             <!-- Scrollable Content Section -->
-            <form id="editBreedForm" class="flex-1 overflow-y-auto p-10">
+            <form id="editBreedForm" class="flex-grow-1 overflow-auto p-5">
                 <input type="hidden" id="editBreedId" name="breed_id" value="">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                <div class="row g-5">
                     <!-- Breed Image Section -->
-                    <div class="md:col-span-5 flex flex-col gap-6">
-                        <div class="relative group">
-                            <div class="aspect-square rounded-xl overflow-hidden bg-surface-container shadow-inner">
-                                <img id="editBreedImagePreview" alt="Breed image" class="w-full h-full object-cover"
+                    <div class="col-md-5 d-flex flex-column gap-4">
+                        <div class="position-relative group">
+                            <div class="ratio ratio-1x1 rounded-xl overflow-hidden bg-surface-container shadow-sm">
+                                <img id="editBreedImagePreview" alt="Breed image" class="w-100 h-100 object-fit-cover"
                                     data-alt="Breed image preview"
                                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgih6bq3mACcgSc2MphDkKQkK-MTZjkHSi2pmYqcT4SmHzAc7GBI6D8fg3FL90R4M-7lrYRj4KPdZ1L7rDXYaRSa1H46ncTf7zp-c6Mne_5uhWVoR8Py5j75PSbq3GxGoZ0xUlDKqPTD2m6iG3PUi-a1Z85dYrF-d3SZV9bPPMA-93-NCCh2JY6RsZakQ27sCy7u8jYl8QNimz93Biy8LTZJa7pmkhIjF6BEjpRt3azkzFZjS-o865DtenBGj6-6V_x4btCaI8ACws" />
-                                <input type="file" id="editImageInput" name="image" class="hidden" accept="image/*" />
+                                <input type="file" id="editImageInput" name="image" class="hidden"
+                                    accept="image/*" />
                             </div>
                             <button type="button" id="editImageUploadBtn"
-                                class="absolute bottom-4 right-4 bg-primary text-on-primary px-6 py-3 rounded-full flex items-center gap-2 shadow-lg hover:bg-primary-dim transition-all active:scale-95">
+                                class="position-absolute bottom-0 end-0 m-3 btn btn-primary rounded-pill d-flex align-items-center gap-2 shadow hover-bg-primary-dim active-scale-95">
                                 <span class="material-symbols-outlined text-sm">photo_camera</span>
                                 <span class="font-label font-bold text-xs tracking-wider">UPDATE PHOTO</span>
                             </button>
@@ -248,49 +243,53 @@
                         </div> --}}
                     </div>
                     <!-- Form Section -->
-                    <div class="md:col-span-7 flex flex-col gap-8">
+                    <div class="col-md-7 d-flex flex-column gap-5">
                         <!-- Breed Name -->
-                        <div class="flex flex-col gap-2">
+                        <div class="d-flex flex-column gap-2">
                             <label class="font-label text-xs font-bold tracking-widest text-primary uppercase">Breed
                                 Name</label>
                             <input id="editBreedName"
-                                class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-3 px-0 focus:ring-0 focus:border-secondary text-lg font-medium text-on-surface transition-all placeholder:text-outline-variant"
+                                class="form-control border-0 border-bottom border-outline-variant-30 py-2 px-0 shadow-none fs-5 fw-medium text-on-surface bg-transparent"
                                 type="text" name="breed_name" value="" />
                         </div>
-                        <div class="grid grid-cols-2 gap-8">
+                        <div class="row g-4">
                             <!-- Species (Read Only) -->
-                            <div class="flex flex-col gap-2 opacity-70">
+                            <div class="d-flex flex-column gap-2 opacity-70">
                                 <label
                                     class="font-label text-xs font-bold tracking-widest text-outline uppercase">Species</label>
                                 <div
-                                    class="w-full bg-surface-container-high rounded-full py-3 px-6 flex items-center justify-between cursor-not-allowed">
+                                    class="w-100 bg-surface-container-high rounded-pill py-2 px-4 d-flex align-items-center justify-content-between">
                                     <span id="editBreedSpecies" class="text-on-surface font-medium">Canine</span>
                                     <span class="material-symbols-outlined text-sm">lock</span>
                                 </div>
                             </div>
                             <!-- Status Toggle -->
-                            <div class="flex flex-col gap-2">
+                            <div class="d-flex flex-column gap-2">
                                 <label
                                     class="font-label text-xs font-bold tracking-widest text-primary uppercase">Status</label>
                                 <div
-                                    class="flex bg-surface-container-low p-1 rounded-full border border-outline-variant/10">
-                                    <label class="flex-1 py-2 px-4 rounded-full text-xs font-bold transition-all shadow-sm cursor-pointer">
-                                        <input id="editBreedStatusActive" type="radio" name="status" value="1" class="hidden" />
-                                        <span class="block text-center">Active</span>
+                                    class="d-flex bg-surface-container-low p-1 rounded-pill border border-outline-variant-10">
+                                    <label
+                                        class="flex-grow-1 py-2 px-3 rounded-pill fs-6 fw-bold shadow-sm cursor-pointer">
+                                        <input id="editBreedStatusActive" type="radio" name="status" value="1"
+                                            class="hidden" />
+                                        <span class="d-block text-center">Active</span>
                                     </label>
-                                    <label class="flex-1 py-2 px-4 rounded-full text-xs font-bold transition-all shadow-sm cursor-pointer">
-                                        <input id="editBreedStatusInactive" type="radio" name="status" value="0" class="hidden" />
-                                        <span class="block text-center">Inactive</span>
+                                    <label
+                                        class="flex-grow-1 py-2 px-3 rounded-pill fs-6 fw-bold shadow-sm cursor-pointer">
+                                        <input id="editBreedStatusInactive" type="radio" name="status" value="0"
+                                            class="hidden" />
+                                        <span class="d-block text-center">Inactive</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <!-- Description & Care Notes -->
-                        <div class="flex flex-col gap-2">
+                        <div class="d-flex flex-column gap-2">
                             <label class="font-label text-xs font-bold tracking-widest text-primary uppercase">Description
                                 &amp; Care Notes</label>
                             <textarea id="editBreedDescription"
-                                class="w-full bg-surface-container-low rounded-lg border border-outline-variant/20 p-4 focus:ring-2 focus:ring-secondary/20 focus:border-secondary text-on-surface leading-relaxed resize-none transition-all"
+                                class="form-control bg-surface-container-low rounded-3 border-outline-variant-20 p-3 shadow-none text-on-surface"
                                 rows="6"></textarea>
                         </div>
                     </div>
@@ -298,13 +297,13 @@
             </form>
             <!-- Actions Footer -->
             <div
-                class="px-6 py-4 border-t border-outline-variant/10 flex justify-end items-center gap-4 bg-surface/40 backdrop-blur-md">
+                class="p-4 border-top border-outline-variant-10 d-flex justify-content-end align-items-center gap-3 bg-white-40 backdrop-blur-md">
                 <button id="cancelEditBreedM"
-                    class="px-8 py-3 rounded-full font-label font-bold text-sm tracking-wide text-outline hover:text-primary transition-all active:scale-95">
+                    class="btn rounded-pill font-label fw-bold text-outline hover-text-primary active-scale-95">
                     Cancel
                 </button>
                 <button type="button" id="saveEditBreedBtn"
-                    class="px-10 py-3 rounded-full bg-primary text-on-primary font-headline font-bold text-sm shadow-[0_10px_20px_rgba(148,76,0,0.2)] hover:bg-primary-dim transition-all active:scale-95 flex items-center gap-2">
+                    class="btn btn-primary rounded-pill bg-primary text-white font-headline fw-bold shadow-custom-1 hover-bg-primary-dim active-scale-95 d-flex align-items-center gap-2">
                     <span class="material-symbols-outlined text-[20px]"
                         style="font-variation-settings: 'FILL' 1;">save</span>
                     Save Changes
@@ -316,16 +315,13 @@
 
 
 
-
-
-
     <!-- Header Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
-        <div class="lg:col-span-8 flex justify-between items-center">
+    <div class="row g-4 mb-5">
+        <div class="col-lg-8 d-flex justify-content-between align-items-center">
             <div>
-                <span class="label-md text-primary font-bold tracking-widest text-xs uppercase">Registry Overview</span>
-                <h2 class="font-headline text-4xl font-extrabold text-on-surface mt-2">Pet Management</h2>
-                <p class="text-on-surface-variant mt-2 max-w-lg">Manage the global taxonomy of species and breeds within
+                <span class="text-primary fw-bold tracking-widest fs-6 text-uppercase">Registry Overview</span>
+                <h2 class="font-headline fs-2 font-headline fw-bolder text-on-surface mt-2">Pet Management</h2>
+                <p class="text-on-surface-variant mt-2">Manage the global taxonomy of species and breeds within
                     the
                     Radiant Habitat ecosystem.</p>
             </div>
@@ -335,17 +331,17 @@
             </button>
         </div>
         <!-- Sidebar / Stats Section -->
-        <aside class="lg:col-span-4 space-y-8">
-            <div class="bg-secondary/10 rounded-xl p-8 border border-secondary/10">
-                <h4 class="font-headline text-lg font-bold mb-6">Population Insights</h4>
-                <div class="space-y-6">
-                    <div class="flex items-center justify-between">
+        <aside class="col-lg-4 d-flex flex-column gap-4">
+            <div class="bg-secondary-10 rounded-xl p-4 border border-secondary-10">
+                <h4 class="font-headline fs-5 fw-bold mb-4">Population Insights</h4>
+                <div class="d-flex flex-column gap-3">
+                    <div class="d-flex align-items-center justify-content-between">
                         <span class="text-sm opacity-70">Total Species</span>
-                        <span class="font-bold text-xl">{{ $totalSpecies }}</span>
+                        <span class="fw-bold fs-4">{{ $totalSpecies }}</span>
                     </div>
-                    <div class="flex items-center justify-between">
+                    <div class="d-flex align-items-center justify-content-between">
                         <span class="text-sm opacity-70">Active Breeds</span>
-                        <span class="font-bold text-xl">{{ $totalBreeds }}</span>
+                        <span class="fw-bold fs-4">{{ $totalBreeds }}</span>
                     </div>
                 </div>
             </div>
@@ -354,46 +350,47 @@
     </div>
 
     <!-- Hierarchical Bento Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div class="row g-4">
         <!-- Species Section: Canine -->
         @foreach ($species as $specie)
-            <section class="lg:col-span-12">
-                <div class="glass-card rounded-xl p-8 mb-8 relative overflow-hidden group">
+            <section class="col-12">
+                <div class="glass-card rounded-xl p-4 mb-4 position-relative overflow-hidden group">
                     <div
-                        class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-primary/5 rounded-full blur-3xl transition-all group-hover:bg-primary/10">
+                        class="position-absolute top-0 end-0 translate-middle-y translate-middle-x rounded-circle bg-primary-5">
                     </div>
-                    <div class="flex justify-between items-center mb-10 relative z-10">
-                        <div class="flex items-center gap-4">
-                            <div class="w-16 h-16 rounded-2xl bg-primary-container/20 flex items-center justify-center">
+                    <div class="d-flex justify-content-between align-items-center mb-4 position-relative z-10">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-2xl bg-primary-10 d-flex align-items-center justify-content-center p-3">
                                 <span class="material-symbols-outlined text-primary text-3xl" data-icon="pets">pets</span>
                             </div>
                             <div>
-                                <h3 class="font-headline text-2xl font-bold">{{ $specie->species_name }}</h3>
+                                <h3 class="font-headline fs-3 fw-bold">{{ $specie->species_name }}</h3>
                                 <p class="text-on-surface-variant text-sm">42 registered breeds</p>
                             </div>
                         </div>
                         <button id="addBreeds" data-specie-id="{{ $specie->id }}"
-                            class="px-6 py-2 rounded-full border-2 border-primary/20 text-primary font-bold text-sm hover:bg-primary/5 transition-all flex items-center gap-2">
+                            class="btn rounded-pill border border-2 border-primary-20 text-primary fw-bold hover-bg-primary-5 d-flex align-items-center gap-2">
                             <span class="material-symbols-outlined text-sm" data-icon="add">add</span>
                             Add New Breed
                         </button>
                     </div>
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 relative z-10">
+                    <div class="row g-3 row-cols-2 row-cols-md-5 relative z-10">
                         <!-- Breed Card -->
                         @php $count = 0; @endphp
                         @foreach ($breeds as $breed)
                             @if ($breed->species_id == $specie->id)
                                 @php $count++; @endphp
-                                <div class="bg-white/40 hover:bg-white rounded-2xl p-4 transition-all hover:shadow-lg hover:shadow-primary/5 cursor-pointer border border-transparent hover:border-primary/10 group/item breed-card {{ $count > 5 ? 'hidden' : '' }}"
+                                <div class="col bg-white-40 rounded-2xl p-3 cursor-pointer border border-transparent group-item breed-card {{ $count > 5 ? 'hidden' : '' }}"
                                     data-specie-id="{{ $specie->id }}">
-                                    <div class="aspect-square rounded-xl overflow-hidden mb-3 relative">
-                                        <img class="w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-500"
+                                    <div class="ratio ratio-1x1 rounded-xl overflow-hidden mb-3 position-relative">
+                                        <img class="w-80 h-80 object-fit-cover group-hover/item:scale-110 transition-transform duration-500"
                                             alt="{{ $breed->breed_name }} image"
                                             data-alt="{{ $breed->breed_name }} breed image"
                                             src="{{ $breed->image ? asset($breed->image) : 'https://lh3.googleusercontent.com/aida-public/AB6AXuB_IkAcim22G1smrkzGfTl4wiP2em21kEY5402THTUNP42RbV2kcnzZk2TvAkj6Ua5sdP62akZ2zbd_6GkfKizf68pEbiEUUATjLM5YJ0M6MxK_reMap0a5TMfpDX5qYtOwfiWr0MaPH9veI7Oos5wqQeGZwhnKC7-Q9tgs84DoXxr66NaocAaOTQ4pQEC_54C-1XZlvBjYqQuAqI3oLsCdDIb2upe0HwItbGUy2Hxc0YBQaFrVkYB-bOyhRjOrTSVOHN5YQClQ15VL' }}" />
                                         <div
-                                            class="breed-action-overlay absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300">
-                                            <button type="button" class="editBreedBtn p-2 bg-white/90 hover:bg-white text-primary rounded-full shadow-lg transition-transform hover:scale-110"
+                                            class="breed-action-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center gap-2">
+                                            <button type="button"
+                                                class="btn editBreedBtn p-2 bg-white-90 text-primary rounded-circle shadow hover-scale-110"
                                                 data-breed-id="{{ $breed->id }}"
                                                 data-breed-name="{{ $breed->breed_name }}"
                                                 data-species-name="{{ $specie->species_name }}"
@@ -403,50 +400,31 @@
                                                 title="Edit">
                                                 <span class="material-symbols-outlined text-sm">edit</span>
                                             </button>
+
                                             <button type="button"
-                                                class="deleteBreedBtn p-2 bg-white/90 hover:bg-error text-error hover:text-white rounded-full shadow-lg transition-transform hover:scale-110"
-                                                data-breed-id="{{ $breed->id }}" title="Deactivate">
+                                                class="btn deleteBreedBtn p-2 bg-white-90 text-error rounded-circle shadow hover-scale-110"
+                                                data-breed-id="{{ $breed->id }}" title="Delete">
                                                 <span class="material-symbols-outlined text-sm">delete</span>
                                             </button>
                                         </div>
                                     </div>
-                                    <h4 class="font-bold text-on-surface">{{ $breed->breed_name }}</h4>
-                                    <p class="text-xs text-on-surface-variant">Standard / Large</p>
+                                    <h4 class="fw-bold text-on-surface">{{ $breed->breed_name }}</h4>
+                                    <p class="fs-6 text-on-surface-variant">Standard / Large</p>
                                 </div>
                             @endif
                         @endforeach
                     </div>
                     <button id="viewAllBreeds-{{ $specie->id }}" data-specie-id="{{ $specie->id }}"
                         data-species-name="{{ $specie->species_name }}" data-expanded="false"
-                        class="w-full mt-6 py-2 text-primary font-bold text-sm hover:underline flex justify-center items-center gap-1">
+                        class="w-100 mt-4 py-2 text-primary fw-bold btn d-flex justify-content-center align-items-center gap-1">
                         <span>View all {{ $specie->species_name }} breeds</span>
                         <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
                     </button>
                 </div>
             </section>
         @endforeach
-
     </div>
 
-    <div id="successOverlay" class="fixed inset-0 z-10 bg-on-surface/5 backdrop-blur-[2px] hidden"></div>
-    <!-- Success Modal -->
-    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center p-6 hidden">
-        <div class=" w-full max-w-md rounded-xl p-10 flex flex-col items-center text-center shadow-[0_20px_40px_rgba(148,76,0,0.06)] transform scale-105"
-            style="background: beige;"> <!-- Icon Container with Glow -->
-            <div class="mb-8 relative">
-                <div class="absolute inset-0 bg-primary/20 blur-2xl rounded-full scale-150"></div>
-                <div class="relative w-24 h-24 signature-glow rounded-full flex items-center justify-center shadow-lg">
-                    <span class="material-symbols-outlined text-on-primary text-5xl"
-                        style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                </div>
-            </div> <!-- Content -->
-            <div class="space-y-3 mb-10">
-                <h2 class="font-headline text-3xl font-extrabold tracking-tight text-on-surface">Success!</h2>
-                <p class="text-body-lg text-on-surface-variant leading-relaxed px-4"> Information has been updated
-                    successfully. </p>
-            </div>
-        </div>
-    </div>
 
 
 
@@ -490,40 +468,45 @@
                     url: '{{ route('petManagement.saveSpecies') }}',
                     method: 'POST',
                     data: $form.serialize(),
+
                     success: function(response) {
                         if (response.success) {
 
-                            $('#successOverlay').removeClass('hidden');
-                            $('#successModal').removeClass('hidden');
-
+                            // ✅ Toastr Success Message
+                            toastr.success(response.message || 'Species saved successfully!');
 
                             $form[0].reset();
                             $('#newSpeciesModal').addClass('hidden');
-
 
                             setTimeout(function() {
                                 location.reload();
                             }, 1000);
 
                         } else {
-                            alert(response.message || 'Unable to save species.');
+                            // ❌ Toastr Warning/Error
+                            toastr.warning(response.message || 'Unable to save species.');
                         }
                     },
+
                     error: function(xhr) {
                         var message = 'An error occurred while saving the form.';
+
                         if (xhr.responseJSON && xhr.responseJSON.errors) {
-                            message = Object.values(xhr.responseJSON.errors).flat().join('\n');
+                            message = Object.values(xhr.responseJSON.errors).flat().join(
+                                '<br>');
                         } else if (xhr.responseJSON && xhr.responseJSON.message) {
                             message = xhr.responseJSON.message;
                         }
-                        alert(message);
+
+                        // ❌ Toastr Error
+                        toastr.error(message);
                     },
+
                     complete: function() {
                         $button.prop('disabled', false).html(originalText);
                     }
                 });
             });
-
 
 
 
@@ -563,7 +546,8 @@
 
             $(document).on('change', '#imageInput, #editImageInput', function(e) {
                 var file = e.target.files[0];
-                var previewSelector = $(this).attr('id') === 'editImageInput' ? '#editBreedImagePreview' : '#imagePreview';
+                var previewSelector = $(this).attr('id') === 'editImageInput' ? '#editBreedImagePreview' :
+                    '#imagePreview';
 
                 if (file) {
                     var reader = new FileReader();
@@ -597,13 +581,12 @@
                     data: formData,
                     processData: false,
                     contentType: false,
+
                     success: function(response) {
                         if (response.success) {
-                            console.log('SUCCESS HIT');
 
-                            // ✅ SHOW modal first
-                            $('#successOverlay').removeClass('hidden').hide().fadeIn(200);
-                            $('#successModal').removeClass('hidden').hide().fadeIn(200);
+                            // ✅ Toastr Success
+                            toastr.success(response.message || 'Breed saved successfully!');
 
                             // Reset form
                             $('#addBreedsModal').addClass('hidden');
@@ -616,32 +599,37 @@
                                 .removeClass('opacity-100')
                                 .addClass('opacity-20');
 
-                            // ✅ Hide after 1s → then reload
                             setTimeout(function() {
-                                $('#successModal').fadeOut(300);
-                                $('#successOverlay').fadeOut(300);
-
-                                setTimeout(() => location.reload(), 300);
+                                location.reload();
                             }, 1000);
 
                         } else {
-                            alert(response.message || 'Unable to save breed.');
+                            // ❌ Toastr Warning
+                            toastr.warning(response.message || 'Unable to save breed.');
                         }
                     },
+
                     error: function(xhr) {
                         var message = 'An error occurred while saving the breed.';
+
                         if (xhr.responseJSON && xhr.responseJSON.errors) {
-                            message = Object.values(xhr.responseJSON.errors).flat().join('\n');
+                            message = Object.values(xhr.responseJSON.errors).flat().join(
+                                '<br>');
                         } else if (xhr.responseJSON && xhr.responseJSON.message) {
                             message = xhr.responseJSON.message;
                         }
-                        alert(message);
+
+                        // ❌ Toastr Error
+                        toastr.error(message);
                     },
+
                     complete: function() {
                         $submitButton.prop('disabled', false).html(originalText);
                     }
                 });
             });
+
+
 
             /////////// Update breed
             $('#editBreedForm').on('submit', function(event) {
@@ -663,71 +651,49 @@
                     data: formData,
                     processData: false,
                     contentType: false,
+
                     success: function(response) {
                         if (response.success) {
-                            $('#successOverlay').removeClass('hidden').hide().fadeIn(200);
-                            $('#successModal').removeClass('hidden').hide().fadeIn(200);
+
+                            // ✅ Toastr Success
+                            toastr.success(response.message || 'Breed updated successfully!');
 
                             $('#editBreedsModal').addClass('hidden');
 
                             setTimeout(function() {
-                                $('#successModal').fadeOut(300);
-                                $('#successOverlay').fadeOut(300);
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 300);
+                                location.reload();
                             }, 1000);
+
                         } else {
-                            alert(response.message || 'Unable to update breed.');
+                            // ❌ Toastr Warning
+                            toastr.warning(response.message || 'Unable to update breed.');
                         }
                     },
+
                     error: function(xhr) {
                         var message = 'An error occurred while updating the breed.';
+
                         if (xhr.responseJSON && xhr.responseJSON.errors) {
-                            message = Object.values(xhr.responseJSON.errors).flat().join('\n');
+                            message = Object.values(xhr.responseJSON.errors).flat().join(
+                                '<br>');
                         } else if (xhr.responseJSON && xhr.responseJSON.message) {
                             message = xhr.responseJSON.message;
                         }
-                        alert(message);
+
+                        // ❌ Toastr Error
+                        toastr.error(message);
                     },
+
                     complete: function() {
                         $submitButton.prop('disabled', false).html(originalText);
                     }
                 });
             });
 
-            // Delete breed button (now deactivates)
-            $(document).on('click', '.deleteBreedBtn', function() {
-                var $button = $(this);
-                var breedId = $button.data('breed-id');
-                if (!confirm('Deactivate this breed?')) {
-                    return;
-                }
 
-                $.ajax({
-                    url: "{{ url('admin/toggleBreedStatus') }}/" + breedId,
-                    method: 'POST',
-                    data: {
-                        _method: 'PATCH'
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            $button.closest('.breed-card').fadeOut(300, function() {
-                                $(this).remove();
-                            });
-                        } else {
-                            alert(response.message || 'Unable to deactivate breed.');
-                        }
-                    },
-                    error: function(xhr) {
-                        var message = 'An error occurred while deactivating the breed.';
-                        if (xhr.responseJSON && xhr.responseJSON.message) {
-                            message = xhr.responseJSON.message;
-                        }
-                        alert(message);
-                    }
-                });
-            });
+
+            // Delete breed button (now deactivates)
+
 
             // View all breeds toggle
             $(document).on('click', '[id^="viewAllBreeds-"]', function() {
@@ -758,7 +724,8 @@
                 var speciesName = $button.data('species-name') || '';
                 var description = $button.data('breed-description') || '';
                 var status = $button.data('breed-status');
-                var imageUrl = $button.data('breed-image') || 'https://lh3.googleusercontent.com/aida-public/AB6AXuCgih6bq3mACcgSc2MphDkKQkK-MTZjkHSi2pmYqcT4SmHzAc7GBI6D8fg3FL90R4M-7lrYRj4KPdZ1L7rDXYaRSa1H46ncTf7zp-c6Mne_5uhWVoR8Py5j75PSbq3GxGoZ0xUlDKqPTD2m6iG3PUi-a1Z85dYrF-d3SZV9bPPMA-93-NCCh2JY6RsZakQ27sCy7u8jYl8QNimz93Biy8LTZJa7pmkhIjF6BEjpRt3azkzFZjS-o865DtenBGj6-6V_x4btCaI8ACws';
+                var imageUrl = $button.data('breed-image') ||
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuCgih6bq3mACcgSc2MphDkKQkK-MTZjkHSi2pmYqcT4SmHzAc7GBI6D8fg3FL90R4M-7lrYRj4KPdZ1L7rDXYaRSa1H46ncTf7zp-c6Mne_5uhWVoR8Py5j75PSbq3GxGoZ0xUlDKqPTD2m6iG3PUi-a1Z85dYrF-d3SZV9bPPMA-93-NCCh2JY6RsZakQ27sCy7u8jYl8QNimz93Biy8LTZJa7pmkhIjF6BEjpRt3azkzFZjS-o865DtenBGj6-6V_x4btCaI8ACws';
 
                 $('#editBreedId').val(breedId);
                 $('#editBreedName').val(breedName);
@@ -782,11 +749,15 @@
                 var $inactiveLabel = $('#editBreedStatusInactive').closest('label');
 
                 if (isActive) {
-                    $activeLabel.addClass('bg-secondary text-on-secondary').removeClass('bg-transparent text-outline');
-                    $inactiveLabel.addClass('bg-transparent text-outline').removeClass('bg-secondary text-on-secondary');
+                    $activeLabel.addClass('bg-secondary text-on-secondary').removeClass(
+                        'bg-transparent text-outline');
+                    $inactiveLabel.addClass('bg-transparent text-outline').removeClass(
+                        'bg-secondary text-on-secondary');
                 } else {
-                    $inactiveLabel.addClass('bg-secondary text-on-secondary').removeClass('bg-transparent text-outline');
-                    $activeLabel.addClass('bg-transparent text-outline').removeClass('bg-secondary text-on-secondary');
+                    $inactiveLabel.addClass('bg-secondary text-on-secondary').removeClass(
+                        'bg-transparent text-outline');
+                    $activeLabel.addClass('bg-transparent text-outline').removeClass(
+                        'bg-secondary text-on-secondary');
                 }
             }
 
@@ -811,6 +782,35 @@
 
 
 
+            // Delete breed button
+            $(document).on('click', '.deleteBreedBtn', function() {
+                var breedId = $(this).data('breed-id');
+                var $card = $(this).closest('.breed-card');
+
+                if (confirm('Are you sure you want to delete this breed?')) {
+                    $.ajax({
+                        url: "{{ url('admin/deleteBreed') }}/" + breedId,
+                        method: 'DELETE',
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.message || 'Breed deleted successfully!');
+                                $card.fadeOut(300, function() {
+                                    $(this).remove();
+                                });
+                            } else {
+                                toastr.warning(response.message || 'Unable to delete breed.');
+                            }
+                        },
+                        error: function(xhr) {
+                            var message = 'An error occurred while deleting the breed.';
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            toastr.error(message);
+                        }
+                    });
+                }
+            });
 
         });
     </script>
