@@ -68,8 +68,6 @@
         </div>
     </div>
 
-
-
     {{-- Edit Category Modal --}}
     <div id="editCategoryModal" class="fixed inset-0 z-50 flex items-center justify-center px-4 py-10 hidden">
         <div class="absolute inset-0 bg-on-surface/10 backdrop-blur-sm"></div>
@@ -257,20 +255,11 @@
     </div>
 
 
-
-
-
-
-
-
-
     <div class="space-y-16">
         <!-- Header Section -->
         <section class="max-w-4xl">
             <h1 class="text-5xl font-extrabold tracking-tight text-on-surface mb-4">Service Registry</h1>
-
         </section>
-
 
         <div class="grid grid-cols-6 gap-8">
             <!-- Recent Appointments Table -->
@@ -366,256 +355,39 @@
                     Create New Service
                 </a>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-16">
-                <!-- Recent Appointments Table -->
-                <div class="col-span-4 glass-card rounded-lg overflow-hidden flex flex-col">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
 
-                    <div class="p-8 pb-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-
-                        <!-- LEFT TITLE -->
-                        <h4 class="text-xl font-headline font-bold tracking-tight">
-                            Services
-                        </h4>
-
-                        <!-- RIGHT FILTER AREA -->
-                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
-
-                            <!-- 🔍 SEARCH -->
-                            <div class="relative w-full sm:w-64">
-                                <span
-                                    class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant text-lg">
-                                    search
-                                </span>
-
-                                <input type="text" id="searchService" placeholder="Search services..."
-                                    class="w-full pl-10 pr-4 py-2.5 rounded-full bg-surface border border-outline-variant/30 
-                                        focus:border-secondary focus:ring-0 text-sm placeholder:text-outline-variant transition-all">
-                            </div>
-
-                            <!-- 🏢 COMPANY -->
-                            <div class="relative w-full sm:w-44 select-wrapper">
-
-                                <select id="filterCompany"
-                                    class="w-full appearance-none pl-4 pr-10 py-2.5 rounded-full bg-surface border border-outline-variant/30 
-                                        focus:border-secondary text-sm cursor-pointer">
-
-                                    <option value="">All Companies</option>
-                                    <option value="1">Company A</option>
-                                    <option value="2">Company B</option>
-
-                                </select>
-
-                                <!-- ONLY CUSTOM ICON -->
-                                <span
-                                    class="absolute right-3 top-1/2 -translate-y-1/2 
-                                        material-symbols-outlined text-outline-variant pointer-events-none">
-                                    expand_more
-                                </span>
-
-                            </div>
-
-                            <!-- 📂 CATEGORY -->
-                            <div class="relative w-full sm:w-44">
-
-                                <select name="category_id" id="filterCategory"
-                                    class="w-full appearance-none pl-4 pr-10 py-2.5 rounded-full bg-surface border border-outline-variant/30 
-                                        focus:border-secondary text-sm cursor-pointer">
-
-                                    <option value="">All Categories</option>
-                                    <option value="1">Grooming</option>
-                                    <option value="2">Walking</option>
-
-                                </select>
-
-                                <span
-                                    class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant pointer-events-none">
-                                    expand_more
-                                </span>
-
-                            </div>
-
-                            <!-- 🔄 STATUS -->
-                            <div class="relative w-full sm:w-36">
-
-                                <select name="status" id="filterStatus"
-                                    class="w-full appearance-none pl-4 pr-10 py-2.5 rounded-full bg-surface border border-outline-variant/30 
-                                        focus:border-secondary text-sm cursor-pointer">
-
-                                    <option value="">All Status</option>
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
-
-                                </select>
-
-                                <span
-                                    class="absolute right-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant pointer-events-none">
-                                    expand_more
-                                </span>
-
-                            </div>
-
+                @if ($services->isNotEmpty())
+                    @foreach ($services as $service )
+                        <div
+                            class="glass-card p-8 rounded-lg flex flex-col gap-6 group hover:translate-y-[-4px] transition-all duration-500">
+                            
+                                <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-primary">
+                                    <img src="{{ asset($service->image) }}" alt="">
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-2">{{ $service->name }}</h3>
+                                    <p class="text-sm text-stone-500 line-clamp-2">Category : {{ $service->category?->name }}</p>
+                                    <p class="text-sm text-stone-500 line-clamp-2">{{ $service->service_type }}</p>
+                                </div>
+                                <div class="mt-auto flex items-center justify-between border-t border-stone-200/30 pt-6">
+                                   
+                                    <div class="flex gap-2">
+                                        <a class="px-4 py-2 h-full rounded-full border border-outline-variant/30 text-stone-600 text-sm font-semibold hover:bg-stone-50 transition-colors" href="{{ route('editService', $service->id) }}">Manage</a>
+                                        <button class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            
                         </div>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left p-4 max-h-[50px] overflow-y-auto">
-                            <thead
-                                class="bg-surface-container-low text-on-surface-variant font-label text-[10px] tracking-widest uppercase">
-                                <tr>
-                                    <th class="px-6 py-4">Service Name</th>
-                                    <th class="px-6 py-4">Category</th>
-                                    <th class="px-6 py-4">Species</th>
-                                    <th class="px-6 py-4">Company Name</th>
-                                    <th class="px-6 py-4">Price/Timing</th>
-                                    <th class="px-6 py-4">Capacity</th>
-                                    <th class="px-6 py-4">Status</th>
-                                    <th class="px-8 py-4 text-right">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-outline-variant/10">
-
-                                @foreach ($services as $service)
-                                    <tr class="hover:bg-surface-container-lowest/50 transition-colors group"
-                                        data-id="{{ $service->id }}">
-
-                                        <td class="px-6 py-5 text-sm">{{ $service->name }}</td>
-                                        <td class="px-6 py-5 text-sm">{{ $service->category->name ?? 'N/A' }}</td>
-                                        <td class="px-6 py-5 text-sm">{{ $service->species->species_name ?? 'N/A' }}</td>
-
-                                        <td class="px-6 py-5 text-sm">{{ $service->company->name ?? 'N/A' }}</td>
-                                        <td class="px-6 py-5 text-sm">{{ $service->base_price ?? 'N/A' }} /
-                                            {{ $service->timing ?? 'N/A' }}</td>
-                                        <td class="px-6 py-5 text-sm">{{ $service->capacity ?? 'N/A' }}</td>
-                                        <td class="px-6 py-5">
-
-                                            <div class="flex items-center gap-1.5 text-secondary">
-                                                <span class="w-2 h-2 rounded-full bg-secondary"></span>
-                                                <span class="text-xs font-bold">Active</span>
-                                            </div>
-
-                                            <div class="flex items-center gap-1.5 text-primary">
-                                                <span class="w-2 h-2 rounded-full bg-primary"></span>
-                                                <span class="text-xs font-bold">Inactive</span>
-                                            </div>
-
-                                        </td>
-                                        <td class="px-8 py-5 text-right">
-
-                                            <button type="button"
-                                                class="viewServiceBtn p-2 text-stone-400 hover:text-primary transition-colors"
-                                                data-id="{{ $service->id }}" data-name="{{ $service->name }}"
-                                                data-category="{{ $service->category->name ?? 'N/A' }}"
-                                                data-species="{{ $service->species->species_name ?? 'N/A' }}"
-                                                data-company="{{ $service->company->company_name ?? 'N/A' }}"
-                                                data-price="{{ $service->base_price }}"
-                                                data-timing="{{ $service->timing }}"
-                                                data-capacity="{{ $service->capacity }}"
-                                                data-description="{{ $service->description }}"
-                                                data-status="{{ $service->is_published ? 'Active' : 'Inactive' }}">
-
-                                                <span class="material-symbols-outlined">visibility</span>
-                                            </button>
-
-                                            <button type="button"
-                                                class="p-2 text-stone-400 hover:text-secondary transition-colors">
-                                                <span class="material-symbols-outlined">edit</span>
-                                            </button>
-
-                                            <button class=" p-2 text-stone-400 hover:text-error transition-colors">
-                                                <span class="material-symbols-outlined">delete</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        {{-- <div class="mt-4">
-                            {{ $categories->links() }}
-                        </div> --}}
-                    </div>
-                </div>
+                    @endforeach
+                @endif
+                
+                
             </div>
-            {{-- <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                <!-- Full Grooming Card -->
-                <div
-                    class="glass-card p-8 rounded-lg flex flex-col gap-6 group hover:translate-y-[-4px] transition-all duration-500">
-                    <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-primary">
-                        <span class="material-symbols-outlined text-3xl" data-icon="content_cut">content_cut</span>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">Full Grooming</h3>
-                        <p class="text-sm text-stone-500 line-clamp-2">Complete spa treatment including bath, hair trim,
-                            nail clipping, and ear cleaning for all small mammals.</p>
-                    </div>
-                    <div class="mt-auto flex items-center justify-between border-t border-stone-200/30 pt-6">
-                        <span class="text-primary font-bold">$65.00+</span>
-                        <div class="flex gap-2">
-                            <button
-                                class="px-4 py-2 rounded-full border border-outline-variant/30 text-stone-600 text-sm font-semibold hover:bg-stone-50 transition-colors">Manage</button>
-                            <button class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
-                                <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Routine Checkup Card -->
-                <div
-                    class="glass-card p-8 rounded-lg flex flex-col gap-6 group hover:translate-y-[-4px] transition-all duration-500">
-                    <div
-                        class="w-14 h-14 bg-secondary-container/30 rounded-2xl flex items-center justify-center text-secondary">
-                        <span class="material-symbols-outlined text-3xl" data-icon="stethoscope">stethoscope</span>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">Routine Checkup</h3>
-                        <p class="text-sm text-stone-500 line-clamp-2">Bi-annual health evaluation, vital checks, and
-                            preventative care consultations for pets of all sizes.</p>
-                    </div>
-                    <div class="mt-auto flex items-center justify-between border-t border-stone-200/30 pt-6">
-                        <span class="text-primary font-bold">$120.00</span>
-                        <div class="flex gap-2">
-                            <button
-                                class="px-4 py-2 rounded-full border border-outline-variant/30 text-stone-600 text-sm font-semibold hover:bg-stone-50 transition-colors">Manage</button>
-                            <button class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
-                                <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Behavioral Training Card -->
-                <div
-                    class="glass-card p-8 rounded-lg flex flex-col gap-6 group hover:translate-y-[-4px] transition-all duration-500">
-                    <div
-                        class="w-14 h-14 bg-tertiary-container/30 rounded-2xl flex items-center justify-center text-tertiary">
-                        <span class="material-symbols-outlined text-3xl" data-icon="psychology">psychology</span>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">Behavioral Training</h3>
-                        <p class="text-sm text-stone-500 line-clamp-2">Positive reinforcement-based sessions focusing on
-                            social skills, anxiety reduction, and basic commands.</p>
-                    </div>
-                    <div class="mt-auto flex items-center justify-between border-t border-stone-200/30 pt-6">
-                        <span class="text-primary font-bold">$85.00 / hr</span>
-                        <div class="flex gap-2">
-                            <button
-                                class="px-4 py-2 rounded-full border border-outline-variant/30 text-stone-600 text-sm font-semibold hover:bg-stone-50 transition-colors">Manage</button>
-                            <button class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
-                                <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
         </section>
     </div>
-
-
-
-
-
-
-
-
-
-
 
 
     <script>

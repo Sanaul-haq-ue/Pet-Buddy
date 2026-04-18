@@ -95,16 +95,20 @@
 
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <!-- Add in your layout head -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="stylesheet" href="{{ asset('backAssets/css/style.css') }}">
-
+ 
     <link rel="stylesheet" href="{{ asset('backAssets/css/petManagement.css') }}">
-
     <link rel="stylesheet" href="{{ asset('backAssets/css/company.css') }}">
+    <link rel="stylesheet" href="{{ asset('backAssets/css/style.css') }}">
 
 </head>
 
@@ -128,51 +132,11 @@
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
-
-
-    {{-- <script>
-        let isPinned = true;
-
-        const sidebar = document.getElementById('sidebar');
-        const main = document.getElementById('mainContent');
-        const header = document.getElementById('topbar');
-
-        function toggleSidebar() {
-
-            if (isPinned) {
-                // COLLAPSE
-                sidebar.classList.remove('w-64');
-                sidebar.classList.add('w-20');
-
-                main.classList.remove('ml-64');
-                main.classList.add('ml-20');
-
-                header.classList.remove('ml-64');
-                header.classList.add('ml-20');
-
-                header.classList.remove('w-[calc(100%-16rem)]');
-                header.classList.add('w-[calc(100%-5rem)]');
-
-            } else {
-                // EXPAND
-                sidebar.classList.remove('w-20');
-                sidebar.classList.add('w-64');
-
-                main.classList.remove('ml-20');
-                main.classList.add('ml-64');
-
-                header.classList.remove('ml-20');
-                header.classList.add('ml-64');
-
-                header.classList.remove('w-[calc(100%-5rem)]');
-                header.classList.add('w-[calc(100%-16rem)]');
-            }
-
-            isPinned = !isPinned;
-        }
-    </script> --}}
 
 </body>
 

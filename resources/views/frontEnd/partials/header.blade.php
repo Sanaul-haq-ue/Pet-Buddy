@@ -11,15 +11,18 @@
             <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'active' : '' }}">Services</a>
             <a href="{{ route('shop') }}" class="{{ request()->routeIs('shop') ? 'active' : '' }}">Pet Food</a>
             <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
-            <a href="{{ route('bookings') }}" class="{{ request()->routeIs('bookings') ? 'active' : '' }}">Bookings</a>
+            {{-- <a href="{{ route('bookings') }}" class="{{ request()->routeIs('bookings') ? 'active' : '' }}">Bookings</a> --}}
         </div>
         <div class="nav-actions">
             <div class="search-box">
                 <span class="material-symbols-outlined">search</span>
                 <input type="text" placeholder="Search services...">
             </div>
+            @if(Auth::check())
+                <a href="{{ route('user.dashboard') }}" class="btn-primary user-menu"> <img src="{{ asset('frontend/img/user-svgrepo-com.svg') }}" alt="" class="user-icon"><span class="user-span">Welcome, {{ Auth::user()->first_name }}</span></a>
+            @else
             <a href="{{ route('login') }}" class="btn-primary user-menu"> <img src="{{ asset('frontend/img/user-svgrepo-com.svg') }}" alt="" class="user-icon"><span class="user-span">Login</span></a>
-            
+            @endif
         </div>
     </div>
 </nav>
@@ -53,10 +56,10 @@
             <i class="ri-arrow-right-s-line"></i>
         </a>
 
-        <a href="{{ route('bookings') }}" class="{{ request()->routeIs('bookings') ? 'active' : '' }}">
+        {{-- <a href="{{ route('bookings') }}" class="{{ request()->routeIs('bookings') ? 'active' : '' }}">
             <span>Bookings</span>
             <i class="ri-arrow-right-s-line"></i>
-        </a>
+        </a> --}}
     </div>
     <div class="sidebar-social">
         <p>Follow us on</p>
@@ -91,8 +94,15 @@
             <span class="nav-menu-text">Food</span>
         </a>
         <!-- Profile -->
+        @if(Auth::check())
+        <a class="nav-menu {{ request()->routeIs('user.dashboard') ? 'active' : '' }}" href="{{ route('user.dashboard') }}">
+            <span class="material-symbols-outlined">person</span>
+            <span class="nav-menu-text">Dashboard</span>
+        </a>
+        @else
         <a class="nav-menu {{ request()->routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">
             <span class="material-symbols-outlined">person</span>
-            <span class="nav-menu-text">Profile</span>
+            <span class="nav-menu-text">Login</span>
         </a>
+        @endif
     </nav>

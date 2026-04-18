@@ -21,7 +21,7 @@
             </div>
         </header> --}}
     <!-- Page Content -->
-    <div class="max-w-6xl mx-auto">
+    <div class="mx-auto">
         <!-- Breadcrumb -->
         <nav class="flex items-center gap-2 mb-8 text-sm font-label text-outline uppercase tracking-wider">
             <a class="hover:text-primary transition-colors" href="#">Services</a>
@@ -380,6 +380,7 @@
                     </section>
                 </div>
             </div>
+            
             <!-- Action Footer -->
             <div class="sticky bottom-8 z-30">
                 <div
@@ -729,4 +730,6 @@
 
         });
     </script>
+
+
 @endsection

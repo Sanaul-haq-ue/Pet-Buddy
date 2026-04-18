@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('frontEnd.home');
-    }
-
-    public function homemobile()
-    {
-        return view('frontEnd.homemobile');
+        $services = Service::where('status', 1)->get();
+        return view('frontEnd.home',[
+            'services' => $services
+        ]);
     }
 }

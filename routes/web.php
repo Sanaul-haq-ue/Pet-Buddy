@@ -13,6 +13,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserAppointmentController;
+use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\UserDashbaord;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -20,6 +23,20 @@ Route::get('/services', [ServicesController::class, 'index'])->name('services');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/bookings', [BookingsController::class, 'index'])->name('bookings');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+
+Route::prefix('user')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::post('/login', [UserAuthController::class, 'loginSubmit'])->name('user.login.submit');
+        Route::post('/register', [UserAuthController::class, 'registerSubmit'])->name('user.register.submit');
+    });
+
+    Route::middleware('user')->group(function () {
+        Route::get('/dashboard', [UserDashbaord::class, 'dashboard'])->name('user.dashboard');
+        Route::get('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
+        Route::post('/booking/store', [UserAppointmentController::class, 'store'])->name('user.booking.store');
+    });
+});
+
 
 Route::prefix('admin')->group(function () {
 
@@ -54,12 +71,18 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/serviceManagement', [ServiceMController::class, 'serviceManagement'])->name('serviceManagement');
         Route::get('/addService', [ServiceMController::class, 'addService'])->name('addService');
-        Route::post('/saveService', [ServiceMController::class, 'saveService'])->name('saveService');
-        Route::get('/upazilas-by-district/{district_id}', [ServiceMController::class, 'upazilasByDistrict'])->name('upazilasByDistrict');
-        Route::get('/unions-by-upazila/{upazila_id}', [ServiceMController::class, 'unionsByUpazila'])->name('unionsByUpazila');
+        Route::get('/edit/Service/{id}', [ServiceMController::class, 'editService'])->name('editService');
+        Route::post('/save/service', [ServiceMController::class, 'saveService'])->name('saveService');
+        Route::post('/update/service/{id}', [ServiceMController::class, 'updateService'])->name('updateService');
+
+        Route::get('/get-upazilas/{id}', [ServiceMController::class, 'getUpazilas'])->name('upazilasByDistrict');
+        Route::get('/get-unions/{id}', [ServiceMController::class, 'getUnions'])->name('unionsByUpazila');
+
+        Route::get('/get-breeds/{id}', [ServiceMController::class, 'getBreeds'])->name('getBreeds');
+        Route::get('/get-sizes/{id}', [ServiceMController::class, 'getSizes'])->name('getSizes');
 
         Route::post('/saveCategory', [ServiceMController::class, 'saveCategory'])->name('saveCategory');
         Route::post('/updateCategory', [ServiceMController::class, 'updateCategory'])->name('updateCategory');
-
+        Route::get('/addService/store', [ServiceMController::class, 'addService'])->name('admin.services.store');
     });
 });
