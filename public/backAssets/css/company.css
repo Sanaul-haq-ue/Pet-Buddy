@@ -277,3 +277,49 @@
     backdrop-filter: blur(12px);
     border-top: 1px solid rgba(177, 178, 175, 0.1);
 }
+
+
+
+/* company create pop up modal */
+
+/* Modal Custom Styles */
+.modal-content.glass-card {
+    background: rgba(250, 249, 246, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.border-secondary-10 {
+    border-color: rgba(0, 107, 99, 0.1) !important;
+}
+
+.hover-border-primary:hover {
+    border-color: #944c00 !important;
+}
+
+.hover-border-secondary:hover {
+    border-color: #006b63 !important;
+}
+
+.border-transparent {
+    border-color: transparent !important;
+}
+
+.form-select.custom-focus-ring:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 107, 99, 0.2) !important;
+}
+
+.custom-radio {
+    cursor: pointer;
+}
+
+.custom-radio input[type="radio"]:checked+label {
+    color: #944c00 !important;
+}
+
+.custom-radio input[type="radio"]:checked {
+    background-color: #944c00;
+    border-color: #944c00;
+}

@@ -52,6 +52,8 @@ Route::prefix('admin')->group(function () {
 
 
         Route::get('/company', [ConpanyController::class, 'company'])->name('company');
+        Route::post('/saveCompany', [ConpanyController::class, 'saveCompany'])->name('saveCompany');
+        Route::post('/updateCompany', [ConpanyController::class, 'updateCompany'])->name('updateCompany');
 
         Route::get('/serviceManagement', [ServiceMController::class, 'serviceManagement'])->name('serviceManagement');
         Route::get('/addService', [ServiceMController::class, 'addService'])->name('addService');
