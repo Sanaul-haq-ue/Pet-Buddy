@@ -1124,8 +1124,29 @@ a{
     z-index: 9999;
     cursor: pointer;
 }
-
-
+.sale-per{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(148, 76, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+}
+.card-location{
+  font-size: 13px;
+}
+.price{
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.price del{
+  font-size: 11px;
+  color: var(--color-on-surface-variant);
+}
 
 @media (max-width: 767px) {
   .nav-links , .user-span{

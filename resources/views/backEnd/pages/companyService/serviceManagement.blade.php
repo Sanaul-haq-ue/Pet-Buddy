@@ -68,8 +68,6 @@
         </div>
     </div>
 
-
-
     {{-- Edit Category Modal --}}
     <div id="editCategoryModal" class="fixed inset-0 z-50 flex items-center justify-center px-4 py-10 hidden">
         <div class="absolute inset-0 bg-on-surface/10 backdrop-blur-sm"></div>
@@ -140,20 +138,11 @@
     </div>
 
 
-
-
-
-
-
-
-
     <div class="space-y-16">
         <!-- Header Section -->
         <section class="max-w-4xl">
             <h1 class="text-5xl font-extrabold tracking-tight text-on-surface mb-4">Service Registry</h1>
-
         </section>
-
 
         <div class="grid grid-cols-6 gap-8">
             <!-- Recent Appointments Table -->
@@ -250,87 +239,38 @@
                 </a>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                <!-- Full Grooming Card -->
-                <div
-                    class="glass-card p-8 rounded-lg flex flex-col gap-6 group hover:translate-y-[-4px] transition-all duration-500">
-                    <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-primary">
-                        <span class="material-symbols-outlined text-3xl" data-icon="content_cut">content_cut</span>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">Full Grooming</h3>
-                        <p class="text-sm text-stone-500 line-clamp-2">Complete spa treatment including bath, hair trim,
-                            nail clipping, and ear cleaning for all small mammals.</p>
-                    </div>
-                    <div class="mt-auto flex items-center justify-between border-t border-stone-200/30 pt-6">
-                        <span class="text-primary font-bold">$65.00+</span>
-                        <div class="flex gap-2">
-                            <button
-                                class="px-4 py-2 rounded-full border border-outline-variant/30 text-stone-600 text-sm font-semibold hover:bg-stone-50 transition-colors">Manage</button>
-                            <button class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
-                                <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                            </button>
+
+                @if ($services->isNotEmpty())
+                    @foreach ($services as $service )
+                        <div
+                            class="glass-card p-8 rounded-lg flex flex-col gap-6 group hover:translate-y-[-4px] transition-all duration-500">
+                            
+                                <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-primary">
+                                    <img src="{{ asset($service->image) }}" alt="">
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-2">{{ $service->name }}</h3>
+                                    <p class="text-sm text-stone-500 line-clamp-2">Category : {{ $service->category->name }}</p>
+                                    <p class="text-sm text-stone-500 line-clamp-2">{{ $service->service_type }}</p>
+                                </div>
+                                <div class="mt-auto flex items-center justify-between border-t border-stone-200/30 pt-6">
+                                   
+                                    <div class="flex gap-2">
+                                        <a class="px-4 py-2 h-full rounded-full border border-outline-variant/30 text-stone-600 text-sm font-semibold hover:bg-stone-50 transition-colors" href="{{ route('editService', $service->id) }}">Manage</a>
+                                        <button class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
+                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            
                         </div>
-                    </div>
-                </div>
-                <!-- Routine Checkup Card -->
-                <div
-                    class="glass-card p-8 rounded-lg flex flex-col gap-6 group hover:translate-y-[-4px] transition-all duration-500">
-                    <div
-                        class="w-14 h-14 bg-secondary-container/30 rounded-2xl flex items-center justify-center text-secondary">
-                        <span class="material-symbols-outlined text-3xl" data-icon="stethoscope">stethoscope</span>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">Routine Checkup</h3>
-                        <p class="text-sm text-stone-500 line-clamp-2">Bi-annual health evaluation, vital checks, and
-                            preventative care consultations for pets of all sizes.</p>
-                    </div>
-                    <div class="mt-auto flex items-center justify-between border-t border-stone-200/30 pt-6">
-                        <span class="text-primary font-bold">$120.00</span>
-                        <div class="flex gap-2">
-                            <button
-                                class="px-4 py-2 rounded-full border border-outline-variant/30 text-stone-600 text-sm font-semibold hover:bg-stone-50 transition-colors">Manage</button>
-                            <button class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
-                                <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Behavioral Training Card -->
-                <div
-                    class="glass-card p-8 rounded-lg flex flex-col gap-6 group hover:translate-y-[-4px] transition-all duration-500">
-                    <div
-                        class="w-14 h-14 bg-tertiary-container/30 rounded-2xl flex items-center justify-center text-tertiary">
-                        <span class="material-symbols-outlined text-3xl" data-icon="psychology">psychology</span>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">Behavioral Training</h3>
-                        <p class="text-sm text-stone-500 line-clamp-2">Positive reinforcement-based sessions focusing on
-                            social skills, anxiety reduction, and basic commands.</p>
-                    </div>
-                    <div class="mt-auto flex items-center justify-between border-t border-stone-200/30 pt-6">
-                        <span class="text-primary font-bold">$85.00 / hr</span>
-                        <div class="flex gap-2">
-                            <button
-                                class="px-4 py-2 rounded-full border border-outline-variant/30 text-stone-600 text-sm font-semibold hover:bg-stone-50 transition-colors">Manage</button>
-                            <button class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
-                                <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
+                
+                
             </div>
         </section>
     </div>
-
-
-
-
-
-
-
-
-
-
 
 
     <script>

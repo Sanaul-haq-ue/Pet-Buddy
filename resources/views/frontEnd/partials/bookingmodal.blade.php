@@ -4,6 +4,7 @@
     <div class="booking-modal-container">
         <!-- Step 1: Service Details & Booking Form -->
         <div class="booking-step booking-step-active" id="step1">
+           
             <div class="booking-modal-content">
                 <button class="modal-close-btn">&times;</button>
 
@@ -66,6 +67,7 @@
                     <button type="button" class="btn-primary booking-next-btn">Next</button>
                 </div>
             </div>
+        
         </div>
 
         <!-- Step 2: Payment & Summary -->
@@ -132,6 +134,18 @@
                             </div>
                         </label>
                     </div>
+
+                    <div id="paymentExtra" style="display:none;">
+                        <div class="form-group">
+                            <label>Account Number</label>
+                            <input type="text" id="accountNumber">
+                        </div>
+                        <div class="form-group">
+                            <label>Transaction ID</label>
+                            <input type="text" id="transactionId">
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- Payment Actions -->
@@ -144,195 +158,317 @@
     </div>
 </div>
 
+<!-- Login Required Modal -->
+<div id="loginModal" class="booking-modal">
+    <div class="booking-modal-overlay"></div>
+
+    <div class="booking-modal-container" style="max-width:400px;">
+        <div class="booking-modal-content text-center">
+            
+            <button class="modal-close-btn login-close">&times;</button>
+
+            <h2 style="margin-bottom:10px;">Login Required</h2>
+            <p style="margin-bottom:20px;">
+                Please login first to book a service.
+            </p>
+
+            <a href="{{ route('login') }}" class="btn-primary" style="display:inline-block;">
+                Login Now
+            </a>
+
+        </div>
+    </div>
+</div>
 
 {{-- Booking Modal Script - Handles opening, closing, form steps, and data collection for service bookings. --}}
 <script>
-    // Booking Modal Functionality
-    const bookingModal = document.getElementById('bookingModal');
-    const bookingForm = document.getElementById('bookingForm');
-    const petCountInput = document.getElementById('petCount');
-    const petsContainer = document.getElementById('petsContainer');
-    const step1 = document.getElementById('step1');
-    const step2 = document.getElementById('step2');
-    const bookingNextBtn = document.querySelector('.booking-next-btn');
-    const bookingBackBtn = document.querySelector('.booking-back-btn');
-    const bookingCancelBtn = document.querySelector('.booking-cancel-btn');
-    const bookingConfirmBtn = document.querySelector('.booking-confirm-btn');
-    const modalCloseBtn = document.querySelectorAll('.modal-close-btn');
+    const isLoggedIn = @json(auth()->check());
+</script>
+<script>
+/* ===============================
+   TOASTR SETTINGS
+================================*/
+toastr.options = {
+    closeButton: true,
+    progressBar: true,
+    positionClass: "toast-top-right",
+    timeOut: "3000"
+};
 
-    let currentServiceData = {};
+/* ===============================
+   GLOBAL VARIABLES
+================================*/
+const bookingModal = document.getElementById('bookingModal');
+const bookingForm = document.getElementById('bookingForm');
+const petCountInput = document.getElementById('petCount');
+const petsContainer = document.getElementById('petsContainer');
 
-    // Open modal when plus button clicked
-    document.querySelectorAll('.open-booking-modal').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            currentServiceData = {
-                name: btn.dataset.serviceName,
-                price: btn.dataset.servicePrice,
-                image: btn.dataset.serviceImage,
-                desc: btn.dataset.serviceDesc
-            };
-            openModal();
-        });
-    });
+const step1 = document.getElementById('step1');
+const step2 = document.getElementById('step2');
 
-    function openModal() {
-        document.getElementById('serviceName').textContent = currentServiceData.name;
-        document.getElementById('servicePrice').textContent = '$' + currentServiceData.price;
-        document.getElementById('serviceDesc').textContent = currentServiceData.desc;
-        document.getElementById('serviceImage').src = currentServiceData.image;
+const bookingNextBtn = document.querySelector('.booking-next-btn');
+const bookingBackBtn = document.querySelector('.booking-back-btn');
+const bookingCancelBtn = document.querySelector('.booking-cancel-btn');
+const bookingConfirmBtn = document.querySelector('.booking-confirm-btn');
 
-        bookingModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        generatePetInputs(1);
-    }
+const modalCloseBtns = document.querySelectorAll('.modal-close-btn');
 
-    function closeModal() {
-        bookingModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-        resetForm();
-        showStep(1);
-    }
+let currentServiceData = {};
 
-    // Close modal handlers
-    modalCloseBtn.forEach(btn => {
-        btn.addEventListener('click', closeModal);
-    });
+/* ===============================
+   OPEN MODAL WITH DATA
+================================*/
+document.querySelectorAll('.open-booking-modal').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
 
-    bookingCancelBtn.addEventListener('click', closeModal);
-
-    // Close on overlay click
-    document.querySelector('.booking-modal-overlay').addEventListener('click', closeModal);
-
-    // Pet count handler
-    petCountInput.addEventListener('change', (e) => {
-        generatePetInputs(parseInt(e.target.value));
-    });
-
-    function generatePetInputs(count) {
-        petsContainer.innerHTML = '';
-        for (let i = 0; i < count; i++) {
-            const petEntry = document.createElement('div');
-            petEntry.className = 'pet-entry';
-            petEntry.innerHTML = `
-                        <div class="form-group">
-                            <label for="petType_${i}">Pet ${i + 1} Type</label>
-                            <select id="petType_${i}" name="petType[]" class="pet-type-select" required>
-                                <option value="">Select Type</option>
-                                <option value="dog">Dog</option>
-                                <option value="cat">Cat</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="petName_${i}">Pet ${i + 1} Name</label>
-                            <input type="text" id="petName_${i}" name="petName[]" placeholder="e.g., Max" required>
-                        </div>
-                    `;
-            petsContainer.appendChild(petEntry);
-        }
-    }
-
-    // Next button handler
-    bookingNextBtn.addEventListener('click', () => {
-        if (bookingForm.checkValidity()) {
-            populateSummary();
-            showStep(2);
-        } else {
-            bookingForm.reportValidity();
-        }
-    });
-
-    // Back button handler
-    bookingBackBtn.addEventListener('click', () => {
-        showStep(1);
-    });
-
-    function showStep(stepNumber) {
-        if (stepNumber === 1) {
-            step2.classList.remove('booking-step-active');
-            step2.classList.add('booking-step-prev');
-            step1.classList.remove('booking-step-prev');
-            step1.classList.add('booking-step-active');
-        } else {
-            step1.classList.remove('booking-step-active');
-            step1.classList.add('booking-step-prev');
-            step2.classList.remove('booking-step-prev');
-            step2.classList.add('booking-step-active');
-        }
-    }
-
-    function populateSummary() {
-        const date = document.getElementById('bookingDate').value;
-        const time = document.getElementById('bookingTime').value;
-        const petCount = parseInt(document.getElementById('petCount').value);
-
-        // Format date
-        const dateObj = new Date(date + 'T00:00:00');
-        const formattedDate = dateObj.toLocaleDateString('en-US', {
-            weekday: 'short',
-            month: 'short',
-            day: 'numeric'
-        });
-
-        document.getElementById('summaryService').textContent = currentServiceData.name;
-        document.getElementById('summaryPrice').textContent = '$' + currentServiceData.price;
-        document.getElementById('summaryDate').textContent = formattedDate;
-        document.getElementById('summaryTime').textContent = time;
-
-        // Build pet summary
-        const petTypeSelects = document.querySelectorAll('.pet-type-select');
-        const petNameInputs = document.querySelectorAll('input[name="petName[]"]');
-        const summaryPetsDiv = document.getElementById('summaryPets');
-        summaryPetsDiv.innerHTML = '';
-
-        for (let i = 0; i < petCount; i++) {
-            const petType = petTypeSelects[i].value;
-            const petName = petNameInputs[i].value;
-            const petSummary = document.createElement('div');
-            petSummary.className = 'summary-pet-item';
-            petSummary.textContent = `${petName} (${petType.charAt(0).toUpperCase() + petType.slice(1)})`;
-            summaryPetsDiv.appendChild(petSummary);
-        }
-    }
-
-    // Confirm booking handler
-    bookingConfirmBtn.addEventListener('click', () => {
-        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
-
-        if (!paymentMethod) {
-            alert('Please select a payment method');
+        // ❌ Not logged in → show login modal
+        if (!isLoggedIn) {
+            openLoginModal();
             return;
         }
 
-        // Collect form data
-        const bookingData = {
-            service: currentServiceData.name,
-            price: currentServiceData.price,
-            date: document.getElementById('bookingDate').value,
-            time: document.getElementById('bookingTime').value,
-            petCount: document.getElementById('petCount').value,
-            pets: [],
-            paymentMethod: paymentMethod.value
+        // ✅ Logged in → open booking modal
+        currentServiceData = {
+            id: btn.dataset.serviceId,
+            name: btn.dataset.serviceName,
+            price: btn.dataset.servicePrice,
+            timing: btn.dataset.serviceTiming,
+            image: btn.dataset.serviceImage,
+            location: btn.dataset.serviceLocation
         };
 
-        document.querySelectorAll('.pet-entry').forEach((entry, index) => {
-            const type = entry.querySelector('select').value;
-            const name = entry.querySelector('input').value;
-            bookingData.pets.push({
-                type,
-                name
-            });
-        });
+        openModal();
+    });
+});
 
-        console.log('Booking Data:', bookingData);
-        alert(`Booking confirmed! Payment method: ${paymentMethod.value.toUpperCase()}`);
-        closeModal();
+const loginModal = document.getElementById('loginModal');
+
+function openLoginModal() {
+    loginModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLoginModal() {
+    loginModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Close button
+document.querySelector('.login-close')
+    .addEventListener('click', closeLoginModal);
+
+// Overlay click
+loginModal.querySelector('.booking-modal-overlay')
+    .addEventListener('click', closeLoginModal);
+
+function openModal() {
+    document.getElementById('serviceName').textContent = currentServiceData.name;
+    document.getElementById('servicePrice').textContent =
+        '$' + currentServiceData.price + currentServiceData.timing;
+
+    document.getElementById('serviceDesc').textContent =
+        currentServiceData.location;
+
+    document.getElementById('serviceImage').src =
+        currentServiceData.image;
+
+    bookingModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    generatePetInputs(1);
+}
+
+/* ===============================
+   CLOSE MODAL
+================================*/
+function closeModal() {
+    bookingModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    resetForm();
+    showStep(1);
+}
+
+modalCloseBtns.forEach(btn => btn.addEventListener('click', closeModal));
+bookingCancelBtn.addEventListener('click', closeModal);
+
+document.querySelector('.booking-modal-overlay')
+    .addEventListener('click', closeModal);
+
+/* ===============================
+   PET INPUT GENERATOR
+================================*/
+petCountInput.addEventListener('change', (e) => {
+    generatePetInputs(parseInt(e.target.value));
+});
+
+function generatePetInputs(count) {
+    petsContainer.innerHTML = '';
+
+    for (let i = 0; i < count; i++) {
+        const petEntry = document.createElement('div');
+        petEntry.className = 'pet-entry';
+
+        petEntry.innerHTML = `
+            <div class="form-group">
+                <label>Pet ${i + 1} Type</label>
+                <select name="petType[]" class="pet-type-select" required>
+                    <option value="">Select Type</option>
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Pet ${i + 1} Name</label>
+                <input type="text" name="petName[]" required>
+            </div>
+        `;
+
+        petsContainer.appendChild(petEntry);
+    }
+}
+
+/* ===============================
+   STEP HANDLING
+================================*/
+bookingNextBtn.addEventListener('click', () => {
+    if (bookingForm.checkValidity()) {
+        populateSummary();
+        showStep(2);
+    } else {
+        bookingForm.reportValidity();
+    }
+});
+
+bookingBackBtn.addEventListener('click', () => {
+    showStep(1);
+});
+
+function showStep(step) {
+    if (step === 1) {
+        step2.classList.remove('booking-step-active');
+        step1.classList.add('booking-step-active');
+    } else {
+        step1.classList.remove('booking-step-active');
+        step2.classList.add('booking-step-active');
+    }
+}
+
+/* ===============================
+   SUMMARY
+================================*/
+function populateSummary() {
+    const date = document.getElementById('bookingDate').value;
+    const time = document.getElementById('bookingTime').value;
+
+    const formattedDate = new Date(date).toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric'
     });
 
-    function resetForm() {
-        bookingForm.reset();
-        document.getElementById('petCount').value = 1;
-        generatePetInputs(1);
-        document.querySelectorAll('input[name="paymentMethod"]')[0].checked = false;
+    document.getElementById('summaryService').textContent = currentServiceData.name;
+    document.getElementById('summaryPrice').textContent =
+        '$' + currentServiceData.price + currentServiceData.timing;
+
+    document.getElementById('summaryDate').textContent = formattedDate;
+    document.getElementById('summaryTime').textContent = time;
+
+    const summaryPets = document.getElementById('summaryPets');
+    summaryPets.innerHTML = '';
+
+    document.querySelectorAll('.pet-entry').forEach(entry => {
+        const type = entry.querySelector('select').value;
+        const name = entry.querySelector('input').value;
+
+        const div = document.createElement('div');
+        div.textContent = `${name} (${type})`;
+
+        summaryPets.appendChild(div);
+    });
+}
+
+/* ===============================
+   PAYMENT EXTRA FIELD SHOW
+================================*/
+document.querySelectorAll('.payment-radio').forEach(radio => {
+    radio.addEventListener('change', () => {
+        document.getElementById('paymentExtra').style.display = 'block';
+    });
+});
+
+/* ===============================
+   SUBMIT BOOKING (AJAX)
+================================*/
+bookingConfirmBtn.addEventListener('click', () => {
+
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+
+    if (!paymentMethod) {
+        toastr.error('Select payment method');
+        return;
     }
+
+    const accountNumber = document.getElementById('accountNumber').value;
+    const transactionId = document.getElementById('transactionId').value;
+
+    if (!accountNumber || !transactionId) {
+        toastr.error('Payment details required');
+        return;
+    }
+
+    const bookingData = {
+        service_id: currentServiceData.id,
+        date: document.getElementById('bookingDate').value,
+        time: document.getElementById('bookingTime').value,
+        pet_count: document.getElementById('petCount').value,
+        payment_method: paymentMethod.value,
+        account_number: accountNumber,
+        transaction_id: transactionId,
+        pets: []
+    };
+
+    document.querySelectorAll('.pet-entry').forEach(entry => {
+        bookingData.pets.push({
+            type: entry.querySelector('select').value,
+            name: entry.querySelector('input').value
+        });
+    });
+
+    fetch("{{ route('user.booking.store') }}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        },
+        body: JSON.stringify(bookingData)
+    })
+    .then(res => res.json())
+    .then(res => {
+        if (res.success) {
+            toastr.success(res.message);
+            closeModal();
+        } else {
+            toastr.error(res.message);
+        }
+    })
+    .catch(() => {
+        toastr.error('Server error');
+    });
+});
+
+/* ===============================
+   RESET FORM
+================================*/
+function resetForm() {
+    bookingForm.reset();
+    petCountInput.value = 1;
+    generatePetInputs(1);
+
+    document.getElementById('paymentExtra').style.display = 'none';
+
+    document.querySelectorAll('input[name="paymentMethod"]')
+        .forEach(r => r.checked = false);
+}
 </script>
