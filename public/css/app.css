@@ -731,7 +731,9 @@ h6 {
 .btn-outline:active {
     transform: translateY(0);
 }
-
+.mb-2 {
+    margin-bottom: 10px;
+}
 /* Animations */
 @keyframes fadeIn {
     from {

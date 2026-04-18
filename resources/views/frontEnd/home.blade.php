@@ -111,70 +111,51 @@
                     </div>
                 </div>
                 <div class="swiper-wrapper">
-                    <!-- Service 1 -->
-                    <div class="carousel-card swiper-slide glass-card ">
-                        <div class="card-image">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn3ZfnJkt-50wYcLntoQYrdWX68D_EbQa0bCMgWbqnnTGHwEz-YOWd6Jnbgg4Vq823BMmRxn5WmjqQdgOCI_xRhPwF8TudN99rKFbSa_bkKcE-ViNHOWhFrviO8pS0op12NBg4o9skDQ5gXJ-Qb5fqLXpMNxTpgSMuQQir6sXpiO4-oQU--cRhN0S2-vabKaCrtoakyBdu5QTBCfypS6Yh9MqM4hwsuMKfbZPJ0jw24ftSTpJpJsC6Cq8WIGa43SlFid7xlREJ4o7T"
-                                alt="Grooming">
-                        </div>
-                        <div class="p-2">
-                            <h3 class="card-title text-primary">Artisan Grooming</h3>
-                            <p class="card-desc">Full-service spa treatments designed for aesthetic excellence.</p>
-                            <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart service primary open-booking-modal" data-service-name="Artisan Grooming" data-service-price="45.00" data-service-image="https://lh3.googleusercontent.com/aida-public/AB6AXuAn3ZfnJkt-50wYcLntoQYrdWX68D_EbQa0bCMgWbqnnTGHwEz-YOWd6Jnbgg4Vq823BMmRxn5WmjqQdgOCI_xRhPwF8TudN99rKFbSa_bkKcE-ViNHOWhFrviO8pS0op12NBg4o9skDQ5gXJ-Qb5fqLXpMNxTpgSMuQQir6sXpiO4-oQU--cRhN0S2-vabKaCrtoakyBdu5QTBCfypS6Yh9MqM4hwsuMKfbZPJ0jw24ftSTpJpJsC6Cq8WIGa43SlFid7xlREJ4o7T" data-service-desc="Full-service spa treatments designed for aesthetic excellence."><span class="material-symbols-outlined"><i
-                                            class="fa-solid fa-plus"></i></span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Service 2 -->
-                    <div class="carousel-card swiper-slide glass-card ">
-                        <div class="card-image">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI8VKIF5Dv0mrUTcSY0uGvR78w854ZExEJjdfeH-nHeXwfVV4_74gccUbWFuTwAnatTChMqT9rRoF2LUtByCGyGhdTWSZuZjPwARvWovmo-loPN5sfMRZihhwjXEi6qLEMHcV6oLDhFx4TNJ78HoNeXDExnXC2RfEaR3DoWn8D9I4z8YIqzpV_U-73-HnxJ73SmjRmIXZnGAHxjzwVIWAlY38YdSu8hRUUATo7nSKRBns169e8AXA9N_598SiYRt99Q6Mmuzo6lMgm"
-                                alt="Daycare">
-                        </div>
-                        <div class="p-2">
-                            <h3 class="card-title text-primary">Artisan Grooming</h3>
-                            <p class="card-desc">Full-service spa treatments designed for aesthetic excellence.</p>
-                            <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart service primary open-booking-modal" data-service-name="Artisan Grooming" data-service-price="45.00" data-service-image="https://lh3.googleusercontent.com/aida-public/AB6AXuDI8VKIF5Dv0mrUTcSY0uGvR78w854ZExEJjdfeH-nHeXwfVV4_74gccUbWFuTwAnatTChMqT9rRoF2LUtByCGyGhdTWSZuZjPwARvWovmo-loPN5sfMRZihhwjXEi6qLEMHcV6oLDhFx4TNJ78HoNeXDExnXC2RfEaR3DoWn8D9I4z8YIqzpV_U-73-HnxJ73SmjRmIXZnGAHxjzwVIWAlY38YdSu8hRUUATo7nSKRBns169e8AXA9N_598SiYRt99Q6Mmuzo6lMgm" data-service-desc="Full-service spa treatments designed for aesthetic excellence."><span class="material-symbols-outlined"><i
-                                            class="fa-solid fa-plus"></i></span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Service 3 -->
-                    <div class="carousel-card swiper-slide glass-card ">
-                        <div class="card-image">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRHSMqtmp-tkEqR7puXMsj_NFlbFwkdS5-oxTJuT6ul_tJuoXtr8APQdfe-VT8llK478HoGUvwz_DPMZqFJe0psVUW0rq61SIegchF1l9tkAXv0SHK84gB5E7JVS5jKFLgHYys6z8tNE-ykGiWnnaTMNJPe8bp5oSeFlksGUf9cDzC45v9HTqWbLZx0UnQaIKeh8Vm9JzDJu_Mvsst1YZ310VhqPKIuy6tLR1cbX-AA0UP__mUglDYx23L_uxi572-X4qhjChv4w4X"
-                                alt="Wellness">
-                        </div>
-                        <div class="p-2">
-                            <h3 class="card-title text-primary">Artisan Grooming</h3>
-                            <p class="card-desc">Full-service spa treatments designed for aesthetic excellence.</p>
-                            <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart service primary open-booking-modal" data-service-name="Artisan Grooming" data-service-price="45.00" data-service-image="https://lh3.googleusercontent.com/aida-public/AB6AXuBRHSMqtmp-tkEqR7puXMsj_NFlbFwkdS5-oxTJuT6ul_tJuoXtr8APQdfe-VT8llK478HoGUvwz_DPMZqFJe0psVUW0rq61SIegchF1l9tkAXv0SHK84gB5E7JVS5jKFLgHYys6z8tNE-ykGiWnnaTMNJPe8bp5oSeFlksGUf9cDzC45v9HTqWbLZx0UnQaIKeh8Vm9JzDJu_Mvsst1YZ310VhqPKIuy6tLR1cbX-AA0UP__mUglDYx23L_uxi572-X4qhjChv4w4X" data-service-desc="Full-service spa treatments designed for aesthetic excellence."><span class="material-symbols-outlined"><i
-                                            class="fa-solid fa-plus"></i></span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Service 4 -->
-                    <div class="carousel-card swiper-slide glass-card">
-                        <div class="card-image">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn3ZfnJkt-50wYcLntoQYrdWX68D_EbQa0bCMgWbqnnTGHwEz-YOWd6Jnbgg4Vq823BMmRxn5WmjqQdgOCI_xRhPwF8TudN99rKFbSa_bkKcE-ViNHOWhFrviO8pS0op12NBg4o9skDQ5gXJ-Qb5fqLXpMNxTpgSMuQQir6sXpiO4-oQU--cRhN0S2-vabKaCrtoakyBdu5QTBCfypS6Yh9MqM4hwsuMKfbZPJ0jw24ftSTpJpJsC6Cq8WIGa43SlFid7xlREJ4o7T"
-                                alt="Training">
-                        </div>
-                        <div class="p-2">
-                            <h3 class="card-title text-primary">Artisan Grooming</h3>
-                            <p class="card-desc">Full-service spa treatments designed for aesthetic excellence.</p>
-                            <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart service primary open-booking-modal" data-service-name="Artisan Grooming" data-service-price="45.00" data-service-image="https://lh3.googleusercontent.com/aida-public/AB6AXuAn3ZfnJkt-50wYcLntoQYrdWX68D_EbQa0bCMgWbqnnTGHwEz-YOWd6Jnbgg4Vq823BMmRxn5WmjqQdgOCI_xRhPwF8TudN99rKFbSa_bkKcE-ViNHOWhFrviO8pS0op12NBg4o9skDQ5gXJ-Qb5fqLXpMNxTpgSMuQQir6sXpiO4-oQU--cRhN0S2-vabKaCrtoakyBdu5QTBCfypS6Yh9MqM4hwsuMKfbZPJ0jw24ftSTpJpJsC6Cq8WIGa43SlFid7xlREJ4o7T" data-service-desc="Full-service spa treatments designed for aesthetic excellence."><span class="material-symbols-outlined"><i
-                                            class="fa-solid fa-plus"></i></span></button>
-                            </div>
-                        </div>
-                    </div>
+                    @if($services->isNotEmpty())
+                        @foreach($services->take(5) as $service)
+                             <!-- Service Card -->
+                            {{-- <div class="carousel-card swiper-slide glass-card ">
+                                <div class="card-image bg-tinted">
+                                    <img src="{{ $service->image }}" alt="{{ $service->name }}">
+                                </div>
+                                <div class="p-2">
+                                    <div class="mb-2 d-flex gap-2 align-items-center">
+                                        <span class="badge ">{{ $service->company->company_name }}</span>
+                                        @foreach($service->species_list as $species)
+                                            <span class="badge ">{{ $species->species_name }}</span>
+                                        @endforeach
+                                    </div>
+                                    <h3 class="card-title text-primary">{{ $service->name }}</h3>
+                                    <p class="card-location">{{ $service->union->name ?? 'N/A' }} , {{ $service->district->name ?? 'N/A' }}</p>
+                                    <div class="product-actions">
+                                        @if($service->_price)
+                                            <p class="price text-secondary"><del>${{ number_format($service->base_price, 2) }}</del> ${{ number_format($service->offer_price, 2) }}/{{ $service->timing == 'Hourly' ? 'h' : 'd' }}</p>
+                                            @php
+                                                $discount = (($service->base_price - $service->offer_price) / $service->base_price) * 100;
+                                                $discountPercent = round($discount);
+                                            @endphp
+                                            <span class="badge badge-danger sale-per">{{ $discountPercent }}% Off</span>
+                                        @else
+                                            <p class="price text-secondary">${{ number_format($service->base_price, 2) }}/{{ $service->timing == 'Hourly' ? 'h' : 'day' }} </p>
+                                        @endif
+                                        <button 
+                                            class="add-to-cart service primary open-booking-modal"
+                                            data-service-name="{{ $service->service_name }}"
+                                            data-service-price="{{ $service->offer_price ?? $service->base_price }}"
+                                            data-service-timing="{{ $service->timing == 'Hourly' ? '/h' : '/d' }}"
+                                            data-service-image="{{ $service->cover_image }}"
+                                            data-service-location="{{ $service->union->name ?? 'N/A' }}, {{ $service->district->name ?? 'N/A' }}"
+                                            data-service-id="{{ $service->id }}"
+                                            >
+                                            <span class="material-symbols-outlined">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div> --}}
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
