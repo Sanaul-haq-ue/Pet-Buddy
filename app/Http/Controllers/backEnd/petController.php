@@ -42,6 +42,40 @@ class petController extends Controller
         ]);
     }
 
+
+    public function update(Request $request, $id)
+    {
+        $specie = Species::findOrFail($id);
+
+        $request->validate([
+            'species_name' => 'required|string|max:255',
+            'scientific_classification' => 'nullable|string|max:255',
+            'care_notes' => 'nullable|string',
+        ]);
+
+        $specie->update($request->all());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Species updated successfully!'
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $specie = Species::findOrFail($id);
+        $specie->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Species deleted successfully!'
+        ]);
+    }
+
+
+
+
+
     // //// Pet Management Breed Management Section
 
     public function saveBreed(Request $request)
@@ -63,13 +97,13 @@ class petController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = 'breed_'.uniqid().'.'.$file->getClientOriginalExtension();
+            $filename = 'breed_' . uniqid() . '.' . $file->getClientOriginalExtension();
             $destinationPath = public_path('backAssets/upload/breedImage');
             if (! file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true);
             }
             $file->move($destinationPath, $filename);
-            $breedData['image'] = 'backAssets/upload/breedImage/'.$filename;
+            $breedData['image'] = 'backAssets/upload/breedImage/' . $filename;
         }
 
         Breed::create($breedData);
@@ -103,13 +137,13 @@ class petController extends Controller
             }
 
             $file = $request->file('image');
-            $filename = 'breed_'.uniqid().'.'.$file->getClientOriginalExtension();
+            $filename = 'breed_' . uniqid() . '.' . $file->getClientOriginalExtension();
             $destinationPath = public_path('backAssets/upload/breedImage');
             if (! file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true);
             }
             $file->move($destinationPath, $filename);
-            $breedData['image'] = 'backAssets/upload/breedImage/'.$filename;
+            $breedData['image'] = 'backAssets/upload/breedImage/' . $filename;
         }
 
         $breed->update($breedData);

@@ -20,31 +20,6 @@
             </div>
             <!-- Modal Content Form -->
             <form id="speciesForm" class="modal-form">
-                <!-- Section 1: Identity -->
-                {{-- <div class="form-grid"> --}}
-                <!-- Image Upload -->
-                {{-- <div class="image-upload-section">
-                        <div class="upload-area">
-                            <span class="material-symbols-outlined upload-icon" data-icon="add_a_photo">add_a_photo</span>
-                            <p class="upload-text">Upload Icon or Photo</p>
-                            <img alt="Decorative background of animal paw print"
-                                class="upload-bg"
-                                data-alt="abstract minimalist graphic of a dog paw print on a clean off-white background with soft shadows"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrH6Ue9DieYjg7TGAgHheazfsCuSM2vR6fVG6344X-3lR5xm_QMzna67inMcleylOT__RwltxEBeix9zWRVBxHzvt0sh_2a4IQTNcqRseHPajSOaQFQom2hhLH5G3dD0MpQ1QbIWZEDb6lh-uG5G1CGI7f3gQJlbbugGkqUpWTkme88g_t7OonZuIOugAcvI8qZyY8xuyJT6kBDa_ED1F_tl5KJQB-b86T2YyY0V9AovTgEj7TAhKhJW1TM5OCgJGqYk4sfmwB8_cd" />
-                        </div>
-                        <div class="icon-list">
-                            <div class="icon-item">
-                                <span class="material-symbols-outlined icon-symbol" data-icon="dog">pets</span>
-                            </div>
-                            <div class="icon-item">
-                                <span class="material-symbols-outlined icon-symbol" data-icon="cat">pets</span>
-                            </div>
-                            <div class="icon-item">
-                                <span class="material-symbols-outlined icon-symbol" data-icon="bug_report">bug_report</span>
-                            </div>
-                        </div>
-                    </div> --}}
-                <!-- Inputs -->
                 <div class="input-section">
                     <div class="field-group">
                         <label class="field-label">Species Name</label>
@@ -56,7 +31,6 @@
                             placeholder="e.g. Canis lupus familiaris" type="text" />
                     </div>
                 </div>
-                {{-- </div> --}}
                 <!-- Section 2: Care Notes -->
                 <div class="care-notes-section">
                     <div class="care-notes-header">
@@ -76,7 +50,7 @@
                     </button>
                     <button class="btn-save-species" type="submit">
                         <span class="material-symbols-outlined" data-icon="save">save</span>
-                        Save Species
+                        Save
                     </button>
                 </div>
             </form>
@@ -85,6 +59,11 @@
             <div class="decorative-glow glow-secondary"></div>
         </div>
     </div>
+
+
+
+
+
 
 
 
@@ -193,14 +172,15 @@
                     </button>
                     <button type="submit"
                         class="btn btn-primary rounded-pill bg-primary text-white font-headline fw-bolder shadow hover-scale-102 active-scale-95">
-                        Save Breed
+                        <span class="material-symbols-outlined" data-icon="save">save</span>
+                        Save
                     </button>
                 </div>
             </form>
         </div>
         <!-- Decorative Floating Accent (The "Glow") -->
-        <div class="position-fixed top-0 end-0 bg-primary-10 rounded-circle w-50 h-50 z-n1"></div>
-        <div class="position-fixed bottom-0 start-0 bg-secondary-10 rounded-circle w-50 h-50 z-n1"></div>
+        <div class="decorative-glow glow-primary"></div>
+        <div class="decorative-glow glow-secondary"></div>
     </div>
 
 
@@ -354,19 +334,105 @@
         <!-- Species Section: Canine -->
         @foreach ($species as $specie)
             <section class="col-12">
-                <div class="glass-card rounded-xl p-4 mb-4 position-relative overflow-hidden group">
+
+                <!-- Edit Species Modal -->
+                <div class="editSpeciesForm modal fade" id="editSpeciesModal{{ $specie->id }}" tabindex="-1"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content rounded-4 shadow-lg border-0">
+
+                            <!-- Header -->
+                            <div class="modal-header border-0">
+                                <div>
+                                    <small class="text-muted">Update Entry</small>
+                                    <h5 class="mb-0 fw-bold">Edit Species</h5>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Form -->
+                            <form class="editSpeciesForm" action="{{ route('species.update', $specie->id) }}"
+                                method="POST">
+                                @csrf
+                                @method('PUT')
+
+                                <div class="modal-body">
+
+                                    <!-- Name -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Species Name</label>
+                                        <input type="text" name="species_name" class="form-control"
+                                            value="{{ $specie->species_name }}">
+                                    </div>
+
+                                    <!-- Scientific -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Scientific Classification</label>
+                                        <input type="text" name="scientific_classification" class="form-control"
+                                            value="{{ $specie->scientific_classification }}">
+                                    </div>
+
+                                    <!-- Care Notes -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Care Notes</label>
+                                        <textarea name="care_notes" class="form-control" rows="4">{{ $specie->care_notes }}</textarea>
+                                    </div>
+
+                                </div>
+
+                                <!-- Footer -->
+                                <div class="modal-footer border-0">
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <span class="material-symbols-outlined align-middle">save</span>
+                                        Update
+                                    </button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl p-4 mb-2 position-relative overflow-hidden group">
                     <div
                         class="position-absolute top-0 end-0 translate-middle-y translate-middle-x rounded-circle bg-primary-5">
                     </div>
-                    <div class="d-flex justify-content-between align-items-center mb-4 position-relative z-10">
+                    <div class="d-flex justify-content-between align-items-center mb-2 position-relative z-10">
                         <div class="d-flex align-items-center gap-3">
                             <div class="rounded-2xl bg-primary-10 d-flex align-items-center justify-content-center p-3">
                                 <span class="material-symbols-outlined text-primary text-3xl" data-icon="pets">pets</span>
                             </div>
-                            <div>
-                                <h3 class="font-headline fs-3 fw-bold">{{ $specie->species_name }}</h3>
-                                <p class="text-on-surface-variant text-sm">42 registered breeds</p>
+                            <div class="d-flex align-items-center justify-content-between w-100">
+
+                                <!-- Left: Title -->
+                                <h3 class="font-headline fs-3 fw-bold mb-0">
+                                    {{ $specie->species_name }}
+                                </h3>
+
+                                <!-- Right: Actions -->
+                                <div class="pl-4 d-flex align-items-center gap-2">
+
+                                    <!-- Edit -->
+                                    <button
+                                        class="btn btn-light btn-sm rounded-circle shadow-sm text-primary hover-scale-110"
+                                        data-bs-toggle="modal" data-bs-target="#editSpeciesModal{{ $specie->id }}"
+                                        title="Edit">
+                                        <span class="material-symbols-outlined fs-6">edit</span>
+                                    </button>
+
+                                    <!-- Delete -->
+                                    <button type="button"
+                                        class="btn btn-light btn-sm rounded-circle shadow-sm text-danger hover-scale-110 delete-species-btn"
+                                        data-id="{{ $specie->id }}" title="Delete">
+                                        <span class="material-symbols-outlined fs-6">delete</span>
+                                    </button>
+
+                                </div>
+
                             </div>
+
                         </div>
                         <button id="addBreeds" data-specie-id="{{ $specie->id }}"
                             class="btn rounded-pill border border-2 border-primary-20 text-primary fw-bold hover-bg-primary-5 d-flex align-items-center gap-2">
@@ -374,7 +440,7 @@
                             Add New Breed
                         </button>
                     </div>
-                    <div class="row g-3 row-cols-2 row-cols-md-5 relative z-10">
+                    <div class="row g-1 row-cols-2 row-cols-md-5 relative z-10">
                         <!-- Breed Card -->
                         @php $count = 0; @endphp
                         @foreach ($breeds as $breed)
@@ -382,8 +448,9 @@
                                 @php $count++; @endphp
                                 <div class="col bg-white-40 rounded-2xl p-3 cursor-pointer border border-transparent group-item breed-card {{ $count > 5 ? 'hidden' : '' }}"
                                     data-specie-id="{{ $specie->id }}">
-                                    <div class="ratio ratio-1x1 rounded-xl overflow-hidden mb-3 position-relative">
-                                        <img class="w-80 h-80 object-fit-cover group-hover/item:scale-110 transition-transform duration-500"
+                                    <div
+                                        class="ratio ratio-1x1 rounded-xl overflow-hidden mb-3 position-relative breed-img">
+                                        <img class="w-100 h-100 object-fit-cover group-hover/item:scale-110 transition-transform duration-500"
                                             alt="{{ $breed->breed_name }} image"
                                             data-alt="{{ $breed->breed_name }} breed image"
                                             src="{{ $breed->image ? asset($breed->image) : 'https://lh3.googleusercontent.com/aida-public/AB6AXuB_IkAcim22G1smrkzGfTl4wiP2em21kEY5402THTUNP42RbV2kcnzZk2TvAkj6Ua5sdP62akZ2zbd_6GkfKizf68pEbiEUUATjLM5YJ0M6MxK_reMap0a5TMfpDX5qYtOwfiWr0MaPH9veI7Oos5wqQeGZwhnKC7-Q9tgs84DoXxr66NaocAaOTQ4pQEC_54C-1XZlvBjYqQuAqI3oLsCdDIb2upe0HwItbGUy2Hxc0YBQaFrVkYB-bOyhRjOrTSVOHN5YQClQ15VL' }}" />
@@ -416,7 +483,7 @@
                     </div>
                     <button id="viewAllBreeds-{{ $specie->id }}" data-specie-id="{{ $specie->id }}"
                         data-species-name="{{ $specie->species_name }}" data-expanded="false"
-                        class="w-100 mt-4 py-2 text-primary fw-bold btn d-flex justify-content-center align-items-center gap-1">
+                        class="w-100 mt-2 py-2 text-primary fw-bold btn d-flex justify-content-center align-items-center gap-1">
                         <span>View all {{ $specie->species_name }} breeds</span>
                         <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
                     </button>
@@ -427,6 +494,31 @@
 
 
 
+    <div class="modal fade" id="deleteSpeciesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 shadow-lg">
+
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-danger">Delete Species</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">
+                        Are you sure you want to delete this species? This action cannot be undone.
+                    </p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+                        Yes, Delete
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 
@@ -507,6 +599,102 @@
                     }
                 });
             });
+
+            /////////// Update Species
+            $(document).on('submit', '.editSpeciesForm', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                var $form = $(this);
+                var $button = $form.find('button[type="submit"]');
+                var originalText = $button.html();
+                $button.prop('disabled', true).html('Updating...');
+                var actionUrl = $form.attr('action');
+
+                $.ajax({
+                    url: actionUrl,
+                    method: 'POST', // Laravel uses POST + PUT spoofing
+                    data: $form.serialize(),
+                    success: function(response) {
+                        if (response.success) {
+                            toastr.success(response.message || 'Updated successfully!');
+                            $form.closest('.modal').modal('hide');
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+
+                        } else {
+                            toastr.warning(response.message || 'Update failed!');
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr);
+                        var message = 'Something went wrong.';
+                        if (xhr.responseJSON && xhr.responseJSON.errors) {
+                            message = Object.values(xhr.responseJSON.errors).flat().join(
+                                '<br>');
+                        } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                            message = xhr.responseJSON.message;
+                        }
+                        toastr.error(message);
+                    },
+                    complete: function() {
+                        $button.prop('disabled', false).html(originalText);
+                    }
+                });
+            });
+
+            /////////// Delete Species
+            let deleteId = null;
+            // Open modal & store ID
+            $(document).on('click', '.delete-species-btn', function() {
+                deleteId = $(this).data('id');
+                $('#deleteSpeciesModal').modal('show');
+            });
+
+            // Confirm delete
+            $('#confirmDeleteBtn').on('click', function() {
+
+                $.ajax({
+                    url: `{{ url('admin/species') }}/${deleteId}`,
+                    type: 'POST', // 👈 IMPORTANT (not DELETE)
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        _method: 'DELETE' // 👈 THIS tells Laravel it's DELETE
+                    },
+
+                    success: function(response) {
+                        if (response.success) {
+                            toastr.success(response.message || 'Species deleted successfully!');
+                            $('#deleteSpeciesModal').modal('hide');
+                            $(`button.delete-species-btn[data-id="${deleteId}"]`).closest('section').fadeOut(300,
+                                function() {
+                                    $(this).remove();
+                                });
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+
+                        } else {
+                            toastr.warning(response.message || 'Delete failed!');
+                        }
+                    },
+
+                    error: function(xhr) {
+                        console.log(xhr.responseText); // 👈 ADD THIS FOR DEBUG
+                        let message = 'Something went wrong';
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            message = xhr.responseJSON.message;
+                        }
+
+                        toastr.error(message);
+                    }
+                });
+            });
+
+
+
+
 
 
 
@@ -793,7 +981,8 @@
                         method: 'DELETE',
                         success: function(response) {
                             if (response.success) {
-                                toastr.success(response.message || 'Breed deleted successfully!');
+                                toastr.success(response.message ||
+                                    'Breed deleted successfully!');
                                 $card.fadeOut(300, function() {
                                     $(this).remove();
                                 });
@@ -811,6 +1000,8 @@
                     });
                 }
             });
+
+
 
         });
     </script>

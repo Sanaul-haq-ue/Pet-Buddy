@@ -78,8 +78,7 @@ class UserController extends Controller
         }
 
         $user->save();
-
-        // ✅ Save Pets
+        
         if ($request->has('pets')) {
             foreach ($request->pets as $index => $petData) {
 

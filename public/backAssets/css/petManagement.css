@@ -309,6 +309,10 @@
   padding-top: 1rem;
 }
 
+.breed-img{
+  height: 182px;
+}
+
 @media (min-width: 640px) {
   .modal-actions {
     flex-direction: row;

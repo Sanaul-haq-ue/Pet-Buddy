@@ -81,7 +81,6 @@
 
 
 <!-- Add Customer Modal -->
-
     <div id="addNewUserModal"
         class="fixed inset-0 bg-stone-900/20 backdrop-blur-md z-[100] flex items-center justify-center p-4 hidden">
         <!-- Glassmorphic Modal Content -->
