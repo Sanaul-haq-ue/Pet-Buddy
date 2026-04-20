@@ -521,6 +521,35 @@
     </div>
 
 
+    <div class="modal fade" id="deleteBreedModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 shadow-lg">
+
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-danger">Delete Breed</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p class="mb-0">
+                        Are you sure you want to delete this breed? This action cannot be undone.
+                    </p>
+                </div>
+
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBreedBtn">
+                        Yes, Delete
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 
 
 
@@ -667,7 +696,8 @@
                         if (response.success) {
                             toastr.success(response.message || 'Species deleted successfully!');
                             $('#deleteSpeciesModal').modal('hide');
-                            $(`button.delete-species-btn[data-id="${deleteId}"]`).closest('section').fadeOut(300,
+                            $(`button.delete-species-btn[data-id="${deleteId}"]`).closest(
+                                'section').fadeOut(300,
                                 function() {
                                     $(this).remove();
                                 });
@@ -971,34 +1001,71 @@
 
 
             // Delete breed button
-            $(document).on('click', '.deleteBreedBtn', function() {
-                var breedId = $(this).data('breed-id');
-                var $card = $(this).closest('.breed-card');
+            // =======================
+            // DELETE BREED WITH MODAL
+            // =======================
 
-                if (confirm('Are you sure you want to delete this breed?')) {
-                    $.ajax({
-                        url: "{{ url('admin/deleteBreed') }}/" + breedId,
-                        method: 'DELETE',
-                        success: function(response) {
-                            if (response.success) {
-                                toastr.success(response.message ||
-                                    'Breed deleted successfully!');
-                                $card.fadeOut(300, function() {
+            // Store selected breed
+            let deleteBreedId = null;
+            let $breedCard = null;
+
+            // Open delete modal
+            $(document).on('click', '.deleteBreedBtn', function() {
+                deleteBreedId = $(this).data('breed-id');
+                $breedCard = $(this).closest('.breed-card');
+
+                $('#deleteBreedModal').modal('show');
+            });
+
+
+            // Confirm delete button click
+            $('#confirmDeleteBreedBtn').on('click', function() {
+
+                // Safety check (avoid accidental empty delete)
+                if (!deleteBreedId) {
+                    toastr.error('Invalid breed selected.');
+                    return;
+                }
+
+                $.ajax({
+                    url: "{{ url('admin/deleteBreed') }}/" + deleteBreedId,
+                    method: 'DELETE',
+
+                    success: function(response) {
+                        if (response.success) {
+                            toastr.success(response.message || 'Breed deleted successfully!');
+
+                            // Hide modal
+                            $('#deleteBreedModal').modal('hide');
+
+                            // Remove UI card smoothly
+                            if ($breedCard) {
+                                $breedCard.fadeOut(300, function() {
                                     $(this).remove();
                                 });
-                            } else {
-                                toastr.warning(response.message || 'Unable to delete breed.');
                             }
-                        },
-                        error: function(xhr) {
-                            var message = 'An error occurred while deleting the breed.';
-                            if (xhr.responseJSON && xhr.responseJSON.message) {
-                                message = xhr.responseJSON.message;
-                            }
-                            toastr.error(message);
+
+                            // Reset variables
+                            deleteBreedId = null;
+                            $breedCard = null;
+
+                        } else {
+                            toastr.warning(response.message || 'Unable to delete breed.');
                         }
-                    });
-                }
+                    },
+
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+
+                        let message = 'An error occurred while deleting the breed.';
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            message = xhr.responseJSON.message;
+                        }
+
+                        toastr.error(message);
+                    }
+                });
+
             });
 
 
