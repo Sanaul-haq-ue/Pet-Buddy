@@ -97,15 +97,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
     <!-- Flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
     <!-- Add in your layout head -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
- 
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('backAssets/css/petManagement.css') }}">
     <link rel="stylesheet" href="{{ asset('backAssets/css/company.css') }}">
     <link rel="stylesheet" href="{{ asset('backAssets/css/style.css') }}">
@@ -131,10 +128,27 @@
 
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+
+        @if (session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+    </script>
 
 
 

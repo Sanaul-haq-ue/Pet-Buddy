@@ -57,6 +57,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/customer', [UserController::class, 'customer'])->name('customer');
         Route::post('/saveCustomer', [UserController::class, 'saveCustomer'])->name('customer.store');
         Route::post('/updateCustomer', [UserController::class, 'updateCustomer'])->name('customer.update');
+        Route::delete('/deleteCustomer/{id}', [UserController::class, 'deleteCustomer'])->name('customer.delete');
+        Route::get('/get-breeds/{species_id}', [UserController::class, 'getBreeds']);
 
         Route::get('/petManagement', [petController::class, 'petManagement'])->name('petManagement');
         Route::post('/saveSpecies', [petController::class, 'saveSpecies'])->name('petManagement.saveSpecies');
