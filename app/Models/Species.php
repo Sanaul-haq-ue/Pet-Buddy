@@ -11,4 +11,10 @@ class Species extends Model
         'scientific_classification',
         'care_notes',
     ];
+
+
+    public function breeds()
+    {
+        return $this->hasMany(Breed::class);
+    }
 }

@@ -21,4 +21,5 @@ class Breed extends Model
     {
         return $this->belongsTo(Species::class);
     }
+
 }

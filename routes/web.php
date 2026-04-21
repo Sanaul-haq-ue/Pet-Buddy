@@ -57,13 +57,18 @@ Route::prefix('admin')->group(function () {
         Route::get('/customer', [UserController::class, 'customer'])->name('customer');
         Route::post('/saveCustomer', [UserController::class, 'saveCustomer'])->name('customer.store');
         Route::post('/updateCustomer', [UserController::class, 'updateCustomer'])->name('customer.update');
+        Route::delete('/deleteCustomer/{id}', [UserController::class, 'deleteCustomer'])->name('customer.delete');
+        Route::get('/get-breeds/{species_id}', [UserController::class, 'getBreeds']);
 
         Route::get('/petManagement', [petController::class, 'petManagement'])->name('petManagement');
         Route::post('/saveSpecies', [petController::class, 'saveSpecies'])->name('petManagement.saveSpecies');
+        Route::put('/species/{id}', [petController::class, 'update'])->name('species.update');
+        Route::delete('/species/{id}', [petController::class, 'destroy'])->name('species.destroy');
+
         Route::post('/saveBreed', [petController::class, 'saveBreed'])->name('petManagement.saveBreed');
         Route::patch('/updateBreed/{id}', [petController::class, 'updateBreed'])->name('petManagement.updateBreed');
         Route::delete('/deleteBreed/{id}', [petController::class, 'deleteBreed'])->name('petManagement.deleteBreed');
-        
+
         Route::get('/company', [ConpanyController::class, 'company'])->name('company');
         Route::post('/saveCompany', [ConpanyController::class, 'saveCompany'])->name('saveCompany');
         Route::post('/updateCompany', [ConpanyController::class, 'updateCompany'])->name('updateCompany');

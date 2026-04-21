@@ -231,7 +231,7 @@
         <div class="d-flex flex-column gap-1">
             <button onclick="toggleMenu('customerMenu')" class="nav-link-custom w-100 {{ request()->routeIs('customer') || request()->routeIs('petManagement') ? $activeClass : '' }}">
                 <span class="material-symbols-outlined">group</span>
-                <span class="sidebar-text">Customers / Pets</span>
+                <span class="sidebar-text">Pet Owners</span>
                 <span class="material-symbols-outlined ms-auto toggle-icon" style="font-size: 0.75rem;">expand_more</span>
             </button>
 
@@ -239,11 +239,11 @@
                 <div class="d-flex flex-column gap-1 mt-1">
                     <a href="{{ route('customer') }}" class="nav-link-custom py-2 {{ request()->routeIs('customer') ? $activeClass : '' }}">
                         <span class="material-symbols-outlined">person</span>
-                        <span class="sidebar-text">Customer Management</span>
+                        <span class="sidebar-text">Customer</span>
                     </a>
                     <a href="{{ route('petManagement') }}" class="nav-link-custom py-2 {{ request()->routeIs('petManagement') ? $activeClass : '' }}">
                         <span class="material-symbols-outlined">pets</span>
-                        <span class="sidebar-text">Pet Management</span>
+                        <span class="sidebar-text">Pet</span>
                     </a>
                 </div>
             </div>
