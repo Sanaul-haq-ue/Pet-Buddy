@@ -41,8 +41,6 @@ class UserController extends Controller
         ]);
 
         try {
-
-            // ✅ Save User
             $user = new User();
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
@@ -50,16 +48,14 @@ class UserController extends Controller
             $user->password = bcrypt('12345678');
             $user->mobile = $request->mobile;
             $user->location = $request->location;
+            $user->user_type = 2;
 
             // Profile Image
             if ($request->hasFile('profile_image')) {
                 $file = $request->file('profile_image');
-
                 $filename = 'user_' . uniqid() . '.' . $file->getClientOriginalExtension();
                 $destinationPath = public_path('backAssets/upload/userImage');
-
                 $file->move($destinationPath, $filename);
-
                 $user->profile_image = 'backAssets/upload/userImage/' . $filename;
             }
 
@@ -74,7 +70,7 @@ class UserController extends Controller
                     $pet->pet_age = $petData['pet_age'] ?? null;
                     $pet->species = $petData['species'] ?? null;
                     $pet->breed = $petData['breed'] ?? null;
-                    $pet->status = $petData['status'] ?? 'active';
+                    $pet->status = $petData['status'] ?? 1;
                     $pet->pet_description = $petData['pet_description'] ?? null;
 
                     // Pet Image

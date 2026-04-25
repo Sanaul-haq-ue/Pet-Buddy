@@ -130,6 +130,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+    <script id="c0n6a1">
+        $(document).ready(function() {
+            let $body = $('body');
+            let modeBtn = $('#mode');
+            let currentMode = localStorage.getItem('mode') || 'light';
+
+            // APPLY mode on load
+            if (currentMode === 'dark') {
+                $body.addClass('dark').removeClass('light');
+            } else {
+                $body.addClass('light').removeClass('dark');
+            }
+
+            modeBtn.on('click', function() {
+                if (currentMode === 'light') {
+                    $body.addClass('dark').removeClass('light');
+                    localStorage.setItem('mode', 'dark');
+                    currentMode = 'dark';
+                } else {
+                    $body.addClass('light').removeClass('dark');
+                    localStorage.setItem('mode', 'light');
+                    currentMode = 'light';
+                }
+            });
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>

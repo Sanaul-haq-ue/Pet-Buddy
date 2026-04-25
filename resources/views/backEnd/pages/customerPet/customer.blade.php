@@ -162,8 +162,8 @@
                                 <button type="button" class="changePetImageBtn">Upload Pet Photo</button>
                             </div>
                             <div class="pet-grid">
-                                <input type="text" name="pet_name" placeholder="Pet Name" class="pet_input">
-                                <input type="text" name="pet_age" placeholder="Age" class="pet_input">
+                                <input type="text" name="pet_name" placeholder="Pet Name" class="pet_name pet_input">
+                                <input type="text" name="pet_age" placeholder="Age" class="pet_age pet_input">
                                 <select name="species" class="pet_input species-select">
                                     <option value="">Select Species</option>
                                     @forelse ($species as $specie)
@@ -182,7 +182,7 @@
                                 <label><input type="radio" value="1" class="pet_status" checked> Active</label>
                                 <label><input type="radio" value="0" class="pet_status"> Inactive</label>
                             </div>
-                            <textarea name="pet_description" placeholder="Pet description..."></textarea>
+                            <textarea name="pet_description" class="pet_description"placeholder="Pet description..."></textarea>
                         </div>
                     </div>
                     <!-- ADD PET BUTTON -->
@@ -712,39 +712,43 @@
             });
         });
 
+        // formData.append('_token', '{{ csrf_token() }}');
+        // formData.append('first_name', $('input[name="first_name"]').val());
+        // formData.append('last_name', $('input[name="last_name"]').val());
+        // formData.append('email', $('input[name="email"]').val());
+        // formData.append('mobile', $('input[name="mobile"]').val());
+        // formData.append('location', $('input[name="location"]').val());
+        // formData.append('profile_image', $('#profileImageInput')[0].files[0]);
+
         // Save User
         $(document).on('click', '#submitParentBtn', function() {
+
             let $btn = $(this);
             let originalText = $btn.html();
             $btn.prop('disabled', true).html('Saving...');
 
-            let formData = new FormData();
-            formData.append('_token', '{{ csrf_token() }}');
-            formData.append('first_name', $('input[name="first_name"]').val());
-            formData.append('last_name', $('input[name="last_name"]').val());
-            formData.append('email', $('input[name="email"]').val());
-            formData.append('mobile', $('input[name="mobile"]').val());
-            formData.append('location', $('input[name="location"]').val());
-            formData.append('profile_image', $('#profileImageInput')[0].files[0]);
+            let form = document.getElementById('addParentForm');
+            let formData = new FormData(form);
+
 
             $('.pet-card').each(function(index) {
 
                 let $pet = $(this);
 
                 formData.append(`pets[${index}][pet_name]`,
-                    $pet.find('input[name="pet_name"]').val()
+                    $pet.find('.pet_name').val()
                 );
 
                 formData.append(`pets[${index}][pet_age]`,
-                    $pet.find('input[name="pet_age"]').val()
+                    $pet.find('.pet_age').val()
                 );
 
                 formData.append(`pets[${index}][species]`,
-                    $pet.find('select[name="species"]').val()
+                    $pet.find('.species-select').val()
                 );
 
                 formData.append(`pets[${index}][breed]`,
-                    $pet.find('select[name="breed"]').val()
+                    $pet.find('.breed-select').val()
                 );
 
                 formData.append(`pets[${index}][status]`,
@@ -752,7 +756,7 @@
                 );
 
                 formData.append(`pets[${index}][pet_description]`,
-                    $pet.find('textarea[name="pet_description"]').val()
+                    $pet.find('.pet_description').val()
                 );
 
                 let fileInput = $pet.find('.petImageInput')[0];
@@ -768,32 +772,45 @@
                 data: formData,
                 processData: false,
                 contentType: false,
+
                 success: function(response) {
+
                     toastr.success('Success! Parent and pets saved successfully.');
                     $('#addNewUserModal').addClass('hidden');
 
-                    // Reset Form
+                    // Reset form
                     $('#addParentForm')[0].reset();
                     $('#profileImagePreview').html('<span>📷</span>');
 
-                    // Reset pet cards to only 1
+                    // Reset pets
                     $('.pet-card:not(:first)').remove();
-                    let $firstPet = $('.pet-card').first();
-                    $firstPet.find('.petImagePreview').attr('src', 'https://via.placeholder.com/90');
-                    $firstPet.find('.breed-select').empty().append(
-                        '<option value="">Select Breed</option>');
-                    $firstPet.find('input[type="radio"]').prop('checked', false);
-                    $firstPet.find('input[value="1"]').prop('checked', true);
 
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1500);
+                    let $firstPet = $('.pet-card').first();
+
+                    $firstPet.find('.pet_name').val('');
+                    $firstPet.find('.pet_age').val('');
+                    $firstPet.find('.pet_description').val('');
+
+                    $firstPet.find('.breed-select')
+                        .empty()
+                        .append('<option value="">Select Breed</option>');
+
+                    $firstPet.find('.petImagePreview')
+                        .attr('src', 'https://via.placeholder.com/90');
+
+                    $firstPet.find('.pet_status').prop('checked', false);
+                    $firstPet.find('.pet_status[value="1"]').prop('checked', true);
+
+                    setTimeout(() => location.reload(), 1500);
                 },
+
                 error: function(xhr) {
+
                     console.log(xhr.responseText);
-                    let message = 'Something went wrong. Please try again.';
+
+                    let message = 'Something went wrong.';
+
                     if (xhr.status === 422) {
-                        // Validation errors
                         let errors = xhr.responseJSON?.errors;
                         if (errors) {
                             message = Object.values(errors).flat().join('<br>');
@@ -801,8 +818,10 @@
                     } else if (xhr.responseJSON?.message) {
                         message = xhr.responseJSON.message;
                     }
+
                     toastr.error(message);
                 },
+
                 complete: function() {
                     $btn.prop('disabled', false).html(originalText);
                 }

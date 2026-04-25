@@ -13,6 +13,324 @@
 }
 
 
+body.dark{
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  outline: 1.5px solid rgba(0, 0, 0, 0.15);
+}
+
+body.light{
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  outline: 1.5px solid rgba(177, 178, 175, 0.15);
+}
+
+
+
+/* Header & SideBar */
+
+.sidebar-container {
+  width: 256px;
+  transition: all 0.3s ease;
+  z-index: 50;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-shadow: 1px 0px 0 rgba(1, 1, 1, 0.1);
+}
+
+.sidebar-container.collapsed {
+  width: 80px;
+}
+
+.sidebar-container.collapsed .sidebar-text {
+  opacity: 0;
+  visibility: hidden;
+  display: none !important;
+}
+
+.sidebar-container.collapsed .nav-link-custom {
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.sidebar-container.collapsed .toggle-icon {
+  display: none !important;
+}
+
+.topbar-container {
+  left: 256px;
+  height: 64px;
+  z-index: 40;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.topbar-container.collapsed {
+  left: 80px;
+}
+
+.nav-link-custom {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  color: #57534e;
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-link-custom:hover {
+  color: #c2410c;
+  background-color: rgba(231, 229, 228, 0.4);
+}
+
+.nav-link-active {
+  background-color: rgba(254, 215, 170, 0.5) !important;
+  color: #9a3412 !important;
+  font-weight: bold !important;
+}
+
+.text-orange-800 {
+  color: #9a3412;
+}
+
+.text-stone-500 {
+  color: #78716c;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.font-headline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+
+.text-10px {
+  font-size: 10px;
+}
+
+.search-box {
+  /* background-color: #f4f4f0; */
+  border-radius: 9999px;
+  padding: 0.375rem 1rem;
+  width: 24rem;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  width: 100%;
+  font-size: 0.875rem;
+}
+
+.search-input::placeholder {
+  color: #b1b2af;
+}
+
+/* User Dropdown */
+.user-menu-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  width: 12rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 50;
+  padding: 0.5rem 0;
+}
+
+.user-menu-container:hover .user-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item-custom {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  color: #303330;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item-custom:hover {
+  background-color: rgba(148, 76, 0, 0.1);
+}
+
+.dropdown-item-danger {
+  color: #aa371c;
+}
+
+.dropdown-item-danger:hover {
+  background-color: rgba(170, 55, 28, 0.05);
+}
+
+.menu-btn-custom {
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: #303330;
+}
+
+.menu-btn-custom:hover {
+  background-color: rgba(231, 229, 228, 0.4);
+}
+
+/* Submenu collapse animation without Bootstrap JS dependency */
+.submenu-collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.submenu-collapse.show {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.sidebar-container.collapsed .submenu-collapse {
+  display: none !important;
+}
+
+.expandedMain {
+  margin-left: 80px !important;
+  width: calc(100% - 80px) !important;
+}
+
+.collapsedMain {
+  margin-left: 256px !important;
+  width: calc(100% - 256px) !important;
+}
+
+.mobile-toggle-btn {
+  display: none !important;
+}
+
+/* Mobile  */
+
+@media (max-width: 768px) {
+  .search-box {
+    display: none;
+  }
+
+  .mobile-search-box {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    padding: 0.5rem 1rem;
+    z-index: 50;
+    display: none;
+  }
+
+  .mobile-search-box.active {
+    display: block;
+  }
+
+  .expandedMain,
+  .collapsedMain {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  .user-menu-container {
+    gap: 0 !important;
+    padding-left: 0.75rem !important;
+  }
+
+  .user-menu-container img {
+    display: block !important;
+    flex-shrink: 0;
+  }
+
+  /* .hide-btn {
+            display: flex !important;
+            padding-left: 16px;
+        } */
+
+  #sidebar {
+    margin-top: 38px;
+    box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar-container {
+    position: fixed !important;
+    left: -100% !important;
+  }
+
+  #mainContent {
+    margin-left: 0 !important;
+  }
+
+  #topbar {
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 2 !important;
+    padding: 5px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-toggle-btn {
+    display: block !important;
+    padding-left: 20px;
+  }
+}
+
+
 
 
 
@@ -213,82 +531,76 @@ button {
   }
 }
 
-@media (max-width: 768px) {
-  .sidebar-container {
-    position: fixed !important;
-    left: -100% !important;
-  }
 
-  #mainContent{
-    margin-left: 0 !important;
-  }
-
-  #topbar{
-    left: 0 !important;
-    width: 100% !important;
-    z-index: 1000 !important;
-  }
-}
-
+@media (max-width: 768px) {}
 
 
 /* SUCCESS */
 .toast-success {
-    background-color: #51A351 !important;
-    color: #fff !important;
+  background-color: #51A351 !important;
+  color: #fff !important;
 }
 
 /* ERROR */
 .toast-error {
-    background-color: #BD362F !important;
-    color: #fff !important;
+  background-color: #BD362F !important;
+  color: #fff !important;
 }
 
 /* WARNING */
 .toast-warning {
-    background-color: #F89406 !important;
-    color: #fff !important;
+  background-color: #F89406 !important;
+  color: #fff !important;
 }
 
 /* INFO */
 .toast-info {
-    background-color: #2F96B4 !important;
-    color: #fff !important;
+  background-color: #2F96B4 !important;
+  color: #fff !important;
 }
 
 /* Title & Message */
 .toast-title {
-    color: #fff !important;
+  color: #fff !important;
 }
 
 .toast-message {
-    color: #fff !important;
+  color: #fff !important;
 }
 
 /* Close button */
 .toast-close-button {
-    color: #fff !important;
-    opacity: 1;
+  color: #fff !important;
+  opacity: 1;
 }
 
 /* Progress bar */
 .toast-progress {
-    background: rgba(255, 255, 255, 0.7) !important;
+  background: rgba(255, 255, 255, 0.7) !important;
 }
 
-div:where(.swal2-container) div:where(.swal2-popup){
+
+
+
+div:where(.swal2-container) div:where(.swal2-popup) {
   width: 20rem !important;
 }
-.div:where(.swal2-icon) , .swal2-container .swal2-icon{
+
+.div:where(.swal2-icon),
+.swal2-container .swal2-icon {
   width: 3em !important;
   height: 3em !important;
 }
-div:where(.swal2-icon) .swal2-icon-content{
+
+div:where(.swal2-icon) .swal2-icon-content {
   font-size: 2.75em !important;
 }
-div:where(.swal2-container) div:where(.swal2-html-container){
+
+div:where(.swal2-container) div:where(.swal2-html-container) {
   font-size: 15px !important;
 }
-div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) , div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel){
-  font-size: 13px !important; 
+
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm),
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel) {
+  font-size: 13px !important;
 }
