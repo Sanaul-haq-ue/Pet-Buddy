@@ -13,16 +13,13 @@
 }
 
 
-body.dark{
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(20px);
-  outline: 1.5px solid rgba(0, 0, 0, 0.15);
+
+body.dark {
+  background-color: #000;
 }
 
-body.light{
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  outline: 1.5px solid rgba(177, 178, 175, 0.15);
+body.light {
+  background-color: #fff;
 }
 
 
@@ -62,7 +59,7 @@ body.light{
   left: 256px;
   height: 64px;
   z-index: 40;
-  background-color: rgba(255, 255, 255, 0.7);
+  /* background-color: rgba(255, 255, 255, 0.7); */
   backdrop-filter: blur(12px);
   transition: all 0.3s ease;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -320,7 +317,7 @@ body.light{
     width: 100% !important;
     z-index: 2 !important;
     padding: 5px;
-    background: white;
+    /* background: white; */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 

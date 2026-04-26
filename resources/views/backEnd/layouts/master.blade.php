@@ -109,7 +109,7 @@
 
 </head>
 
-<body class="bg-surface font-body text-on-surface overflow-x-hidden">
+<body class="font-body text-on-surface overflow-x-hidden">
     <!-- SideNavBar -->
     @include('backEnd/include/header')
 
@@ -130,35 +130,59 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    
-    <script id="c0n6a1">
-        $(document).ready(function() {
-            let $body = $('body');
-            let modeBtn = $('#mode');
-            let currentMode = localStorage.getItem('mode') || 'light';
 
-            // APPLY mode on load
-            if (currentMode === 'dark') {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- <script>
+        let $body = $('body');
+        let modeBtn = $('#mode');
+        let currentMode = localStorage.getItem('mode') || 'light';
+
+        // apply on load
+        if (currentMode === 'dark') {
+            $body.addClass('dark').removeClass('light');
+        } else {
+            $body.addClass('light').removeClass('dark');
+        }
+
+        modeBtn.on('click', function() {
+            if (currentMode === 'light') {
                 $body.addClass('dark').removeClass('light');
+                localStorage.setItem('mode', 'dark');
+                currentMode = 'dark';
             } else {
                 $body.addClass('light').removeClass('dark');
+                localStorage.setItem('mode', 'light');
+                currentMode = 'light';
             }
+        });
+    </script> --}}
 
-            modeBtn.on('click', function() {
-                if (currentMode === 'light') {
-                    $body.addClass('dark').removeClass('light');
-                    localStorage.setItem('mode', 'dark');
-                    currentMode = 'dark';
-                } else {
-                    $body.addClass('light').removeClass('dark');
-                    localStorage.setItem('mode', 'light');
-                    currentMode = 'light';
-                }
-            });
+    <script>
+        let $body = $('body');
+        let currentMode = localStorage.getItem('mode') || 'light';
+
+        function applyMode(mode) {
+            if (mode === 'dark') {
+                document.body.style.setProperty('background-color', '#373b43', 'important');
+                document.body.style.setProperty('color', '#fff', 'important');
+            } else {
+                document.body.style.setProperty('background-color', '#fff', 'important');
+                document.body.style.setProperty('color', '#373b43', 'important');
+            }
+            localStorage.setItem('mode', mode);
+        }
+
+        // Apply on load
+        applyMode(currentMode);
+
+        // Toggle on click
+        $(document).on('click', '#mode', function() {
+            currentMode = (currentMode === 'light') ? 'dark' : 'light';
+            applyMode(currentMode);
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         @if (session('success'))
             toastr.success("{{ session('success') }}");
