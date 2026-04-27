@@ -84,5 +84,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/saveCategory', [ServiceMController::class, 'saveCategory'])->name('saveCategory');
         Route::post('/updateCategory', [ServiceMController::class, 'updateCategory'])->name('updateCategory');
         Route::get('/addService/store', [ServiceMController::class, 'addService'])->name('admin.services.store');
+        Route::post('/service/delete/{id}', [ServiceMController::class, 'destroy'])->name('service.destroy');
+        Route::post('/service/category/delete/{id}', [ServiceMController::class, 'Categorydestroy'])->name('serviceCategory.destroy');
     });
 });

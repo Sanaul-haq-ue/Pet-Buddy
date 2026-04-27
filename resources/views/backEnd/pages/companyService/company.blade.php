@@ -34,7 +34,7 @@
             <div class="col-12 col-md-12 d-flex flex-column gap-8">
                 <!-- Recent Appointments Table -->
                 <div class="glass-card rounded-lg overflow-hidden d-flex flex-column">
-                    <div class="d-flex justify-content-between align-items-center p-4 p-md-5 pb-3">
+                    <div class="d-flex justify-content-between align-items-center p-4 p-md-4 pb-3">
                         <h4 class="fs-5 font-headline fw-bold tracking-tight mb-0">Company List</h4>
                         <select name="status_filter" id="statusFilter"
                             class="form-select form-select-sm border-0 shadow-none bg-surface-container-low text-xs fw-bold text-primary rounded-full px-3 py-1 custom-focus-ring"
@@ -416,7 +416,7 @@
                             <label
                                 class="d-block text-xs font-headline fw-bold text-zinc-500 text-uppercase tracking-wider mb-2">Service</label>
                             <select name="services[]" multiple
-                                class="form-select bg-surface-container-low border-0 rounded-2xl px-4 py-3 text-sm font-body custom-focus-ring text-on-surface"
+                                class="form-select bg-surface-container-low border-0 rounded-2xl px-4 py-3 text-sm font-body custom-focus-ring text-on-surface select2"
                                 style="cursor: pointer; min-height: 120px;">
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -815,7 +815,7 @@
                                             Offered Services</h6>
                                         <div>
                                             <select name="services[]" multiple
-                                                class="form-select bg-surface-container-low border-0 rounded-xl px-3 py-2 text-sm font-body custom-focus-ring text-on-surface"
+                                                class="form-select bg-surface-container-low border-0 rounded-xl px-3 py-2 text-sm font-body custom-focus-ring text-on-surface select2"
                                                 style="cursor: pointer; min-height: 100px;">
                                                 @php
                                                     $serviceIds = json_decode($company->services, true) ?? [];
@@ -849,6 +849,25 @@
 
     <script>
         $(document).ready(function() {
+
+            $(document).ready(function () {
+
+                $('.modal').on('shown.bs.modal', function () {
+                    let modal = $(this);
+
+                    modal.find('.select2').each(function () {
+                        if (!$(this).hasClass('select2-hidden-accessible')) {
+                            $(this).select2({
+                                dropdownParent: modal,
+                                placeholder: "Select services",
+                                width: '100%'
+                            });
+                        }
+                    });
+                });
+
+            });
+
             // Trigger Logo input
             $('#uploadLogoWrapper').click(function() {
                 $('#companyLogo').click();

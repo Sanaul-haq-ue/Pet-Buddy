@@ -212,3 +212,64 @@ select:focus {
       transform: rotate(360deg);
     }
   }
+
+  /* SUCCESS */
+.toast-success {
+    background-color: #51A351 !important;
+    color: #fff !important;
+}
+
+/* ERROR */
+.toast-error {
+    background-color: #BD362F !important;
+    color: #fff !important;
+}
+
+/* WARNING */
+.toast-warning {
+    background-color: #F89406 !important;
+    color: #fff !important;
+}
+
+/* INFO */
+.toast-info {
+    background-color: #2F96B4 !important;
+    color: #fff !important;
+}
+
+/* Title & Message */
+.toast-title {
+    color: #fff !important;
+}
+
+.toast-message {
+    color: #fff !important;
+}
+
+/* Close button */
+.toast-close-button {
+    color: #fff !important;
+    opacity: 1;
+}
+
+/* Progress bar */
+.toast-progress {
+    background: rgba(255, 255, 255, 0.7) !important;
+}
+
+div:where(.swal2-container) div:where(.swal2-popup){
+  width: 20rem !important;
+}
+.div:where(.swal2-icon) , .swal2-container .swal2-icon{
+  width: 3em !important;
+  height: 3em !important;
+}
+div:where(.swal2-icon) .swal2-icon-content{
+  font-size: 2.75em !important;
+}
+div:where(.swal2-container) div:where(.swal2-html-container){
+  font-size: 15px !important;
+}
+div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) , div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel){
+  font-size: 13px !important; 
+}

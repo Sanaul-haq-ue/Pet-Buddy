@@ -72,7 +72,14 @@ class ServiceMController extends Controller
         ]);
     }
 
+    public function Categorydestroy(string $id)
+    {
+        $service = Category::findorfail($id);
+        $service->delete();
 
+        // Redirect back to the index with a success message
+        return back()->with('success', 'Service Category deleted successfully!');
+    }
 
 
 
@@ -604,5 +611,14 @@ class ServiceMController extends Controller
         return PetSize::where('breed_id', $breed_id)
             ->select('id', 'name')
             ->get();
+    }
+
+    public function destroy(string $id)
+    {
+        $service = Service::findorfail($id);
+        $service->delete();
+
+        // Redirect back to the index with a success message
+        return back()->with('success', 'Service deleted successfully!');
     }
 }

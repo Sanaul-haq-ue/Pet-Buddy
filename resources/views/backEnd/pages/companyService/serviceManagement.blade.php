@@ -60,8 +60,8 @@
                     <button type="submit"
                         class="bg-gradient-to-r from-primary to-primary-container px-10 py-4 rounded-full text-on-primary font-bold shadow-lg shadow-primary/30 hover:brightness-110 transition-all active:scale-95 flex items-center gap-2">
                         <span class="material-symbols-outlined" data-icon="add"
-                            style="font-variation-settings: 'FILL' 1;">add</span>
-                        Add Category
+                            style="font-variation-settings: 'FILL' 1;">Save</span>
+                       Save
                     </button>
                 </div>
             </form>
@@ -289,8 +289,8 @@
                             @else
                                 @foreach ($categories as $category)
                                     <tr class="hover:bg-surface-container-lowest/50 transition-colors group">
-                                        <td class="px-6 py-5 text-sm">{{ $category->name }}</td>
-                                        <td class="px-6 py-5">
+                                        <td class="px-6 py-2 text-sm">{{ $category->name }}</td>
+                                        <td class="px-6 py-2">
                                             @if ($category->status == 1)
                                                 <div class="flex items-center gap-1.5 text-secondary">
                                                     <span class="w-2 h-2 rounded-full bg-secondary"></span>
@@ -303,7 +303,7 @@
                                                 </div>
                                             @endif
                                         </td>
-                                        <td class="px-8 py-5 text-right">
+                                        <td class="px-8 py-2 text-right">
                                             <button type="button"
                                                 class="editCategoryBtn p-2 text-stone-400 hover:text-secondary transition-colors"
                                                 data-category-id="{{ $category->id }}"
@@ -311,8 +311,11 @@
                                                 data-category-status="{{ $category->status }}"><span
                                                     class="material-symbols-outlined">edit</span></button>
 
-                                            <button class=" p-2 text-stone-400 hover:text-error transition-colors"><span
+                                            <form action="{{ route('serviceCategory.destroy', $category->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                <button type="submit" class=" p-2 text-stone-400 hover:text-error transition-colors d delete-confirm"><span
                                                     class="material-symbols-outlined">delete</span></button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -374,9 +377,14 @@
                                    
                                     <div class="flex gap-2">
                                         <a class="px-4 py-2 h-full rounded-full border border-outline-variant/30 text-stone-600 text-sm font-semibold hover:bg-stone-50 transition-colors" href="{{ route('editService', $service->id) }}">Manage</a>
-                                        <button class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
-                                            <span class="material-symbols-outlined" data-icon="delete">delete</span>
-                                        </button>
+                                        
+                                        <form action="{{ route('service.destroy', $service->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            
+                                            <button type="submit" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors delete-confirm">
+                                                <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             
@@ -565,4 +573,27 @@
 
         });
     </script>
+
+    <script>
+        $(document).on('click', '.delete-confirm', function(e) {
+            e.preventDefault();
+
+            const form = $(this).closest('form');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This action cannot be undone.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+
 @endsection
