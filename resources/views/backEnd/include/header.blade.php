@@ -81,12 +81,12 @@
                     <a href="{{ route('company') }}"
                         class="nav-link-custom py-2 {{ request()->routeIs('company') ? $activeClass : '' }}">
                         <span class="material-symbols-outlined">apartment</span>
-                        <span class="sidebar-text">Company Management</span>
+                        <span class="sidebar-text">Company</span>
                     </a>
                     <a href="{{ route('serviceManagement') }}"
                         class="nav-link-custom py-2 {{ request()->routeIs('serviceManagement') ? $activeClass : '' }}">
                         <span class="material-symbols-outlined">handyman</span>
-                        <span class="sidebar-text">Service Management</span>
+                        <span class="sidebar-text">Service</span>
                     </a>
                 </div>
             </div>

@@ -1,27 +1,19 @@
 @extends('backEnd.layouts.master')
 
 @section('adminContent')
-    <link rel="stylesheet" href="{{ asset('backAssets/css/company.css') }}">
-
-
     <!-- Content Canvas -->
     <div class="company-canvas">
-        <div class="d-flex justify-content-between align-items-end pb-4 mb-3">
+        <div class="company-header d-flex justify-content-between align-items-end pb-4 mb-3">
             <div>
                 <h3 class="fs-1 fw-bold text-on-surface tracking-tighter mb-1">Company Profile</h3>
                 <p class="text-on-surface-variant font-body mb-0">Refine your brand identity, contact details, and
                     operational flow at Radiant Habitat.</p>
             </div>
             <div class="d-flex gap-3">
-                <!-- <button
-                                class="btn bg-secondary-container text-on-secondary-container rounded-full fw-bold text-sm d-flex align-items-center gap-2 border hover-bg-secondary-fixed transition custom-active-scale px-4 py-2">
-                                <span class="material-symbols-outlined fs-5">filter_list</span>
-                                Advanced Filters
-                            </button> -->
                 <button
                     class="btn bg-primary text-on-primary rounded-full fw-bold text-sm d-flex align-items-center gap-2 hover-bg-primary-dim transition custom-active-scale border-0 shadow-sm px-4 py-2"
                     data-bs-toggle="modal" data-bs-target="#addCompanyModal">
-                    <span class="material-symbols-outlined fs-5">person_add</span>
+                    <span class="material-symbols-outlined fs-5">Business</span>
                     Add New Company
                 </button>
             </div>
@@ -30,9 +22,9 @@
         <!-- Settings Bento Grid -->
         <div class="row g-4 align-items-start mt-2">
 
-            <!-- Left Column: Recent Appointments & Sidebar widgets -->
+            <!-- Company List -->
             <div class="col-12 col-md-12 d-flex flex-column gap-8">
-                <!-- Recent Appointments Table -->
+                <!-- Company Search -->
                 <div class="glass-card rounded-lg overflow-hidden d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center p-4 p-md-5 pb-3">
                         <h4 class="fs-5 font-headline fw-bold tracking-tight mb-0">Company List</h4>
@@ -51,7 +43,7 @@
                             style="max-height: 50px; overflow-y: auto;">
                             <thead
                                 class="bg-surface-container-low text-on-surface-variant font-label text-10px tracking-widest text-uppercase">
-                                <tr>
+                                <tr id="table-header">
                                     <th class="py-3 px-4 px-lg-5">Company</th>
                                     <th class="py-3 px-4 px-lg-5">Email</th>
                                     <th class="py-3 px-3 px-lg-4">Number</th>
@@ -467,8 +459,9 @@
         </div>
     </div>
 
-    <!-- View Company Modals -->
+    
     @foreach ($companies as $company)
+        <!-- View Company Modals -->
         <div class="modal fade" id="viewCompanyModal{{ $company->id }}" tabindex="-1"
             aria-labelledby="viewCompanyModalLabel{{ $company->id }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -847,7 +840,7 @@
         </div>
     @endforeach
 
-
+    <!-- Delete Company Modal -->
     <div class="modal fade" id="deleteCompanyModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 rounded-4 shadow-lg">

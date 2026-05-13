@@ -104,7 +104,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('backAssets/css/petManagement.css') }}">
+    <link rel="stylesheet" href="{{ asset('backAssets/css/customer.css') }}">
     <link rel="stylesheet" href="{{ asset('backAssets/css/company.css') }}">
+    <link rel="stylesheet" href="{{ asset('backAssets/css/serviceManagement.css') }}">
     <link rel="stylesheet" href="{{ asset('backAssets/css/style.css') }}">
 
 </head>

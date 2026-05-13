@@ -1,7 +1,6 @@
 @extends('backEnd.layouts.master')
 
 @section('adminContent')
-    <link rel="stylesheet" href="{{ asset('backAssets/css/customer.css') }}">
 
     <!-- Edit Customer Modal -->
     <div id="editUserModal" class="modal-overlay hidden">
@@ -203,17 +202,17 @@
     <!-- Page Content -->
     <div class="space-y-10">
         <!-- Page Header -->
-        <div class="flex justify-between items-end">
+        <div class="customer-header flex justify-between items-end">
             <div>
                 <h3 class="text-4xl font-extrabold text-on-surface tracking-tighter">Customer CRM</h3>
                 <p class="text-on-surface-variant font-body mt-2">Managing 1,284 pet parent relationships</p>
             </div>
             <div class="flex gap-3">
-                <button
+                {{-- <button
                     class="px-6 py-2.5 bg-secondary-container text-on-secondary-container rounded-full font-bold text-sm flex items-center gap-2 border border-secondary/10 hover:bg-secondary-fixed-dim transition-all">
                     <span class="material-symbols-outlined text-lg">filter_list</span>
                     Advanced Filters
-                </button>
+                </button> --}}
                 {{-- <button
                     class="addBtn px-6 py-2.5 bg-primary text-on-primary rounded-full font-bold text-sm flex items-center gap-2 hover:bg-primary-dim transition-all shadow-md">
                     <span class="material-symbols-outlined text-lg">person_add</span>
@@ -258,7 +257,10 @@
             </div>
         </div>
         <!-- Main CRM Area: Two-Column Layout -->
-        <div x-data="crmApp()" class="row g-4 align-items-start">
+        <div x-data="{
+            ...crmApp(),
+            showSummary: false
+        }" class="row g-4 align-items-start">
 
             <!-- LEFT COLUMN -->
             <div class="col-12 col-lg-7">
@@ -292,7 +294,7 @@
                             ];
                         @endphp --}}
                         <div x-show="checkUser({{ $user->status }}, {{ $user->user_type }})"
-                            @click='selectUser(@json($user))'
+                            @click='selectUser(@json($user)); showSummary = true'
                             :class="selectedUser && selectedUser.id === {{ $user->id }} ? 'user-card active' : 'user-card'"
                             class="p-3 mb-3 bg-white">
                             <!-- TOP -->
@@ -380,7 +382,8 @@
             </div>
 
             <div class="col-12 col-lg-5 position-sticky" style="top:90px;">
-                <div class="summary-card bg-white p-4">
+                <!-- Desktop -->
+                <div class="d-none d-lg-block summary-card bg-white p-4">
 
                     <!-- HEADER -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -463,12 +466,110 @@
                     </div>
 
                 </div>
+                <!-- MOBILE OVERLAY -->
+                <div x-show="showSummary" x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+                    x-transition:leave="transition ease-in duration-200" x-transition:leave-start="translate-x-0"
+                    x-transition:leave-end="translate-x-full" class="mobile-summary-overlay d-lg-none">
+
+                    <div class="mobile-summary-content">
+
+                        <!-- SIDE DRAWER HANDLE -->
+                        <div class="summary-side-handle" @click="showSummary = false">
+                            <span class="material-symbols-outlined">
+                                arrow_forward_ios
+                            </span>
+                        </div>
+
+                        <!-- YOUR OLD CONTENT -->
+                        <div class="summary-card bg-white p-4">
+
+                            <!-- HEADER -->
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <h5 class="fw-bold mb-0">Parent Summary</h5>
+
+                                    <button class="btn btn-link fw-bold p-0"
+                                        x-text="selectedUser 
+                        ? selectedUser.first_name + ' ' + selectedUser.last_name 
+                        : 'Profile Name'">
+                                    </button>
+                                </div>
+
+                                <img :src="selectedUser?.profile_image ?
+                                    '{{ url('/') }}/' + selectedUser.profile_image :
+                                    '{{ asset('backAssets/upload/userImage/default-avatar.png') }}'"
+                                    style="width:60px; height:60px; border-radius:50%; object-fit:cover;">
+                            </div>
+
+                            <small class="text-uppercase text-muted fw-bold d-block mb-2"
+                                x-text="selectedUser?.location || 'Location'">
+                            </small>
+
+                            <div class="d-flex gap-3 mb-3">
+                                <small class="text-muted">
+                                    ✉ <span x-text="selectedUser?.email || 'Email'"></span>
+                                </small>
+
+                                <small class="text-muted">
+                                    📞 <span x-text="selectedUser?.mobile || 'Phone'"></span>
+                                </small>
+                            </div>
+
+                            <!-- PETS -->
+                            <div class="d-flex flex-column gap-3">
+
+                                <template x-if="selectedUser && selectedUser.pets?.length">
+                                    <template x-for="pet in selectedUser.pets" :key="pet.id">
+
+                                        <div class="pet-box d-flex align-items-center gap-3">
+
+                                            <img class="pet-img"
+                                                :src="pet.pet_image ?
+                                                    '{{ url('/') }}/' + pet.pet_image :
+                                                    'https://via.placeholder.com/50'">
+
+                                            <div class="flex-grow-1">
+
+                                                <div class="d-flex justify-content-between">
+                                                    <strong x-text="pet.pet_name"></strong>
+
+                                                    <span class="badge-status"
+                                                        :class="pet.status == 1 ? 'badge-stable' : 'badge-follow'"
+                                                        x-text="pet.status == 1 ? 'ACTIVE' : 'INACTIVE'">
+                                                    </span>
+                                                </div>
+
+                                                <small class="text-muted d-block">
+                                                    <span x-text="pet.species?.species_name || 'Species'"></span> /
+                                                    <span x-text="pet.breed?.breed_name || 'Breed'"></span>
+                                                </small>
+
+                                                <span class="badge-status badge-stable">STABLE</span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </template>
+                                </template>
+
+                                <div x-show="!selectedUser || !selectedUser.pets?.length" class="text-muted text-center">
+                                    No pets available
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 
-
+    <!-- Delete Customer Modal -->
     <div class="modal fade" id="deleteCustomerModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 rounded-4 shadow-lg">
@@ -538,8 +639,6 @@
     <script id="speciesData" type="application/json">
     @json($species)
 </script>
-
-
 
 
 

@@ -1,0 +1,25 @@
+    /* Category List */
+    #addCategoryBtn {
+        background-color: rgb(148 76 0);
+        padding: 12px;
+        color: white;
+        border-radius: 14px;
+    }
+
+
+    @media (max-width: 768px) {
+
+        /* Category Population */
+        .ca-po {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+
+        /* Service Header */
+        .service-header{
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 22px;
+        }
+    }

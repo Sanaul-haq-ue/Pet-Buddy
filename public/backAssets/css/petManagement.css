@@ -1,388 +1,44 @@
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
+/* =====================================================
+   Pet Management — Main Stylesheet
+   Sections:
+     1.  Global Utilities
+     2.  Typography Utilities
+     3.  Color Utilities (Text & Background)
+     4.  Border & Shadow Utilities
+     5.  Glass & Backdrop Utilities
+     6.  Transform & Interaction Utilities
+     7.  Spacing & Display Utilities
+     8.  Custom Scrollbar
+     9.  Layout
+     10. Cards (Breed Card)
+     11. Modals
+     12. Forms & Upload
+     13. Buttons
+     14. Media Queries
+===================================================== */
+
+
+/* =====================================================
+   1. Global Utilities
+===================================================== */
+
+.hidden {
+  display: none !important;
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
+.z-60 {
+  z-index: 60 !important;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(148, 76, 0, 0.1);
-  border-radius: 99px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 76, 0, 0.2);
+.z-10 {
+  z-index: 10 !important;
 }
 
 
+/* =====================================================
+   2. Typography Utilities
+===================================================== */
 
-
-
-
-/* Add New Species Modal Styles */
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(8px);
-}
-
-.modal-overlay.hidden {
-  display: none;
-}
-
-.modal-card {
-  width: 30%;
-  max-width: 32rem;
-  border-radius: 1rem;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.89);
-  backdrop-filter: blur(24px);
-  box-shadow: 0 40px 80px rgba(148, 76, 0, 0.12);
-  border: 1px solid rgba(148, 76, 0, 0.08);
-  position: relative;
-}
-
-.modal-header {
-  padding: 2rem 2rem 1rem;
-}
-
-.modal-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.modal-label {
-  display: block;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: #b55700;
-  margin-bottom: 0.5rem;
-}
-
-.modal-title {
-  font-size: 1.875rem;
-  font-weight: 700;
-  color: #111827;
-  line-height: 1.1;
-}
-
-.modal-close-btn {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 9999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.modal-close-btn:hover {
-  background-color: rgba(255, 255, 255, 0.95);
-}
-
-.modal-close-btn .icon {
-  font-size: 1.125rem;
-  color: #6b7280;
-}
-
-.modal-form {
-  padding: 0 2rem 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-
-@media (min-width: 768px) {
-  .form-grid {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-  }
-
-  .image-upload-section {
-    grid-column: span 4;
-  }
-
-  .input-section {
-    grid-column: span 8;
-  }
-}
-
-.image-upload-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.upload-area {
-  width: 10rem;
-  height: 10rem;
-  border-radius: 1rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 2px dashed rgba(148, 76, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-  padding: 1rem;
-  transition: border-color 0.2s ease;
-}
-
-.upload-area:hover {
-  border-color: rgba(181, 87, 0, 0.4);
-}
-
-.upload-icon {
-  font-size: 2.5rem;
-  color: rgba(148, 76, 0, 0.4);
-  margin-bottom: 0.5rem;
-  transition: transform 0.2s ease;
-}
-
-.upload-area:hover .upload-icon {
-  transform: scale(1.1);
-}
-
-.upload-text {
-  font-size: 0.625rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-weight: 700;
-  color: #6b7280;
-}
-
-.upload-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.1;
-  transition: opacity 0.2s ease;
-}
-
-.upload-area:hover .upload-bg {
-  opacity: 0.2;
-}
-
-.icon-list {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.icon-item {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 9999px;
-  background-color: rgba(255, 255, 255, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #6b7280;
-}
-
-.icon-symbol {
-  font-size: 1rem;
-}
-
-.input-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.field-group {
-  position: relative;
-}
-
-.field-label {
-  display: block;
-  font-size: 0.625rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: #b55700;
-  margin-bottom: 0.25rem;
-}
-
-.input-field {
-  width: 100%;
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid rgba(148, 76, 0, 0.2);
-  padding: 0.5rem 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #111827;
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.input-field:focus {
-  border-bottom-color: #f59e0b;
-}
-
-.input-field::placeholder {
-  color: rgba(148, 76, 0, 0.5);
-}
-
-.care-notes-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.care-notes-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.care-notes-icon {
-  font-size: 1.25rem;
-  color: #f59e0b;
-}
-
-.care-notes-title {
-  font-weight: 700;
-  color: #111827;
-}
-
-.textarea-wrapper {
-  position: relative;
-}
-
-.textarea-field {
-  width: 100%;
-  min-height: 9rem;
-  border-radius: 0.75rem;
-  background-color: rgba(255, 255, 255, 0.9);
-  border: none;
-  padding: 1rem;
-  color: #111827;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  resize: none;
-  transition: box-shadow 0.2s ease;
-  box-shadow: inset 0 0 0 1px rgba(148, 76, 0, 0.08);
-}
-
-.textarea-field:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.18);
-}
-
-.textarea-field::placeholder {
-  color: rgba(107, 114, 128, 0.45);
-}
-
-.modal-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 1rem;
-  padding-top: 1rem;
-}
-
-.breed-img{
-  height: 182px;
-}
-
-@media (min-width: 640px) {
-  .modal-actions {
-    flex-direction: row;
-  }
-}
-
-.btn-cancel {
-  padding: 0.75rem 2rem;
-  border-radius: 9999px;
-  background-color: transparent;
-  border: 1px solid transparent;
-  color: #4b5563;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btn-cancel:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-.btn-save-species {
-  padding: 1rem 2.5rem;
-  border-radius: 9999px;
-  background: linear-gradient(135deg, #944c00 0%, #ffaf72 100%);
-  color: #ffffff;
-  font-weight: 800;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  box-shadow: 0 12px 24px rgba(148, 76, 0, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-save-species:hover {
-  transform: scale(1.02);
-}
-
-.btn-save-species:active {
-  transform: scale(0.95);
-}
-
-.decorative-glow {
-  position: absolute;
-  border-radius: 9999px;
-  pointer-events: none;
-}
-
-.glow-primary {
-  bottom: -6rem;
-  right: -6rem;
-  width: 16rem;
-  height: 16rem;
-  background-color: rgba(148, 76, 0, 0.1);
-  filter: blur(80px);
-}
-
-.glow-secondary {
-  top: -6rem;
-  left: -6rem;
-  width: 12rem;
-  height: 12rem;
-  background-color: rgba(245, 158, 11, 0.1);
-  filter: blur(60px);
-}
-
-/* --- Custom Utilities Translated from Tailwind --- */
 .font-headline {
   font-family: 'Inter', sans-serif;
 }
@@ -390,6 +46,23 @@
 .font-label {
   font-family: 'Inter', sans-serif;
 }
+
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+
+
+/* =====================================================
+   3. Color Utilities — Text
+===================================================== */
 
 .text-primary {
   color: #944c00 !important;
@@ -422,6 +95,11 @@
 .text-outline-variant {
   color: #d1d5db !important;
 }
+
+
+/* =====================================================
+   3. Color Utilities — Background
+===================================================== */
 
 .bg-primary {
   background-color: #944c00 !important;
@@ -479,6 +157,7 @@
   background-color: rgba(28, 25, 23, 0.1) !important;
 }
 
+/* Hover Background Utilities */
 .hover-bg-orange-50:hover {
   background-color: #fff7ed !important;
 }
@@ -491,6 +170,12 @@
   background-color: #7a3e00 !important;
 }
 
+
+/* =====================================================
+   4. Border & Shadow Utilities
+===================================================== */
+
+/* Border Color Utilities */
 .border-outline-variant-30 {
   border-color: rgba(209, 213, 219, 0.3) !important;
 }
@@ -515,6 +200,16 @@
   border-color: rgba(148, 76, 0, 0.1) !important;
 }
 
+/* Border Radius Utilities */
+.rounded-xl {
+  border-radius: 0.75rem !important;
+}
+
+.rounded-2xl {
+  border-radius: 1rem !important;
+}
+
+/* Shadow Utilities */
 .shadow-custom-1 {
   box-shadow: 0 20px 40px rgba(148, 76, 0, 0.06) !important;
 }
@@ -522,6 +217,11 @@
 .shadow-custom-2 {
   box-shadow: 0 20px 40px rgba(148, 76, 0, 0.12) !important;
 }
+
+
+/* =====================================================
+   5. Glass & Backdrop Utilities
+===================================================== */
 
 .glass-panel {
   background: rgba(255, 255, 255, 0.9);
@@ -542,25 +242,10 @@
   backdrop-filter: blur(12px);
 }
 
-.breed-card {
-  transition: all 0.3s ease;
-}
 
-.breed-card:hover {
-  background-color: #ffffff !important;
-  box-shadow: 0 10px 15px -3px rgba(148, 76, 0, 0.05);
-  border-color: rgba(148, 76, 0, 0.1) !important;
-}
-
-.breed-action-overlay {
-  background: rgba(255, 255, 255, 0.4);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.group-item:hover .breed-action-overlay {
-  opacity: 1;
-}
+/* =====================================================
+   6. Transform & Interaction Utilities
+===================================================== */
 
 .hover-scale-110:hover {
   transform: scale(1.1);
@@ -574,31 +259,34 @@
   transform: scale(0.95);
 }
 
-.tracking-tight {
-  letter-spacing: -0.025em;
+
+/* =====================================================
+   7. Custom Scrollbar
+===================================================== */
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
 }
 
-.tracking-wider {
-  letter-spacing: 0.05em;
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.tracking-widest {
-  letter-spacing: 0.1em;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 76, 0, 0.1);
+  border-radius: 99px;
 }
 
-.rounded-xl {
-  border-radius: 0.75rem !important;
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 76, 0, 0.2);
 }
 
-.rounded-2xl {
-  border-radius: 1rem !important;
-}
 
-.hidden {
-  display: none !important;
-}
+/* =====================================================
+   8. Layout
+===================================================== */
 
-/* Modal Positioning Overlay */
+/* Full-screen overlay for positioning modals */
 .modal-overlay-custom {
   position: fixed;
   top: 0;
@@ -611,10 +299,519 @@
   justify-content: center;
 }
 
-.z-60 {
-  z-index: 60 !important;
+
+/* =====================================================
+   9. Cards — Breed Card
+===================================================== */
+.breed-glass {
+  width: 32%;
 }
 
-.z-10 {
-  z-index: 10 !important;
+/* Breed image inside cards */
+.breed-img {
+  height: 182px;
+}
+
+/* Breed card base + hover */
+.breed-card {
+  transition: all 0.3s ease;
+}
+
+.breed-card:hover {
+  background-color: #ffffff !important;
+  box-shadow: 0 10px 15px -3px rgba(148, 76, 0, 0.05);
+  border-color: rgba(148, 76, 0, 0.1) !important;
+}
+
+/* Breed action overlay (visible on group hover) */
+.breed-action-overlay {
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.group-item:hover .breed-action-overlay {
+  opacity: 1;
+}
+
+
+.mobileEditBreed {
+  width: 33%;
+  /* height: 80vh; */
+  border-radius: 25px !important
+}
+
+
+.edit-breed-header {
+  padding: 9px 17px !important;
+}
+
+.edit-breed-header h2 {
+  font-size: 1rem !important;
+}
+
+#closeEditBreedM {
+  padding: 5px 3px 0 4px !important;
+}
+
+#editBreedDescription {
+  border: 1px solid #00000024 !important;
+}
+
+.border-top {
+  padding: 13px 30px 13px 30px;
+}
+
+
+
+
+/* =====================================================
+   10. Modals
+===================================================== */
+
+/* --- Modal Overlay (Backdrop) --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+/* --- Modal Card (Container) --- */
+.modal-card {
+  width: 30%;
+  max-width: 32rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.89);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 40px 80px rgba(148, 76, 0, 0.12);
+  border: 1px solid rgba(148, 76, 0, 0.08);
+  position: relative;
+}
+
+/* --- Modal Header --- */
+.modal-header {
+  padding: 2rem 2rem 1rem;
+}
+
+.modal-header-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.modal-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #b55700;
+  margin-bottom: 0.5rem;
+}
+
+.modal-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+}
+
+/* --- Modal Close Button --- */
+.modal-close-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.modal-close-btn .icon {
+  font-size: 1.125rem;
+  color: #6b7280;
+}
+
+/* --- Modal Actions (Footer Buttons Row) --- */
+.modal-actions {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+/* --- Species Dialog (Edit/View Dialog) --- */
+.species-dialog {
+  align-items: center;
+  justify-content: center;
+}
+
+.species-content {
+  width: 60%;
+}
+
+/* --- Decorative Glow Effects (inside modal card) --- */
+.decorative-glow {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.glow-primary {
+  bottom: -6rem;
+  right: -6rem;
+  width: 16rem;
+  height: 16rem;
+  background-color: rgba(148, 76, 0, 0.1);
+  filter: blur(80px);
+}
+
+.glow-secondary {
+  top: -6rem;
+  left: -6rem;
+  width: 12rem;
+  height: 12rem;
+  background-color: rgba(245, 158, 11, 0.1);
+  filter: blur(60px);
+}
+
+
+/* =====================================================
+   11. Forms & Upload
+===================================================== */
+
+/* --- Modal Form Wrapper --- */
+.modal-form {
+  padding: 0 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* --- Form Grid Layout --- */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* --- Image Upload Section --- */
+.image-upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Upload area box */
+.upload-area {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px dashed rgba(148, 76, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.upload-area:hover {
+  border-color: rgba(181, 87, 0, 0.4);
+}
+
+/* Upload icon inside area */
+.upload-icon {
+  font-size: 2.5rem;
+  color: rgba(148, 76, 0, 0.4);
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.upload-area:hover .upload-icon {
+  transform: scale(1.1);
+}
+
+/* Upload label text */
+.upload-text {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+/* Background image overlay inside upload area */
+.upload-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.1;
+  transition: opacity 0.2s ease;
+}
+
+.upload-area:hover .upload-bg {
+  opacity: 0.2;
+}
+
+/* Icon list row (file type icons, etc.) */
+.icon-list {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-item {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+}
+
+.icon-symbol {
+  font-size: 1rem;
+}
+
+/* --- Input Fields Section --- */
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.field-group {
+  position: relative;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #b55700;
+  margin-bottom: 0.25rem;
+}
+
+.input-field {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(148, 76, 0, 0.2);
+  padding: 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input-field:focus {
+  border-bottom-color: #f59e0b;
+}
+
+.input-field::placeholder {
+  color: rgba(148, 76, 0, 0.5);
+}
+
+/* --- Care Notes / Textarea Section --- */
+.care-notes-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.care-notes-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.care-notes-icon {
+  font-size: 1.25rem;
+  color: #f59e0b;
+}
+
+.care-notes-title {
+  font-weight: 700;
+  color: #111827;
+}
+
+.textarea-wrapper {
+  position: relative;
+}
+
+.textarea-field {
+  width: 100%;
+  min-height: 9rem;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 1rem;
+  color: #111827;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  resize: none;
+  transition: box-shadow 0.2s ease;
+  box-shadow: inset 0 0 0 1px rgba(148, 76, 0, 0.08);
+}
+
+.textarea-field:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.18);
+}
+
+.textarea-field::placeholder {
+  color: rgba(107, 114, 128, 0.45);
+}
+
+
+/* =====================================================
+   12. Buttons
+===================================================== */
+
+/* Cancel / Secondary Button */
+.btn-cancel {
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #4b5563;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-cancel:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Primary Save / Submit Button */
+.btn-save-species {
+  padding: 1rem 2.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #944c00 0%, #ffaf72 100%);
+  color: #ffffff;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 12px 24px rgba(148, 76, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-save-species:hover {
+  transform: scale(1.02);
+}
+
+.btn-save-species:active {
+  transform: scale(0.95);
+}
+
+.add-breed-saveBtn {
+  display: flex !important;
+  padding: 9px 24px !important;
+  border: none !important;
+}
+
+
+/* =====================================================
+   13. Media Queries
+===================================================== */
+
+@media (max-width: 768px) {
+
+  /* Layout */
+  .registry {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  /* Species Edit Controls */
+  .speciesModify {
+    flex-direction: column;
+  }
+
+  .species-content {
+    width: 88%;
+  }
+
+  /* Modal Card */
+  .modal-card {
+    width: 90%;
+  }
+
+  /* Add Breed Modal */
+  .breed-glass {
+    width: 94%;
+  }
+
+  /* Edit Breed Modal */
+  .mobileEditBreed {
+    width: 90% !important;
+    height: 87vh !important;
+  }
+
+  .img-main {
+    height: 20vh !important;
+  }
+
+  .img-div {
+    height: 20vh;
+  }
+
+  /* Form Grid — switch to 12-column on mobile */
+  .form-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .image-upload-section {
+    grid-column: span 4;
+  }
+
+  .input-section {
+    grid-column: span 8;
+  }
+
+  /* Modal Actions */
+  .modal-actions {
+    flex-direction: row;
+  }
+
 }

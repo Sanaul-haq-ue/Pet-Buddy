@@ -61,16 +61,10 @@
     </div>
 
 
-
-
-
-
-
-
     <!-- Add New Breed Modal Overlay -->
     <div id="addBreedsModal" class="modal-overlay-custom bg-stone-900-10 backdrop-blur-sm p-3 hidden">
         <!-- Modal Content: Glassmorphic Card (Shaped for Compactness) -->
-        <div class="glass-panel w-90 rounded-xl shadow-custom-1 overflow-hidden bg-white-90">
+        <div class="breed-glass glass-panel rounded-xl shadow-custom-1 overflow-hidden bg-white-90">
             <!-- Modal Header -->
             <div class="p-4 pb-3 d-flex justify-content-between align-items-start">
                 <div>
@@ -171,7 +165,7 @@
                         Cancel
                     </button>
                     <button type="submit"
-                        class="btn btn-primary rounded-pill bg-primary text-white font-headline fw-bolder shadow hover-scale-102 active-scale-95">
+                        class="add-breed-saveBtn btn btn-primary rounded-pill bg-primary text-white font-headline fw-bolder shadow hover-scale-102 active-scale-95">
                         <span class="material-symbols-outlined" data-icon="save">save</span>
                         Save
                     </button>
@@ -187,22 +181,23 @@
     <!-- Add Edit Breed Modal Overlay -->
     <div id="editBreedsModal" class="modal-overlay-custom z-60 bg-on-background-20 backdrop-blur-sm p-3 hidden">
         <!-- Modal Container -->
-        <div class="glass-panel w-50 rounded-xl overflow-hidden d-flex flex-column shadow-custom-2 bg-white-90">
+        <div class="mobileEditBreed glass-panel overflow-hidden d-flex flex-column shadow-custom-2 bg-white-90">
             <!-- Header -->
-            <div class="d-flex align-items-center justify-content-between p-4 border-bottom border-outline-variant-10">
-                <h2 class="fs-3 font-headline fw-bold tracking-tight text-on-surface">Edit Breed</h2>
-                <button id="closeEditBreedM" class="btn p-2 rounded-circle bg-surface-container-high border-0">
+            <div
+                class="edit-breed-header d-flex align-items-center justify-content-between border-bottom border-outline-variant-10">
+                <h2 class="font-headline fw-bold tracking-tight text-on-surface">Edit Breed</h2>
+                <button id="closeEditBreedM" class="btn rounded-circle bg-surface-container-high border-0">
                     <span class="material-symbols-outlined text-outline">close</span>
                 </button>
             </div>
             <!-- Scrollable Content Section -->
-            <form id="editBreedForm" class="flex-grow-1 overflow-auto p-5">
+            <form id="editBreedForm" class="flex-grow-1 overflow-hidden p-3">
                 <input type="hidden" id="editBreedId" name="breed_id" value="">
                 <div class="row g-5">
                     <!-- Breed Image Section -->
                     <div class="col-md-5 d-flex flex-column gap-4">
-                        <div class="position-relative group">
-                            <div class="ratio ratio-1x1 rounded-xl overflow-hidden bg-surface-container shadow-sm">
+                        <div class="img-main position-relative group">
+                            <div class="img-div ratio ratio-1x1 rounded-xl overflow-hidden bg-surface-container shadow-sm">
                                 <img id="editBreedImagePreview" alt="Breed image" class="w-100 h-100 object-fit-cover"
                                     data-alt="Breed image preview"
                                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgih6bq3mACcgSc2MphDkKQkK-MTZjkHSi2pmYqcT4SmHzAc7GBI6D8fg3FL90R4M-7lrYRj4KPdZ1L7rDXYaRSa1H46ncTf7zp-c6Mne_5uhWVoR8Py5j75PSbq3GxGoZ0xUlDKqPTD2m6iG3PUi-a1Z85dYrF-d3SZV9bPPMA-93-NCCh2JY6RsZakQ27sCy7u8jYl8QNimz93Biy8LTZJa7pmkhIjF6BEjpRt3azkzFZjS-o865DtenBGj6-6V_x4btCaI8ACws" />
@@ -223,7 +218,7 @@
                         </div> --}}
                     </div>
                     <!-- Form Section -->
-                    <div class="col-md-7 d-flex flex-column gap-5">
+                    <div class="col-md-7 d-flex flex-column gap-2">
                         <!-- Breed Name -->
                         <div class="d-flex flex-column gap-2">
                             <label class="font-label text-xs font-bold tracking-widest text-primary uppercase">Breed
@@ -264,20 +259,22 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-12">
                         <!-- Description & Care Notes -->
                         <div class="d-flex flex-column gap-2">
                             <label class="font-label text-xs font-bold tracking-widest text-primary uppercase">Description
                                 &amp; Care Notes</label>
                             <textarea id="editBreedDescription"
                                 class="form-control bg-surface-container-low rounded-3 border-outline-variant-20 p-3 shadow-none text-on-surface"
-                                rows="6"></textarea>
+                                rows="3"></textarea>
                         </div>
                     </div>
                 </div>
             </form>
             <!-- Actions Footer -->
             <div
-                class="p-4 border-top border-outline-variant-10 d-flex justify-content-end align-items-center gap-3 bg-white-40 backdrop-blur-md">
+                class="border-top border-outline-variant-10 d-flex justify-content-end align-items-center bg-white-40 backdrop-blur-md">
                 <button id="cancelEditBreedM"
                     class="btn rounded-pill font-label fw-bold text-outline hover-text-primary active-scale-95">
                     Cancel
@@ -297,7 +294,7 @@
 
     <!-- Header Section -->
     <div class="row g-4 mb-5">
-        <div class="col-lg-8 d-flex justify-content-between align-items-center">
+        <div class="col-lg-8 registry d-flex justify-content-between align-items-center">
             <div>
                 <span class="text-primary fw-bold tracking-widest fs-6 text-uppercase">Registry Overview</span>
                 <h2 class="font-headline fs-2 font-headline fw-bolder text-on-surface mt-2">Pet Management</h2>
@@ -338,13 +335,12 @@
                 <!-- Edit Species Modal -->
                 <div class="editSpeciesForm modal fade" id="editSpeciesModal{{ $specie->id }}" tabindex="-1"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered">
-                        <div class="modal-content rounded-4 shadow-lg border-0">
+                    <div class="species-dialog modal-dialog modal-lg modal-dialog-centered">
+                        <div class="species-content modal-content rounded-4 shadow-lg border-0">
 
                             <!-- Header -->
                             <div class="modal-header border-0">
                                 <div>
-                                    <small class="text-muted">Update Entry</small>
                                     <h5 class="mb-0 fw-bold">Edit Species</h5>
                                 </div>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -404,7 +400,7 @@
                             <div class="rounded-2xl bg-primary-10 d-flex align-items-center justify-content-center p-3">
                                 <span class="material-symbols-outlined text-primary text-3xl" data-icon="pets">pets</span>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between w-100">
+                            <div class="speciesModify d-flex align-items-center justify-content-between w-100">
 
                                 <!-- Left: Title -->
                                 <h3 class="font-headline fs-3 fw-bold mb-0">
@@ -437,7 +433,7 @@
                         <button id="addBreeds" data-specie-id="{{ $specie->id }}"
                             class="btn rounded-pill border border-2 border-primary-20 text-primary fw-bold hover-bg-primary-5 d-flex align-items-center gap-2">
                             <span class="material-symbols-outlined text-sm" data-icon="add">add</span>
-                            Add New Breed
+                            <span class="d-none d-md-inline">Add New Breed</span>
                         </button>
                     </div>
                     <div class="row g-1 row-cols-2 row-cols-md-5 relative z-10">
@@ -493,7 +489,7 @@
     </div>
 
 
-
+    <!-- Delete Species Modal -->
     <div class="modal fade" id="deleteSpeciesModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 rounded-4 shadow-lg">
@@ -520,7 +516,7 @@
         </div>
     </div>
 
-
+    <!-- Delete Breed Modal -->
     <div class="modal fade" id="deleteBreedModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 rounded-4 shadow-lg">
@@ -919,15 +915,21 @@
                 var specieId = $button.data('specie-id');
                 var speciesName = $button.data('species-name');
                 var isExpanded = $button.data('expanded');
+                var $extraBreeds = $('.breed-card[data-specie-id="' + specieId + '"]:gt(4)');
+
                 if (isExpanded) {
-                    // Hide extra breeds with fade out
-                    $('.breed-card[data-specie-id="' + specieId + '"]:gt(4)').fadeOut(300);
+                    // Fade out then re-add the 'hidden' class
+                    $extraBreeds.fadeOut(300, function() {
+                        $(this).addClass('hidden');
+                    });
                     $button.find('span:first').text('View all ' + speciesName + ' breeds');
+                    $button.find('[data-icon="arrow_forward"]').text('arrow_forward');
                     $button.data('expanded', false);
                 } else {
-                    // Show all breeds with fade in
-                    $('.breed-card[data-specie-id="' + specieId + '"]:gt(4)').fadeIn(300);
+                    // Remove 'hidden' class first, then fade in
+                    $extraBreeds.removeClass('hidden').hide().fadeIn(300);
                     $button.find('span:first').text('Show less');
+                    $button.find('[data-icon="arrow_forward"]').text('arrow_drop_up');
                     $button.data('expanded', true);
                 }
             });

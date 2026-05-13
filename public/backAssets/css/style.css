@@ -299,7 +299,7 @@ body.light {
         } */
 
   #sidebar {
-    margin-top: 38px;
+    margin-top: 55px;
     box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
   }
 
@@ -310,6 +310,7 @@ body.light {
 
   #mainContent {
     margin-left: 0 !important;
+    padding: 6rem 1rem 0 1rem;
   }
 
   #topbar {
