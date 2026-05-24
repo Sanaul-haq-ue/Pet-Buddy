@@ -1,27 +1,19 @@
 @extends('backEnd.layouts.master')
 
 @section('adminContent')
-    <link rel="stylesheet" href="{{ asset('backAssets/css/company.css') }}">
-
-
     <!-- Content Canvas -->
     <div class="company-canvas">
-        <div class="d-flex justify-content-between align-items-end pb-4 mb-3">
+        <div class="company-header d-flex justify-content-between align-items-end pb-4 mb-3">
             <div>
                 <h3 class="fs-1 fw-bold text-on-surface tracking-tighter mb-1">Company Profile</h3>
                 <p class="text-on-surface-variant font-body mb-0">Refine your brand identity, contact details, and
                     operational flow at Radiant Habitat.</p>
             </div>
             <div class="d-flex gap-3">
-                <!-- <button
-                                class="btn bg-secondary-container text-on-secondary-container rounded-full fw-bold text-sm d-flex align-items-center gap-2 border hover-bg-secondary-fixed transition custom-active-scale px-4 py-2">
-                                <span class="material-symbols-outlined fs-5">filter_list</span>
-                                Advanced Filters
-                            </button> -->
                 <button
                     class="btn bg-primary text-on-primary rounded-full fw-bold text-sm d-flex align-items-center gap-2 hover-bg-primary-dim transition custom-active-scale border-0 shadow-sm px-4 py-2"
                     data-bs-toggle="modal" data-bs-target="#addCompanyModal">
-                    <span class="material-symbols-outlined fs-5">person_add</span>
+                    <span class="material-symbols-outlined fs-5">Business</span>
                     Add New Company
                 </button>
             </div>
@@ -30,9 +22,9 @@
         <!-- Settings Bento Grid -->
         <div class="row g-4 align-items-start mt-2">
 
-            <!-- Left Column: Recent Appointments & Sidebar widgets -->
+            <!-- Company List -->
             <div class="col-12 col-md-12 d-flex flex-column gap-8">
-                <!-- Recent Appointments Table -->
+                <!-- Company Search -->
                 <div class="glass-card rounded-lg overflow-hidden d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center p-4 p-md-5 pb-3">
                         <h4 class="fs-5 font-headline fw-bold tracking-tight mb-0">Company List</h4>
@@ -49,9 +41,8 @@
                     <div class="table-responsive">
                         <table class="table table-borderless table-divider text-start mb-0"
                             style="max-height: 50px; overflow-y: auto;">
-                            <thead
-                                class="bg-surface-container-low text-on-surface-variant font-label text-10px tracking-widest text-uppercase">
-                                <tr>
+                            <thead class="font-label text-10px tracking-widest text-uppercase">
+                                <tr id="table-header">
                                     <th class="py-3 px-4 px-lg-5">Company</th>
                                     <th class="py-3 px-4 px-lg-5">Email</th>
                                     <th class="py-3 px-3 px-lg-4">Number</th>
@@ -292,7 +283,7 @@
     <div class="modal fade" id="addCompanyModal" tabindex="-1" aria-labelledby="addCompanyModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content glass-card border-0 rounded-xl overflow-hidden shadow-lg">
+            <div class="modal-content glass-card border-0 rounded-2xl overflow-hidden shadow-lg">
                 <div class="modal-header border-bottom border-secondary-10 px-4 py-3">
                     <div class="d-flex align-items-center gap-3">
                         <div
@@ -460,26 +451,28 @@
                         class="btn border border-secondary rounded-full text-sm font-headline fw-bold text-on-surface hover-bg-surface-low transition custom-active-scale px-4 py-2"
                         data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" form="addCompanyForm" id="saveCompanyBtn"
-                        class="btn border-0 rounded-full signature-glow text-on-primary text-sm font-headline fw-bold shadow-sm custom-active-scale px-4 py-2">Create
-                        Company</button>
+                        class="btn border-0 rounded-full signature-glow text-on-primary text-sm font-headline fw-bold shadow-sm custom-active-scale px-4 py-2">
+                        Save
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- View Company Modals -->
+
     @foreach ($companies as $company)
+        <!-- View Company Modals -->
         <div class="modal fade" id="viewCompanyModal{{ $company->id }}" tabindex="-1"
             aria-labelledby="viewCompanyModalLabel{{ $company->id }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content glass-card border-0 rounded-xl overflow-hidden shadow-lg">
+                <div class="modal-content glass-card border-0 rounded-2xl overflow-hidden shadow-lg">
                     <div class="modal-header border-bottom border-secondary-10 px-4 py-3">
                         <div class="d-flex align-items-center gap-3">
                             <div
                                 class="w-10 h-10 rounded-full bg-primary-10 d-flex align-items-center justify-content-center text-primary">
                                 <span class="material-symbols-outlined fs-5">storefront</span>
                             </div>
-                            <h5 class="modal-title font-headline fw-bold text-on-surface mb-0"
+                            <h5 class="font-headline fw-bold mb-0"
                                 id="viewCompanyModalLabel{{ $company->id }}">{{ $company->company_name }} Details</h5>
                         </div>
                         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
@@ -495,10 +488,10 @@
                                         Company Logo</p>
                                     @if ($company->brand_logo)
                                         <img src="{{ asset($company->brand_logo) }}" alt="Logo"
-                                            class="img-fluid rounded-xl object-fit-cover shadow-sm mx-auto"
+                                            class="img-fluid object-fit-cover shadow-sm mx-auto"
                                             style="max-height: 150px;">
                                     @else
-                                        <div class="w-100 rounded-xl bg-surface-container-low d-flex align-items-center justify-content-center text-zinc-400"
+                                        <div class="w-100 bg-surface-container-low d-flex align-items-center justify-content-center text-zinc-400"
                                             style="height: 150px;">
                                             <span class="material-symbols-outlined fs-1">image_not_supported</span>
                                         </div>
@@ -511,10 +504,10 @@
                                         Business Card</p>
                                     @if ($company->business_card)
                                         <img src="{{ asset($company->business_card) }}" alt="Business Card"
-                                            class="img-fluid rounded-xl object-fit-cover shadow-sm mx-auto"
+                                            class="img-fluid object-fit-cover shadow-sm mx-auto"
                                             style="max-height: 150px;">
                                     @else
-                                        <div class="w-100 rounded-xl bg-surface-container-low d-flex align-items-center justify-content-center text-zinc-400"
+                                        <div class="w-100  bg-surface-container-low d-flex align-items-center justify-content-center text-zinc-400"
                                             style="height: 150px;">
                                             <span class="material-symbols-outlined fs-1">credit_card_off</span>
                                         </div>
@@ -650,14 +643,14 @@
         <div class="modal fade" id="editCompanyModal{{ $company->id }}" tabindex="-1"
             aria-labelledby="editCompanyModalLabel{{ $company->id }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content glass-card border-0 rounded-xl overflow-hidden shadow-lg">
+                <div class="modal-content glass-card border-0 rounded-2xl overflow-hidden shadow-lg">
                     <div class="modal-header border-bottom border-secondary-10 px-4 py-3">
                         <div class="d-flex align-items-center gap-3">
                             <div
                                 class="w-10 h-10 rounded-full bg-secondary-10 d-flex align-items-center justify-content-center text-secondary">
                                 <span class="material-symbols-outlined fs-5">edit_square</span>
                             </div>
-                            <h5 class="modal-title font-headline fw-bold text-on-surface mb-0"
+                            <h5 class="font-headline fw-bold mb-0"
                                 id="editCompanyModalLabel{{ $company->id }}">Edit {{ $company->company_name }}</h5>
                         </div>
                         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
@@ -681,7 +674,7 @@
                                             class="d-none edit-logo-input" accept="image/*"
                                             data-id="{{ $company->id }}">
                                         <div id="editUploadLogoWrapper{{ $company->id }}"
-                                            class="w-100 rounded-xl bg-surface-container-low d-flex align-items-center justify-content-center hover-border-primary transition overflow-hidden edit-upload-logo-wrapper"
+                                            class="w-100 bg-surface-container-low d-flex align-items-center justify-content-center hover-border-primary transition overflow-hidden edit-upload-logo-wrapper"
                                             style="height: 150px; border: 2px dashed var(--secondary-10) !important; cursor: pointer;"
                                             data-id="{{ $company->id }}">
                                             <img id="editLogoPreview{{ $company->id }}"
@@ -707,7 +700,7 @@
                                             name="business_card" class="d-none edit-card-input" accept="image/*"
                                             data-id="{{ $company->id }}">
                                         <div id="editUploadCardWrapper{{ $company->id }}"
-                                            class="w-100 rounded-xl bg-surface-container-low d-flex align-items-center justify-content-center hover-border-primary transition overflow-hidden edit-upload-card-wrapper"
+                                            class="w-100 bg-surface-container-low d-flex align-items-center justify-content-center hover-border-primary transition overflow-hidden edit-upload-card-wrapper"
                                             style="height: 150px; border: 2px dashed var(--secondary-10) !important; cursor: pointer;"
                                             data-id="{{ $company->id }}">
                                             <img id="editCardPreview{{ $company->id }}"
@@ -839,15 +832,16 @@
                             class="btn border border-secondary rounded-full text-sm font-headline fw-bold text-on-surface hover-bg-surface-low transition custom-active-scale px-4 py-2"
                             data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" form="editCompanyForm{{ $company->id }}"
-                            class="btn border-0 rounded-full bg-secondary text-on-secondary text-sm font-headline fw-bold shadow-sm custom-active-scale px-4 py-2 save-edit-company-btn">Save
-                            Changes</button>
+                            class="btn border-0 rounded-full bg-secondary text-on-secondary text-sm font-headline fw-bold shadow-sm custom-active-scale px-4 py-2 save-edit-company-btn">
+                            Update
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     @endforeach
 
-
+    <!-- Delete Company Modal -->
     <div class="modal fade" id="deleteCompanyModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 rounded-4 shadow-lg">

@@ -17,9 +17,23 @@ class UserController extends Controller
 
         $species = Species::where('status', '1')->get();
 
+        $pets = Pet::where('status', '1')->get();
+
+        $currentMonthPets = $pets->count();
+
+        $lastMonthPets = Pet::whereMonth('created_at', now()->subMonth()->month)
+            ->whereYear('created_at', now()->subMonth()->year)
+            ->count();
+
+        $percentageChange = 0;
+
+        if ($lastMonthPets > 0) {
+            $percentageChange = (($currentMonthPets - $lastMonthPets) / $lastMonthPets) * 100;
+        }
+
         return view(
             'backEnd.pages.customerPet.customer',
-            compact('users', 'species')
+            compact('users', 'species', 'pets', 'currentMonthPets', 'lastMonthPets', 'percentageChange')
         );
     }
 

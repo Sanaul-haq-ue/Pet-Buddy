@@ -23,7 +23,7 @@
                 @csrf
                 <div id="alertMessage" class="hidden rounded-lg px-4 py-3 text-sm font-medium mb-4"></div>
                 <!-- Form Fields -->
-                <div class="grid grid-cols-1 gap-y-8">
+                <div class="grid grid-cols-1 gap-y-4">
                     <!-- Category Name -->
                     <div>
                         <label
@@ -52,16 +52,16 @@
                     </div>
                 </div>
                 <!-- Modal Footer / Actions -->
-                <div class="flex items-center justify-end gap-6 mt-4 pt-6">
+                <div class="flex items-center justify-end gap-6 pt-2">
                     <button id="cancelCategoryModal" type="button"
                         class="px-8 py-3 rounded-full text-on-surface-variant font-bold hover:bg-surface-variant/20 transition-all active:scale-95">
                         Cancel
                     </button>
                     <button type="submit"
-                        class="bg-gradient-to-r from-primary to-primary-container px-10 py-4 rounded-full text-on-primary font-bold shadow-lg shadow-primary/30 hover:brightness-110 transition-all active:scale-95 flex items-center gap-2">
+                        class="bg-gradient-to-r from-primary to-primary-container px-6 py-2 rounded-full text-on-primary font-bold shadow-lg shadow-primary/30 hover:brightness-110 transition-all active:scale-95 flex items-center gap-2">
                         <span class="material-symbols-outlined" data-icon="add"
-                            style="font-variation-settings: 'FILL' 1;">add</span>
-                        Add Category
+                            style="font-variation-settings: 'FILL' 1;">Save</span>
+                        Save
                     </button>
                 </div>
             </form>
@@ -91,7 +91,7 @@
                 <input type="hidden" id="editCategoryId" name="category_id" value="">
                 <div id="alertMessage" class="hidden rounded-lg px-4 py-3 text-sm font-medium mb-4"></div>
                 <!-- Form Fields -->
-                <div class="grid grid-cols-1 gap-y-8">
+                <div class="grid grid-cols-1 gap-y-4">
                     <!-- Category Name -->
                     <div>
                         <label
@@ -121,13 +121,13 @@
                     </div>
                 </div>
                 <!-- Modal Footer / Actions -->
-                <div class="flex items-center justify-end gap-6 mt-4 pt-6">
+                <div class="flex items-center justify-end gap-4 pt-2">
                     <button id="cancelEditCategoryModal" type="button"
                         class="px-8 py-3 rounded-full text-on-surface-variant font-bold hover:bg-surface-variant/20 transition-all active:scale-95">
                         Cancel
                     </button>
                     <button type="submit"
-                        class="bg-gradient-to-r from-primary to-primary-container px-10 py-4 rounded-full text-on-primary font-bold shadow-lg shadow-primary/30 hover:brightness-110 transition-all active:scale-95 flex items-center gap-2">
+                        class="bg-gradient-to-r from-primary to-primary-container px-6 py-2 rounded-full text-on-primary font-bold shadow-lg shadow-primary/30 hover:brightness-110 transition-all active:scale-95 flex items-center gap-2">
                         <span class="material-symbols-outlined" data-icon="add"
                             style="font-variation-settings: 'FILL' 1;">Save</span>
                         Save
@@ -258,19 +258,19 @@
     <div class="space-y-16">
         <!-- Header Section -->
         <section class="max-w-4xl">
-            <h1 class="text-5xl font-extrabold tracking-tight text-on-surface mb-4">Service Registry</h1>
+            <h1 class="fs-1 font-extrabold tracking-tight text-on-surface mb-1">Service Registry</h1>
         </section>
 
-        <div class="grid grid-cols-6 gap-8">
-            <!-- Recent Appointments Table -->
+        <div class="ca-po grid grid-cols-6 gap-8">
+            <!-- Category List -->
             <div class="col-span-4 glass-card rounded-lg overflow-hidden flex flex-col">
-                <div class="p-8 pb-4 flex justify-between items-center">
+                <div class="p-4 pb-4 flex justify-between items-center">
                     <h4 class="text-xl font-headline font-bold tracking-tight">Category</h4>
-                    <button id="addCategoryBtn" class="text-sm font-label text-primary hover:underline">Add
+                    <button id="addCategoryBtn" class="font-label">Add
                         Category</button>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left p-4 max-h-[50px] overflow-y-auto">
+                    <table class="w-full text-left overflow-y-auto">
                         <thead
                             class="bg-surface-container-low text-on-surface-variant font-label text-[10px] tracking-widest uppercase">
                             <tr>
@@ -282,15 +282,15 @@
                         <tbody class="divide-y divide-outline-variant/10">
                             @if ($categories->isEmpty())
                                 <tr>
-                                    <td colspan="3" class="px-6 py-5 text-center text-sm text-on-surface-variant">
+                                    <td colspan="3" class="p-3 text-center text-sm text-on-surface-variant">
                                         No categories found.
                                     </td>
                                 </tr>
                             @else
                                 @foreach ($categories as $category)
                                     <tr class="hover:bg-surface-container-lowest/50 transition-colors group">
-                                        <td class="px-6 py-5 text-sm">{{ $category->name }}</td>
-                                        <td class="px-6 py-5">
+                                        <td class="p-2 text-sm">{{ $category->name }}</td>
+                                        <td class="p-2">
                                             @if ($category->status == 1)
                                                 <div class="flex items-center gap-1.5 text-secondary">
                                                     <span class="w-2 h-2 rounded-full bg-secondary"></span>
@@ -303,7 +303,7 @@
                                                 </div>
                                             @endif
                                         </td>
-                                        <td class="px-8 py-5 text-right">
+                                        <td class="p-2 text-right">
                                             <button type="button"
                                                 class="editCategoryBtn p-2 text-stone-400 hover:text-secondary transition-colors"
                                                 data-category-id="{{ $category->id }}"
@@ -324,6 +324,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Population Insights -->
             <aside class="col-span-2 space-y-8">
                 <div class="bg-secondary/10 rounded-xl p-8 border border-secondary/10">
                     <h4 class="font-headline text-lg font-bold mb-6">Population Insights</h4>
@@ -344,13 +346,13 @@
 
         <!-- Services Section -->
         <section>
-            <div class="flex justify-between items-end mb-8">
+            <div class="service-header flex justify-between items-end mb-8">
                 <div>
                     <h2 class="text-2xl font-bold tracking-tight text-on-surface">Available Services</h2>
                     <p class="text-stone-500 text-sm">Tailored care programs for every resident.</p>
                 </div>
                 <a href="{{ route('addService') }}"
-                    class="bg-primary text-on-primary px-8 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-primary-dim active:scale-95 transition-all">
+                    class="bg-primary text-on-primary px-8 py-2 rounded-full font-bold flex items-center gap-2 hover:bg-primary-dim active:scale-95 transition-all">
                     <span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
                     Create New Service
                 </a>

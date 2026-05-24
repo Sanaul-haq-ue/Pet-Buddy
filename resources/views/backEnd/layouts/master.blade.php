@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Radiant Habitat Admin | Dashboard</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
@@ -104,7 +105,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('backAssets/css/petManagement.css') }}">
+    <link rel="stylesheet" href="{{ asset('backAssets/css/customer.css') }}">
     <link rel="stylesheet" href="{{ asset('backAssets/css/company.css') }}">
+    <link rel="stylesheet" href="{{ asset('backAssets/css/serviceManagement.css') }}">
     <link rel="stylesheet" href="{{ asset('backAssets/css/style.css') }}">
 
 </head>

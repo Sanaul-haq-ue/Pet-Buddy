@@ -6,6 +6,12 @@ use App\Http\Controllers\backEnd\DashboardController;
 use App\Http\Controllers\backEnd\petController;
 use App\Http\Controllers\backEnd\ServiceMController;
 use App\Http\Controllers\backEnd\UserController;
+use App\Http\Controllers\backEnd\ProductController;
+use App\Http\Controllers\backEnd\ProductCategoryController;
+use App\Http\Controllers\backEnd\ProductSubCategoryController;
+use App\Http\Controllers\backEnd\ProductBrandController;
+
+
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -89,5 +95,26 @@ Route::prefix('admin')->group(function () {
         Route::post('/saveCategory', [ServiceMController::class, 'saveCategory'])->name('saveCategory');
         Route::post('/updateCategory', [ServiceMController::class, 'updateCategory'])->name('updateCategory');
         Route::get('/addService/store', [ServiceMController::class, 'addService'])->name('admin.services.store');
+
+        // Product Routes
+        Route::get('/product', [ProductController::class, 'productIndex'])->name('product');
+        // Route::post('/saveSpecies', [petController::class, 'saveSpecies'])->name('petManagement.saveSpecies');
+        // Route::put('/species/{id}', [petController::class, 'update'])->name('species.update');
+        // Route::delete('/species/{id}', [petController::class, 'destroy'])->name('species.destroy');
+
+        Route::get('/product-Category', [ProductCategoryController::class, 'productCategoryIndex'])->name('productCategory');
+        Route::post('/product-Category/store', [ProductCategoryController::class, 'store'])->name('productCategory.store');
+        Route::post('/product-Category/update', [ProductCategoryController::class, 'update'])->name('productCategory.update');
+        Route::delete('/product-category/delete/{id}', [ProductCategoryController::class, 'destroy'])->name('productCategory.delete');
+
+        Route::get('/product-SubCategory', [ProductSubCategoryController::class, 'productSubCategoryIndex'])->name('productSubCategory');
+        Route::post('/product-SubCategory/store', [ProductSubCategoryController::class, 'store'])->name('productSubCategory.store');
+        Route::post('/product-SubCategory/update', [ProductSubCategoryController::class, 'update'])->name('productSubCategory.update');
+        Route::delete('/product-SubCategory/delete/{id}', [ProductSubCategoryController::class, 'destroy'])->name('productSubCategory.delete');
+
+        Route::get('/product-Brand', [ProductBrandController::class, 'productBrandIndex'])->name('productBrand');
+        Route::post('/product-Brand/store', [ProductBrandController::class, 'store'])->name('productBrand.store');
+        Route::post('/product-Brand/update', [ProductBrandController::class, 'update'])->name('productBrand.update');
+        Route::delete('/product-brand/delete/{id}', [ProductBrandController::class, 'destroy'])->name('productBrand.delete');
     });
 });

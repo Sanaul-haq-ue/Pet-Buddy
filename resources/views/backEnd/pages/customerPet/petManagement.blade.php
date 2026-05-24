@@ -3,291 +3,259 @@
 @section('adminContent')
 
     <!-- Add New Species Modal Overlay -->
-    <div id="newSpeciesModal" class="modal-overlay hidden">
-        <!-- Add New Species Popup (The Glass Modal) -->
-        <div class="modal-card">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <div class="modal-header-row">
+    <div class="modal fade" id="newSpeciesModal" tabindex="-1" aria-hidden="true">
+        <div class="species-dialog modal-dialog modal-lg modal-dialog-centered">
+            <div class="species-content modal-content rounded-4 shadow-lg border-0">
+
+                <!-- Header -->
+                <div class="modal-header border-0">
                     <div>
-                        <span class="modal-label">New Registry Entry</span>
-                        <h3 class="modal-title">Add New Species</h3>
+                        <small class="text-muted fw-semibold text-uppercase"
+                            style="font-size: 0.7rem; letter-spacing: 0.08em;">New Registry Entry</small>
+                        <h5 class="mb-0 fw-bold">Add New Species</h5>
                     </div>
-                    <button id="closeaddBtn" class="modal-close-btn">
-                        <span class="material-symbols-outlined icon" data-icon="close">close</span>
-                    </button>
+                    <button id="closeaddBtn" type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+
+                <!-- Form -->
+                <form id="speciesForm" class="modal-form">
+
+                    <div class="modal-body">
+
+                        <!-- Species Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Species Name</label>
+                            <input type="text" name="species_name" class="form-control" placeholder="e.g. Dog" />
+                        </div>
+
+                        <!-- Scientific Classification -->
+                        <div class="mb-3">
+                            <label class="form-label">Scientific Classification</label>
+                            <input type="text" name="scientific_classification" class="form-control"
+                                placeholder="e.g. Canis lupus familiaris" />
+                        </div>
+
+                        <!-- Care Notes -->
+                        <div class="mb-1">
+                            <label class="form-label">
+                                <span class="material-symbols-outlined align-middle me-1" style="font-size: 1rem;"
+                                    data-icon="medical_information">medical_information</span>
+                                Description &amp; Care Notes
+                            </label>
+                            <textarea name="care_notes" class="form-control" rows="4"
+                                placeholder="Describe dietary needs, exercise requirements, and common health considerations..."></textarea>
+                        </div>
+
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer border-0">
+                        <button id="canceladdBtn" type="button" class="btn btn-light"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="material-symbols-outlined align-middle">save</span>
+                            Save
+                        </button>
+                    </div>
+
+                </form>
+
             </div>
-            <!-- Modal Content Form -->
-            <form id="speciesForm" class="modal-form">
-                <div class="input-section">
-                    <div class="field-group">
-                        <label class="field-label">Species Name</label>
-                        <input name="species_name" class="input-field" placeholder="e.g. Dog" type="text" />
-                    </div>
-                    <div class="field-group">
-                        <label class="field-label">Scientific Classification</label>
-                        <input name="scientific_classification" class="input-field"
-                            placeholder="e.g. Canis lupus familiaris" type="text" />
-                    </div>
-                </div>
-                <!-- Section 2: Care Notes -->
-                <div class="care-notes-section">
-                    <div class="care-notes-header">
-                        <span class="material-symbols-outlined care-notes-icon"
-                            data-icon="medical_information">medical_information</span>
-                        <h4 class="care-notes-title">General Care Notes</h4>
-                    </div>
-                    <div class="textarea-wrapper">
-                        <textarea name="care_notes" class="textarea-field"
-                            placeholder="Describe dietary needs, exercise requirements, and common health considerations..." rows="4"></textarea>
-                    </div>
-                </div>
-                <!-- Action Footer -->
-                <div class="modal-actions">
-                    <button id="canceladdBtn" class="btn-cancel" type="button">
-                        Cancel
-                    </button>
-                    <button class="btn-save-species" type="submit">
-                        <span class="material-symbols-outlined" data-icon="save">save</span>
-                        Save
-                    </button>
-                </div>
-            </form>
-            <!-- Decorative Glow Element -->
-            <div class="decorative-glow glow-primary"></div>
-            <div class="decorative-glow glow-secondary"></div>
         </div>
     </div>
 
 
 
+    <!-- Add New Breed Modal -->
+    <div id="addBreedsModal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="species-dialog modal-dialog modal-lg modal-dialog-centered">
+            <div class="species-content modal-content rounded-4 shadow-lg border-0">
 
-
-
-
-
-    <!-- Add New Breed Modal Overlay -->
-    <div id="addBreedsModal" class="modal-overlay-custom bg-stone-900-10 backdrop-blur-sm p-3 hidden">
-        <!-- Modal Content: Glassmorphic Card (Shaped for Compactness) -->
-        <div class="glass-panel w-90 rounded-xl shadow-custom-1 overflow-hidden bg-white-90">
-            <!-- Modal Header -->
-            <div class="p-4 pb-3 d-flex justify-content-between align-items-start">
-                <div>
-                    <h2 class="fs-4 fw-bolder text-primary tracking-tight font-headline">Add New Breed</h2>
-                    <p class="text-on-surface-variant fs-6 fw-medium mt-1">Define new entry in the habitat library.
-                    </p>
-                </div>
-                <button id="closeaddBreeds"
-                    class="p-2 rounded-circle hover-bg-orange-50 text-outline border-0 bg-transparent">
-                    <span class="material-symbols-outlined text-xl">close</span>
-                </button>
-            </div>
-            <!-- Modal Form Body -->
-            <form id="breedForm" class="p-4 pb-5 d-flex flex-column gap-4" enctype="multipart/form-data">
-                <!-- Top Section: Image & Main Info -->
-                <div class="d-flex gap-4 align-items-start">
-                    <!-- Image Upload -->
-                    <div class="w-25">
-                        <label
-                            class="text-[0.6rem] font-bold font-headline text-on-surface-variant uppercase tracking-[0.1em] mb-2 block">
-                            Breed Image
-                        </label>
-
-                        <div class="imageUploadBox position-relative group aspect-square rounded-lg overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center cursor-pointer hover:border-primary/40 transition-all"
-                            id="imageUploadBox">
-
-                            <!-- Preview Image -->
-                            <img class="imagePreview absolute inset-0 w-100 h-100 object-fit-cover opacity-20 group-hover:opacity-30 transition-opacity pointer-events-none"
-                                id="imagePreview"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuATGdqly1vergDzNk6U9EtpyoBtJNP_lndE4Z_v4ddX4lhNrneSBQbWbsyz_No7-JCKl5shIiW5jrpnjVFPW7BmhLG7_vZ1zevpNWagwf4P1B8Z7YQZN7LRGhLkLNcEv7Fd4SqNZBIvGX7E_iVAI5auxRrCY8gVgGH8RaUlH32Phs6sUVNlFn6zGgekktrzUh38NICBuIsqfc8dRZMGymkiGyxMkqrmPwnFQriSa1E5fxZVZuc6e7V_6-0bgJ_Eq8mJYjeLsyAcNEUI" />
-
-                            <span class="material-symbols-outlined ...">cloud_upload</span>
-                            <span class="...">Upload</span>
-
-                            <input type="file" class="imageInput hidden" accept="image/*" id="imageInput" name="image">
-                        </div>
+                <!-- Header -->
+                <div class="modal-header border-0">
+                    <div>
+                        <small class="text-muted fw-semibold text-uppercase"
+                            style="font-size: 0.7rem; letter-spacing: 0.08em;">New Registry Entry</small>
+                        <h5 class="mb-0 fw-bold">Add New Breed</h5>
                     </div>
-                    <div class="flex-grow-1 d-flex flex-column gap-3">
-                        <!-- Breed Name & Species Row -->
-                        <div class="row g-3">
-                            <div class="position-relative group">
-                                <label
-                                    class="text-[0.6rem] font-bold font-headline text-on-surface-variant uppercase tracking-[0.1em] mb-0.5 block">Breed
-                                    Name</label>
-                                <input name="breed_name"
-                                    class="form-control border-0 border-bottom border-outline-variant-30 rounded-0 bg-transparent shadow-none px-0 py-2 fs-6 font-headline fw-semibold text-on-surface"
-                                    placeholder="e.g. Beagle" type="text" />
+                    <button id="closeaddBreeds" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Form -->
+                <form id="breedForm" class="modal-form" enctype="multipart/form-data">
+                    <div class="modal-body row w-100">
+
+                        <!-- Image Upload -->
+                        <div class="col-md-4">
+                            <label class="form-label">Breed Image</label>
+                            <div class="imageUploadBox position-relative rounded-3 overflow-hidden border border-2 border-dashed d-flex flex-column align-items-center justify-content-center cursor-pointer"
+                                id="imageUploadBox" style="height: 140px; background: #f8f9fa;">
+                                <img class="imagePreview position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-25"
+                                    id="imagePreview"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuATGdqly1vergDzNk6U9EtpyoBtJNP_lndE4Z_v4ddX4lhNrneSBQbWbsyz_No7-JCKl5shIiW5jrpnjVFPW7BmhLG7_vZ1zevpNWagwf4P1B8Z7YQZN7LRGhLkLNcEv7Fd4SqNZBIvGX7E_iVAI5auxRrCY8gVgGH8RaUlH32Phs6sUVNlFn6zGgekktrzUh38NICBuIsqfc8dRZMGymkiGyxMkqrmPwnFQriSa1E5fxZVZuc6e7V_6-0bgJ_Eq8mJYjeLsyAcNEUI" />
+                                <span class="material-symbols-outlined mb-1">cloud_upload</span>
+                                <span class="small text-muted">Upload</span>
+                                <input type="file"
+                                    class="imageInput position-absolute top-0 start-0 w-100 h-100 opacity-0"
+                                    style="cursor: pointer;" accept="image/*" id="imageInput" name="image">
                             </div>
-                            <div class="position-relative group">
-                                <label
-                                    class="text-[0.6rem] font-bold font-headline text-on-surface-variant uppercase tracking-[0.1em] mb-0.5 block">Species</label>
-                                <select id="addBreedSpeciesSelect" name="species_id"
-                                    class="form-select border-0 border-bottom border-outline-variant-30 rounded-0 bg-transparent shadow-none px-0 py-2 fs-6 font-headline fw-semibold text-on-surface">
+                        </div>
+
+                        <div class="col-md-8 mb-3">
+                            <!-- Breed Name -->
+                            <div class="mb-1">
+                                <label class="form-label">Breed Name</label>
+                                <input type="text" name="breed_name" class="form-control" placeholder="e.g. Beagle" />
+                            </div>
+
+                            <!-- Species -->
+                            <div class="mb-1">
+                                <label class="form-label">Species</label>
+                                <select id="addBreedSpeciesSelect" name="species_id" class="form-select">
                                     @if ($species)
                                         @foreach ($species as $specie)
                                             <option value="{{ $specie->id }}">{{ $specie->species_name }}</option>
                                         @endforeach
                                     @endif
                                 </select>
-                                <span
-                                    class="material-symbols-outlined absolute right-0 bottom-2 pointer-events-none text-outline-variant text-sm">expand_more</span>
                             </div>
-                        </div>
-                        <!-- Status Selection (Pills) - Smaller -->
-                        <div>
-                            <label
-                                class="block text-xs font-headline font-bold text-primary tracking-widest uppercase mb-1 ml-1">Status</label>
-                            <div class="d-flex gap-3 mt-2">
-                                <label class="d-flex align-items-center gap-2 cursor-pointer">
-                                    <input checked=""
-                                        class="text-secondary focus:ring-secondary border-outline-variant pet_status"
-                                        name="status" value="1" type="radio" />
-                                    <span class="text-sm font-medium">Active</span>
-                                </label>
-                                <label class="d-flex align-items-center gap-2 cursor-pointer">
-                                    <input class="text-secondary focus:ring-secondary border-outline-variant pet_status"
-                                        name="status" value="0" type="radio" />
-                                    <span class="text-sm font-medium">InActive</span>
-                                </label>
 
+                            <!-- Status -->
+                            <div class="mb-1">
+                                <label class="form-label">Status</label>
+                                <div class="d-flex gap-3">
+                                    <label class="d-flex align-items-center gap-2">
+                                        <input checked type="radio" class="pet_status" name="status" value="1" />
+                                        <span>Active</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2">
+                                        <input type="radio" class="pet_status" name="status" value="0" />
+                                        <span>Inactive</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- Description -->
+                        <div class="mb-1">
+                            <label class="form-label">Description &amp; Care Notes</label>
+                            <textarea name="description" class="form-control" rows="3"
+                                placeholder="Temperament, physical traits, care needs..."></textarea>
+                        </div>
+
                     </div>
-                </div>
-                <!-- Description -->
-                <div>
-                    <label
-                        class="text-[0.6rem] font-bold font-headline text-on-surface-variant uppercase tracking-[0.1em] mb-2 block">Description
-                        &amp; Care Notes</label>
-                    <textarea class="form-control glass-panel rounded-3 border-outline-variant-10 shadow-none p-3 text-on-surface fs-6"
-                        name="description" placeholder="Temperament, physical traits, care needs..." rows="3"></textarea>
-                </div>
-                <!-- Modal Footer Actions -->
-                <div class="d-flex align-items-center justify-content-end gap-3 pt-2">
-                    <button type="button"
-                        class="btn rounded-pill text-on-surface-variant font-headline fw-bold hover-bg-stone-100"
-                        id="cancelAddBreedBtn">
-                        Cancel
-                    </button>
-                    <button type="submit"
-                        class="btn btn-primary rounded-pill bg-primary text-white font-headline fw-bolder shadow hover-scale-102 active-scale-95">
-                        <span class="material-symbols-outlined" data-icon="save">save</span>
-                        Save
-                    </button>
-                </div>
-            </form>
+
+                    <!-- Footer -->
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-light" id="cancelAddBreedBtn"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="add-breed-saveBtn btn btn-primary">
+                            <span class="material-symbols-outlined align-middle">save</span>
+                            Save
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
         </div>
-        <!-- Decorative Floating Accent (The "Glow") -->
-        <div class="decorative-glow glow-primary"></div>
-        <div class="decorative-glow glow-secondary"></div>
     </div>
 
 
-    <!-- Add Edit Breed Modal Overlay -->
-    <div id="editBreedsModal" class="modal-overlay-custom z-60 bg-on-background-20 backdrop-blur-sm p-3 hidden">
-        <!-- Modal Container -->
-        <div class="glass-panel w-50 rounded-xl overflow-hidden d-flex flex-column shadow-custom-2 bg-white-90">
-            <!-- Header -->
-            <div class="d-flex align-items-center justify-content-between p-4 border-bottom border-outline-variant-10">
-                <h2 class="fs-3 font-headline fw-bold tracking-tight text-on-surface">Edit Breed</h2>
-                <button id="closeEditBreedM" class="btn p-2 rounded-circle bg-surface-container-high border-0">
-                    <span class="material-symbols-outlined text-outline">close</span>
-                </button>
-            </div>
-            <!-- Scrollable Content Section -->
-            <form id="editBreedForm" class="flex-grow-1 overflow-auto p-5">
-                <input type="hidden" id="editBreedId" name="breed_id" value="">
-                <div class="row g-5">
-                    <!-- Breed Image Section -->
-                    <div class="col-md-5 d-flex flex-column gap-4">
-                        <div class="position-relative group">
-                            <div class="ratio ratio-1x1 rounded-xl overflow-hidden bg-surface-container shadow-sm">
-                                <img id="editBreedImagePreview" alt="Breed image" class="w-100 h-100 object-fit-cover"
-                                    data-alt="Breed image preview"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgih6bq3mACcgSc2MphDkKQkK-MTZjkHSi2pmYqcT4SmHzAc7GBI6D8fg3FL90R4M-7lrYRj4KPdZ1L7rDXYaRSa1H46ncTf7zp-c6Mne_5uhWVoR8Py5j75PSbq3GxGoZ0xUlDKqPTD2m6iG3PUi-a1Z85dYrF-d3SZV9bPPMA-93-NCCh2JY6RsZakQ27sCy7u8jYl8QNimz93Biy8LTZJa7pmkhIjF6BEjpRt3azkzFZjS-o865DtenBGj6-6V_x4btCaI8ACws" />
-                                <input type="file" id="editImageInput" name="image" class="hidden"
-                                    accept="image/*" />
-                            </div>
-                            <button type="button" id="editImageUploadBtn"
-                                class="position-absolute bottom-0 end-0 m-3 btn btn-primary rounded-pill d-flex align-items-center gap-2 shadow hover-bg-primary-dim active-scale-95">
-                                <span class="material-symbols-outlined text-sm">photo_camera</span>
-                                <span class="font-label font-bold text-xs tracking-wider">UPDATE PHOTO</span>
-                            </button>
-                        </div>
-                        {{-- <div class="p-6 rounded-lg bg-surface-container-low border border-outline-variant/5">
-                            <p class="text-sm text-outline leading-relaxed">
-                                High-quality images increase registry visibility. Recommended: 1080x1080px, natural
-                                lighting, centered subject.
-                            </p>
-                        </div> --}}
+    <!-- Edit Breed Modal -->
+    <div id="editBreedsModal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="species-dialog modal-dialog modal-lg modal-dialog-centered">
+            <div class="species-content modal-content rounded-4 shadow-lg border-0">
+
+                <!-- Header -->
+                <div class="modal-header border-0">
+                    <div>
+                        <small class="text-muted fw-semibold text-uppercase"
+                            style="font-size: 0.7rem; letter-spacing: 0.08em;">Registry Entry</small>
+                        <h5 class="mb-0 fw-bold">Edit Breed</h5>
                     </div>
-                    <!-- Form Section -->
-                    <div class="col-md-7 d-flex flex-column gap-5">
-                        <!-- Breed Name -->
-                        <div class="d-flex flex-column gap-2">
-                            <label class="font-label text-xs font-bold tracking-widest text-primary uppercase">Breed
-                                Name</label>
-                            <input id="editBreedName"
-                                class="form-control border-0 border-bottom border-outline-variant-30 py-2 px-0 shadow-none fs-5 fw-medium text-on-surface bg-transparent"
-                                type="text" name="breed_name" value="" />
-                        </div>
-                        <div class="row g-4">
-                            <!-- Species (Read Only) -->
-                            <div class="d-flex flex-column gap-2 opacity-70">
-                                <label
-                                    class="font-label text-xs font-bold tracking-widest text-outline uppercase">Species</label>
-                                <div
-                                    class="w-100 bg-surface-container-high rounded-pill py-2 px-4 d-flex align-items-center justify-content-between">
-                                    <span id="editBreedSpecies" class="text-on-surface font-medium">Canine</span>
-                                    <span class="material-symbols-outlined text-sm">lock</span>
-                                </div>
-                            </div>
-                            <!-- Status Toggle -->
-                            <div class="d-flex flex-column gap-2">
-                                <label
-                                    class="font-label text-xs font-bold tracking-widest text-primary uppercase">Status</label>
-                                <div
-                                    class="d-flex bg-surface-container-low p-1 rounded-pill border border-outline-variant-10">
-                                    <label
-                                        class="flex-grow-1 py-2 px-3 rounded-pill fs-6 fw-bold shadow-sm cursor-pointer">
-                                        <input id="editBreedStatusActive" type="radio" name="status" value="1"
-                                            class="hidden" />
-                                        <span class="d-block text-center">Active</span>
-                                    </label>
-                                    <label
-                                        class="flex-grow-1 py-2 px-3 rounded-pill fs-6 fw-bold shadow-sm cursor-pointer">
-                                        <input id="editBreedStatusInactive" type="radio" name="status" value="0"
-                                            class="hidden" />
-                                        <span class="d-block text-center">Inactive</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Description & Care Notes -->
-                        <div class="d-flex flex-column gap-2">
-                            <label class="font-label text-xs font-bold tracking-widest text-primary uppercase">Description
-                                &amp; Care Notes</label>
-                            <textarea id="editBreedDescription"
-                                class="form-control bg-surface-container-low rounded-3 border-outline-variant-20 p-3 shadow-none text-on-surface"
-                                rows="6"></textarea>
-                        </div>
-                    </div>
+                    <button id="closeEditBreedM" type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-            </form>
-            <!-- Actions Footer -->
-            <div
-                class="p-4 border-top border-outline-variant-10 d-flex justify-content-end align-items-center gap-3 bg-white-40 backdrop-blur-md">
-                <button id="cancelEditBreedM"
-                    class="btn rounded-pill font-label fw-bold text-outline hover-text-primary active-scale-95">
-                    Cancel
-                </button>
-                <button type="button" id="saveEditBreedBtn"
-                    class="btn btn-primary rounded-pill bg-primary text-white font-headline fw-bold shadow-custom-1 hover-bg-primary-dim active-scale-95 d-flex align-items-center gap-2">
-                    <span class="material-symbols-outlined text-[20px]"
-                        style="font-variation-settings: 'FILL' 1;">save</span>
-                    Save Changes
-                </button>
+
+                <!-- Form -->
+                <form id="editBreedForm" class="modal-form" enctype="multipart/form-data">
+                    <input type="hidden" id="editBreedId" name="breed_id" value="">
+
+                    <div class="modal-body row w-100">
+
+                        <!-- Image Upload -->
+                        <div class="col-md-4">
+                            <label class="form-label">Breed Image</label>
+                            <div class="imageUploadBox position-relative rounded-3 overflow-hidden border border-2 border-dashed d-flex flex-column align-items-center justify-content-center cursor-pointer"
+                                id="editImageUploadBox" style="height: 140px; background: #f8f9fa;">
+                                <img class="imagePreview position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-25"
+                                    id="editBreedImagePreview" alt="Breed image preview"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgih6bq3mACcgSc2MphDkKQkK-MTZjkHSi2pmYqcT4SmHzAc7GBI6D8fg3FL90R4M-7lrYRj4KPdZ1L7rDXYaRSa1H46ncTf7zp-c6Mne_5uhWVoR8Py5j75PSbq3GxGoZ0xUlDKqPTD2m6iG3PUi-a1Z85dYrF-d3SZV9bPPMA-93-NCCh2JY6RsZakQ27sCy7u8jYl8QNimz93Biy8LTJa7pmkhIjF6BEjpRt3azkzFZjS-o865DtenBGj6-6V_x4btCaI8ACws" />
+                                <span class="material-symbols-outlined mb-1">photo_camera</span>
+                                <span class="small text-muted">Update Photo</span>
+                                <input type="file" class="position-absolute top-0 start-0 w-100 h-100 opacity-0"
+                                    style="cursor: pointer;" accept="image/*" id="editImageInput" name="image">
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 mb-3">
+                            <!-- Breed Name -->
+                            <div class="mb-1">
+                                <label class="form-label">Breed Name</label>
+                                <input type="text" id="editBreedName" name="breed_name" class="form-control"
+                                    placeholder="e.g. Beagle" value="" />
+                            </div>
+
+                            <!-- Species (Read Only) -->
+                            <div class="mb-1">
+                                <label class="form-label">Species</label>
+                                <div class="form-control d-flex align-items-center justify-content-between bg-light"
+                                    style="cursor: not-allowed;">
+                                    <span id="editBreedSpecies" class="text-muted">—</span>
+                                    <span class="material-symbols-outlined text-muted"
+                                        style="font-size: 1rem;">lock</span>
+                                </div>
+                            </div>
+
+                            <!-- Status -->
+                            <div class="mb-1">
+                                <label class="form-label">Status</label>
+                                <div class="d-flex gap-3">
+                                    <label class="d-flex align-items-center gap-2">
+                                        <input type="radio" id="editBreedStatusActive" class="pet_status"
+                                            name="status" value="1" />
+                                        <span>Active</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2">
+                                        <input type="radio" id="editBreedStatusInactive" class="pet_status"
+                                            name="status" value="0" />
+                                        <span>Inactive</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-1">
+                            <label class="form-label">Description &amp; Care Notes</label>
+                            <textarea id="editBreedDescription" name="description" class="form-control" rows="3"
+                                placeholder="Temperament, physical traits, care needs..."></textarea>
+                        </div>
+
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-light" id="cancelEditBreedM"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" id="saveEditBreedBtn" class="btn btn-primary">
+                            <span class="material-symbols-outlined align-middle">update</span>
+                            update
+                        </button>
+                    </div>
+
+                </form>
+
             </div>
         </div>
     </div>
@@ -297,7 +265,7 @@
 
     <!-- Header Section -->
     <div class="row g-4 mb-5">
-        <div class="col-lg-8 d-flex justify-content-between align-items-center">
+        <div class="col-lg-8 registry d-flex justify-content-between align-items-center">
             <div>
                 <span class="text-primary fw-bold tracking-widest fs-6 text-uppercase">Registry Overview</span>
                 <h2 class="font-headline fs-2 font-headline fw-bolder text-on-surface mt-2">Pet Management</h2>
@@ -305,22 +273,23 @@
                     the
                     Radiant Habitat ecosystem.</p>
             </div>
-            <button id="addBtn" class="btn-add-new">
+            <button id="addBtn" class="btn-add-new" type="button" data-bs-toggle="modal"
+                data-bs-target="#newSpeciesModal">
                 <span class="material-symbols-outlined" data-icon="add">add</span>
                 Add New Species
             </button>
         </div>
         <!-- Sidebar / Stats Section -->
-        <aside class="col-lg-4 d-flex flex-column gap-4">
-            <div class="bg-secondary-10 rounded-xl p-4 border border-secondary-10">
+        <aside class="registry-sidebar col-lg-4 d-flex flex-column gap-4">
+            <div class="bg-secondary-10 rounded-2xl md:rounded-xl p-4 border border-secondary-10">
                 <h4 class="font-headline fs-5 fw-bold mb-4">Population Insights</h4>
-                <div class="d-flex flex-column gap-3">
+                <div class="count d-flex flex-column gap-3">
                     <div class="d-flex align-items-center justify-content-between">
                         <span class="text-sm opacity-70">Total Species</span>
                         <span class="fw-bold fs-4">{{ $totalSpecies }}</span>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
-                        <span class="text-sm opacity-70">Active Breeds</span>
+                        <span class="text-sm opacity-70">Total Breeds</span>
                         <span class="fw-bold fs-4">{{ $totalBreeds }}</span>
                     </div>
                 </div>
@@ -338,13 +307,12 @@
                 <!-- Edit Species Modal -->
                 <div class="editSpeciesForm modal fade" id="editSpeciesModal{{ $specie->id }}" tabindex="-1"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered">
-                        <div class="modal-content rounded-4 shadow-lg border-0">
+                    <div class="species-dialog modal-dialog modal-lg modal-dialog-centered">
+                        <div class="species-content modal-content rounded-4 shadow-lg border-0">
 
                             <!-- Header -->
                             <div class="modal-header border-0">
                                 <div>
-                                    <small class="text-muted">Update Entry</small>
                                     <h5 class="mb-0 fw-bold">Edit Species</h5>
                                 </div>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -395,16 +363,17 @@
                     </div>
                 </div>
 
-                <div class="glass-card rounded-xl p-4 mb-2 position-relative overflow-hidden group">
+                <div class="glass-card rounded-4xl p-2 mb-2 position-relative overflow-hidden group">
                     <div
                         class="position-absolute top-0 end-0 translate-middle-y translate-middle-x rounded-circle bg-primary-5">
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-2 position-relative z-10">
                         <div class="d-flex align-items-center gap-3">
                             <div class="rounded-2xl bg-primary-10 d-flex align-items-center justify-content-center p-3">
-                                <span class="material-symbols-outlined text-primary text-3xl" data-icon="pets">pets</span>
+                                <span class="material-symbols-outlined text-primary text-xl md:text-3xl"
+                                    data-icon="pets">pets</span>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between w-100">
+                            <div class="speciesModify d-flex align-items-center justify-content-between w-100">
 
                                 <!-- Left: Title -->
                                 <h3 class="font-headline fs-3 fw-bold mb-0">
@@ -412,7 +381,7 @@
                                 </h3>
 
                                 <!-- Right: Actions -->
-                                <div class="pl-4 d-flex align-items-center gap-2">
+                                <div class="pl-4 pt-2 d-flex align-items-center gap-2">
 
                                     <!-- Edit -->
                                     <button
@@ -428,28 +397,27 @@
                                         data-id="{{ $specie->id }}" title="Delete">
                                         <span class="material-symbols-outlined fs-6">delete</span>
                                     </button>
-
                                 </div>
-
                             </div>
-
                         </div>
-                        <button id="addBreeds" data-specie-id="{{ $specie->id }}"
+
+                        <button id="addBreeds" data-specie-id="{{ $specie->id }}" data-bs-toggle="modal"
+                            data-bs-target="#addBreedsModal"
                             class="btn rounded-pill border border-2 border-primary-20 text-primary fw-bold hover-bg-primary-5 d-flex align-items-center gap-2">
                             <span class="material-symbols-outlined text-sm" data-icon="add">add</span>
-                            Add New Breed
+                            <span class="d-none d-md-inline">Add New Breed</span>
                         </button>
                     </div>
-                    <div class="row g-1 row-cols-2 row-cols-md-5 relative z-10">
+                    <div class="breed-main-card row g-2 row-cols-2 row-cols-md-5 relative z-10">
                         <!-- Breed Card -->
                         @php $count = 0; @endphp
                         @foreach ($breeds as $breed)
                             @if ($breed->species_id == $specie->id)
                                 @php $count++; @endphp
-                                <div class="col bg-white-40 rounded-2xl p-3 cursor-pointer border border-transparent group-item breed-card {{ $count > 5 ? 'hidden' : '' }}"
+                                <div class="col bg-white-40 rounded-2xl g-2 cursor-pointer border border-transparent group-item breed-card {{ $count > 5 ? 'hidden' : '' }}"
                                     data-specie-id="{{ $specie->id }}">
                                     <div
-                                        class="ratio ratio-1x1 rounded-xl overflow-hidden mb-3 position-relative breed-img">
+                                        class="breed-height ratio ratio-1x1 rounded-2xl overflow-hidden mb-2 position-relative breed-img">
                                         <img class="w-100 h-100 object-fit-cover group-hover/item:scale-110 transition-transform duration-500"
                                             alt="{{ $breed->breed_name }} image"
                                             data-alt="{{ $breed->breed_name }} breed image"
@@ -475,8 +443,8 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <h4 class="fw-bold text-on-surface">{{ $breed->breed_name }}</h4>
-                                    <p class="fs-6 text-on-surface-variant">Standard / Large</p>
+                                    <h4 class="fw-bold text-on-surface pb-2 px-2">{{ $breed->breed_name }}</h4>
+                                    {{-- <p class="fs-6 text-on-surface-variant">Standard / Large</p> --}}
                                 </div>
                             @endif
                         @endforeach
@@ -484,8 +452,9 @@
                     <button id="viewAllBreeds-{{ $specie->id }}" data-specie-id="{{ $specie->id }}"
                         data-species-name="{{ $specie->species_name }}" data-expanded="false"
                         class="w-100 mt-2 py-2 text-primary fw-bold btn d-flex justify-content-center align-items-center gap-1">
-                        <span>View all {{ $specie->species_name }} breeds</span>
-                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+                        <span class="text-sm md:text-xs">View all {{ $specie->species_name }} breeds</span>
+                        <span class="material-symbols-outlined text-sm md:text-xs"
+                            data-icon="arrow_forward">arrow_forward</span>
                     </button>
                 </div>
             </section>
@@ -493,16 +462,16 @@
     </div>
 
 
-
+    <!-- Delete Species Modal -->
     <div class="modal fade" id="deleteSpeciesModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 rounded-4 shadow-lg">
 
                 <div class="modal-header border-0">
-                    <h5 class="modal-title text-danger">Delete Species</h5>
+                    <h5 class="modal-title text-danger md:text-2xl text-lg">Delete Species</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body py-1">
                     <p class="mb-0">
                         Are you sure you want to delete this species? This action cannot be undone.
                     </p>
@@ -520,17 +489,17 @@
         </div>
     </div>
 
-
+    <!-- Delete Breed Modal -->
     <div class="modal fade" id="deleteBreedModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 rounded-4 shadow-lg">
 
                 <div class="modal-header border-0">
-                    <h5 class="modal-title text-danger">Delete Breed</h5>
+                    <h5 class="modal-title text-danger md:text-2xl text-lg">Delete Breed</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
-                <div class="modal-body">
+                <div class="modal-body py-1">
                     <p class="mb-0">
                         Are you sure you want to delete this breed? This action cannot be undone.
                     </p>
@@ -564,15 +533,6 @@
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
-            });
-
-            // Open Add Species Modal
-            $('#addBtn').click(function() {
-                $('#newSpeciesModal').removeClass('hidden');
-            });
-
-            $(document).on('click', '#closeaddBtn, #canceladdBtn', function() {
-                $('#newSpeciesModal').addClass('hidden');
             });
 
             /////////// Save Species
@@ -725,34 +685,6 @@
 
 
 
-
-
-
-            // Open Add Breed Modal
-            $(document).on('click', '#addBreeds', function() {
-                var specieId = $(this).data('specie-id');
-
-                $('#addBreedsModal').removeClass('hidden');
-
-                // Just set default value
-                $('#addBreedSpeciesSelect').val(specieId.toString());
-            });
-
-            // Close modal
-            $(document).on('click', '#closeaddBreeds', function() {
-                $('#addBreedsModal').addClass('hidden');
-            });
-
-            // Optional: close when clicking outside modal
-            $(document).on('click', '#addBreedsModal', function(e) {
-                if (e.target.id === 'addBreedsModal') {
-                    $('#addBreedsModal').addClass('hidden');
-                }
-            });
-
-
-
-
             /////////// Save/ Edit Breed image upload & preview
             $(document).on('click', '#imageUploadBox', function() {
                 $('#imageInput')[0].click();
@@ -847,6 +779,14 @@
                 });
             });
 
+            // Auto-select species when Add New Breed modal opens
+            $('#addBreedsModal').on('show.bs.modal', function(event) {
+                var specieId = $(event.relatedTarget).data('specie-id');
+                if (specieId) {
+                    $('#addBreedSpeciesSelect').val(specieId);
+                }
+            });
+
 
 
             /////////// Update breed
@@ -910,8 +850,6 @@
 
 
 
-            // Delete breed button (now deactivates)
-
 
             // View all breeds toggle
             $(document).on('click', '[id^="viewAllBreeds-"]', function() {
@@ -919,15 +857,21 @@
                 var specieId = $button.data('specie-id');
                 var speciesName = $button.data('species-name');
                 var isExpanded = $button.data('expanded');
+                var $extraBreeds = $('.breed-card[data-specie-id="' + specieId + '"]:gt(4)');
+
                 if (isExpanded) {
-                    // Hide extra breeds with fade out
-                    $('.breed-card[data-specie-id="' + specieId + '"]:gt(4)').fadeOut(300);
+                    // Fade out then re-add the 'hidden' class
+                    $extraBreeds.fadeOut(300, function() {
+                        $(this).addClass('hidden');
+                    });
                     $button.find('span:first').text('View all ' + speciesName + ' breeds');
+                    $button.find('[data-icon="arrow_forward"]').text('arrow_forward');
                     $button.data('expanded', false);
                 } else {
-                    // Show all breeds with fade in
-                    $('.breed-card[data-specie-id="' + specieId + '"]:gt(4)').fadeIn(300);
+                    // Remove 'hidden' class first, then fade in
+                    $extraBreeds.removeClass('hidden').hide().fadeIn(300);
                     $button.find('span:first').text('Show less');
+                    $button.find('[data-icon="arrow_forward"]').text('arrow_drop_up');
                     $button.data('expanded', true);
                 }
             });
@@ -958,7 +902,9 @@
                 }
 
                 updateEditBreedStatusPills();
-                $('#editBreedsModal').removeClass('hidden');
+                // ✅ Replace the old removeClass('hidden') with this
+                var editModal = new bootstrap.Modal(document.getElementById('editBreedsModal'));
+                editModal.show();
             });
 
             function updateEditBreedStatusPills() {
@@ -983,16 +929,6 @@
                 updateEditBreedStatusPills();
             });
 
-            $(document).on('click', '#closeEditBreedM, #cancelEditBreedM', function() {
-                $('#editBreedsModal').addClass('hidden');
-            });
-
-            // Close modal when clicking outside
-            $(document).on('click', '#editBreedsModal', function(e) {
-                if (e.target.id === 'editBreedsModal') {
-                    $('#editBreedsModal').addClass('hidden');
-                }
-            });
 
             $(document).on('click', '#saveEditBreedBtn', function() {
                 $('#editBreedForm').submit();

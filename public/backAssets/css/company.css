@@ -1,8 +1,20 @@
-/* Exact Design Mapping for Company Page (Tailwind -> Bootstrap + CSS) */
+/* ============================================================
+   company.css
+   Exact Design Mapping for Company Page (Tailwind -> Bootstrap + CSS)
+   ============================================================ */
+
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+/* ---------- Page Layout ---------- */
 .company-canvas {
     padding-bottom: 8rem;
 }
 
+
+/* ---------- Typography ---------- */
 .tracking-tighter {
     letter-spacing: -0.05em !important;
 }
@@ -27,7 +39,20 @@
     font-size: 0.75rem !important;
 }
 
-/* Color Scheme */
+.font-headline {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.font-body {
+    font-family: 'Be Vietnam Pro', sans-serif !important;
+}
+
+.font-label {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+
+/* ---------- Color Scheme — Text ---------- */
 .text-on-surface {
     color: #303330 !important;
 }
@@ -80,6 +105,8 @@
     color: #5c4900 !important;
 }
 
+
+/* ---------- Color Scheme — Background ---------- */
 .bg-primary {
     background-color: #944c00 !important;
 }
@@ -128,20 +155,9 @@
     background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
-/* Typography */
-.font-headline {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-}
 
-.font-body {
-    font-family: 'Be Vietnam Pro', sans-serif !important;
-}
-
-.font-label {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-}
-
-/* Border Radius */
+/* ---------- Border Radius ---------- */
+/* Configured in system */
 .rounded-full {
     border-radius: 9999px !important;
 }
@@ -150,7 +166,6 @@
     border-radius: 2rem !important;
 }
 
-/* Configured in system */
 .rounded-xl {
     border-radius: 3rem !important;
 }
@@ -159,7 +174,8 @@
     border-radius: 1rem !important;
 }
 
-/* Sizing Constraints */
+
+/* ---------- Sizing Constraints ---------- */
 .w-10 {
     width: 2.5rem !important;
 }
@@ -180,12 +196,13 @@
     gap: 2rem !important;
 }
 
-/* Visual Effects */
+
+/* ---------- Visual Effects ---------- */
 .glass-card {
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px 3px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .signature-glow {
@@ -201,11 +218,16 @@
     border-bottom: none;
 }
 
+#table-header {
+    background-color: #ebebeb !important;
+}
+
 .custom-active-scale:active {
     transform: scale(0.95);
 }
 
-/* Hover States */
+
+/* ---------- Hover States ---------- */
 .hover-bg-surface-lowest:hover {
     background-color: rgba(255, 255, 255, 0.5) !important;
     transition: all 0.2s;
@@ -249,7 +271,8 @@
     color: #944c00 !important;
 }
 
-/* Animations */
+
+/* ---------- Animations ---------- */
 @keyframes pulse-custom {
 
     0%,
@@ -266,12 +289,20 @@
     animation: pulse-custom 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Map Input Overrides */
+
+/* ---------- Form Input Overrides ---------- */
 .custom-focus-ring:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(0, 107, 99, 0.2) !important;
 }
 
+.form-select.custom-focus-ring:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 107, 99, 0.2) !important;
+}
+
+
+/* ---------- Bottom Bar ---------- */
 #bottomBar {
     background-color: rgba(250, 249, 246, 0.95);
     backdrop-filter: blur(12px);
@@ -279,19 +310,13 @@
 }
 
 
-
-/* company create pop up modal */
-
-/* Modal Custom Styles */
-.modal-content.glass-card {
-    background: rgba(250, 249, 246, 0.95);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
+/* ---------- Border Utilities ---------- */
 .border-secondary-10 {
     border-color: rgba(0, 107, 99, 0.1) !important;
+}
+
+.border-transparent {
+    border-color: transparent !important;
 }
 
 .hover-border-primary:hover {
@@ -302,15 +327,8 @@
     border-color: #006b63 !important;
 }
 
-.border-transparent {
-    border-color: transparent !important;
-}
 
-.form-select.custom-focus-ring:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 107, 99, 0.2) !important;
-}
-
+/* ---------- Custom Radio ---------- */
 .custom-radio {
     cursor: pointer;
 }
@@ -322,4 +340,158 @@
 .custom-radio input[type="radio"]:checked {
     background-color: #944c00;
     border-color: #944c00;
+}
+
+
+/* ========================================
+   Add Company Modal
+   ======================================== */
+
+.modal-content.glass-card {
+    background: rgba(250, 249, 246, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+#addCompanyForm input {
+    background-color: #e5e5e5 !important;
+}
+
+#addCompanyModal .modal-content {
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+#addCompanyModal .modal-body {
+    overflow-y: auto;
+}
+
+/* ========================================
+   View Company Modal
+   ======================================== */
+
+/* (Styles shared with Edit Company Modal — see below) */
+
+
+/* ========================================
+   Edit Company Modal
+   ======================================== */
+
+[id^="editCompanyModal"] .modal-content {
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+[id^="editCompanyModal"] .modal-body {
+    overflow-y: auto;
+}
+
+/* (View & Edit modal responsive styles are grouped in the Media Queries section) */
+
+
+/* ============================================================
+   MEDIA QUERIES
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    /* ---------- Company Page — Header ---------- */
+    .company-header {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 2rem;
+    }
+
+    .company-header h3 {
+        font-size: 22px !important;
+    }
+
+    .company-header p {
+        font-size: 0.9rem !important;
+    }
+
+
+
+    /* ---------- Add Company Modal ---------- */
+    #addCompanyModal .modal-dialog {
+        width: 90%;
+        max-width: 90%;
+        margin: auto;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+    }
+
+    #addCompanyModal .modal-content {
+        height: 80vh;
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    #addCompanyModal .modal-body {
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    #addCompanyModalLabel {
+        font-size: 0.9rem !important;
+    }
+
+
+
+
+    /* ---------- View Company Modal ---------- */
+    #viewCompanyModalLabel {
+        font-size: 0.9rem !important;
+    }
+
+
+    #viewCompanyModal .modal-dialog,
+    [id^="viewCompanyModal"] .modal-dialog {
+        width: 90% !important;
+        max-width: 90% !important;
+        height: 80vh;
+        margin: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    [id^="viewCompanyModal"] .modal-content {
+        height: 80vh;
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    [id^="viewCompanyModal"] .modal-body {
+        overflow-y: auto;
+        flex: 1;
+    }
+
+
+    /* ---------- Edit Company Modal ---------- */
+    #editCompanyModalLabel {
+        font-size: 0.9rem !important;
+    }
+
+    [id^="editCompanyModal"] .modal-dialog {
+        width: 90% !important;
+        max-width: 90% !important;
+        height: 80vh;
+        margin: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    [id^="editCompanyModal"] .modal-content {
+        height: 80vh;
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    [id^="editCompanyModal"] .modal-body {
+        overflow-y: auto;
+        flex: 1;
+    }
+
 }

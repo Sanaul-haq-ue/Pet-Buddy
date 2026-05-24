@@ -1,257 +1,16 @@
-/* Edit User modal */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(28, 28, 28, 0.4);
-    backdrop-filter: blur(4px);
-    z-index: 1050;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.glass-card {
-    background: #fff;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 500px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
+/* =========================
+   UTILITIES
+========================== */
 .hidden {
     display: none !important;
 }
 
 
+/* =========================
+   CUSTOMER LIST / CARDS
+========================== */
 
-
-/* Create User modal */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-}
-
-.modern-modal {
-    width: 900px;
-    max-height: 90vh;
-    overflow: hidden;
-    background: #fff;
-    border-radius: 18px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
-}
-
-/* HEADER */
-.modal-header {
-    padding: 20px 25px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-}
-
-.title {
-    font-weight: 800;
-    margin: 0;
-}
-
-.subtitle {
-    font-size: 12px;
-    color: #777;
-    margin: 0;
-}
-
-.close-btn {
-    border: none;
-    background: #f5f5f5;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
-/* BODY */
-.modal-body {
-    padding: 25px;
-    overflow-y: auto;
-}
-
-/* PROFILE */
-.profile-section {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 25px;
-}
-
-.profile-avatar {
-    width: 90px;
-    height: 90px;
-    border-radius: 16px;
-    border: 2px dashed #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 22px;
-    background: #fafafa;
-}
-
-.edit-btn {
-    margin-top: 10px;
-    background: #0d6efd;
-    color: #fff;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-}
-
-.profile-text h5 {
-    margin: 0;
-    font-weight: 700;
-}
-
-.profile-text p {
-    font-size: 12px;
-    color: #777;
-}
-
-/* FORM GRID */
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.input-box label {
-    font-size: 12px;
-    font-weight: 700;
-    color: #666;
-}
-
-.input-box input,
-.input-box select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-}
-
-.full {
-    grid-column: span 2;
-}
-
-/* PET SECTION */
-.section-title {
-    margin: 25px 0 10px;
-    font-weight: 800;
-    font-size: 14px;
-}
-
-.pet-card {
-    background: #f9fafc;
-    padding: 15px;
-    border-radius: 14px;
-    margin-bottom: 15px;
-    border: 1px solid #eee;
-}
-
-.pet-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.pet-top {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.pet-preview {
-    width: 80px;
-    height: 80px;
-    border-radius: 12px;
-    object-fit: cover;
-}
-
-.changePetImageBtn {
-    background: transparent;
-    border: 1px solid #0d6efd;
-    color: #0d6efd;
-    padding: 5px 10px;
-    border-radius: 8px;
-}
-
-.pet-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.pet_input {
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-}
-
-.pet-status {
-    margin: 10px 0;
-    display: flex;
-    gap: 15px;
-}
-
-textarea {
-    width: 100%;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-/* BUTTONS */
-.add-pet-btn {
-    width: 100%;
-    padding: 12px;
-    border: 2px dashed #0d6efd;
-    background: transparent;
-    border-radius: 12px;
-    margin-top: 10px;
-}
-
-.modal-footer {
-    padding: 15px;
-    border-top: 1px solid #eee;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.btn-cancel {
-    background: #f1f1f1;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 10px;
-}
-
-.btn-save {
-    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
-    border: none;
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 10px;
-    font-weight: 700;
-}
-
-
-
-/* User List modal */
+/* --- User Card --- */
 .user-card {
     border-radius: 14px;
     background: #ffffff;
@@ -262,7 +21,7 @@ textarea {
     padding: 16px !important;
 }
 
-/* spacing between cards (IMPORTANT) */
+/* Spacing between cards (IMPORTANT) */
 .user-card+.user-card {
     margin-top: 12px;
 }
@@ -291,6 +50,7 @@ textarea {
     transform: scale(1.08);
 }
 
+/* --- Pet Avatar (in card list) --- */
 .pet-avatar {
     width: 38px;
     height: 38px;
@@ -305,6 +65,7 @@ textarea {
     margin-left: 0;
 }
 
+/* --- Badges --- */
 .badge-vip {
     background: rgba(13, 110, 253, 0.08);
     color: #0d6efd;
@@ -324,9 +85,9 @@ textarea {
 }
 
 
-
-
-/* Pet Summary */
+/* =========================
+   SUMMARY PANEL (DESKTOP)
+========================== */
 .summary-card {
     border-radius: 14px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
@@ -363,4 +124,341 @@ textarea {
 
 .badge-follow {
     background: #0d6efd;
+}
+
+
+/* =========================
+   MODALS (ADD / EDIT)
+========================== */
+
+/* --- Overlay --- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* --- Glass Card (Edit modal wrapper) --- */
+.glass-card {
+    background: #fff;
+    border-radius: 20px;
+    width: 100%;
+    /* max-width: 500px; */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Modern Modal (Add / Create modal wrapper) --- */
+.modern-modal {
+    width: 900px;
+    max-height: 90vh;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Modal Header --- */
+.modal-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-weight: 800;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 12px;
+    color: #777;
+    margin: 0;
+}
+
+.close-btn {
+    border: none;
+    background: #f5f5f5;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* --- Modal Body --- */
+.modal-body {
+    padding: 25px;
+    overflow-y: auto;
+}
+
+/* --- Modal Footer --- */
+.modal-footer {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+/* =========================
+   BUTTONS & ACTIONS
+========================== */
+.edit-btn {
+    margin-top: 10px;
+    background: #0d6efd;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.changePetImageBtn {
+    background: transparent;
+    border: 1px solid #0d6efd;
+    color: #0d6efd;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.add-pet-btn {
+    width: 100%;
+    padding: 12px;
+    border: 2px dashed #0d6efd;
+    background: transparent;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.btn-cancel {
+    background: #f1f1f1;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    border: none;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   FORMS / INPUTS
+========================== */
+
+/* --- Profile Section --- */
+.profile-section {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 16px;
+    border: 2px dashed #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 22px;
+    background: #fafafa;
+}
+
+.profile-text h5 {
+    margin: 0;
+    font-weight: 700;
+}
+
+.profile-text p {
+    font-size: 12px;
+    color: #777;
+}
+
+/* --- Form Grid --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.input-box label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #666;
+}
+
+.input-box input,
+.input-box select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.full {
+    grid-column: span 2;
+}
+
+textarea {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+
+/* =========================
+   PET CARDS / PET UI
+========================== */
+.section-title {
+    margin: 25px 0 10px;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.pet-card {
+    background: #f9fafc;
+    padding: 15px;
+    border-radius: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+}
+
+.pet-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.pet-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.pet-preview {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.pet-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.pet_input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.pet-status {
+    margin: 10px 0;
+    display: flex;
+    gap: 15px;
+}
+
+
+/* =========================
+   MOBILE STYLES
+========================== */
+@media (max-width: 768px) {
+
+    /* --- Customer Header --- */
+    .customer-header {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+
+    .customer-header h3 {
+        font-size: 1.125rem !important;
+    }
+
+    .customer-header p {
+        padding-bottom: 20px;
+        font-size: 0.9rem !important;
+    }
+
+    /* --- Customer View --- */
+    .customer-list {
+        flex-direction: column;
+        gap: 14px;
+        background-color: #e3e3e378;
+        padding: 20px 3px;
+    }
+
+    /* --- Mobile Summary Overlay / Drawer --- */
+    .mobile-summary-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 9999;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    /* Right sliding panel */
+    .mobile-summary-content {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 90%;
+        height: 100vh;
+        overflow-y: auto;
+        background: #fff;
+        padding: 16px;
+        padding-top: 78px;
+    }
+
+    /* --- Side Handle --- */
+    .summary-side-handle {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+
+        width: 44px;
+        height: 90px;
+
+        background: #fff;
+        border-radius: 0 12px 12px 0;
+        box-shadow: 4px 0 18px rgba(0, 0, 0, 0.2);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+        z-index: 10000;
+    }
+
+    /* Icon style */
+    .summary-side-handle span {
+        font-size: 26px;
+        color: #333;
+    }
+
+    /* Hover effect */
+    .summary-side-handle:hover {
+        background: #f7f7f7;
+    }
 }
