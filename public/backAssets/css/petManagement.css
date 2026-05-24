@@ -428,6 +428,34 @@
   line-height: 1.1;
 }
 
+#speciesForm .modal-body {
+  padding: 0;
+}
+
+#speciesForm .modal-footer {
+  padding: 0;
+}
+
+#breedForm .modal-body {
+  padding: 0;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+#breedForm .modal-footer {
+  padding: 0;
+}
+
+#editBreedForm .modal-body {
+  padding: 0;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+#editBreedForm .modal-footer {
+  padding: 0;
+}
+
 /* --- Modal Close Button --- */
 .modal-close-btn {
   width: 2.5rem;
@@ -763,9 +791,52 @@
     gap: 30px;
   }
 
+  .registry span {
+    font-size: 11px !important;
+  }
+
+  .registry p {
+    font-size: 0.9rem !important;
+  }
+
+  .registry-sidebar {}
+
+  .registry-sidebar h4 {
+    font-size: 1.125rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .registry-sidebar .count {
+    gap: 4px !important;
+  }
+
+  .registry-sidebar .count span {
+    font-size: 12px !important;
+  }
+
+
+  /* breed View */
+  .breed-main-card {
+    justify-content: center;
+    padding-top: 14px;
+  }
+
+  .breed-card {
+    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.2);
+    width: 46%;
+    margin: 3px;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  .breed-height {
+    height: 100px !important;
+  }
+
+
   /* Species Edit Controls */
   .speciesModify {
-    flex-direction: column;
+    /* flex-direction: column; */
   }
 
   .species-content {
@@ -780,6 +851,14 @@
   /* Add Breed Modal */
   .breed-glass {
     width: 94%;
+  }
+
+  .left-side {
+    width: 25%;
+  }
+
+  .right-side {
+    width: 75%;
   }
 
   /* Edit Breed Modal */

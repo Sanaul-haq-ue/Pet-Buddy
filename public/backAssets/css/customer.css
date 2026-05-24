@@ -22,7 +22,7 @@
 }
 
 /* Spacing between cards (IMPORTANT) */
-.user-card + .user-card {
+.user-card+.user-card {
     margin-top: 12px;
 }
 
@@ -389,8 +389,21 @@ textarea {
         gap: 10px;
     }
 
+    .customer-header h3 {
+        font-size: 1.125rem !important;
+    }
+
     .customer-header p {
         padding-bottom: 20px;
+        font-size: 0.9rem !important;
+    }
+
+    /* --- Customer View --- */
+    .customer-list {
+        flex-direction: column;
+        gap: 14px;
+        background-color: #e3e3e378;
+        padding: 20px 3px;
     }
 
     /* --- Mobile Summary Overlay / Drawer --- */

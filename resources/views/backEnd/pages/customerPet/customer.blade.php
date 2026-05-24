@@ -1,7 +1,6 @@
 @extends('backEnd.layouts.master')
 
 @section('adminContent')
-
     <!-- Edit Customer Modal -->
     <div id="editUserModal" class="modal-overlay hidden">
         <div class="modern-modal">
@@ -231,17 +230,22 @@
                     <span class="material-symbols-outlined text-8xl text-primary">pets</span>
                 </div>
                 <p class="text-label-md text-stone-500 font-bold tracking-widest uppercase text-xs">Total Pets</p>
-                <h4 class="text-4xl font-black text-on-surface mt-2">2,412</h4>
-                <div class="mt-4 flex items-center gap-2 text-secondary font-bold text-sm">
-                    <span class="material-symbols-outlined">trending_up</span>
-                    <span>+12% from last month</span>
+                <h4 class="text-2xl md:text-4xl font-black text-on-surface mt-1 md:mt-2">{{ number_format($pets->count()) }}</h4>
+                <div class="mt-2 md:mt-4 flex items-center gap-2 text-secondary font-bold text-sm">
+                    <span class="material-symbols-outlined">
+                        {{ $percentageChange >= 0 ? 'trending_up' : 'trending_down' }}
+                    </span>
+
+                    <span>
+                        {{ number_format(abs($percentageChange), 1) }}% from last month
+                    </span>
                 </div>
             </div>
             <div class="col-span-12 md:col-span-4 glass-card p-6 rounded-lg border-l-4 border-secondary">
                 <p class="text-label-md text-stone-500 font-bold tracking-widest uppercase text-xs">Active
                     Subscriptions</p>
-                <h4 class="text-4xl font-black text-on-surface mt-2">842</h4>
-                <div class="mt-4 flex items-center gap-2 text-stone-400 font-bold text-sm">
+                <h4 class="text-2xl md:text-4xl font-black text-on-surface mt-1 md:mt-2">842</h4>
+                <div class="mt-2 md:mt-4 flex items-center gap-2 text-stone-400 font-bold text-sm">
                     <span class="material-symbols-outlined">info</span>
                     <span>Tier: Premium Care</span>
                 </div>
@@ -249,8 +253,8 @@
             <div class="col-span-12 md:col-span-4 glass-card p-6 rounded-lg">
                 <p class="text-label-md text-stone-500 font-bold tracking-widest uppercase text-xs">Avg. Visit
                     Frequency</p>
-                <h4 class="text-4xl font-black text-on-surface mt-2">14 Days</h4>
-                <div class="mt-4 flex items-center gap-2 text-primary font-bold text-sm">
+                <h4 class="text-2xl md:text-4xl font-black text-on-surface mt-1 md:mt-2">14 Days</h4>
+                <div class="mt-2 md:mt-4 flex items-center gap-2 text-primary font-bold text-sm">
                     <span class="material-symbols-outlined">event_repeat</span>
                     <span>Next cycle begins Monday</span>
                 </div>
@@ -266,17 +270,17 @@
             <div class="col-12 col-lg-7">
 
                 <!-- FILTER -->
-                <div class="d-flex justify-content-between align-items-center mb-2 px-2">
+                <div class="customer-list d-flex justify-content-between align-items-center mb-2 px-2">
                     <h6 class="fw-bold text-muted">Active Pet Parents</h6>
 
                     <div class="d-flex gap-3 small fw-bold text-secondary flex-wrap">
-                        <span @click="filter = 'all'" :class="activeFilter('all')" style="cursor:pointer;">All</span>
-                        <span @click="filter = 'new'" :class="activeFilter('new')" style="cursor:pointer;">New</span>
-                        <span @click="filter = 'vip'" :class="activeFilter('vip')" style="cursor:pointer;">VIP</span>
+                        <span @click="filter = 'all'" :class="activeFilter('all')" class="text-xs md:text-xl" style="cursor:pointer;">All</span>
+                        <span @click="filter = 'new'" :class="activeFilter('new')" class="text-xs md:text-xl"  style="cursor:pointer;">New</span>
+                        <span @click="filter = 'vip'" :class="activeFilter('vip')" class="text-xs md:text-xl" style="cursor:pointer;">VIP</span>
                         <span @click="filter = 'standard'" :class="activeFilter('standard')"
-                            style="cursor:pointer;">Standard</span>
+                            class="text-xs md:text-xl" style="cursor:pointer;">Standard</span>
                         <span @click="filter = 'inactive'" :class="activeFilter('inactive')"
-                            style="cursor:pointer;">Inactive</span>
+                            class="text-xs md:text-xl" style="cursor:pointer;">Inactive</span> 
                     </div>
                 </div>
 

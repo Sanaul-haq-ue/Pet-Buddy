@@ -41,8 +41,7 @@
                     <div class="table-responsive">
                         <table class="table table-borderless table-divider text-start mb-0"
                             style="max-height: 50px; overflow-y: auto;">
-                            <thead
-                                class="bg-surface-container-low text-on-surface-variant font-label text-10px tracking-widest text-uppercase">
+                            <thead class="font-label text-10px tracking-widest text-uppercase">
                                 <tr id="table-header">
                                     <th class="py-3 px-4 px-lg-5">Company</th>
                                     <th class="py-3 px-4 px-lg-5">Email</th>
@@ -284,7 +283,7 @@
     <div class="modal fade" id="addCompanyModal" tabindex="-1" aria-labelledby="addCompanyModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content glass-card border-0 rounded-xl overflow-hidden shadow-lg">
+            <div class="modal-content glass-card border-0 rounded-2xl overflow-hidden shadow-lg">
                 <div class="modal-header border-bottom border-secondary-10 px-4 py-3">
                     <div class="d-flex align-items-center gap-3">
                         <div
@@ -452,27 +451,28 @@
                         class="btn border border-secondary rounded-full text-sm font-headline fw-bold text-on-surface hover-bg-surface-low transition custom-active-scale px-4 py-2"
                         data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" form="addCompanyForm" id="saveCompanyBtn"
-                        class="btn border-0 rounded-full signature-glow text-on-primary text-sm font-headline fw-bold shadow-sm custom-active-scale px-4 py-2">Create
-                        Company</button>
+                        class="btn border-0 rounded-full signature-glow text-on-primary text-sm font-headline fw-bold shadow-sm custom-active-scale px-4 py-2">
+                        Save
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    
+
     @foreach ($companies as $company)
         <!-- View Company Modals -->
         <div class="modal fade" id="viewCompanyModal{{ $company->id }}" tabindex="-1"
             aria-labelledby="viewCompanyModalLabel{{ $company->id }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content glass-card border-0 rounded-xl overflow-hidden shadow-lg">
+                <div class="modal-content glass-card border-0 rounded-2xl overflow-hidden shadow-lg">
                     <div class="modal-header border-bottom border-secondary-10 px-4 py-3">
                         <div class="d-flex align-items-center gap-3">
                             <div
                                 class="w-10 h-10 rounded-full bg-primary-10 d-flex align-items-center justify-content-center text-primary">
                                 <span class="material-symbols-outlined fs-5">storefront</span>
                             </div>
-                            <h5 class="modal-title font-headline fw-bold text-on-surface mb-0"
+                            <h5 class="font-headline fw-bold mb-0"
                                 id="viewCompanyModalLabel{{ $company->id }}">{{ $company->company_name }} Details</h5>
                         </div>
                         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
@@ -488,10 +488,10 @@
                                         Company Logo</p>
                                     @if ($company->brand_logo)
                                         <img src="{{ asset($company->brand_logo) }}" alt="Logo"
-                                            class="img-fluid rounded-xl object-fit-cover shadow-sm mx-auto"
+                                            class="img-fluid object-fit-cover shadow-sm mx-auto"
                                             style="max-height: 150px;">
                                     @else
-                                        <div class="w-100 rounded-xl bg-surface-container-low d-flex align-items-center justify-content-center text-zinc-400"
+                                        <div class="w-100 bg-surface-container-low d-flex align-items-center justify-content-center text-zinc-400"
                                             style="height: 150px;">
                                             <span class="material-symbols-outlined fs-1">image_not_supported</span>
                                         </div>
@@ -504,10 +504,10 @@
                                         Business Card</p>
                                     @if ($company->business_card)
                                         <img src="{{ asset($company->business_card) }}" alt="Business Card"
-                                            class="img-fluid rounded-xl object-fit-cover shadow-sm mx-auto"
+                                            class="img-fluid object-fit-cover shadow-sm mx-auto"
                                             style="max-height: 150px;">
                                     @else
-                                        <div class="w-100 rounded-xl bg-surface-container-low d-flex align-items-center justify-content-center text-zinc-400"
+                                        <div class="w-100  bg-surface-container-low d-flex align-items-center justify-content-center text-zinc-400"
                                             style="height: 150px;">
                                             <span class="material-symbols-outlined fs-1">credit_card_off</span>
                                         </div>
@@ -643,14 +643,14 @@
         <div class="modal fade" id="editCompanyModal{{ $company->id }}" tabindex="-1"
             aria-labelledby="editCompanyModalLabel{{ $company->id }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content glass-card border-0 rounded-xl overflow-hidden shadow-lg">
+                <div class="modal-content glass-card border-0 rounded-2xl overflow-hidden shadow-lg">
                     <div class="modal-header border-bottom border-secondary-10 px-4 py-3">
                         <div class="d-flex align-items-center gap-3">
                             <div
                                 class="w-10 h-10 rounded-full bg-secondary-10 d-flex align-items-center justify-content-center text-secondary">
                                 <span class="material-symbols-outlined fs-5">edit_square</span>
                             </div>
-                            <h5 class="modal-title font-headline fw-bold text-on-surface mb-0"
+                            <h5 class="font-headline fw-bold mb-0"
                                 id="editCompanyModalLabel{{ $company->id }}">Edit {{ $company->company_name }}</h5>
                         </div>
                         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
@@ -674,7 +674,7 @@
                                             class="d-none edit-logo-input" accept="image/*"
                                             data-id="{{ $company->id }}">
                                         <div id="editUploadLogoWrapper{{ $company->id }}"
-                                            class="w-100 rounded-xl bg-surface-container-low d-flex align-items-center justify-content-center hover-border-primary transition overflow-hidden edit-upload-logo-wrapper"
+                                            class="w-100 bg-surface-container-low d-flex align-items-center justify-content-center hover-border-primary transition overflow-hidden edit-upload-logo-wrapper"
                                             style="height: 150px; border: 2px dashed var(--secondary-10) !important; cursor: pointer;"
                                             data-id="{{ $company->id }}">
                                             <img id="editLogoPreview{{ $company->id }}"
@@ -700,7 +700,7 @@
                                             name="business_card" class="d-none edit-card-input" accept="image/*"
                                             data-id="{{ $company->id }}">
                                         <div id="editUploadCardWrapper{{ $company->id }}"
-                                            class="w-100 rounded-xl bg-surface-container-low d-flex align-items-center justify-content-center hover-border-primary transition overflow-hidden edit-upload-card-wrapper"
+                                            class="w-100 bg-surface-container-low d-flex align-items-center justify-content-center hover-border-primary transition overflow-hidden edit-upload-card-wrapper"
                                             style="height: 150px; border: 2px dashed var(--secondary-10) !important; cursor: pointer;"
                                             data-id="{{ $company->id }}">
                                             <img id="editCardPreview{{ $company->id }}"
@@ -832,8 +832,9 @@
                             class="btn border border-secondary rounded-full text-sm font-headline fw-bold text-on-surface hover-bg-surface-low transition custom-active-scale px-4 py-2"
                             data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" form="editCompanyForm{{ $company->id }}"
-                            class="btn border-0 rounded-full bg-secondary text-on-secondary text-sm font-headline fw-bold shadow-sm custom-active-scale px-4 py-2 save-edit-company-btn">Save
-                            Changes</button>
+                            class="btn border-0 rounded-full bg-secondary text-on-secondary text-sm font-headline fw-bold shadow-sm custom-active-scale px-4 py-2 save-edit-company-btn">
+                            Update
+                        </button>
                     </div>
                 </div>
             </div>

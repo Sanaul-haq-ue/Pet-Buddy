@@ -36,6 +36,44 @@
             <span class="sidebar-text">Inventory</span>
         </a>
 
+        <!-- Product -->
+        <div class="d-flex flex-column gap-1">
+            <button onclick="toggleMenu('productMenu')"
+                class="nav-link-custom w-100 {{ request()->routeIs('product') || request()->routeIs('productCategory') || request()->routeIs('productSubCategory') || request()->routeIs('productBrand') ? $activeClass : '' }}">
+                <span class="material-symbols-outlined">group</span>
+                <span class="sidebar-text">Product</span>
+                <span class="material-symbols-outlined ms-auto toggle-icon"
+                    style="font-size: 0.75rem;">expand_more</span>
+            </button>
+
+            <div id="productMenu"
+                class="submenu-collapse {{ request()->routeIs('product') || request()->routeIs('productCategory') || request()->routeIs('productSubCategory') || request()->routeIs('productBrand') ? 'show' : '' }}"
+                style="margin-left: 1.5rem;">
+                <div class="d-flex flex-column gap-1 mt-1">
+                    <a href="{{ route('product') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('product') ? $activeClass : '' }}">
+                        <span class="material-symbols-outlined">pets</span>
+                        <span class="sidebar-text">Product</span>
+                    </a>
+                    <a href="{{ route('productCategory') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('productCategory') ? $activeClass : '' }}">
+                        <span class="material-symbols-outlined">person</span>
+                        <span class="sidebar-text">Category</span>
+                    </a>
+                    <a href="{{ route('productSubCategory') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('productSubCategory') ? $activeClass : '' }}">
+                        <span class="material-symbols-outlined">pets</span>
+                        <span class="sidebar-text">Sub Category</span>
+                    </a>
+                    <a href="{{ route('productBrand') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('productBrand') ? $activeClass : '' }}">
+                        <span class="material-symbols-outlined">pets</span>
+                        <span class="sidebar-text">Brand</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <!-- Customers -->
         <div class="d-flex flex-column gap-1">
             <button onclick="toggleMenu('customerMenu')"
@@ -123,7 +161,7 @@
         {{-- <span class="material-symbols-outlined" style="font-size: 1.125rem; color: #797b78;">search</span> --}}
         {{-- <input class="search-input font-body" placeholder="Search appointments, pets, or stock..." type="text" /> --}}
     </div>
-    <div class="d-flex align-items-center gap-4">
+    <div class="top-func d-flex align-items-center gap-4">
         <button id="mobileSearchToggle" class="menu-btn-custom d-flex d-md-none">
             <span class="material-symbols-outlined">search</span>
         </button>

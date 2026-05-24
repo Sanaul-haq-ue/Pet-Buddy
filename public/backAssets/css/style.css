@@ -286,6 +286,7 @@ body.light {
   .user-menu-container {
     gap: 0 !important;
     padding-left: 0.75rem !important;
+
   }
 
   .user-menu-container img {
@@ -310,7 +311,7 @@ body.light {
 
   #mainContent {
     margin-left: 0 !important;
-    padding: 6rem 1rem 0 1rem;
+    padding: 5rem 1rem 0 1rem;
   }
 
   #topbar {
@@ -322,10 +323,21 @@ body.light {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
+  .top-func {
+    gap: 0.5rem !important;
+  }
+
   .mobile-toggle-btn {
     display: block !important;
     padding-left: 20px;
   }
+
+  .btn-add-new {
+    font-size: 11px !important;
+    padding: 10px 22px !important;
+  }
+
+
 }
 
 
@@ -529,8 +541,6 @@ button {
   }
 }
 
-
-@media (max-width: 768px) {}
 
 
 /* SUCCESS */

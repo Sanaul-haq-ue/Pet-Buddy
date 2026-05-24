@@ -403,6 +403,15 @@
         gap: 2rem;
     }
 
+    .company-header h3 {
+        font-size: 22px !important;
+    }
+
+    .company-header p {
+        font-size: 0.9rem !important;
+    }
+
+
 
     /* ---------- Add Company Modal ---------- */
     #addCompanyModal .modal-dialog {
@@ -426,11 +435,18 @@
     }
 
     #addCompanyModalLabel {
-        font-size: 1.5rem !important;
+        font-size: 0.9rem !important;
     }
 
 
+
+
     /* ---------- View Company Modal ---------- */
+    #viewCompanyModalLabel {
+        font-size: 0.9rem !important;
+    }
+
+
     #viewCompanyModal .modal-dialog,
     [id^="viewCompanyModal"] .modal-dialog {
         width: 90% !important;
@@ -454,6 +470,10 @@
 
 
     /* ---------- Edit Company Modal ---------- */
+    #editCompanyModalLabel {
+        font-size: 0.9rem !important;
+    }
+
     [id^="editCompanyModal"] .modal-dialog {
         width: 90% !important;
         max-width: 90% !important;
