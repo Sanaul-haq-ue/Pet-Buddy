@@ -39,7 +39,7 @@
         <!-- Product -->
         <div class="d-flex flex-column gap-1">
             <button onclick="toggleMenu('productMenu')"
-                class="nav-link-custom w-100 {{ request()->routeIs('product') || request()->routeIs('productCategory') || request()->routeIs('productSubCategory') || request()->routeIs('productBrand') ? $activeClass : '' }}">
+                class="nav-link-custom w-100 {{ request()->routeIs('product') || request()->routeIs('productCategory') || request()->routeIs('productSubCategory') || request()->routeIs('productBrand') || request()->routeIs('productUnit') ? $activeClass : '' }}">
                 <span class="material-symbols-outlined">group</span>
                 <span class="sidebar-text">Product</span>
                 <span class="material-symbols-outlined ms-auto toggle-icon"
@@ -47,7 +47,7 @@
             </button>
 
             <div id="productMenu"
-                class="submenu-collapse {{ request()->routeIs('product') || request()->routeIs('productCategory') || request()->routeIs('productSubCategory') || request()->routeIs('productBrand') ? 'show' : '' }}"
+                class="submenu-collapse {{ request()->routeIs('product') || request()->routeIs('productCategory') || request()->routeIs('productSubCategory') || request()->routeIs('productBrand') || request()->routeIs('productUnit') ? 'show' : '' }}"
                 style="margin-left: 1.5rem;">
                 <div class="d-flex flex-column gap-1 mt-1">
                     <a href="{{ route('product') }}"
@@ -69,6 +69,11 @@
                         class="nav-link-custom py-2 {{ request()->routeIs('productBrand') ? $activeClass : '' }}">
                         <span class="material-symbols-outlined">pets</span>
                         <span class="sidebar-text">Brand</span>
+                    </a>
+                    <a href="{{ route('productUnit') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('productUnit') ? $activeClass : '' }}">
+                        <span class="material-symbols-outlined">pets</span>
+                        <span class="sidebar-text">Unit</span>
                     </a>
                 </div>
             </div>
@@ -130,6 +135,34 @@
             </div>
         </div>
 
+        <!-- Payment -->
+        <div class="d-flex flex-column gap-1">
+            <button onclick="toggleMenu('paymentMenu')"
+                class="nav-link-custom w-100 {{ request()->routeIs('pay.type') || request()->routeIs('pay.method') ? $activeClass : '' }}">
+                <span class="material-symbols-outlined">payment</span>
+                <span class="sidebar-text">Payment</span>
+                <span class="material-symbols-outlined ms-auto toggle-icon"
+                    style="font-size: 0.75rem;">expand_more</span>
+            </button>
+
+            <div id="paymentMenu"
+                class="submenu-collapse {{ request()->routeIs('pay.type') || request()->routeIs('pay.method') ? 'show' : '' }}"
+                style="margin-left: 1.5rem;">
+                <div class="d-flex flex-column gap-1 mt-1">
+                    <a href="{{ route('pay.type') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('pay.type') ? $activeClass : '' }}">
+                        {{-- <span class="material-symbols-outlined">Pay Type</span> --}}
+                        <span class="sidebar-text">Pay Type</span>
+                    </a>
+                    <a href="{{ route('pay.method') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('pay.method') ? $activeClass : '' }}">
+                        {{-- <span class="material-symbols-outlined">Pay Method</span> --}}
+                        <span class="sidebar-text">Pay Method</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <a href="#" class="nav-link-custom">
             <span class="material-symbols-outlined">settings</span>
             <span class="sidebar-text">Settings</span>
@@ -155,7 +188,8 @@
     <div class="d-flex align-items-center search-box ms-4">
         <div class="d-flex align-items-center search-box ms-4 d-none d-md-flex">
             <span class="material-symbols-outlined" style="font-size: 1.125rem; color: #797b78;">search</span>
-            <input class="search-input font-body" placeholder="Search appointments, pets, or stock..." type="text" />
+            <input class="search-input font-body" placeholder="Search appointments, pets, or stock..."
+                type="text" />
         </div>
 
         {{-- <span class="material-symbols-outlined" style="font-size: 1.125rem; color: #797b78;">search</span> --}}
@@ -179,7 +213,8 @@
                 <p class="mb-0 text-xs font-headline fw-bold" style="color: #303330;">Admin Profile</p>
                 <p class="mb-0 text-10px" style="color: #797b78;">Super Admin</p>
             </div>
-            <img alt="Admin User Profile" class="rounded-circle object-fit-cover" style="width: 2.5rem; height: 2.5rem;"
+            <img alt="Admin User Profile" class="rounded-circle object-fit-cover"
+                style="width: 2.5rem; height: 2.5rem;"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0efH14mVIQ5Ts91_DVq80xvSg5hp-xsQVxi-DeIAn2vmKYfGHciH2v6wFR7Zb28C7s_CJ8nSLbfR31Pci2A4HHwOMydF2xwDrEzGptj4OtregfoxW5Dh3Y0Jk0DfmtdnYpwuoWqD7L36G1M9C4BbStGaFn9GZEOOKuORKrB226KVKTgX1vBC2KkAmwxfzSahc59zR97On8W7_IyxAdF3g3niiEj99KH9NGYOKJZ4XPpUSkvZefuEfHLzMUdHvijC_MCLg2ZxlRcGW" />
 
             <!-- Dropdown Menu -->

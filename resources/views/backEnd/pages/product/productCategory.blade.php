@@ -4,7 +4,7 @@
     <!-- Add New Product Category -->
     <div class="modal fade" id="addProductCategoryModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered align-items-center justify-content-center">
-            <div class="modal-content rounded-4 shadow-lg border-0 w-50">
+            <div class="modal-content rounded-2xl shadow-lg border-0">
                 <!-- Header -->
                 <div class="modal-header border-0">
                     <div>
@@ -13,7 +13,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <!-- Form -->
-                <form id="addProductCategoryForm" class="modal-form">
+                <form id="addProductCategoryForm" class="modal-form"> 
                     @csrf
                     <div class="modal-body">
                         <!-- Product Category Name -->
@@ -43,7 +43,7 @@
                     <!-- Footer -->
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary btn-custom">
                             <span class="material-symbols-outlined align-middle">save</span>
                             Save
                         </button>
@@ -98,7 +98,7 @@
                     <!-- Footer -->
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary btn-custom">
                             <span class="material-symbols-outlined align-middle">update</span>
                             Update
                         </button>
@@ -162,7 +162,7 @@
             <!-- Product Category List -->
             <div class="col-12 col-md-12 d-flex flex-column gap-8">
                 <!-- Product Category Search -->
-                <div class="glass-card rounded-lg overflow-hidden d-flex flex-column">
+                <div class="glass-card rounded-2xl overflow-hidden d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center p-4 p-md-5 pb-3">
                         <h4 class="fs-5 font-headline fw-bold tracking-tight mb-0">Product Category List</h4>
                         <select name="status_filter" id="statusFilter"

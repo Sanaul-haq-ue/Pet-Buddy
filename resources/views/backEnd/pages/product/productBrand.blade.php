@@ -4,7 +4,7 @@
     <!-- Add New Product Brand -->
     <div class="modal fade" id="addProductBrandModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered align-items-center justify-content-center">
-            <div class="modal-content rounded-4 shadow-lg border-0 w-50">
+            <div class="modal-content rounded-4 shadow-lg border-0">
                 <!-- Header -->
                 <div class="modal-header border-0">
                     <div>
@@ -43,7 +43,7 @@
                     <!-- Footer -->
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary btn-custom">
                             <span class="material-symbols-outlined align-middle">save</span>
                             Save
                         </button>
@@ -58,7 +58,7 @@
     <!-- Edit Product Brand -->
     <div class="modal fade" id="editProductBrandModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered align-items-center justify-content-center">
-            <div class="modal-content rounded-4 shadow-lg border-0 w-50">
+            <div class="modal-content rounded-4 shadow-lg border-0">
                 <!-- Header -->
                 <div class="modal-header border-0">
                     <div>

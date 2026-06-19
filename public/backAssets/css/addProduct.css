@@ -1,0 +1,462 @@
+/* Add Product CSS styles for the product listing and editing pages,
+including card designs,
+input styles,
+tag pills,
+toggle switches,
+and responsive adjustments.  */
+
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+}
+
+.section-divider {
+    width: 6px;
+    height: 32px;
+    border-radius: 999px;
+    flex-shrink: 0;
+}
+
+.section-divider.primary {
+    background-color: #944c00;
+}
+
+.section-divider.secondary {
+    background-color: #b06e3a;
+}
+
+.input-underline {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+    transition: all 0.2s ease;
+    padding: 12px 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+    outline: none;
+}
+
+.input-underline:focus {
+    border-bottom-color: #944c00;
+}
+
+.input-underline.sm {
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+.input-underline.mono {
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+}
+
+.input-underline.bold {
+    font-weight: 700;
+}
+
+.input-bordered {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input-bordered:focus {
+    border-color: #944c00;
+    box-shadow: 0 0 0 3px rgba(148, 76, 0, 0.15);
+}
+
+.input-bordered.sm {
+    font-weight: 400;
+}
+
+select.input-underline,
+select.input-bordered {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 28px;
+}
+
+.upload-area {
+    position: relative;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px dashed rgba(128, 128, 128, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s ease;
+    background-color: rgba(248, 248, 248, 0.5);
+}
+
+.upload-area:hover {
+    border-color: rgba(148, 76, 0, 0.5);
+}
+
+.upload-area img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+    transition: opacity 0.2s ease;
+}
+
+.upload-area:hover img {
+    opacity: 0.4;
+}
+
+.upload-btn {
+    width: 64px;
+    height: 64px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+}
+
+.upload-btn span {
+    font-size: 28px;
+    color: #944c00;
+}
+
+.add-thumb {
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    background: #e8e0d8;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.add-thumb:hover {
+    background: #ddd5cc;
+}
+
+.add-thumb span {
+    color: #999;
+}
+
+.tag-pill {
+    background: rgba(176, 110, 58, 0.1);
+    color: #8a5c30;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid rgba(176, 110, 58, 0.2);
+}
+
+.tag-pill button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
+    line-height: 1;
+}
+
+.tag-pill button:hover {
+    color: #d32f2f;
+}
+
+.add-tag-btn {
+    color: #944c00;
+    font-weight: 700;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.add-tag-btn:hover {
+    background: rgba(148, 76, 0, 0.05);
+}
+
+.status-card {
+    background: white;
+    border: 2px solid rgba(148, 76, 0, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.toggle-track {
+    width: 48px;
+    height: 24px;
+    background-color: #944c00;
+    border-radius: 999px;
+    position: relative;
+}
+
+.toggle-thumb {
+    position: absolute;
+    left: 26px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    top: 4px;
+    transition: transform 0.2s ease;
+}
+
+.signature-glow {
+    background: linear-gradient(135deg, #944c00, #b06e3a);
+    color: white;
+    border: none;
+}
+
+.signature-glow:hover {
+    box-shadow: 0 8px 32px rgba(148, 76, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.floating-blob {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -10;
+}
+
+.floating-blob.primary {
+    top: 20%;
+    right: -5%;
+    width: 384px;
+    height: 384px;
+    background: rgba(148, 76, 0, 0.05);
+    filter: blur(120px);
+}
+
+.floating-blob.secondary {
+    bottom: 10%;
+    left: -5%;
+    width: 320px;
+    height: 320px;
+    background: rgba(176, 110, 58, 0.05);
+    filter: blur(100px);
+}
+
+.label-text {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #6b5e55;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.footer-bar {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+    box-shadow: 0 20px 40px rgba(148, 76, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    padding: 16px 24px;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #6b7280;
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    background: rgba(148, 76, 0, 0.05);
+}
+
+.icon-btn:active {
+    transform: scale(0.95);
+}
+
+.btn-cancel {
+    padding: 8px 24px;
+    border-radius: 999px;
+    font-weight: 600;
+    border: none;
+    background: none;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background: #f1f5f9;
+}
+
+.btn-cancel:active {
+    transform: scale(0.95);
+}
+
+.btn-save {
+    padding: 10px 32px;
+    border-radius: 999px;
+    font-weight: 700;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(148, 76, 0, 0.2);
+}
+
+.btn-save:active {
+    transform: scale(0.95);
+}
+
+.price-prefix {
+    position: absolute;
+    left: 0;
+    top: 14px;
+}
+
+.price-prefix.primary {
+    color: #944c00;
+    font-weight: 700;
+}
+
+.font-headline {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+
+/* Species pills for product targeting */
+.species-pill {
+    background: #1e293b;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.species-pill button {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/* Product Visibility Toggle */
+.toggle-switch {
+    width: 55px;
+    height: 25px;
+    background: #cbd5e1;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.toggle-thumb {
+    width: 21px;
+    height: 21px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: 0.3s;
+}
+
+/* ON state */
+.toggle-switch.active {
+    background: #22c55e;
+}
+
+.toggle-switch.active .toggle-thumb {
+    left: 27px;
+}
+
+
+#showDetailsBtn{
+    border: none;
+}
+
+.clos-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.remove-row-btn {
+    font-size: 11px;
+}
+
+
+
+@media (max-width: 768px) {
+    .glass-card {
+        padding: 1.5rem;
+    }
+
+    .footer-bar .d-flex {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .footer-bar .d-flex .align-items-center.gap-4 {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #addNewRowBtn{
+        font-size: 10px !important;
+        text-align: center !important;
+    }
+    #closeDetailsBtn{
+        font-size: 10px !important;
+        text-align: center !important;
+    }
+}

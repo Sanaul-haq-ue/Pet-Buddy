@@ -1,0 +1,105 @@
+.btn-custom {
+    border: none;
+}
+
+
+
+/* Category Modal */
+#addProductCategoryModal .modal-content {
+    width: 50% !important;
+}
+
+#editProductCategoryModal .modal-content {
+    width: 50% !important;
+}
+
+
+
+/* Sub Category Modal */
+#addProductSubCategoryModal .modal-content {
+    width: 50% !important;
+}
+
+#editProductSubCategoryModal .modal-content {
+    width: 50% !important;
+}
+
+
+
+/* Brand Modal */
+#addProductBrandModal .modal-content {
+    width: 50% !important;
+}
+
+#editProductBrandModal .modal-content {
+    width: 50% !important;
+}
+
+
+
+
+/* Unit Modal */
+#addProductUnitModal .modal-content {
+    width: 50% !important;
+}
+
+#editProductUnitModal .modal-content {
+    width: 50% !important;
+}
+
+
+
+
+
+@media (max-width: 768px) {
+
+    /* Category Modal */
+    #addProductCategoryModal .modal-content {
+        width: 90% !important;
+    }
+
+    #editProductCategoryModal .modal-content {
+        width: 90% !important;
+    }
+
+
+
+
+    /* Sub Category Modal */
+    #addProductSubCategoryModal .modal-content {
+        width: 90% !important;
+    }
+
+    #editProductSubCategoryModal .modal-content {
+        width: 90% !important;
+    }
+
+
+
+
+    /* Brand Modal */
+    #addProductBrandModal .modal-content {
+        width: 90% !important;
+    }
+
+    #editProductBrandModal .modal-content {
+        width: 90% !important;
+    }
+
+
+
+    /* Unit Modal */
+    #addProductUnitModal .modal-content {
+        width: 90% !important;
+    }
+
+    #editProductUnitModal .modal-content {
+        width: 90% !important;
+    }
+
+
+
+
+
+
+}
