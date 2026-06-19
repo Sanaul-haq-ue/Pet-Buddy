@@ -232,7 +232,7 @@ body.light {
 }
 
 .submenu-collapse.show {
-  max-height: 200px;
+  max-height: 236px;
   opacity: 1;
 }
 
@@ -253,6 +253,23 @@ body.light {
 .mobile-toggle-btn {
   display: none !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Mobile  */
 
@@ -611,4 +628,14 @@ div:where(.swal2-container) div:where(.swal2-html-container) {
 div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm),
 div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel) {
   font-size: 13px !important;
+}
+
+
+
+/* payment page css */
+#addPaymentMethodForm {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 0 !important;
+    gap: 0 !important;
 }

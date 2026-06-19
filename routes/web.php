@@ -10,7 +10,8 @@ use App\Http\Controllers\backEnd\ProductController;
 use App\Http\Controllers\backEnd\ProductCategoryController;
 use App\Http\Controllers\backEnd\ProductSubCategoryController;
 use App\Http\Controllers\backEnd\ProductBrandController;
-
+use App\Http\Controllers\backEnd\ProductUnitController;
+use App\Http\Controllers\backEnd\PayController;
 
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\ContactController;
@@ -29,6 +30,7 @@ Route::get('/services', [ServicesController::class, 'index'])->name('services');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/bookings', [BookingsController::class, 'index'])->name('bookings');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop/{slug}', [ShopController::class, 'singlePage'])->name('shop.single-page');
 
 Route::prefix('user')->group(function () {
     Route::middleware('guest')->group(function () {
@@ -98,9 +100,11 @@ Route::prefix('admin')->group(function () {
 
         // Product Routes
         Route::get('/product', [ProductController::class, 'productIndex'])->name('product');
-        // Route::post('/saveSpecies', [petController::class, 'saveSpecies'])->name('petManagement.saveSpecies');
-        // Route::put('/species/{id}', [petController::class, 'update'])->name('species.update');
-        // Route::delete('/species/{id}', [petController::class, 'destroy'])->name('species.destroy');
+        Route::get('/product-Add', [ProductController::class, 'productAdd'])->name('productAdd');
+        Route::post('/product-store', [ProductController::class, 'store'])->name('product.store');
+        Route::get('/product-Edit/{slug}', [ProductController::class, 'productEdit'])->name('productEdit');
+        Route::post('/product-update/{slug}', [ProductController::class, 'productUpdate'])->name('product.update');
+        Route::delete('/product-delete/{slug}', [ProductController::class, 'productDelete'])->name('product.delete');
 
         Route::get('/product-Category', [ProductCategoryController::class, 'productCategoryIndex'])->name('productCategory');
         Route::post('/product-Category/store', [ProductCategoryController::class, 'store'])->name('productCategory.store');
@@ -116,5 +120,18 @@ Route::prefix('admin')->group(function () {
         Route::post('/product-Brand/store', [ProductBrandController::class, 'store'])->name('productBrand.store');
         Route::post('/product-Brand/update', [ProductBrandController::class, 'update'])->name('productBrand.update');
         Route::delete('/product-brand/delete/{id}', [ProductBrandController::class, 'destroy'])->name('productBrand.delete');
+
+        Route::get('/product-Unit', [ProductUnitController::class, 'productUnitIndex'])->name('productUnit');
+        Route::post('/product-Unit/store', [ProductUnitController::class, 'store'])->name('productUnit.store');
+        Route::post('/product-Unit/update', [ProductUnitController::class, 'update'])->name('productUnit.update');
+        Route::delete('/product-unit/delete/{id}', [ProductUnitController::class, 'destroy'])->name('productUnit.delete');
+
+        Route::get('/pay-type', [PayController::class, 'pay_Type_Index'])->name('pay.type');
+        Route::post('/payment-type/store', [PayController::class, 'storePaymentType'])->name('paymentType.store');
+        Route::post('/payment-type/update', [PayController::class, 'updatePaymentType'])->name('paymentType.update');
+
+        Route::get('/pay-method', [PayController::class, 'pay_Method_Index'])->name('pay.method');
+        Route::post('/payment-method/store', [PayController::class, 'storePaymentMethod'])->name('paymentMethod.store');
+        Route::post('/payment-method/update', [PayController::class, 'updatePaymentMethod'])->name('paymentMethod.update');
     });
 });
