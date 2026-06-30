@@ -138,7 +138,7 @@
         <!-- Payment -->
         <div class="d-flex flex-column gap-1">
             <button onclick="toggleMenu('paymentMenu')"
-                class="nav-link-custom w-100 {{ request()->routeIs('pay.type') || request()->routeIs('pay.method') ? $activeClass : '' }}">
+                class="nav-link-custom w-100 {{ request()->routeIs('pay.type') || request()->routeIs('pay.method') || request()->routeIs('pay.coupon') ? $activeClass : '' }}">
                 <span class="material-symbols-outlined">payment</span>
                 <span class="sidebar-text">Payment</span>
                 <span class="material-symbols-outlined ms-auto toggle-icon"
@@ -146,7 +146,7 @@
             </button>
 
             <div id="paymentMenu"
-                class="submenu-collapse {{ request()->routeIs('pay.type') || request()->routeIs('pay.method') ? 'show' : '' }}"
+                class="submenu-collapse {{ request()->routeIs('pay.type') || request()->routeIs('pay.method') || request()->routeIs('pay.coupon') ? 'show' : '' }}"
                 style="margin-left: 1.5rem;">
                 <div class="d-flex flex-column gap-1 mt-1">
                     <a href="{{ route('pay.type') }}"
@@ -159,9 +159,40 @@
                         {{-- <span class="material-symbols-outlined">Pay Method</span> --}}
                         <span class="sidebar-text">Pay Method</span>
                     </a>
+                    <a href="{{ route('pay.coupon') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('pay.coupon') ? $activeClass : '' }}">
+                        {{-- <span class="material-symbols-outlined">Pay Method</span> --}}
+                        <span class="sidebar-text">Coupon</span>
+                    </a>
                 </div>
             </div>
         </div>
+
+        <!-- Order -->
+        {{-- <div class="d-flex flex-column gap-1">
+            <button onclick="toggleMenu('order')"
+                class="nav-link-custom w-100 {{ request()->routeIs('') || request()->routeIs('') ? $activeClass : '' }}">
+                <span class="material-symbols-outlined">Order</span>
+                <span class="sidebar-text">Order</span>
+                <span class="material-symbols-outlined ms-auto toggle-icon"
+                    style="font-size: 0.75rem;">expand_more</span>
+            </button>
+
+            <div id="order"
+                class="submenu-collapse {{ request()->routeIs('') || request()->routeIs('') ? 'show' : '' }}"
+                style="margin-left: 1.5rem;">
+                <div class="d-flex flex-column gap-1 mt-1">
+                    <a href="{{ route('') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('') ? $activeClass : '' }}">
+                        <span class="sidebar-text">Order Manage</span>
+                    </a>
+                    <a href="{{ route('') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('') ? $activeClass : '' }}">
+                        <span class="sidebar-text">Pay Method</span>
+                    </a>
+                </div>
+            </div>
+        </div> --}}
 
         <a href="#" class="nav-link-custom">
             <span class="material-symbols-outlined">settings</span>
@@ -182,7 +213,7 @@
 
     <button onclick="toggleSidebar()"
         class="menu-btn-custom d-flex align-items-center justify-content-center ms-4 d-none d-md-flex">
-        <span class="material-symbols-outlined">menu</span>
+        <span class="material-symbols-ou                                                                                                                          tlined">menu</span>
     </button>
 
     <div class="d-flex align-items-center search-box ms-4">

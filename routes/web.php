@@ -13,8 +13,10 @@ use App\Http\Controllers\backEnd\ProductBrandController;
 use App\Http\Controllers\backEnd\ProductUnitController;
 use App\Http\Controllers\backEnd\PayController;
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServicesController;
@@ -31,6 +33,24 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/bookings', [BookingsController::class, 'index'])->name('bookings');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/shop/{slug}', [ShopController::class, 'singlePage'])->name('shop.single-page');
+
+Route::post('/cart/add', [ShopController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/update', [ShopController::class, 'updateCart'])->name('cart.update');
+Route::post('/cart/remove', [ShopController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/cart/clear', [ShopController::class, 'clearCart'])->name('cart.clear');
+
+Route::post('/coupon/apply', [CouponController::class, 'apply'])->name('coupon.apply');
+
+Route::post('/order/place', [OrderController::class, 'placeOrder'])->name('order.place');
+Route::get('/order/successfull/{order_no}', [OrderController::class, 'successfull'])->name('order.successfull');
+
+
+
+// Route::get('/clear-cart-session', function () {
+//     session()->forget('cart');
+//     return 'Cart session cleared!';
+// });
+
 
 Route::prefix('user')->group(function () {
     Route::middleware('guest')->group(function () {
@@ -126,6 +146,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/product-Unit/update', [ProductUnitController::class, 'update'])->name('productUnit.update');
         Route::delete('/product-unit/delete/{id}', [ProductUnitController::class, 'destroy'])->name('productUnit.delete');
 
+        // Payment Routes
         Route::get('/pay-type', [PayController::class, 'pay_Type_Index'])->name('pay.type');
         Route::post('/payment-type/store', [PayController::class, 'storePaymentType'])->name('paymentType.store');
         Route::post('/payment-type/update', [PayController::class, 'updatePaymentType'])->name('paymentType.update');
@@ -133,5 +154,12 @@ Route::prefix('admin')->group(function () {
         Route::get('/pay-method', [PayController::class, 'pay_Method_Index'])->name('pay.method');
         Route::post('/payment-method/store', [PayController::class, 'storePaymentMethod'])->name('paymentMethod.store');
         Route::post('/payment-method/update', [PayController::class, 'updatePaymentMethod'])->name('paymentMethod.update');
+
+        Route::get('/pay-coupon', [PayController::class, 'pay_coupon_Index'])->name('pay.coupon');
+        Route::post('/pay-coupon/store', [PayController::class, 'storePayCoupon'])->name('payCoupon.store');
+        Route::post('/pay-coupon/update', [PayController::class, 'updatePayCoupon'])->name('payCoupon.update');
+
+        Route::get('/shipping', [PayController::class, 'shipping_Index'])->name('shipping');
+        // Route::post('/pay-coupon/update', [PayController::class, 'updatePayCoupon'])->name('payCoupon.update');
     });
 });

@@ -1,0 +1,475 @@
+/* ── CSS Custom Properties ── */
+:root {
+    --color-primary: #944c00;
+    --color-primary-dim: #824200;
+    --color-primary-container: #ffaf72;
+    --color-on-primary: #fff7f4;
+    --color-secondary: #006b63;
+    --color-secondary-container: #84f5e8;
+    --color-on-secondary-container: #005c55;
+    --color-surface: #faf9f6;
+    --color-surface-container: #eeeeea;
+    --color-surface-container-high: #e8e8e4;
+    --color-on-surface: #303330;
+    --color-on-surface-variant: #5d605c;
+    --color-outline-variant: #b1b2af;
+    --color-background: #faf9f6;
+}
+
+/* ── Base ── */
+body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-on-surface);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.font-display {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ── Material Symbols ── */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+}
+
+/* ── Glass Card ── */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(177, 178, 175, 0.15);
+    box-shadow: 0 20px 40px rgba(148, 76, 0, 0.06);
+}
+
+/* ── Atmospheric Background ── */
+.radiant-glow {
+    background: radial-gradient(circle, rgba(255, 175, 114, 0.4) 0%, rgba(255, 175, 114, 0) 70%);
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    position: absolute;
+    top: 80px;
+    right: -80px;
+    z-index: -1;
+    filter: blur(60px);
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.secondary-glow {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 160px;
+    left: -80px;
+    z-index: -1;
+    background: rgba(0, 107, 99, 0.05);
+    filter: blur(60px);
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* ── Main layout ── */
+.page-main {
+    font-family: system-ui;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+/* ── Success Icon ── */
+.success-icon-wrapper {
+    position: relative;
+    width: 82px;
+    height: 82px;
+    margin: 0 auto 2.5rem;
+}
+
+.celebratory-ring {
+    position: absolute;
+    inset: -11px;
+    border-radius: 50%;
+    background: rgba(148, 76, 0, 0.1);
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(0.95);
+        opacity: 0.5;
+    }
+}
+
+.success-icon-circle-outer {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.success-icon-circle-inner {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 40px rgba(148, 76, 0, 0.2);
+}
+
+.success-icon-circle-inner .material-symbols-outlined {
+    font-size: 3rem;
+    color: #fff;
+    font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 48;
+}
+
+.info-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1.5rem;
+    border-radius: 9999px;
+    background: rgba(148, 76, 0, 0.05);
+    border: 1.5px solid rgba(148, 76, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 20px 40px rgba(148, 76, 0, 0.06);
+    margin-bottom: 2rem;
+}
+
+.info-icon {
+    color: #944c00;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.info-text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #5d605c;
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .info-text {
+        font-size: 1rem;
+    }
+}
+
+/* ── Typography ── */
+.page-title {
+    font-family: system-ui;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--color-on-surface);
+    margin-bottom: 1rem;
+    text-align: center;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .page-title {
+        font-size: 26px;
+    }
+}
+
+.page-subtitle {
+    color: var(--color-on-surface-variant);
+    font-size: 1.125rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.page-subtitle .order-id {
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+/* ── Order Summary Card ── */
+.order-card {
+    border-radius: 2rem;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.order-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.order-card-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-on-surface);
+    margin: 0;
+}
+
+.delivery-badge {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    color: var(--color-on-surface-variant);
+    background: var(--color-surface-container);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+}
+
+/* ── Product Row ── */
+.product-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.product-image-wrap {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: var(--color-surface-container-high);
+    transition: transform 0.5s ease;
+}
+
+.product-image-wrap:hover {
+    transform: scale(1.05);
+}
+
+.product-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.flex-grow-1 {
+    width: 58%;
+}
+
+.product-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    color: var(--color-on-surface);
+    margin-bottom: 0.15rem;
+}
+
+.product-desc {
+    font-size: 0.875rem;
+    color: var(--color-on-surface-variant);
+    margin-bottom: 0.25rem;
+}
+
+.product-price {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.product-qty {
+    color: var(--color-on-surface-variant);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.text-end {
+    width: 20%;
+    text-align: end;
+}
+
+/* ── Divider ── */
+.card-divider {
+    border-color: rgba(177, 178, 175, 0.15);
+    margin: 1.5rem 0;
+}
+
+/* ── Price Rows ── */
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-on-surface-variant);
+    margin-bottom: 0.5rem;
+}
+
+.price-row .free {
+    color: var(--color-secondary);
+    font-weight: 600;
+}
+
+.price-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-on-surface);
+    padding-top: 1rem;
+    border-top: 1px solid rgba(177, 178, 175, 0.15);
+    margin-top: 0.5rem;
+}
+
+.payment-row {
+    display: flex;
+    justify-content: space-between;
+    /* font-family: 'Plus Jakarta Sans', sans-serif; */
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--color-on-surface);
+    padding-top: 1rem;
+    border-top: 1px solid rgba(177, 178, 175, 0.15);
+    margin-top: 1.5rem;
+}
+
+/* ── Buttons ── */
+.btn-track {
+    display: block;
+    width: 100%;
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    padding: 1.1rem 1.5rem;
+    border-radius: 9999px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(148, 76, 0, 0.2);
+    transition: background 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-track:hover {
+    background: var(--color-primary-dim);
+}
+
+.btn-track:active {
+    transform: scale(0.95);
+}
+
+.btn-invoice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    color: var(--color-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    padding: 1rem 1.5rem;
+    border-radius: 9999px;
+    border: none;
+    background: transparent;
+    transition: background 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+}
+
+.btn-invoice:hover {
+    background: var(--color-surface-container);
+}
+
+.btn-invoice:active {
+    transform: scale(0.95);
+}
+
+.btn-secondary-action {
+    flex: 1;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 9999px;
+    border: none;
+    background: rgba(132, 245, 232, 0.4);
+    color: var(--color-on-secondary-container);
+    transition: background 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+}
+
+.btn-secondary-action:hover {
+    background: rgba(132, 245, 232, 0.6);
+}
+
+.btn-secondary-action:active {
+    transform: scale(0.95);
+}
+
+.btn-ghost-action {
+    flex: 1;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 9999px;
+    border: none;
+    background: transparent;
+    color: var(--color-on-surface-variant);
+    transition: background 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+}
+
+.btn-ghost-action:hover {
+    background: var(--color-surface-container);
+}
+
+.btn-ghost-action:active {
+    transform: scale(0.95);
+}
+
+/* ── Button row at bottom ── */
+.btn-action-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.btn-split-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    .btn-split-row {
+        flex-direction: row;
+    }
+}

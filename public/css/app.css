@@ -631,8 +631,8 @@ h6 {
 }
 
 .payment-methods {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    /* grid-template-columns: 1fr 1fr; */
     gap: 16px;
 }
 
@@ -648,7 +648,7 @@ h6 {
 }
 
 .payment-method-box {
-    padding: 20px;
+    padding: 10px 45px 10px 45px;
     border: 2px solid #e0e0e0;
     border-radius: 14px;
     display: flex;
@@ -656,6 +656,7 @@ h6 {
     align-items: center;
     gap: 12px;
     transition: all 0.2s ease;
+    width: 33%;
     background: white;
 }
 
@@ -792,4 +793,67 @@ h6 {
         bottom: 135px;
         right: 10px;
     }
+
+    #cartStep2 .booking-modal-content > div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ── Checkout Form Fields ──────────────────────────────── */
+.checkout-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.checkout-field-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.req-star {
+    color: #ef4444;
+    font-weight: 700;
+    margin-left: 2px;
+}
+
+.checkout-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #1a1a1a;
+    background: #fafafa;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.checkout-input:focus {
+    border-color: var(--color-primary, #7c3aed);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.08);
+}
+
+.checkout-input::placeholder {
+    color: #b0b0b0;
+}
+
+/* ── File Upload Area ─────────────────────────────────── */
+.upload-area {
+    border: 2px dashed #d1c4e9;
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    background: rgba(124, 58, 237, 0.03);
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    border-color: var(--color-primary, #7c3aed);
+    background: rgba(124, 58, 237, 0.06);
 }

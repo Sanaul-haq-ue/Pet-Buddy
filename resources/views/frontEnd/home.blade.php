@@ -176,65 +176,35 @@
                 </div>
                 <div class="swiper-wrapper">
                     <!-- Product 1 -->
+                    @if ($products)
+                        @foreach ($products as $product)
                     <div class="carousel-card swiper-slide product-card glass-card">
                         <div class="card-image-bg">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwKQj3qAo0lUOzMMhNeMb7pjcLf_pfpvIc0mTkfjJzV2G8DQ1SiIHvJnNLCtNlmc9sOAk0jBqycB6WyuTwiZJQZs9te2fRiU2gchSGK0vnO-Hrt5ojwoIc9GpC92G72MPkjHphIbzaG7MYpVcODuVqzZjwOt5qsqvVuVV4d0ElJHsmCeDkN0tsrNfzZB2SaOhcg5AdLVIrRy4jza3_ZFvEFGs-oGXG7kmKEZ82dIvpt7c8RVakaGD_NJw-RJI2VurQWSWboVmx3HQx"
-                                alt="Dog Food" class="product-img">
+                            <a href="{{ route('shop.single-page', $product->slug) }}">
+                                <img src="{{ asset($product->image) }}"
+                                    alt="{{ $product->product_name }}" class="product-img">
+                            </a>
                         </div>
                         <div class="p-2">
-                            <h3 class="card-title text-primary">Wild Harvest Blend</h3>
+                            <h3 class="card-title text-primary">
+                                <a href="{{ route('shop.single-page', $product->slug) }}" style="text-decoration: none; color: inherit;">
+                                    {{ $product->product_name }}
+                                </a>
+                            </h3>
                             <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart primary"><span
-                                        class="material-symbols-outlined">add_shopping_cart</span></button>
+                                <p class="price text-secondary">৳{{ number_format($product->selling_price, 2) }}</p>
+                                <button class="add-to-cart primary"
+                                    data-slug="{{ $product->slug }}"
+                                    data-name="{{ $product->product_name }}"
+                                    data-price="{{ $product->selling_price }}"
+                                    data-image="{{ asset($product->image) }}">
+                                    <span class="material-symbols-outlined">add_shopping_cart</span>
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <!-- Product 2 -->
-                    <div class="carousel-card swiper-slide product-card glass-card">
-                        <div class="card-image-bg">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjUxVStxXIY-vNfw8QpVuge0MQ_8uP8wVYEdCZq1Xkd7JgG-574sixuZfyqxtp5z-gIP0y7s01OTMsAz_M7IqQGaf-r0AWsEFG6KT7SCC55Su2Xeazb0tdFxwunz41593eJ6cYer4lL0xYIrUpHkMkm9kyepehgvzdjvjwB3rT7M1Z1viUN6349vtP9JCf36_5tDfbTd95MfX32UiIAsK5yo9a_AlDBpAQfTY4vGF4RslmmUjQAv18Ia3FANTkW9nop-nKeRfoRs0r"
-                                alt="Cat Food" class="product-img">
-                        </div>
-                        <div class="p-2">
-                            <h3 class="card-title text-primary">Wild Harvest Blend</h3>
-                            <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart primary"><span
-                                        class="material-symbols-outlined">add_shopping_cart</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product 3 -->
-                    <div class="carousel-card swiper-slide product-card glass-card">
-                        <div class="card-image-bg">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_gUryut3eYaHmmVZgpk17CM7Ml90nr39W8FGbNxE9vZyU-uctNSZG6BGqO80roUeoWdKZ-q-Xpmvbl1fgLveWnXEccaiSoW3IUTn9QPZDZ4AjftkPTeqTWhm5IbRkzElp_rPxkU_k8DREDypwxMGZKg78oPiTljUHh95N2r5HQnLb4kpn752N3lQ8Iy1Mz9FGk6LQ3dd8vJEarGrTCiVgHVYou-crk4zj_cDTDhybH0XSb-bXHKYi0vsb_ka7wK1bbjiDkOjZKegU"
-                                alt="Treats" class="product-img">
-                        </div>
-                        <div class="p-2">
-                            <h3 class="card-title text-primary">Wild Harvest Blend</h3>
-                            <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart primary"><span
-                                        class="material-symbols-outlined">add_shopping_cart</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product 4 -->
-                    <div class="carousel-card swiper-slide product-card glass-card">
-                        <div class="card-image-bg">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwKQj3qAo0lUOzMMhNeMb7pjcLf_pfpvIc0mTkfjJzV2G8DQ1SiIHvJnNLCtNlmc9sOAk0jBqycB6WyuTwiZJQZs9te2fRiU2gchSGK0vnO-Hrt5ojwoIc9GpC92G72MPkjHphIbzaG7MYpVcODuVqzZjwOt5qsqvVuVV4d0ElJHsmCeDkN0tsrNfzZB2SaOhcg5AdLVIrRy4jza3_ZFvEFGs-oGXG7kmKEZ82dIvpt7c8RVakaGD_NJw-RJI2VurQWSWboVmx3HQx"
-                                alt="Dog Food 2" class="product-img">
-                        </div>
-                        <div class="p-2">
-                            <h3 class="card-title text-primary">Wild Harvest Blend</h3>
-                            <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart primary"><span
-                                        class="material-symbols-outlined">add_shopping_cart</span></button>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
@@ -256,7 +226,7 @@
                     </li>
                 </ul>
                 <div class="action-buttons pt-4">
-                    <button class="btn-primary btn-large signature-glow sunlight-shadow">Shop All Products</button>
+                    <a class="btn-primary btn-large signature-glow sunlight-shadow" href="{{route('shop')}}">Shop All Products</a>
                     <div class="carousel-nav mt-4">
                         <button class="nav-btn swiper-prev-2"><span
                                 class="material-symbols-outlined">arrow_back</span></button>

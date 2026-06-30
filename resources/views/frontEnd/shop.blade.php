@@ -126,7 +126,11 @@
                                         <i class="fa-solid fa-bangladeshi-taka-sign"></i>
                                         {{ number_format($product->selling_price, 2) }}
                                     </span>
-                                    <button class="btn-add-cart add-to-cart signature-glow">
+                                    <button class="btn-add-cart add-to-cart signature-glow"
+                                        data-slug="{{ $product->slug }}"
+                                        data-name="{{ $product->product_name }}"
+                                        data-price="{{ $product->selling_price }}"
+                                        data-image="{{ asset($product->image) }}">
                                         <span class="material-symbols-outlined">add_shopping_cart</span>
                                     </button>
                                 </div>
