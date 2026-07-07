@@ -4,6 +4,13 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
+<!-- Fonts (used by successfull.css) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
 <link rel="stylesheet" href="{{ asset('css/successfull.css') }}">
 
 
@@ -49,22 +56,25 @@
                         <span class="delivery-badge font-label">EST. DELIVERY: {{ $estimatedDelivery }}</span>
                     </div>
 
-                    <!-- Product Item -->
-                    @foreach ($order->items as $item)
-                        <div class="product-row">
-                            <div class="product-image-wrap">
-                                <img src="{{ asset($item->product->image) }}" alt="{{ $item->product->product_name }}">
+                    <!-- Product Items (scrolls internally if the list is long, so totals/buttons stay visible) -->
+                    <div class="product-list">
+                        @foreach ($order->items as $item)
+                            <div class="product-row">
+                                <div class="product-image-wrap">
+                                    <img src="{{ asset($item->product->image) }}"
+                                        alt="{{ $item->product->product_name }}">
 
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="product-name font-display">{{ $item->product->product_name }}</p>
+                                    <p class="product-price font-display">৳{{ number_format($item->price, 2) }}</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="product-qty">Qty: {{ $item->quantity }}</span>
+                                </div>
                             </div>
-                            <div class="flex-grow-1">
-                                <p class="product-name font-display">{{ $item->product->product_name }}</p>
-                                <p class="product-price font-display">৳{{ number_format($item->price, 2) }}</p>
-                            </div>
-                            <div class="text-end">
-                                <span class="product-qty">Qty: {{ $item->quantity }}</span>
-                            </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
 
                     <hr class="card-divider">
 
@@ -111,13 +121,14 @@
 
                 <!-- Action Buttons -->
                 <div class="btn-action-row">
-                    <a class="btn-track font-display" href="">Track Order</a>
 
-                    <button class="btn-invoice glass-card font-display">
+                    <a class="btn-track font-display" href="{{ route('track.order.form') }}">Track Order</a>
+
+                    <a href="{{ route('order.invoice', $order->order_no) }}"
+                        class="btn-invoice glass-card font-display">
                         <i class="fa-solid fa-download"></i>
                         Download Invoice
-                    </button>
-
+                    </a>
                     <div class="btn-split-row">
                         <button class="btn-secondary-action glass-card font-display">View Order Details</button>
                         <a href="{{ route('shop') }}" class="btn-ghost-action glass-card font-display">Continue

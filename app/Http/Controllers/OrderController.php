@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\OrderStatusService;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Mpdf\Mpdf;
 use Illuminate\View\View;
 
 class OrderController extends Controller
@@ -223,6 +225,9 @@ class OrderController extends Controller
                 'payment_status'     => 'pending',
             ]);
 
+            // NEW — creates the very first history entry so the tracking page isn't empty
+            OrderStatusService::setStage($order, 'placed', 'Order Placed');
+
             // ── Step 7: Save order items ──────────────────────────────────────
             foreach ($cart as $item) {
                 // Safety check — product_id must exist in session item
@@ -292,6 +297,41 @@ class OrderController extends Controller
 
         $estimatedDelivery = \Carbon\Carbon::parse($order->created_at)->addDays(7)->format('M d');
 
-        return view('frontEnd.successfull', compact('order', 'estimatedDelivery'));
+        return view('frontEnd.order.successfull', compact('order', 'estimatedDelivery'));
+    }
+
+
+
+    public function downloadInvoice($order_no)
+    {
+        $order = Order::with(['items.product', 'payType', 'payMethod'])
+            ->where('order_no', $order_no)
+            ->firstOrFail();
+
+        $html = view('frontEnd.order.invoice', compact('order'))->render();
+
+        $mpdf = new Mpdf([
+            'mode'          => 'utf-8',
+            'format'        => 'A4',
+            'margin_top'    => 10,
+            'margin_bottom' => 10,
+            'margin_left'   => 10,
+            'margin_right'  => 10,
+        ]);
+
+        $mpdf->WriteHTML($html);
+
+        return response($mpdf->Output('Invoice-' . $order->order_no . '.pdf', 'S'), 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="Invoice-' . $order->order_no . '.pdf"');
+    }
+
+    public function demo($order_no)
+    {
+        $order = Order::with(['items.product', 'payType', 'payMethod'])
+            ->where('order_no', $order_no)
+            ->firstOrFail();
+
+        return view('frontEnd.order.invoice', compact('order'));
     }
 }

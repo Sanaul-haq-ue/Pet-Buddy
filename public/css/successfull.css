@@ -1,475 +1,371 @@
-/* ── CSS Custom Properties ── */
 :root {
-    --color-primary: #944c00;
-    --color-primary-dim: #824200;
-    --color-primary-container: #ffaf72;
-    --color-on-primary: #fff7f4;
-    --color-secondary: #006b63;
-    --color-secondary-container: #84f5e8;
-    --color-on-secondary-container: #005c55;
-    --color-surface: #faf9f6;
-    --color-surface-container: #eeeeea;
-    --color-surface-container-high: #e8e8e4;
-    --color-on-surface: #303330;
-    --color-on-surface-variant: #5d605c;
-    --color-outline-variant: #b1b2af;
-    --color-background: #faf9f6;
+    --primary: #944c00;
+    --primary-dim: #824200;
+    --primary-container: #ffaf72;
+    --on-primary: #fff7f4;
+    --on-primary-container: #602f00;
+    --secondary: #006b63;
+    --on-surface: #303330;
+    --on-surface-variant: #5d605c;
+    --outline-variant: #b1b2af;
+    --surface: #faf9f6;
+    --surface-container-low: #f4f4f0;
+    --font-headline: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Be Vietnam Pro', sans-serif;
 }
 
-/* ── Base ── */
+html,
 body {
-    font-family: 'Be Vietnam Pro', sans-serif;
-    background-color: var(--color-background);
-    color: var(--color-on-surface);
-    overflow-x: hidden;
-    min-height: 100vh;
+    height: 100%;
+}
+
+body {
+    background-color: var(--surface);
+    color: var(--on-surface);
+    font-family: var(--font-body);
+    margin: 0;
 }
 
 .font-display {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: var(--font-headline);
 }
 
-.font-label {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-/* ── Material Symbols ── */
-.material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    vertical-align: middle;
-}
-
-/* ── Glass Card ── */
-.glass-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1.5px solid rgba(177, 178, 175, 0.15);
-    box-shadow: 0 20px 40px rgba(148, 76, 0, 0.06);
-}
-
-/* ── Atmospheric Background ── */
-.radiant-glow {
-    background: radial-gradient(circle, rgba(255, 175, 114, 0.4) 0%, rgba(255, 175, 114, 0) 70%);
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    position: absolute;
-    top: 80px;
-    right: -80px;
-    z-index: -1;
-    filter: blur(60px);
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-.secondary-glow {
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 160px;
-    left: -80px;
-    z-index: -1;
-    background: rgba(0, 107, 99, 0.05);
-    filter: blur(60px);
-    opacity: 0.4;
-    pointer-events: none;
-}
-
-/* ── Main layout ── */
+/* ===== Page shell / 100vh fit ===== */
 .page-main {
-    font-family: system-ui;
-    padding-top: 2rem;
-    padding-bottom: 3rem;
-    position: relative;
-    overflow: hidden;
-    width: 1000px;
-    margin: 0 auto;
-}
-
-/* ── Success Icon ── */
-.success-icon-wrapper {
-    position: relative;
-    width: 82px;
-    height: 82px;
-    margin: 0 auto 2.5rem;
-}
-
-.celebratory-ring {
-    position: absolute;
-    inset: -11px;
-    border-radius: 50%;
-    background: rgba(148, 76, 0, 0.1);
-    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    align-items: center;
-    justify-content: center;
-}
-
-@keyframes pulse-ring {
-    0% {
-        transform: scale(0.95);
-        opacity: 0.5;
-    }
-
-    50% {
-        transform: scale(1.05);
-        opacity: 0.8;
-    }
-
-    100% {
-        transform: scale(0.95);
-        opacity: 0.5;
-    }
-}
-
-.success-icon-circle-outer {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 1.25rem 1rem;
+}
+
+/* Short-viewport fallback: never clip content, allow natural scroll instead */
+@media (max-height: 780px) {
+    .page-main {
+        align-items: flex-start;
+        overflow-y: auto;
+        min-height: 100vh;
+    }
+}
+
+.radiant-glow,
+.secondary-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.radiant-glow {
+    width: 340px;
+    height: 340px;
+    top: -6rem;
+    right: -6rem;
+    background: rgba(255, 175, 114, 0.25);
+}
+
+.secondary-glow {
+    width: 260px;
+    height: 260px;
+    bottom: -5rem;
+    left: -5rem;
+    background: rgba(0, 107, 99, 0.15);
+}
+
+.container {
     position: relative;
     z-index: 1;
 }
 
-.success-icon-circle-inner {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 20px 40px rgba(148, 76, 0, 0.2);
-}
-
-.success-icon-circle-inner .material-symbols-outlined {
-    font-size: 3rem;
-    color: #fff;
-    font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 48;
-}
-
+/* ===== Info banner ===== */
 .info-banner {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.625rem 1.5rem;
+    gap: 0.5rem;
+    background: rgba(0, 107, 99, 0.08);
+    border: 1px solid rgba(0, 107, 99, 0.2);
+    color: var(--secondary);
+    padding: 0.5rem 1rem;
     border-radius: 9999px;
-    background: rgba(148, 76, 0, 0.05);
-    border: 1.5px solid rgba(148, 76, 0, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 20px 40px rgba(148, 76, 0, 0.06);
-    margin-bottom: 2rem;
+    margin-bottom: 0.9rem;
+    max-width: 100%;
 }
 
-.info-icon {
-    color: #944c00;
-    font-size: 1.25rem;
+.info-banner i {
+    font-size: 0.9rem;
     flex-shrink: 0;
 }
 
 .info-text {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #5d605c;
     margin: 0;
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-align: left;
 }
 
-@media (min-width: 768px) {
-    .info-text {
-        font-size: 1rem;
-    }
-}
-
-/* ── Typography ── */
+/* ===== Heading ===== */
 .page-title {
-    font-family: system-ui;
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    color: var(--color-on-surface);
-    margin-bottom: 1rem;
-    text-align: center;
-    justify-content: center;
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+    line-height: 1.25;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 576px) {
     .page-title {
-        font-size: 26px;
+        font-size: 2rem;
     }
 }
 
 .page-subtitle {
-    color: var(--color-on-surface-variant);
-    font-size: 1.125rem;
-    margin-bottom: 3rem;
-    text-align: center;
+    color: var(--on-surface-variant);
+    font-size: 0.85rem;
+    margin-bottom: 1.25rem;
 }
 
-.page-subtitle .order-id {
-    font-weight: 600;
-    color: var(--color-primary);
+.order-id {
+    color: var(--primary);
+    font-weight: 700;
 }
 
-/* ── Order Summary Card ── */
+/* ===== Glass card base ===== */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(177, 178, 175, 0.15);
+    box-shadow: 0 15px 30px rgba(148, 76, 0, 0.06);
+    border-radius: 1.25rem;
+}
+
+/* ===== Order card ===== */
 .order-card {
-    border-radius: 2rem;
-    padding: 2rem;
-    margin-bottom: 2.5rem;
+    padding: 1.1rem;
     text-align: left;
-    position: relative;
-    overflow: hidden;
+    margin-bottom: 1.25rem;
+}
+
+@media (min-width: 576px) {
+    .order-card {
+        padding: 1.5rem 1.75rem;
+    }
 }
 
 .order-card-header {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
 }
 
 .order-card-title {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.25rem;
     font-weight: 700;
-    color: var(--color-on-surface);
+    font-size: 1.05rem;
     margin: 0;
 }
 
 .delivery-badge {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.625rem;
-    letter-spacing: 0.12em;
-    color: var(--color-on-surface-variant);
-    background: var(--color-surface-container);
-    padding: 0.25rem 0.75rem;
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+}
+
+/* Product list — scrolls internally if long, so total/buttons stay visible */
+.product-list {
+    max-height: 34vh;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+}
+
+.product-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.product-list::-webkit-scrollbar-thumb {
+    background: rgba(148, 76, 0, 0.25);
     border-radius: 9999px;
 }
 
-/* ── Product Row ── */
 .product-row {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 5px;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(177, 178, 175, 0.15);
+}
+
+.product-row:last-child {
+    border-bottom: none;
 }
 
 .product-image-wrap {
-    width: 80px;
-    height: 80px;
+    width: 48px;
+    height: 48px;
     flex-shrink: 0;
-    border-radius: 0.75rem;
+    border-radius: 0.6rem;
     overflow: hidden;
-    background: var(--color-surface-container-high);
-    transition: transform 0.5s ease;
-}
-
-.product-image-wrap:hover {
-    transform: scale(1.05);
+    background: var(--surface-container-low);
 }
 
 .product-image-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-}
-
-.flex-grow-1 {
-    width: 58%;
 }
 
 .product-name {
-    font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 600;
-    color: var(--color-on-surface);
-    margin-bottom: 0.15rem;
-}
-
-.product-desc {
-    font-size: 0.875rem;
-    color: var(--color-on-surface-variant);
-    margin-bottom: 0.25rem;
+    font-size: 0.88rem;
+    margin: 0 0 0.15rem 0;
 }
 
 .product-price {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    color: var(--color-primary);
+    font-size: 0.78rem;
+    color: var(--on-surface-variant);
     margin: 0;
 }
 
 .product-qty {
-    color: var(--color-on-surface-variant);
-    font-weight: 500;
+    font-size: 0.78rem;
+    color: var(--on-surface-variant);
     white-space: nowrap;
 }
 
-.text-end {
-    width: 20%;
-    text-align: end;
-}
-
-/* ── Divider ── */
 .card-divider {
-    border-color: rgba(177, 178, 175, 0.15);
-    margin: 1.5rem 0;
+    border: none;
+    border-top: 1px solid rgba(177, 178, 175, 0.25);
+    margin: 0.75rem 0;
 }
 
-/* ── Price Rows ── */
+/* ===== Price breakdown ===== */
 .price-row {
     display: flex;
     justify-content: space-between;
-    color: var(--color-on-surface-variant);
-    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--on-surface-variant);
+    padding: 0.25rem 0;
 }
 
 .price-row .free {
-    color: var(--color-secondary);
+    color: var(--secondary);
     font-weight: 600;
 }
 
 .price-total-row {
     display: flex;
     justify-content: space-between;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: var(--color-on-surface);
-    padding-top: 1rem;
-    border-top: 1px solid rgba(177, 178, 175, 0.15);
-    margin-top: 0.5rem;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--primary);
+    padding-top: 0.5rem;
+    margin-top: 0.35rem;
+    border-top: 1px solid rgba(177, 178, 175, 0.3);
 }
 
 .payment-row {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    /* font-family: 'Plus Jakarta Sans', sans-serif; */
-    font-weight: 500;
-    font-size: 17px;
-    color: var(--color-on-surface);
-    padding-top: 1rem;
-    border-top: 1px solid rgba(177, 178, 175, 0.15);
-    margin-top: 1.5rem;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    margin-top: 0.6rem;
 }
 
-/* ── Buttons ── */
-.btn-track {
-    display: block;
-    width: 100%;
-    background: var(--color-primary);
-    color: var(--color-on-primary);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.125rem;
-    padding: 1.1rem 1.5rem;
-    border-radius: 9999px;
-    border: none;
-    box-shadow: 0 10px 30px rgba(148, 76, 0, 0.2);
-    transition: background 0.2s ease, transform 0.1s ease;
-    cursor: pointer;
-    text-align: center;
-}
-
-.btn-track:hover {
-    background: var(--color-primary-dim);
-}
-
-.btn-track:active {
-    transform: scale(0.95);
-}
-
-.btn-invoice {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-    color: var(--color-primary);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.125rem;
-    padding: 1rem 1.5rem;
-    border-radius: 9999px;
-    border: none;
-    background: transparent;
-    transition: background 0.2s ease, transform 0.1s ease;
-    cursor: pointer;
-}
-
-.btn-invoice:hover {
-    background: var(--color-surface-container);
-}
-
-.btn-invoice:active {
-    transform: scale(0.95);
-}
-
-.btn-secondary-action {
-    flex: 1;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+.payment-row span:first-child {
     font-weight: 600;
-    font-size: 1rem;
-    padding: 1rem 1.5rem;
-    border-radius: 9999px;
-    border: none;
-    background: rgba(132, 245, 232, 0.4);
-    color: var(--color-on-secondary-container);
-    transition: background 0.2s ease, transform 0.1s ease;
-    cursor: pointer;
+    color: var(--on-surface);
 }
 
-.btn-secondary-action:hover {
-    background: rgba(132, 245, 232, 0.6);
-}
-
-.btn-secondary-action:active {
-    transform: scale(0.95);
-}
-
-.btn-ghost-action {
-    flex: 1;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 1rem 1.5rem;
-    border-radius: 9999px;
-    border: none;
-    background: transparent;
-    color: var(--color-on-surface-variant);
-    transition: background 0.2s ease, transform 0.1s ease;
-    cursor: pointer;
-}
-
-.btn-ghost-action:hover {
-    background: var(--color-surface-container);
-}
-
-.btn-ghost-action:active {
-    transform: scale(0.95);
-}
-
-/* ── Button row at bottom ── */
+/* ===== Action buttons ===== */
 .btn-action-row {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.btn-track,
+.btn-invoice {
     width: 100%;
+    max-width: 340px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.btn-track {
+    background: var(--primary);
+    color: var(--on-primary);
+    border: none;
+}
+
+.btn-track:hover {
+    opacity: 0.85;
+    color: var(--on-primary);
+    transform: scale(1.01);
+}
+
+.btn-invoice {
+    color: var(--primary);
+    border: 1px solid rgba(148, 76, 0, 0.2);
+}
+
+.btn-invoice:hover {
+    background: rgba(148, 76, 0, 0.06);
+    color: var(--primary);
+    transform: scale(1.01);
 }
 
 .btn-split-row {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.6rem;
     width: 100%;
+    max-width: 340px;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 480px) {
     .btn-split-row {
         flex-direction: row;
     }
+}
+
+.btn-secondary-action,
+.btn-ghost-action {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: 1px solid rgba(177, 178, 175, 0.3);
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--on-surface);
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.btn-secondary-action:hover,
+.btn-ghost-action:hover {
+    background: var(--surface-container-low);
+    color: var(--on-surface);
+    transform: scale(1.01);
 }

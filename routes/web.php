@@ -12,7 +12,9 @@ use App\Http\Controllers\backEnd\ProductSubCategoryController;
 use App\Http\Controllers\backEnd\ProductBrandController;
 use App\Http\Controllers\backEnd\ProductUnitController;
 use App\Http\Controllers\backEnd\PayController;
+use App\Http\Controllers\backEnd\OrderStatusController;
 
+use App\Http\Controllers\TrackOrderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\ContactController;
@@ -43,7 +45,13 @@ Route::post('/coupon/apply', [CouponController::class, 'apply'])->name('coupon.a
 
 Route::post('/order/place', [OrderController::class, 'placeOrder'])->name('order.place');
 Route::get('/order/successfull/{order_no}', [OrderController::class, 'successfull'])->name('order.successfull');
+Route::get('/order/invoice/{order_no}', [OrderController::class, 'downloadInvoice'])->name('order.invoice');
+Route::get('/order/in/{order_no}', [OrderController::class, 'demo'])->name('order.in');
 
+// Track Order Routes
+Route::get('/track-order', [TrackOrderController::class, 'trackOrderForm'])->name('track.order.form');
+Route::post('/track-order', [TrackOrderController::class, 'trackOrderSearch'])->name('track.order.search');
+Route::get('/track-order/{order_no}', [TrackOrderController::class, 'trackOrderShow'])->name('track.order.show');
 
 
 // Route::get('/clear-cart-session', function () {
@@ -161,5 +169,16 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/shipping', [PayController::class, 'shipping_Index'])->name('shipping');
         // Route::post('/pay-coupon/update', [PayController::class, 'updatePayCoupon'])->name('payCoupon.update');
+
+        Route::get('/order-status-control', [OrderStatusController::class, 'order_status_Index'])->name('order.status.control');
+        // Route::get('/order-status-control/{order_no}', [OrderStatusController::class, 'manage'])->name('orders.manage');
+
+        // Order status management
+        Route::prefix('orders/{order}')->name('admin.orders.')->group(function () {
+            Route::post('/confirm', [OrderStatusController::class, 'confirm'])->name('confirm');
+            Route::post('/call-attempt', [OrderStatusController::class, 'callAttempt'])->name('call-attempt');
+            Route::post('/status', [OrderStatusController::class, 'updateStatus'])->name('update-status');
+            Route::post('/cancel', [OrderStatusController::class, 'cancel'])->name('cancel');
+        });
     });
 });

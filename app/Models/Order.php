@@ -25,6 +25,18 @@ class Order extends Model
         'payment_status',
         'shipping_charge',
         'shipping_zone',
+        'tracking_stage',
+        'call_attempts',
+        'cancelled_reason',
+        'confirmed_at',
+        'shipped_at',
+        'delivered_at',
+    ];
+
+    protected $casts = [
+        'confirmed_at' => 'datetime',
+        'shipped_at'   => 'datetime',
+        'delivered_at' => 'datetime',
     ];
 
     public function items()
@@ -44,5 +56,10 @@ class Order extends Model
     public function payMethod()
     {
         return $this->belongsTo(PayMethod::class, 'pay_method_id');
+    }
+
+    public function statusLogs()
+    {
+        return $this->hasMany(OrderStatusLog::class)->orderBy('created_at');
     }
 }
