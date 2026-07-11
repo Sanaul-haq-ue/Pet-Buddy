@@ -87,7 +87,7 @@
                         <span class="sidebar-text">Category</span>
                     </a>
                     <a href="{{ route('productSubCategory') }}"
-                        class="nav-link-custom py-2 {{ request()->routeIs('productSubCategory') ? $activeClass : '' }}">                        
+                        class="nav-link-custom py-2 {{ request()->routeIs('productSubCategory') ? $activeClass : '' }}">
                         <span class="sidebar-text">Sub Category</span>
                     </a>
                     <a href="{{ route('productBrand') }}"
@@ -191,12 +191,27 @@
             </div>
         </div>
 
+        <!-- Settings -->
+        <div class="d-flex flex-column gap-1">
+            <button onclick="toggleMenu('settingsmenu')"
+                class="nav-link-custom w-100  {{ request()->routeIs('site.content') ? 'show' : '' }}">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="sidebar-text">Settings</span>
+                <span class="material-symbols-outlined ms-auto toggle-icon"
+                    style="font-size: 0.75rem;">expand_more</span>
+            </button>
 
-
-        <a href="#" class="nav-link-custom">
-            <span class="material-symbols-outlined">settings</span>
-            <span class="sidebar-text">Settings</span>
-        </a>
+            <div id="settingsmenu"
+                class="submenu-collapse {{ request()->routeIs('site.content') ? 'show' : '' }}"
+                style="margin-left: 1.5rem;">
+                <div class="d-flex flex-column gap-1 mt-1">
+                    <a href="{{ route('site.content') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('site.content') ? $activeClass : '' }}">
+                        <span class="sidebar-text">Site Content</span>
+                    </a>
+                </div>
+            </div>
+        </div>
 
     </nav>
 </aside>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Service;
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,9 +13,11 @@ class HomeController extends Controller
     {
         $products = Product::where('is_visible', 1)->get();
         $services = Service::where('status', 1)->get();
+        $siteSetting = SiteSetting::first();
         return view('frontEnd.home',[
             'services' => $services,
-            'products' => $products
+            'products' => $products,
+            'siteSetting' => $siteSetting
         ]);
     }
 }

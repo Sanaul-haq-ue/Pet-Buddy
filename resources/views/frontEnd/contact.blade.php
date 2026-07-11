@@ -63,13 +63,8 @@
                         </div>
                     </div>
                     <div class="input-group">
-                        <label>Service of Interest</label>
-                        <select>
-                            <option>Grooming & Spa</option>
-                            <option>Nutritional Counseling</option>
-                            <option>Pet Boarding</option>
-                            <option>Other Inquiries</option>
-                        </select>
+                        <label>Subject</label>
+                        <input type="text" placeholder="Your Subject Here">
                     </div>
                     <div class="input-group">
                         <label>Message</label>
@@ -92,7 +87,7 @@
                         </div>
                         <div class="contact-text">
                             <h3>Our Sanctuary</h3>
-                            <p>123 Sun-Drenched Way<br>Pet Valley, CA 90210</p>
+                            <p>{{$siteSetting->studio_location}}</p>
                         </div>
                     </div>
                     <!-- Item 2 -->
@@ -102,7 +97,7 @@
                         </div>
                         <div class="contact-text">
                             <h3>Give Us a Bark</h3>
-                            <p>+1 (555) RADIANT<br>Mon-Sat: 8am - 7pm</p>
+                            <p>{{$siteSetting->contact_phone}}<br>{{$siteSetting->business_hours}}</p>
                         </div>
                     </div>
                     <!-- Item 3 -->
@@ -112,7 +107,7 @@
                         </div>
                         <div class="contact-text">
                             <h3>Digital Correspondence</h3>
-                            <p>hello@radianthabitat.com<br>support@radianthabitat.com</p>
+                            <p>{{$siteSetting->contact_email}}</p>
                         </div>
                     </div>
                 </div>

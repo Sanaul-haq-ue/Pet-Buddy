@@ -1,10 +1,17 @@
+@php $siteSettings = \App\Models\SiteSetting::current(); @endphp
+
 <!-- Top Navigation -->
 <nav class="navbar">
     <div class="nav-container">
         <div class=" hero-title">
-            <img src="{{ asset('frontend/img/menu-alt-2-svgrepo-com (1).svg') }}" alt="" class="mobile-menu-bar" id="openMenu">
-            <img src="{{ asset('frontend/img/ChatGPT Image Mar 30, 2026, 02_53_26 AM-modified.png') }}" alt="" class="logo-img">
-            <span class="italic text-primary logo">Pet Buddy </span>
+            <img src="{{ asset('frontend/img/menu-alt-2-svgrepo-com (1).svg') }}" alt="" class="mobile-menu-bar"
+                id="openMenu">
+            @if ($siteSettings->brand_logo_path)
+                <img src="{{ asset($siteSettings->brand_logo_path) }}" alt="{{ $siteSettings->brand_logo_text }}"
+                    class="logo-img">
+            @endif
+            <span class="italic text-primary logo">{{ $siteSettings->brand_logo_text }}</span>
+
         </div>
         <div class="nav-links">
             <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
@@ -18,10 +25,14 @@
                 <span class="material-symbols-outlined">search</span>
                 <input type="text" placeholder="Search services...">
             </div>
-            @if(Auth::check())
-                <a href="{{ route('user.dashboard') }}" class="btn-primary user-menu"> <img src="{{ asset('frontend/img/user-svgrepo-com.svg') }}" alt="" class="user-icon"><span class="user-span">Welcome, {{ Auth::user()->first_name }}</span></a>
+            @if (Auth::check())
+                <a href="{{ route('user.dashboard') }}" class="btn-primary user-menu"> <img
+                        src="{{ asset('frontend/img/user-svgrepo-com.svg') }}" alt="" class="user-icon"><span
+                        class="user-span">Welcome, {{ Auth::user()->first_name }}</span></a>
             @else
-            <a href="{{ route('login') }}" class="btn-primary user-menu"> <img src="{{ asset('frontend/img/user-svgrepo-com.svg') }}" alt="" class="user-icon"><span class="user-span">Login</span></a>
+                <a href="{{ route('login') }}" class="btn-primary user-menu"> <img
+                        src="{{ asset('frontend/img/user-svgrepo-com.svg') }}" alt="" class="user-icon"><span
+                        class="user-span">Login</span></a>
             @endif
         </div>
     </div>
@@ -78,31 +89,32 @@
 
 
 <nav class="fixed-bottom-nav glass-body">
-        <!-- Home (Active) -->
-        <a class="nav-menu {{ request()->routeIs('home') ? 'active' : ''  }}" href="{{ route('home') }}">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
-            <span class="nav-menu-text">Home</span>
-        </a>
-        <!-- Services -->
-        <a class="nav-menu {{ request()->routeIs('services') ? 'active' : '' }}" href="{{ route('services') }}">
-            <span class="material-symbols-outlined">pets</span>
-            <span class="nav-menu-text">Services</span>
-        </a>
-        <!-- Pet Food -->
-        <a class="nav-menu {{ request()->routeIs('shop') ? 'active' : '' }}" href="{{ route('shop') }}">
-            <span class="material-symbols-outlined">storefront</span>
-            <span class="nav-menu-text">Food</span>
-        </a>
-        <!-- Profile -->
-        @if(Auth::check())
-        <a class="nav-menu {{ request()->routeIs('user.dashboard') ? 'active' : '' }}" href="{{ route('user.dashboard') }}">
+    <!-- Home (Active) -->
+    <a class="nav-menu {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+        <span class="nav-menu-text">Home</span>
+    </a>
+    <!-- Services -->
+    <a class="nav-menu {{ request()->routeIs('services') ? 'active' : '' }}" href="{{ route('services') }}">
+        <span class="material-symbols-outlined">pets</span>
+        <span class="nav-menu-text">Services</span>
+    </a>
+    <!-- Pet Food -->
+    <a class="nav-menu {{ request()->routeIs('shop') ? 'active' : '' }}" href="{{ route('shop') }}">
+        <span class="material-symbols-outlined">storefront</span>
+        <span class="nav-menu-text">Food</span>
+    </a>
+    <!-- Profile -->
+    @if (Auth::check())
+        <a class="nav-menu {{ request()->routeIs('user.dashboard') ? 'active' : '' }}"
+            href="{{ route('user.dashboard') }}">
             <span class="material-symbols-outlined">person</span>
             <span class="nav-menu-text">Dashboard</span>
         </a>
-        @else
+    @else
         <a class="nav-menu {{ request()->routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">
             <span class="material-symbols-outlined">person</span>
             <span class="nav-menu-text">Login</span>
         </a>
-        @endif
-    </nav>
+    @endif
+</nav>
