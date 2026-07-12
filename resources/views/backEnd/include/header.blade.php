@@ -1,9 +1,10 @@
+@php $siteSettings = \App\Models\SiteSetting::current(); @endphp
 <aside id="sidebar" class="sidebar-container position-fixed top-0 start-0 h-100 d-flex flex-column p-4">
     <!-- Header -->
     <div class="d-flex align-items-center justify-content-between mb-4">
         <div class="sidebar-text">
             <h1 class="fs-4 fw-bold text-orange-800 font-headline tracking-tight m-0">
-                Radiant Admin
+                {{ $siteSettings->brand_logo_text }}
             </h1>
             <p class="text-10px font-label text-uppercase tracking-widest text-stone-500 mt-1 mb-0">
                 The Luminous Sanctuary

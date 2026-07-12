@@ -130,7 +130,8 @@
                         Download Invoice
                     </a>
                     <div class="btn-split-row">
-                        <button class="btn-secondary-action glass-card font-display">View Order Details</button>
+                        <a href="{{ route('user.dashboard') }}"
+                            class="btn-secondary-action glass-card font-display">View Order Details</a>
                         <a href="{{ route('shop') }}" class="btn-ghost-action glass-card font-display">Continue
                             Shopping</a>
                     </div>

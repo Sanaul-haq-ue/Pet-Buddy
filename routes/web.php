@@ -47,14 +47,19 @@ Route::post('/coupon/apply', [CouponController::class, 'apply'])->name('coupon.a
 Route::post('/order/place', [OrderController::class, 'placeOrder'])->name('order.place');
 Route::get('/order/successfull/{order_no}', [OrderController::class, 'successfull'])->name('order.successfull');
 Route::get('/order/invoice/{order_no}', [OrderController::class, 'downloadInvoice'])->name('order.invoice');
-Route::get('/order/in/{order_no}', [OrderController::class, 'demo'])->name('order.in');
+
 
 // Track Order Routes
 Route::get('/track-order', [TrackOrderController::class, 'trackOrderForm'])->name('track.order.form');
 Route::post('/track-order', [TrackOrderController::class, 'trackOrderSearch'])->name('track.order.search');
 Route::get('/track-order/{order_no}', [TrackOrderController::class, 'trackOrderShow'])->name('track.order.show');
 
+// contact mail
+Route::post('/contact', [ContactController::class, 'send'])->middleware('throttle:5,1')->name('contact.send');
 
+// Demo
+// Route::get('/mail', [OrderController::class, 'demomail'])->name('order.demomail');
+Route::get('/order/in/{order_no}', [OrderController::class, 'demo'])->name('order.in');
 // Route::get('/clear-cart-session', function () {
 //     session()->forget('cart');
 //     return 'Cart session cleared!';
@@ -193,7 +198,7 @@ Route::prefix('admin')->group(function () {
         // Site Content
         Route::get('/site-content', [SettingController::class, 'siteContent'])->name('site.content');
         Route::put('/site-content/{section}', [SettingController::class, 'update'])
-        ->whereIn('section', ['brand', 'hero', 'info', 'services', 'shop', 'contact', 'socials'])
-        ->name('admin.site-content.update');
+            ->whereIn('section', ['brand', 'hero', 'info', 'services', 'shop', 'contact', 'socials'])
+            ->name('admin.site-content.update');
     });
 });

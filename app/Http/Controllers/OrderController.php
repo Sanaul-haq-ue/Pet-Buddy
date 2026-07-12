@@ -6,6 +6,7 @@ use App\Services\OrderStatusService;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -308,7 +309,15 @@ class OrderController extends Controller
             ->where('order_no', $order_no)
             ->firstOrFail();
 
-        $html = view('frontEnd.order.invoice', compact('order'))->render();
+        $siteSettings = \App\Models\SiteSetting::current();
+
+        // mPDF reads images most reliably from a real server file path,
+        // not a URL — so we resolve the logo to an absolute path here.
+        $logoPath = $siteSettings->brand_logo_path
+            ? public_path($siteSettings->brand_logo_path)
+            : null;
+
+        $html = view('frontEnd.order.invoice', compact('order', 'siteSettings', 'logoPath'))->render();
 
         $mpdf = new Mpdf([
             'mode'          => 'utf-8',
@@ -334,4 +343,19 @@ class OrderController extends Controller
 
         return view('frontEnd.order.invoice', compact('order'));
     }
+
+    // public function demomail()
+    // {
+    //     $order = Order::with(['items.product', 'payType', 'payMethod'])->latest()->firstOrFail();
+    //     $siteSettings = SiteSetting::current();
+
+    //     $message = new class {
+    //         public function embed($path)
+    //         {
+    //             return 'file://' . $path;
+    //         } // won't render logo in browser
+    //     };
+
+    //     return view('frontEnd.mail.order-placed', compact('order', 'siteSettings', 'message'));
+    // }
 }

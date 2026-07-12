@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Invoice {{ $order->order_no }}</title>
 
-    li
     <style>
         body {
             font-family: sans-serif;
@@ -159,14 +159,31 @@
 
 <body>
 
+    @php
+        $siteSettings = $siteSettings ?? \App\Models\SiteSetting::current();
+        $logoPath = $logoPath ?? ($siteSettings->brand_logo_path ? public_path($siteSettings->brand_logo_path) : null);
+    @endphp
+
     <table class="header-table">
         <tr>
             <td width="50%">
-                <p class="brand-title">Radiant Habitat</p>
+                <table cellpadding="0" cellspacing="0" style="margin-bottom:6px;">
+                    <tr>
+                        @if ($logoPath && file_exists($logoPath))
+                            <td style="width:40px; vertical-align:middle; padding-right:8px;">
+                                <img src="{{ $logoPath }}" alt="{{ $siteSettings->brand_logo_text }}"
+                                    style="height:36px;">
+                            </td>
+                        @endif
+                        <td style="vertical-align:middle;">
+                            <span class="brand-title"
+                                style="font-size:16px; font-weight:bold;">{{ $siteSettings->brand_logo_text }}</span>
+                        </td>
+                    </tr>
+                </table>
                 <p class="text-muted">
-                    123 Sanctuary Way,<br>
-                    Petaluma, CA 94952<br>
-                    <strong>contact@radianthabitat.com</strong>
+                    {{ $siteSettings->studio_location }}<br>
+                    <strong>{{ $siteSettings->contact_email }}</strong>
                 </p>
             </td>
             <td width="50%" class="text-right">
@@ -254,7 +271,7 @@
     </table>
 
     <div class="footer">
-        Thank you for choosing <strong>Radiant Habitat</strong> for your companion's care.<br>
+        Thank you for choosing <strong>{{ $siteSettings->brand_logo_text }}</strong> for your companion's care.<br>
         Premium Curation &bull; Sustainable Living &bull; Holistic Pet Wellness
     </div>
 

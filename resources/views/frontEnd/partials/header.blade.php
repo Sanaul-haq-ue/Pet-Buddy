@@ -10,7 +10,7 @@
                 <img src="{{ asset($siteSettings->brand_logo_path) }}" alt="{{ $siteSettings->brand_logo_text }}"
                     class="logo-img">
             @endif
-            <span class="italic text-primary logo">{{ $siteSettings->brand_logo_text }}</span>
+            <a class="italic text-primary logo" href="{{ route('home') }}">{{ $siteSettings->brand_logo_text }}</a>
 
         </div>
         <div class="nav-links">

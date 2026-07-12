@@ -375,9 +375,9 @@
                         Habitat</h3>
                     <p class="community-text">Connect with 5,000+ pet
                         parents in your neighborhood. Share tips, playdates, and more.</p>
-                    <button class="community-btn btn-primary">
+                    <a href="{{ $siteSetting->facebook_url }}" target="_blank" class="community-btn btn-primary">
                         Join Community
-                    </button>
+                    </a>
                 </div>
                 <!-- Asymmetric Floating Image -->
                 <div class="community-image-wrapper">
