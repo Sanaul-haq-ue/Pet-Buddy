@@ -5,6 +5,9 @@ namespace App\Http\Controllers\backEnd;
 use App\Http\Controllers\Controller;
 use App\Models\PayType;
 use App\Models\PayMethod;
+use App\Models\Coupon;
+use Carbon\Carbon;
+use Carbon\Shipping;
 use Illuminate\Http\Request;
 
 class PayController extends Controller
@@ -242,5 +245,160 @@ class PayController extends Controller
             'success' => false,
             'message' => 'Failed to update payment method.',
         ], 500);
+    }
+
+
+
+
+
+    // Coupon Index
+    public function pay_coupon_Index(Request $request)
+    {
+        $query = Coupon::query();
+        $status = $request->input('status', '1'); // Default to Active (1)
+        if ($status !== 'all') {
+            $query->where('status', $status);
+        }
+        $coupons = $query->get();;
+
+        return view('backEnd.pages.payment.coupon', compact('coupons'));
+    }
+
+
+    public function storePayCoupon(Request $request)
+    {
+        $request->merge([
+            'start_date' => Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d'),
+            'expiry_date' => Carbon::createFromFormat('d/m/Y', $request->expiry_date)->format('Y-m-d'),
+        ]);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'code' => 'required|string|max:50|unique:coupons,code',
+            'discount_type' => 'required|in:percentage,fixed',
+            'discount_value' => 'required|numeric|min:0',
+            'min_order_amount' => 'nullable|numeric|min:0',
+            'max_discount_amount' => 'nullable|numeric|min:0',
+            'usage_limit' => 'nullable|integer|min:1',
+            'usage_per_customer' => 'nullable|integer|min:1',
+            'start_date' => 'required|date',
+            'expiry_date' => 'required|date|after_or_equal:start_date',
+            'status' => 'required|in:0,1',
+        ], [
+            'name.required' => 'Coupon name is required.',
+            'code.required' => 'Coupon code is required.',
+            'code.unique' => 'This coupon code already exists.',
+            'discount_type.required' => 'Discount type is required.',
+            'discount_type.in' => 'Invalid discount type selected.',
+            'discount_value.required' => 'Discount value is required.',
+            'discount_value.numeric' => 'Discount value must be a number.',
+            'start_date.required' => 'Start date is required.',
+            'expiry_date.required' => 'Expiry date is required.',
+            'expiry_date.after_or_equal' => 'Expiry date must be after or equal to start date.',
+            'status.required' => 'Status is required.',
+        ]);
+
+        $coupon = new Coupon();
+        $coupon->name = $request->name;
+        $coupon->code = $request->code;
+        $coupon->discount_type = $request->discount_type;
+        $coupon->discount_value = $request->discount_value;
+        $coupon->min_order_amount = $request->min_order_amount;
+        $coupon->max_discount_amount = $request->max_discount_amount;
+        $coupon->usage_limit = $request->usage_limit;
+        $coupon->usage_per_customer = $request->usage_per_customer;
+        $coupon->start_date = $request->start_date;
+        $coupon->expiry_date = $request->expiry_date;
+        $coupon->note = $request->note;
+        $coupon->status = $request->status;
+
+        if ($coupon->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Coupon saved successfully.'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to save Coupon.'
+        ], 500);
+    }
+
+    public function updatePayCoupon(Request $request)
+    {
+        $request->merge([
+            'start_date' => Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d'),
+            'expiry_date' => Carbon::createFromFormat('d/m/Y', $request->expiry_date)->format('Y-m-d'),
+        ]);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'code' => 'required|string|max:50',
+            'discount_type' => 'required|in:percentage,fixed',
+            'discount_value' => 'required|numeric|min:0',
+            'min_order_amount' => 'nullable|numeric|min:0',
+            'max_discount_amount' => 'nullable|numeric|min:0',
+            'usage_limit' => 'nullable|integer|min:1',
+            'usage_per_customer' => 'nullable|integer|min:1',
+            'start_date' => 'required|date',
+            'expiry_date' => 'required|date|after_or_equal:start_date',
+            'status' => 'required|in:0,1',
+        ], [
+            'name.required' => 'Coupon name is required.',
+            'code.required' => 'Coupon code is required.',
+            'code.unique' => 'This coupon code already exists.',
+            'discount_type.required' => 'Discount type is required.',
+            'discount_type.in' => 'Invalid discount type selected.',
+            'discount_value.required' => 'Discount value is required.',
+            'discount_value.numeric' => 'Discount value must be a number.',
+            'start_date.required' => 'Start date is required.',
+            'expiry_date.required' => 'Expiry date is required.',
+            'expiry_date.after_or_equal' => 'Expiry date must be after or equal to start date.',
+            'status.required' => 'Status is required.',
+        ]);
+
+        $coupon = Coupon::findOrFail($request->id);
+        $coupon->name = $request->name;
+        $coupon->code = $request->code;
+        $coupon->discount_type = $request->discount_type;
+        $coupon->discount_value = $request->discount_value;
+        $coupon->min_order_amount = $request->min_order_amount;
+        $coupon->max_discount_amount = $request->max_discount_amount;
+        $coupon->usage_limit = $request->usage_limit;
+        $coupon->usage_per_customer = $request->usage_per_customer;
+        $coupon->start_date = $request->start_date;
+        $coupon->expiry_date = $request->expiry_date;
+        $coupon->note = $request->note;
+        $coupon->status = $request->status;
+
+        if ($coupon->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Coupon updated successfully.'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to update Coupon.'
+        ], 500);
+    }
+
+
+
+
+
+    // Shipping Index
+    public function shipping(Request $request)
+    {
+        $query = Shipping::query();
+        $status = $request->input('status', '1'); // Default to Active (1)
+        if ($status !== 'all') {
+            $query->where('status', $status);
+        }
+        $shippings = $query->get();;
+
+        return view('backEnd.pages.payment.shipping', compact('shippings'));
     }
 }

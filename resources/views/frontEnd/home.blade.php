@@ -26,8 +26,7 @@
                     Your Companions.
                 </h1>
                 <p class="hero-subtitle">
-                    Elevating pet care through transparent professional services and nutrition tailored to the rhythmic soul
-                    of your beloved animals.
+                    {{ $siteSetting->hero_subtext }}
                 </p>
                 <div class="hero-buttons">
                     <button class="btn-primary btn-large signature-glow sunlight-shadow">Explore Services</button>
@@ -36,8 +35,12 @@
             </div>
             <div class="hero-image-column">
                 <div class="hero-image-wrapper sunlight-shadow">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBurp5El2Avw_m0_a2mjYaThksrwdg50h7TJBQwazt4Aj8i4lv-I0HlurTz5m9asC6aYk7YhXK1tQUsJ4sdWpuPzj0A72nfuVK_zP-t2sbjlXfBRuxLJxg8uxB-Dln6lhnyzpr7dqSpCangZp31u1EPps7vzi983HHbTIvPvXYLLMNYuKgv6Yc3nz_r8O0nQTqCMaLRNKrWshJrRtBEjPhEPCWHqFsLOPKGswXIWTM-SRITyTcSNQ5WZFBbtrzsRn1PTWksrSP_wXdP"
-                        alt="Happy golden retriever">
+                    {{-- <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBurp5El2Avw_m0_a2mjYaThksrwdg50h7TJBQwazt4Aj8i4lv-I0HlurTz5m9asC6aYk7YhXK1tQUsJ4sdWpuPzj0A72nfuVK_zP-t2sbjlXfBRuxLJxg8uxB-Dln6lhnyzpr7dqSpCangZp31u1EPps7vzi983HHbTIvPvXYLLMNYuKgv6Yc3nz_r8O0nQTqCMaLRNKrWshJrRtBEjPhEPCWHqFsLOPKGswXIWTM-SRITyTcSNQ5WZFBbtrzsRn1PTWksrSP_wXdP"
+                        alt="Happy golden retriever"> --}}
+                    @if ($siteSetting->hero_image_path)
+                        <img src="{{ asset($siteSetting->hero_image_path) }}" alt="Happy golden retriever"
+                            class="logo-img">
+                    @endif
                     <h1 class="hero-title title-mb">
                         A Luminous <br>
                         <span class="italic text-primary">Sanctuary</span> For <br>
@@ -79,10 +82,9 @@
         <div class="container layout-grid">
             <div class="text-column">
                 <span class="section-badge text-secondary">OUR SERVICES</span>
-                <h2 class="section-title">Tailored Care For <br>Unique Personalities</h2>
+                <h2 class="section-title">{{$siteSetting->services_headline}}</h2>
                 <p class="section-desc">
-                    We don't believe in one-size-fits-all. Every pet at Radiant Habitat receives a personalized care plan
-                    that respects their boundaries.
+                    {{$siteSetting->services_subtext}}
                 </p>
                 <ul class="feature-list">
                     <li>
@@ -111,9 +113,9 @@
                     </div>
                 </div>
                 <div class="swiper-wrapper">
-                    @if($services->isNotEmpty())
-                        @foreach($services->take(5) as $service)
-                             <!-- Service Card -->
+                    @if ($services->isNotEmpty())
+                        @foreach ($services->take(5) as $service)
+                            <!-- Service Card -->
                             {{-- <div class="carousel-card swiper-slide glass-card ">
                                 <div class="card-image bg-tinted">
                                     <img src="{{ $service->image }}" alt="{{ $service->name }}">
@@ -121,14 +123,14 @@
                                 <div class="p-2">
                                     <div class="mb-2 d-flex gap-2 align-items-center">
                                         <span class="badge ">{{ $service->company->company_name }}</span>
-                                        @foreach($service->species_list as $species)
+                                        @foreach ($service->species_list as $species)
                                             <span class="badge ">{{ $species->species_name }}</span>
                                         @endforeach
                                     </div>
                                     <h3 class="card-title text-primary">{{ $service->name }}</h3>
                                     <p class="card-location">{{ $service->union->name ?? 'N/A' }} , {{ $service->district->name ?? 'N/A' }}</p>
                                     <div class="product-actions">
-                                        @if($service->_price)
+                                        @if ($service->_price)
                                             <p class="price text-secondary"><del>${{ number_format($service->base_price, 2) }}</del> ${{ number_format($service->offer_price, 2) }}/{{ $service->timing == 'Hourly' ? 'h' : 'd' }}</p>
                                             @php
                                                 $discount = (($service->base_price - $service->offer_price) / $service->base_price) * 100;
@@ -176,74 +178,43 @@
                 </div>
                 <div class="swiper-wrapper">
                     <!-- Product 1 -->
-                    <div class="carousel-card swiper-slide product-card glass-card">
-                        <div class="card-image-bg">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwKQj3qAo0lUOzMMhNeMb7pjcLf_pfpvIc0mTkfjJzV2G8DQ1SiIHvJnNLCtNlmc9sOAk0jBqycB6WyuTwiZJQZs9te2fRiU2gchSGK0vnO-Hrt5ojwoIc9GpC92G72MPkjHphIbzaG7MYpVcODuVqzZjwOt5qsqvVuVV4d0ElJHsmCeDkN0tsrNfzZB2SaOhcg5AdLVIrRy4jza3_ZFvEFGs-oGXG7kmKEZ82dIvpt7c8RVakaGD_NJw-RJI2VurQWSWboVmx3HQx"
-                                alt="Dog Food" class="product-img">
-                        </div>
-                        <div class="p-2">
-                            <h3 class="card-title text-primary">Wild Harvest Blend</h3>
-                            <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart primary"><span
-                                        class="material-symbols-outlined">add_shopping_cart</span></button>
+                    @if ($products)
+                        @foreach ($products as $product)
+                            <div class="carousel-card swiper-slide product-card glass-card">
+                                <div class="card-image-bg">
+                                    <a href="{{ route('shop.single-page', $product->slug) }}">
+                                        <img src="{{ asset($product->image) }}" alt="{{ $product->product_name }}"
+                                            class="product-img">
+                                    </a>
+                                </div>
+                                <div class="p-2">
+                                    <h3 class="card-title text-primary">
+                                        <a href="{{ route('shop.single-page', $product->slug) }}"
+                                            style="text-decoration: none; color: inherit;">
+                                            {{ $product->product_name }}
+                                        </a>
+                                    </h3>
+                                    <div class="product-actions">
+                                        <p class="price text-secondary">৳{{ number_format($product->selling_price, 2) }}</p>
+                                        <button class="add-to-cart primary" data-slug="{{ $product->slug }}"
+                                            data-name="{{ $product->product_name }}"
+                                            data-price="{{ $product->selling_price }}"
+                                            data-image="{{ asset($product->image) }}">
+                                            <span class="material-symbols-outlined">add_shopping_cart</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Product 2 -->
-                    <div class="carousel-card swiper-slide product-card glass-card">
-                        <div class="card-image-bg">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjUxVStxXIY-vNfw8QpVuge0MQ_8uP8wVYEdCZq1Xkd7JgG-574sixuZfyqxtp5z-gIP0y7s01OTMsAz_M7IqQGaf-r0AWsEFG6KT7SCC55Su2Xeazb0tdFxwunz41593eJ6cYer4lL0xYIrUpHkMkm9kyepehgvzdjvjwB3rT7M1Z1viUN6349vtP9JCf36_5tDfbTd95MfX32UiIAsK5yo9a_AlDBpAQfTY4vGF4RslmmUjQAv18Ia3FANTkW9nop-nKeRfoRs0r"
-                                alt="Cat Food" class="product-img">
-                        </div>
-                        <div class="p-2">
-                            <h3 class="card-title text-primary">Wild Harvest Blend</h3>
-                            <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart primary"><span
-                                        class="material-symbols-outlined">add_shopping_cart</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product 3 -->
-                    <div class="carousel-card swiper-slide product-card glass-card">
-                        <div class="card-image-bg">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_gUryut3eYaHmmVZgpk17CM7Ml90nr39W8FGbNxE9vZyU-uctNSZG6BGqO80roUeoWdKZ-q-Xpmvbl1fgLveWnXEccaiSoW3IUTn9QPZDZ4AjftkPTeqTWhm5IbRkzElp_rPxkU_k8DREDypwxMGZKg78oPiTljUHh95N2r5HQnLb4kpn752N3lQ8Iy1Mz9FGk6LQ3dd8vJEarGrTCiVgHVYou-crk4zj_cDTDhybH0XSb-bXHKYi0vsb_ka7wK1bbjiDkOjZKegU"
-                                alt="Treats" class="product-img">
-                        </div>
-                        <div class="p-2">
-                            <h3 class="card-title text-primary">Wild Harvest Blend</h3>
-                            <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart primary"><span
-                                        class="material-symbols-outlined">add_shopping_cart</span></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product 4 -->
-                    <div class="carousel-card swiper-slide product-card glass-card">
-                        <div class="card-image-bg">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwKQj3qAo0lUOzMMhNeMb7pjcLf_pfpvIc0mTkfjJzV2G8DQ1SiIHvJnNLCtNlmc9sOAk0jBqycB6WyuTwiZJQZs9te2fRiU2gchSGK0vnO-Hrt5ojwoIc9GpC92G72MPkjHphIbzaG7MYpVcODuVqzZjwOt5qsqvVuVV4d0ElJHsmCeDkN0tsrNfzZB2SaOhcg5AdLVIrRy4jza3_ZFvEFGs-oGXG7kmKEZ82dIvpt7c8RVakaGD_NJw-RJI2VurQWSWboVmx3HQx"
-                                alt="Dog Food 2" class="product-img">
-                        </div>
-                        <div class="p-2">
-                            <h3 class="card-title text-primary">Wild Harvest Blend</h3>
-                            <div class="product-actions">
-                                <p class="price text-secondary">$45.00</p>
-                                <button class="add-to-cart primary"><span
-                                        class="material-symbols-outlined">add_shopping_cart</span></button>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
             <div class="text-column">
                 <span class="section-badge text-primary">NUTRITION FIRST</span>
-                <h2 class="section-title">Glow From The Inside Out</h2>
+                <h2 class="section-title">{{$siteSetting->shop_headline}}</h2>
                 <p class="section-desc">
-                    Curated by leading animal nutritionists. We prioritize human-grade ingredients and transparent sourcing
-                    for your pet's vitality.
+                    {{$siteSetting->shop_subtext}}
                 </p>
                 <ul class="feature-list">
                     <li>
@@ -256,7 +227,8 @@
                     </li>
                 </ul>
                 <div class="action-buttons pt-4">
-                    <button class="btn-primary btn-large signature-glow sunlight-shadow">Shop All Products</button>
+                    <a class="btn-primary btn-large signature-glow sunlight-shadow" href="{{ route('shop') }}">Shop All
+                        Products</a>
                     <div class="carousel-nav mt-4">
                         <button class="nav-btn swiper-prev-2"><span
                                 class="material-symbols-outlined">arrow_back</span></button>
@@ -403,15 +375,13 @@
                         Habitat</h3>
                     <p class="community-text">Connect with 5,000+ pet
                         parents in your neighborhood. Share tips, playdates, and more.</p>
-                    <button
-                        class="community-btn btn-primary">
+                    <a href="{{ $siteSetting->facebook_url }}" target="_blank" class="community-btn btn-primary">
                         Join Community
-                    </button>
+                    </a>
                 </div>
                 <!-- Asymmetric Floating Image -->
                 <div class="community-image-wrapper">
-                    <img alt="Community Dogs"
-                        class="community-image"
+                    <img alt="Community Dogs" class="community-image"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuhJhfGc6HgG-DHlcCV7R-pOoeo3lHjXQSJeHfJeuvq6jYwU8ru3h61YaHhywSen5b2pu3Qsv4EsYiz3MECm0BjabqJU0J9rNxktq4_NnUVkLLTqF1slanDQkAyqiEp88FQutRwJTdfCyK6RtM9t05HEmDqau9kJorWfyzpAz7ZyE2gBb9m8hnV2sNsFiZLJkdDtm6KRjIjtodLH5uLgnulfD5bBNQy0PB7OkTywvoL0qtYnlhGsXgmBkHHReFrkt-n8WmOgMHm_ZU" />
                 </div>
             </div>
@@ -511,6 +481,5 @@
                 }
             });
         </script>
-        
     @endpush
 @endsection

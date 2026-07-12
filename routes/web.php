@@ -12,9 +12,14 @@ use App\Http\Controllers\backEnd\ProductSubCategoryController;
 use App\Http\Controllers\backEnd\ProductBrandController;
 use App\Http\Controllers\backEnd\ProductUnitController;
 use App\Http\Controllers\backEnd\PayController;
+use App\Http\Controllers\backEnd\OrderStatusController;
+use App\Http\Controllers\backEnd\SettingController;
 
+use App\Http\Controllers\TrackOrderController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServicesController;
@@ -32,6 +37,35 @@ Route::get('/bookings', [BookingsController::class, 'index'])->name('bookings');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/shop/{slug}', [ShopController::class, 'singlePage'])->name('shop.single-page');
 
+Route::post('/cart/add', [ShopController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/update', [ShopController::class, 'updateCart'])->name('cart.update');
+Route::post('/cart/remove', [ShopController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/cart/clear', [ShopController::class, 'clearCart'])->name('cart.clear');
+
+Route::post('/coupon/apply', [CouponController::class, 'apply'])->name('coupon.apply');
+
+Route::post('/order/place', [OrderController::class, 'placeOrder'])->name('order.place');
+Route::get('/order/successfull/{order_no}', [OrderController::class, 'successfull'])->name('order.successfull');
+Route::get('/order/invoice/{order_no}', [OrderController::class, 'downloadInvoice'])->name('order.invoice');
+
+
+// Track Order Routes
+Route::get('/track-order', [TrackOrderController::class, 'trackOrderForm'])->name('track.order.form');
+Route::post('/track-order', [TrackOrderController::class, 'trackOrderSearch'])->name('track.order.search');
+Route::get('/track-order/{order_no}', [TrackOrderController::class, 'trackOrderShow'])->name('track.order.show');
+
+// contact mail
+Route::post('/contact', [ContactController::class, 'send'])->middleware('throttle:5,1')->name('contact.send');
+
+// Demo
+// Route::get('/mail', [OrderController::class, 'demomail'])->name('order.demomail');
+Route::get('/order/in/{order_no}', [OrderController::class, 'demo'])->name('order.in');
+// Route::get('/clear-cart-session', function () {
+//     session()->forget('cart');
+//     return 'Cart session cleared!';
+// });
+
+
 Route::prefix('user')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::post('/login', [UserAuthController::class, 'loginSubmit'])->name('user.login.submit');
@@ -40,6 +74,14 @@ Route::prefix('user')->group(function () {
 
     Route::middleware('user')->group(function () {
         Route::get('/dashboard', [UserDashbaord::class, 'dashboard'])->name('user.dashboard');
+        Route::get('/get-breeds/{species_id}', [UserDashbaord::class, 'getBreeds'])->name('user.get-breeds');
+        Route::post('/savePet', [UserDashbaord::class, 'savePet'])->name('pet.store');
+        Route::put('/updatePets/{pet}', [UserDashbaord::class, 'updatePet'])->name('pet.update');
+        Route::put('/pets/{pet}/soft-delete', [UserDashbaord::class, 'softDeletePet'])->name('pet.softDelete');
+        Route::post('/profile/update', [UserDashbaord::class, 'updateProfile'])->name('profile.update');
+
+        Route::get('/dashboard/track-order/{order_no}', [UserDashbaord::class, 'trackOrder'])->name('user.track-order');
+
         Route::get('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
         Route::post('/booking/store', [UserAppointmentController::class, 'store'])->name('user.booking.store');
     });
@@ -126,6 +168,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/product-Unit/update', [ProductUnitController::class, 'update'])->name('productUnit.update');
         Route::delete('/product-unit/delete/{id}', [ProductUnitController::class, 'destroy'])->name('productUnit.delete');
 
+        // Payment Routes
         Route::get('/pay-type', [PayController::class, 'pay_Type_Index'])->name('pay.type');
         Route::post('/payment-type/store', [PayController::class, 'storePaymentType'])->name('paymentType.store');
         Route::post('/payment-type/update', [PayController::class, 'updatePaymentType'])->name('paymentType.update');
@@ -133,5 +176,29 @@ Route::prefix('admin')->group(function () {
         Route::get('/pay-method', [PayController::class, 'pay_Method_Index'])->name('pay.method');
         Route::post('/payment-method/store', [PayController::class, 'storePaymentMethod'])->name('paymentMethod.store');
         Route::post('/payment-method/update', [PayController::class, 'updatePaymentMethod'])->name('paymentMethod.update');
+
+        Route::get('/pay-coupon', [PayController::class, 'pay_coupon_Index'])->name('pay.coupon');
+        Route::post('/pay-coupon/store', [PayController::class, 'storePayCoupon'])->name('payCoupon.store');
+        Route::post('/pay-coupon/update', [PayController::class, 'updatePayCoupon'])->name('payCoupon.update');
+
+        Route::get('/shipping', [PayController::class, 'shipping_Index'])->name('shipping');
+        // Route::post('/pay-coupon/update', [PayController::class, 'updatePayCoupon'])->name('payCoupon.update');
+
+        Route::get('/order-status-control', [OrderStatusController::class, 'order_status_Index'])->name('order.status.control');
+        // Route::get('/order-status-control/{order_no}', [OrderStatusController::class, 'manage'])->name('orders.manage');
+
+        // Order status management
+        Route::prefix('orders/{order}')->name('admin.orders.')->group(function () {
+            Route::post('/confirm', [OrderStatusController::class, 'confirm'])->name('confirm');
+            Route::post('/call-attempt', [OrderStatusController::class, 'callAttempt'])->name('call-attempt');
+            Route::post('/status', [OrderStatusController::class, 'updateStatus'])->name('update-status');
+            Route::post('/cancel', [OrderStatusController::class, 'cancel'])->name('cancel');
+        });
+
+        // Site Content
+        Route::get('/site-content', [SettingController::class, 'siteContent'])->name('site.content');
+        Route::put('/site-content/{section}', [SettingController::class, 'update'])
+            ->whereIn('section', ['brand', 'hero', 'info', 'services', 'shop', 'contact', 'socials'])
+            ->name('admin.site-content.update');
     });
 });

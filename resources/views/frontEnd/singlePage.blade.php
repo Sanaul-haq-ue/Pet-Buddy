@@ -303,25 +303,14 @@
             if (btnAddToCart) {
                 btnAddToCart.addEventListener('click', function(e) {
                     e.preventDefault();
+                    const slug = "{{ $product->slug }}";
                     const name = "{{ $product->product_name }}";
                     const price = parseFloat("{{ $product->selling_price }}") || 0;
                     const image = "{{ asset($product->image) }}";
                     const quantity = parseInt(document.getElementById('qty-val').value) || 1;
 
-                    if (typeof cart !== 'undefined') {
-                        const existing = cart.find(item => item.name === name);
-                        if (existing) {
-                            existing.quantity += quantity;
-                        } else {
-                            cart.push({
-                                name: name,
-                                price: price,
-                                quantity: quantity,
-                                image: image
-                            });
-                        }
-                        if (typeof updateCartIcon === 'function') updateCartIcon();
-                        if (typeof openCartModal === 'function') openCartModal();
+                    if (typeof addToCartAJAX === 'function') {
+                        addToCartAJAX(slug, name, price, image, quantity);
                     } else {
                         console.error(
                             'Cart script not loaded. Make sure frontend.partials.cartmodal is included in the base layout.'

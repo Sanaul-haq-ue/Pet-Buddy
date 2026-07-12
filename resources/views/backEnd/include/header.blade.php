@@ -1,9 +1,10 @@
+@php $siteSettings = \App\Models\SiteSetting::current(); @endphp
 <aside id="sidebar" class="sidebar-container position-fixed top-0 start-0 h-100 d-flex flex-column p-4">
     <!-- Header -->
     <div class="d-flex align-items-center justify-content-between mb-4">
         <div class="sidebar-text">
             <h1 class="fs-4 fw-bold text-orange-800 font-headline tracking-tight m-0">
-                Radiant Admin
+                {{ $siteSettings->brand_logo_text }}
             </h1>
             <p class="text-10px font-label text-uppercase tracking-widest text-stone-500 mt-1 mb-0">
                 The Luminous Sanctuary
@@ -36,11 +37,37 @@
             <span class="sidebar-text">Inventory</span>
         </a>
 
+        <!-- Order -->
+        <div class="d-flex flex-column gap-1">
+            <button onclick="toggleMenu('order')"
+                class="nav-link-custom w-100 {{ request()->routeIs('order.status.control') ? $activeClass : '' }}">
+                <span class="material-symbols-outlined">draft_orders</span>
+                <span class="sidebar-text">Order</span>
+                <span class="material-symbols-outlined ms-auto toggle-icon"
+                    style="font-size: 0.75rem;">expand_more</span>
+            </button>
+
+            <div id="order" class="submenu-collapse {{ request()->routeIs('order.status.control') ? 'show' : '' }}"
+                style="margin-left: 1.5rem;">
+                <div class="d-flex flex-column gap-1 mt-1">
+                    <a href="{{ route('order.status.control') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('order.status.control') ? $activeClass : '' }}">
+                        <span class="material-symbols-outlined">orders</span>
+                        <span class="sidebar-text">Order Control</span>
+                    </a>
+                    {{-- <a href="{{ route('orders.manage') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('orders.manage') ? $activeClass : '' }}">
+                        <span class="sidebar-text">Order Manage</span>
+                    </a> --}}
+                </div>
+            </div>
+        </div>
+
         <!-- Product -->
         <div class="d-flex flex-column gap-1">
             <button onclick="toggleMenu('productMenu')"
                 class="nav-link-custom w-100 {{ request()->routeIs('product') || request()->routeIs('productCategory') || request()->routeIs('productSubCategory') || request()->routeIs('productBrand') || request()->routeIs('productUnit') ? $activeClass : '' }}">
-                <span class="material-symbols-outlined">group</span>
+                <span class="material-symbols-outlined">shopping_bag</span>
                 <span class="sidebar-text">Product</span>
                 <span class="material-symbols-outlined ms-auto toggle-icon"
                     style="font-size: 0.75rem;">expand_more</span>
@@ -52,27 +79,24 @@
                 <div class="d-flex flex-column gap-1 mt-1">
                     <a href="{{ route('product') }}"
                         class="nav-link-custom py-2 {{ request()->routeIs('product') ? $activeClass : '' }}">
-                        <span class="material-symbols-outlined">pets</span>
+                        <span class="material-symbols-outlined">shopping_bag</span>
                         <span class="sidebar-text">Product</span>
                     </a>
                     <a href="{{ route('productCategory') }}"
                         class="nav-link-custom py-2 {{ request()->routeIs('productCategory') ? $activeClass : '' }}">
-                        <span class="material-symbols-outlined">person</span>
+                        <span class="material-symbols-outlined">category</span>
                         <span class="sidebar-text">Category</span>
                     </a>
                     <a href="{{ route('productSubCategory') }}"
                         class="nav-link-custom py-2 {{ request()->routeIs('productSubCategory') ? $activeClass : '' }}">
-                        <span class="material-symbols-outlined">pets</span>
                         <span class="sidebar-text">Sub Category</span>
                     </a>
                     <a href="{{ route('productBrand') }}"
                         class="nav-link-custom py-2 {{ request()->routeIs('productBrand') ? $activeClass : '' }}">
-                        <span class="material-symbols-outlined">pets</span>
                         <span class="sidebar-text">Brand</span>
                     </a>
                     <a href="{{ route('productUnit') }}"
                         class="nav-link-custom py-2 {{ request()->routeIs('productUnit') ? $activeClass : '' }}">
-                        <span class="material-symbols-outlined">pets</span>
                         <span class="sidebar-text">Unit</span>
                     </a>
                 </div>
@@ -138,7 +162,7 @@
         <!-- Payment -->
         <div class="d-flex flex-column gap-1">
             <button onclick="toggleMenu('paymentMenu')"
-                class="nav-link-custom w-100 {{ request()->routeIs('pay.type') || request()->routeIs('pay.method') ? $activeClass : '' }}">
+                class="nav-link-custom w-100 {{ request()->routeIs('pay.type') || request()->routeIs('pay.method') || request()->routeIs('pay.coupon') ? $activeClass : '' }}">
                 <span class="material-symbols-outlined">payment</span>
                 <span class="sidebar-text">Payment</span>
                 <span class="material-symbols-outlined ms-auto toggle-icon"
@@ -146,7 +170,7 @@
             </button>
 
             <div id="paymentMenu"
-                class="submenu-collapse {{ request()->routeIs('pay.type') || request()->routeIs('pay.method') ? 'show' : '' }}"
+                class="submenu-collapse {{ request()->routeIs('pay.type') || request()->routeIs('pay.method') || request()->routeIs('pay.coupon') ? 'show' : '' }}"
                 style="margin-left: 1.5rem;">
                 <div class="d-flex flex-column gap-1 mt-1">
                     <a href="{{ route('pay.type') }}"
@@ -159,14 +183,36 @@
                         {{-- <span class="material-symbols-outlined">Pay Method</span> --}}
                         <span class="sidebar-text">Pay Method</span>
                     </a>
+                    <a href="{{ route('pay.coupon') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('pay.coupon') ? $activeClass : '' }}">
+                        {{-- <span class="material-symbols-outlined">Pay Method</span> --}}
+                        <span class="sidebar-text">Coupon</span>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <a href="#" class="nav-link-custom">
-            <span class="material-symbols-outlined">settings</span>
-            <span class="sidebar-text">Settings</span>
-        </a>
+        <!-- Settings -->
+        <div class="d-flex flex-column gap-1">
+            <button onclick="toggleMenu('settingsmenu')"
+                class="nav-link-custom w-100  {{ request()->routeIs('site.content') ? 'show' : '' }}">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="sidebar-text">Settings</span>
+                <span class="material-symbols-outlined ms-auto toggle-icon"
+                    style="font-size: 0.75rem;">expand_more</span>
+            </button>
+
+            <div id="settingsmenu"
+                class="submenu-collapse {{ request()->routeIs('site.content') ? 'show' : '' }}"
+                style="margin-left: 1.5rem;">
+                <div class="d-flex flex-column gap-1 mt-1">
+                    <a href="{{ route('site.content') }}"
+                        class="nav-link-custom py-2 {{ request()->routeIs('site.content') ? $activeClass : '' }}">
+                        <span class="sidebar-text">Site Content</span>
+                    </a>
+                </div>
+            </div>
+        </div>
 
     </nav>
 </aside>
@@ -176,13 +222,15 @@
     class="topbar-container position-fixed top-0 pe-4 pe-md-5 d-flex justify-content-between align-items-center"
     style="right: 0;">
 
-    <button onclick="mobileToggleSidebar()" class="mobile-toggle-btn d-flex align-items-center justify-content-center">
+    <button onclick="mobileToggleSidebar()"
+        class="mobile-toggle-btn d-flex align-items-center justify-content-center">
         <span class="material-symbols-outlined">menu</span>
     </button>
 
     <button onclick="toggleSidebar()"
         class="menu-btn-custom d-flex align-items-center justify-content-center ms-4 d-none d-md-flex">
-        <span class="material-symbols-outlined">menu</span>
+        <span
+            class="material-symbols-ou                                                                                                                          tlined">menu</span>
     </button>
 
     <div class="d-flex align-items-center search-box ms-4">
