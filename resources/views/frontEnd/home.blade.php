@@ -26,7 +26,7 @@
                     Your Companions.
                 </h1>
                 <p class="hero-subtitle">
-                    {{ $siteSetting->hero_subtext }}
+                    {{ $siteSetting?->hero_subtext }}
                 </p>
                 <div class="hero-buttons">
                     <button class="btn-primary btn-large signature-glow sunlight-shadow">Explore Services</button>
@@ -37,7 +37,7 @@
                 <div class="hero-image-wrapper sunlight-shadow">
                     {{-- <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBurp5El2Avw_m0_a2mjYaThksrwdg50h7TJBQwazt4Aj8i4lv-I0HlurTz5m9asC6aYk7YhXK1tQUsJ4sdWpuPzj0A72nfuVK_zP-t2sbjlXfBRuxLJxg8uxB-Dln6lhnyzpr7dqSpCangZp31u1EPps7vzi983HHbTIvPvXYLLMNYuKgv6Yc3nz_r8O0nQTqCMaLRNKrWshJrRtBEjPhEPCWHqFsLOPKGswXIWTM-SRITyTcSNQ5WZFBbtrzsRn1PTWksrSP_wXdP"
                         alt="Happy golden retriever"> --}}
-                    @if ($siteSetting->hero_image_path)
+                    @if ($siteSetting?->hero_image_path)
                         <img src="{{ asset($siteSetting->hero_image_path) }}" alt="Happy golden retriever"
                             class="logo-img">
                     @endif
@@ -82,9 +82,9 @@
         <div class="container layout-grid">
             <div class="text-column">
                 <span class="section-badge text-secondary">OUR SERVICES</span>
-                <h2 class="section-title">{{$siteSetting->services_headline}}</h2>
+                <h2 class="section-title">{{$siteSetting?->services_headline}}</h2>
                 <p class="section-desc">
-                    {{$siteSetting->services_subtext}}
+                    {{$siteSetting?->services_subtext}}
                 </p>
                 <ul class="feature-list">
                     <li>
@@ -212,9 +212,9 @@
 
             <div class="text-column">
                 <span class="section-badge text-primary">NUTRITION FIRST</span>
-                <h2 class="section-title">{{$siteSetting->shop_headline}}</h2>
+                <h2 class="section-title">{{$siteSetting?->shop_headline}}</h2>
                 <p class="section-desc">
-                    {{$siteSetting->shop_subtext}}
+                    {{$siteSetting?->shop_subtext}}
                 </p>
                 <ul class="feature-list">
                     <li>
@@ -375,7 +375,7 @@
                         Habitat</h3>
                     <p class="community-text">Connect with 5,000+ pet
                         parents in your neighborhood. Share tips, playdates, and more.</p>
-                    <a href="{{ $siteSetting->facebook_url }}" target="_blank" class="community-btn btn-primary">
+                    <a href="{{ $siteSetting?->facebook_url }}" target="_blank" class="community-btn btn-primary">
                         Join Community
                     </a>
                 </div>
