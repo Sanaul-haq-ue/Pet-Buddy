@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Controllers\backEnd;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class DashboardController extends Controller
+{
+    public function index(){
+        return view('backEnd.dashboard');
+    }
+
+    public function appointment(){
+        return view('backEnd.appointment');
+    }
+
+    public function inventory(){
+        return view('backEnd.inventory');
+    }
+}

@@ -14,7 +14,7 @@
 
         <div class="services-layout">
             <!-- Sidebar Filters -->
-            <aside class="sidebar">
+            <aside class="sidebar" id="filterSidebar">
                 <div class="sidebar-sticky">
                     <div class="categories-box">
                         <h3 class="sidebar-title">Categories</h3>
@@ -57,6 +57,10 @@
                 </div>
             </aside>
 
+            <button class="filter-toggle" id="openFilter">
+                <span class="material-symbols-outlined">tune</span>
+            </button>
+
             <!-- Services Grid -->
             <div class="services-grid-wrapper">
                 <div class="services-grid">
@@ -76,7 +80,7 @@
                                 <div class="service-meta">
                                     <span class="material-symbols-outlined">schedule</span> 90-120 mins
                                 </div>
-                                <button class="btn-book signature-glow">Book Now</button>
+                                <button class="btn-book open-booking-modal signature-glow">Book Now</button>
                             </div>
                         </div>
                     </div>
@@ -96,7 +100,7 @@
                                 <div class="service-meta">
                                     <span class="material-symbols-outlined">person</span> Expert Specialist
                                 </div>
-                                <button class="btn-book signature-glow">Book Now</button>
+                                <button class="btn-book open-booking-modal signature-glow">Book Now</button>
                             </div>
                         </div>
                     </div>
@@ -116,7 +120,7 @@
                                 <div class="service-meta">
                                     <span class="material-symbols-outlined">location_on</span> In-Park Session
                                 </div>
-                                <button class="btn-book signature-glow">Book Now</button>
+                                <button class="btn-book open-booking-modal signature-glow">Book Now</button>
                             </div>
                         </div>
                     </div>
@@ -136,7 +140,7 @@
                                 <div class="service-meta">
                                     <span class="material-symbols-outlined">verified</span> Certified Hygienist
                                 </div>
-                                <button class="btn-book signature-glow">Book Now</button>
+                                <button class="btn-book open-booking-modal signature-glow">Book Now</button>
                             </div>
                         </div>
                     </div>
@@ -153,3 +157,26 @@
         </div>
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+    const openFilter = document.getElementById('openFilter');
+    const filterSidebar = document.getElementById('filterSidebar');
+
+    // Toggle sidebar
+    openFilter.addEventListener('click', (e) => {
+        e.stopPropagation(); // prevent immediate close
+        filterSidebar.classList.toggle('active');
+    });
+
+    // Prevent clicks inside sidebar from closing it
+    filterSidebar.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // Click outside → close
+    document.addEventListener('click', () => {
+        filterSidebar.classList.remove('active');
+    });
+</script>
+@endpush

@@ -503,12 +503,6 @@
   display: none;
 }
 
-@media (min-width: 768px) {
-  .brand-logo {
-    display: block;
-  }
-}
-
 .logo-wrapper {
   display: flex;
   align-items: center;
@@ -550,4 +544,119 @@
   font-size: 12rem;
   /* text-[12rem] */
   color: var(--color-primary);
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.tab-btn {
+  flex: 1;
+  border: none;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.tab-btn.active {
+  background: rgba(255, 255, 255, 0.85);
+  color: #1f2937;
+  transform: translateY(-1px);
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.15);
+}
+
+.form-panel {
+  display: none;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.35s ease;
+}
+
+.form-panel-active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.auth-tabs.hidden {
+  display: none;
+}
+
+.forgot-link,
+#forgotBackBtn {
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.btn-text {
+  color: #7c3aed;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.social-btn {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.divider .line {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.input-group input {
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2937;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 13px;
+}
+.error-message{
+  font-size: 12px;
+}
+.password-input-wrapper{
+  position: relative;
+}
+.password-toggle{
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(93, 96, 92, 0.6);
+  font-size: 14px;
 }

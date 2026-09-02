@@ -356,3 +356,13 @@
     border: none;
     cursor: pointer;
 }
+
+@media (max-width: 767px) {
+    .contact-main {
+        padding-top: 6rem;
+        padding-bottom: 5rem;
+    }
+    .hero-title {
+        font-size: 2.75rem;
+    }
+}

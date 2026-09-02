@@ -294,6 +294,36 @@
   color: var(--color-primary-dim);
 }
 
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  flex: 1;
+  padding-right: 2.5rem; /* space for the button */
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.25rem;
+  background: none;
+  border: none;
+  color: rgba(93, 96, 92, 0.6);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s;
+}
+
+.password-toggle:hover {
+  color: var(--color-primary);
+}
+
+.password-toggle i {
+  font-size: 1rem;
+}
+
 .mt-4 { margin-top: 1rem; }
 
 .remember-group {

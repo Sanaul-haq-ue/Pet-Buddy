@@ -1,9 +1,10 @@
+@php $siteSettings = \App\Models\SiteSetting::current(); @endphp
 <!-- Footer -->
 <footer class="app-footer">
     <div class="container footer-grid">
         <div class="footer-brand">
-            <div class="brand-title">Radiant Habitat</div>
-            <p>Crafting a world where pet care meets architectural beauty.</p>
+            <div class="brand-title">{{ $siteSettings->brand_logo_text }}</div>
+            <p>{{ $siteSettings->brand_tagline }}</p>
         </div>
         <div class="footer-links-col">
             <h5 class="footer-heading">Navigation</h5>
@@ -24,13 +25,13 @@
             <ul>
                 <li><a href="{{ route('contact') }}">Contact Us</a></li>
                 <li>
-                    <span class="material-symbols-outlined">mail</span> hello@radianthabitat.com
+                    <span class="material-symbols-outlined">mail</span> {{ $siteSettings->contact_email }}
                 </li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom container border-t">
-        <p>© 2024 Radiant Habitat. All rights reserved.</p>
+        <p>{{ $siteSettings->copyright_notice }}</p>
         <div class="social-icons">
             <span class="material-symbols-outlined">public</span>
             <span class="material-symbols-outlined">mood</span>
