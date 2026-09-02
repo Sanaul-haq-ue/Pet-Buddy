@@ -17,16 +17,16 @@ return new class extends Migration
             $table->string('product_name');
 
             $table->foreignId('brand_id')
-                ->constrained('brands')
-                ->nullOnDelete();
+                ->constrained('product_brands')
+                ->restrictOnDelete();
 
             $table->foreignId('category_id')
                 ->constrained('categories')
-                ->nullOnDelete();
+                ->restrictOnDelete();
 
             $table->foreignId('sub_category_id')
                 ->nullable()
-                ->constrained('sub_categories')
+                ->constrained('product_sub_categories')
                 ->nullOnDelete();
 
             $table->text('description')->nullable();

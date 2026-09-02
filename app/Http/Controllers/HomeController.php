@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         $products = Product::where('is_visible', 1)->get();
-        $services = Service::where('status', 1)->get();
+        $services = Service::where('is_published', 1)->get();
         $siteSetting = SiteSetting::first();
         return view('frontEnd.home',[
             'services' => $services,

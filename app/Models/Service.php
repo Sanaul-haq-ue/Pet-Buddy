@@ -17,7 +17,7 @@ class Service extends Model
         'union_id',
         'location',
         'image',
-        'status',
+        'is_published',
         'service_type',
     ];
 
